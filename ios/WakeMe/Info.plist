@@ -38,8 +38,26 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string></string>
+	<key>NSCalendarsUsageDescription</key>
+	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>Let users take photos or videos</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string>Get location related results</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Let users upload photos to send to friends</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Let users add photos</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string></string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string></string>
+	<key>NSMotionUsageDescription</key>
+	<string></string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
