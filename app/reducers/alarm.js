@@ -5,7 +5,9 @@ import * as _actions from './../constants/alarm'
 const init = {
 	hour: '9',
 	minute: '18',
-	ampm: 'am'
+	ampm: 'am',
+	repeat: {},
+	repeat_label: 'Never',
 };
 
 export default (state = init, action) => {
@@ -13,8 +15,7 @@ export default (state = init, action) => {
 	switch ( action.type ) {
 
 		case _actions.SAVE:
-			const { hour, minute, ampm } = action.payload;
-			return {...state, hour, minute, ampm};
+			return {...state, ...action.payload};
 
 		default: return state;
 

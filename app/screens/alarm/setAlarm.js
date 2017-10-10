@@ -14,6 +14,7 @@ import {
 
 // components
 import EditAlarmTimeModal from './../../components/editAlarmTimeModal'
+import EditAlarmDaysModal from './../../components/editAlarmDaysModal'
 
 // styles
 import { edit, darkTheme, darkThemeObj } from './../../styles/alarm'
@@ -27,6 +28,8 @@ class SetAlarm extends Component{
 
 		this.state = {
 			editTime: false,
+			editDays: false,
+			editSound: false,
 		}
 	}
 
@@ -35,16 +38,16 @@ class SetAlarm extends Component{
 	}
 
 	_minutePress = () => {
-		this.setState({editTime: true});
+		this.setState({editDays: true});
 	}
 
 	_ampmPress = () => {
-		this.setState({editTime: true});
+		this.setState({editSound: true});
 	}
 
 	render(){
-		const { hour, minute, ampm } = this.props._alarm;
-		const { editTime } = this.state;
+		const { hour, minute, ampm, repeat_label } = this.props._alarm;
+		const { editTime, editDays, editSound } = this.state;
 
 		return (
 			<ScrollView style={[edit.container, theme.bg3]}>
@@ -60,8 +63,8 @@ class SetAlarm extends Component{
 
 				<TouchableOpacity 
 					style={[edit.field]}
-					onPress={() => this.setState({editTime: true})}>
-						<Text style={theme.color2}><Text style={edit.label}>Repeat</Text>: Everyday</Text>
+					onPress={() => this.setState({editDays: true})}>
+						<Text style={theme.color2}><Text style={edit.label}>Repeat</Text>: { repeat_label }</Text>
 						<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
 				</TouchableOpacity>
 
@@ -74,6 +77,9 @@ class SetAlarm extends Component{
 
 				{ editTime && 
 					<EditAlarmTimeModal close={ () => this.setState({editTime: false}) } /> }
+
+				{ editDays && 
+					<EditAlarmDaysModal close={ () => this.setState({editDays: false}) } /> }
 
 			</ScrollView>
 		);

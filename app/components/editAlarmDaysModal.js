@@ -1,4 +1,4 @@
-// /components/editAlarmTimeModal.js
+// /components/editAlarmDaysModal.js
 
 // /screens/alarm/index.js
 
@@ -19,18 +19,19 @@ import { saveAlarm } from './../actions/alarm'
 // styles
 import { edit } from './../styles/alarm'
 
-class EditAlarmTime extends Component{
+// constants
+import { 
+	DAYS_OF_WEEK, 
+	determineDaysSelectedType,
+} from './../constants/alarm'
+
+class EditAlarmDays extends Component{
 	constructor(props){
 		super(props);
 
-		this.ampm = ['am', 'pm'];
-		this.hours = [...new Array(12).keys()].map(x => ''+(x+1));
-		this.minutes = [...new Array(60).keys()].map(x => x < 10 ? '0'+x : ''+x);
-
 		this.state = {
-			hour: props._alarm.hour,
-			minute: props._alarm.minute,
-			ampm: props._alarm.ampm,
+			repeat: props._alarm.repeat,
+			repeat_label: props._alarm.repeat,
 		}
 	}
 
@@ -41,9 +42,26 @@ class EditAlarmTime extends Component{
 		close();
 	}
 
+	_daySelected = ({ name, active }) => {
+		const repeat = {
+			...this.state.repeat,
+			[name]: !active,
+		}
+
+		const days = [];
+
+		for( const key in repeat ){
+			if( repeat[key] ) days.push(key);
+		}
+
+		const repeat_label = determineDaysSelectedType(days);
+
+		this.setState({ repeat, repeat_label });
+	}
+
 	render(){
 		const { close } = this.props;
-		const { hour, minute, ampm } = this.state;
+		const { repeat, repeat_label } = this.state;
 
 		return (
 			<Modal
@@ -69,31 +87,12 @@ class EditAlarmTime extends Component{
 
 						</View>
 
-						<View style={edit.pickerWrapper}>
-
-							<Picker 
-								style={edit.picker}
-								selectedValue={ hour }
-								onValueChange={ hour => this.setState({ hour }) }>
-									{ this.hours.map(x => <Picker.Item key={x} label={x} value={x} />) }
-							</Picker>
-
-							<Text style={edit.colon}>:</Text>
-
-							<Picker 
-								style={edit.picker}
-								selectedValue={ minute }
-								onValueChange={ minute => this.setState({ minute }) }>
-									{ this.minutes.map(x => <Picker.Item key={x} label={x} value={x} />) }
-							</Picker>
-
-							<Picker 
-								style={edit.picker}
-								selectedValue={ ampm }
-								onValueChange={ ampm => this.setState({ ampm }) }>
-									{ this.ampm.map(x => <Picker.Item key={x} label={x} value={x} />) }
-							</Picker>
-
+						<View style={edit.dateWrapper}>
+							{ DAYS_OF_WEEK.map(day => <DaySelector 
+														key={day.name} 
+														{...day} 
+														active={ !!repeat[day.name] }
+														onPress={ this._daySelected } />) }
 						</View>
 
 					</View>
@@ -103,6 +102,18 @@ class EditAlarmTime extends Component{
 	}
 }
 
+const DaySelector = ({ name, abbr, active, onPress }) => (
+
+	<TouchableOpacity 
+		style={[edit.day, active && edit.dayActive]}
+		onPress={ () => onPress({ name, active }) }>
+
+			<Text style={[edit.dayText, active && edit.dayTextActive]}>{abbr}</Text>
+
+	</TouchableOpacity>
+
+)
+
 const mapStateToProps = (state, props) => {
 	return {
 		_user: state._user,
@@ -110,4 +121,4 @@ const mapStateToProps = (state, props) => {
 	}
 }
 
-export default connect(mapStateToProps)(EditAlarmTime);
+export default connect(mapStateToProps)(EditAlarmDays);

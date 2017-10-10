@@ -107,6 +107,30 @@ export const edit = StyleSheet.create({
 	},
 	label: {
 		fontWeight: '700',
+	},
+	dateWrapper: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+		flex: 1,
+	},
+	day: {
+		..._g._border(1, _g.darkTheme.shade5),
+		..._g._borderRadius(100),
+		width: 40,
+		height: 40,
+		alignItems: 'center',
+		justifyContent: 'center',
+		marginRight: 5,
+	},
+	dayActive: {
+		backgroundColor: _g.darkTheme.shade5,
+	},
+	dayText: {
+		color: _g.darkTheme.shade5,
+	},
+	dayTextActive: {
+		color: _g.darkTheme.shade3,
 	}
 });
 
