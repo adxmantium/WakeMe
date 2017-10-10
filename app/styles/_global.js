@@ -3,6 +3,30 @@
 export const white = '#fff'
 export const error = 'firebrick'
 
+export const darkTheme = {
+  shade1: '#29648A',
+  shade2: '#2E9CCA',
+  shade3: '#AAABB8',
+  shade4: '#464866',
+  shade5: '#25274D',
+}
+
+export const lightTheme = {
+  shade1: '#FEFFFF',
+  shade2: '#DEF2F1',
+  shade3: '#3AAFA9',
+  shade4: '#2B7A78',
+  shade5: '#17252A',
+}
+
+export const natureTheme = {
+  shade1: '#F7F9FB',
+  shade2: '#8FC1E3',
+  shade3: '#5085A5',
+  shade4: '#31708E',
+  shade5: '#687864',
+}
+
 
 // returns object with all padding sides
 // if rt, bt, and lt are undefined, then use tp as default to mimic css ex: padding: 10

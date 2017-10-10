@@ -8,13 +8,13 @@ import * as _g from './_global'
 export const al = StyleSheet.create({
 	container: {
 		flex: 1,
-		..._g._border(1, 'red'),			
+		// ..._g._border(1, 'red'),			
 	},
 });
 
 export const head = StyleSheet.create({
 	container: {
-		..._g._border(1, 'blue'),			
+		// ..._g._border(1, 'blue'),
 		alignItems: 'center',
 		flex: 0.3,
 		justifyContent: 'flex-end',
@@ -27,7 +27,7 @@ export const head = StyleSheet.create({
 
 export const main = StyleSheet.create({
 	container: {
-		..._g._border(1, 'green'),			
+		// ..._g._border(1, 'green'),
 		alignItems: 'center',
 		flex: 2,
 		justifyContent: 'center',
@@ -47,20 +47,20 @@ export const main = StyleSheet.create({
 
 export const edit = StyleSheet.create({
 	container: {
-		..._g._border(1, 'black'),
+		// ..._g._border(1, 'black'),
 		flex: 1,
 	},
 	modal: {
 		flex: 1,
-		..._g._border(1, 'blue'),
+		// ..._g._border(1, 'blue'),
 		backgroundColor: 'rgba(255,255,255,0.9)',
-		marginTop: 400,
+		marginTop: '130%',
 	},
 	actions: {
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		..._g._border(1, 'red'),
+		// ..._g._border(1, 'red'),
 	},
 	btn: {
 		..._g._padding(5, 15, 5, 15),
@@ -75,7 +75,7 @@ export const edit = StyleSheet.create({
 		flex: 1,
 	},
 	picker: {
-		..._g._border(1, 'green'),
+		// ..._g._border(1, 'green'),
 		width: 75,
 	},
 	colon: {
@@ -83,5 +83,41 @@ export const edit = StyleSheet.create({
 		width: 20,
 		textAlign: 'center',
 		..._g._padding(87, 0, 0, 0),
+	},
+	title: {
+		textAlign: 'center',
+		..._g._padding(10, 0, 10, 0),
+	},
+	field: {
+		// ..._g._border(1, 'black'),
+		..._g._padding(10, 10, 10, 10),
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		marginBottom: 1,
+	},
+	label: {
+		fontWeight: '700',
 	}
 });
+
+export const darkTheme = StyleSheet.create({
+	bg: {
+		backgroundColor: _g.darkTheme.shade5,
+	},
+	bg2: {
+		backgroundColor: _g.darkTheme.shade4,
+	},
+	bg3: {
+		backgroundColor: _g.darkTheme.shade3,
+	},
+	color: {
+		color: _g.darkTheme.shade3,
+	},
+	color2: {
+		color: _g.darkTheme.shade5,
+	}
+});
+
+export const darkThemeObj = {
+	icon: _g.darkTheme.shade5,
+}

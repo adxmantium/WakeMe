@@ -2,6 +2,7 @@
 
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   View,
   Text,
@@ -15,7 +16,10 @@ import {
 import EditAlarmTimeModal from './../../components/editAlarmTimeModal'
 
 // styles
-import { edit } from './../../styles/alarm'
+import { edit, darkTheme, darkThemeObj } from './../../styles/alarm'
+
+const theme = darkTheme;
+const themeObj = darkThemeObj;
 
 class SetAlarm extends Component{
 	constructor(props){
@@ -26,22 +30,46 @@ class SetAlarm extends Component{
 		}
 	}
 
+	_hourPress = () => {
+		this.setState({editTime: true});
+	}
+
+	_minutePress = () => {
+		this.setState({editTime: true});
+	}
+
+	_ampmPress = () => {
+		this.setState({editTime: true});
+	}
+
 	render(){
+		const { hour, minute, ampm } = this.props._alarm;
 		const { editTime } = this.state;
 
 		return (
-			<ScrollView style={edit.container}>
+			<ScrollView style={[edit.container, theme.bg3]}>
 
-				<TouchableOpacity onPress={() => this.setState({editTime: true})}>
-					<Text>12:00 - edit</Text>
+				<Text style={[edit.title, theme.color2]}>Set Alarm</Text>
+
+				<TouchableOpacity 
+					style={[edit.field]}
+					onPress={() => this.setState({editTime: true})}>
+						<Text style={theme.color2}><Text style={edit.label}>Time</Text>: {`${hour}:${minute} ${ampm}`}</Text>
+						<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
 				</TouchableOpacity>
 
-				<TouchableOpacity onPress={() => this.setState({editTime: true})}>
-					<Text>Repeat: Everyday</Text>
+				<TouchableOpacity 
+					style={[edit.field]}
+					onPress={() => this.setState({editTime: true})}>
+						<Text style={theme.color2}><Text style={edit.label}>Repeat</Text>: Everyday</Text>
+						<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
 				</TouchableOpacity>
 
-				<TouchableOpacity onPress={() => this.setState({editTime: true})}>
-					<Text>Sound: Default</Text>
+				<TouchableOpacity 
+					style={[edit.field]}
+					onPress={() => this.setState({editTime: true})}>
+						<Text style={theme.color2}><Text style={edit.label}>Sound</Text>: Default</Text>
+						<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
 				</TouchableOpacity>
 
 				{ editTime && 
@@ -54,7 +82,7 @@ class SetAlarm extends Component{
 
 const mapStateToProps = (state, props) => {
 	return {
-		_user: state._user,
+		_alarm: state._alarm,
 	}
 }
 

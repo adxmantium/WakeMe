@@ -1,5 +1,6 @@
 // /screens/alarm/index.js
 
+import { Fab } from 'native-base'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import {
@@ -16,7 +17,9 @@ import {
 import SetAlarm from './setAlarm'
 
 // styles
-import { al, head, main, edit } from './../../styles/alarm'
+import { al, head, main, darkTheme } from './../../styles/alarm'
+
+const theme = darkTheme;
 
 class Alarm extends Component{
 	constructor(props){
@@ -34,13 +37,13 @@ class Alarm extends Component{
 		return (
 			<View style={al.container}>
 
-				<View style={head.container}>
-					<Text style={head.name}>WakeMe</Text>
+				<View style={[head.container, theme.bg]}>
+					<Text style={[head.name, theme.color]}>WakeMe</Text>
 				</View>
 
-				<View style={main.container}>
-					<Text style={main.time}>{`${hour}:${minute}`}<Text style={main.ampm}>{ampm}</Text></Text>
-					<Text style={main.date}>Monday, October 9, 2017</Text>
+				<View style={[main.container, theme.bg]}>
+					<Text style={[main.time, theme.color]}>{`${hour}:${minute}`}<Text style={main.ampm}>{ampm}</Text></Text>
+					<Text style={[main.date, theme.color]}>Monday, October 9, 2017</Text>
 				</View>
 
 				<SetAlarm />
