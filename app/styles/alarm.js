@@ -16,8 +16,10 @@ export const head = StyleSheet.create({
 	container: {
 		// ..._g._border(1, 'blue'),
 		alignItems: 'center',
-		flex: 0.3,
-		justifyContent: 'flex-end',
+		flex: 0.4,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		..._g._padding(0, 15, 0, 15),
 	},
 	name: {
 		fontSize: 20,
@@ -53,8 +55,8 @@ export const edit = StyleSheet.create({
 	modal: {
 		flex: 1,
 		// ..._g._border(1, 'blue'),
-		backgroundColor: 'rgba(255,255,255,0.9)',
-		marginTop: '130%',
+		backgroundColor: _g.darkTheme.shade3,
+		marginTop: '110%',
 	},
 	actions: {
 		flexDirection: 'row',
@@ -68,6 +70,13 @@ export const edit = StyleSheet.create({
 	},
 	btnText: {
 		color: 'blue',
+	},
+	btnCancel: {
+		color: _g._flatblack,
+	},
+	btnSave: {
+		color: _g.darkTheme.shade5,
+		fontWeight: '700',
 	},
 	pickerWrapper: {
 		flexDirection: 'row',
@@ -86,6 +95,7 @@ export const edit = StyleSheet.create({
 	},
 	title: {
 		textAlign: 'center',
+		fontWeight: '700',
 		..._g._padding(10, 0, 10, 0),
 	},
 	field: {
@@ -98,6 +108,19 @@ export const edit = StyleSheet.create({
 	label: {
 		fontWeight: '700',
 	}
+});
+
+export const menu = StyleSheet.create({
+	container: {
+		width: 50,
+		height: 50,
+		position: 'absolute',
+		bottom: 5,
+		left: '43%',
+	},
+	items: {
+
+	},
 });
 
 export const darkTheme = StyleSheet.create({
@@ -120,4 +143,7 @@ export const darkTheme = StyleSheet.create({
 
 export const darkThemeObj = {
 	icon: _g.darkTheme.shade5,
+	menuActive: _g.darkTheme.shade5,
+	menuInactive: _g.darkTheme.shade6,
+	menuIcon: _g.darkTheme.shade3,
 }

@@ -3,6 +3,7 @@
 import { Fab } from 'native-base'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   View,
   Text,
@@ -14,12 +15,15 @@ import {
 } from 'react-native'
 
 // components
+import Menu from './../menu'
 import SetAlarm from './setAlarm'
+import AlarmHeader from './header'
 
 // styles
-import { al, head, main, darkTheme } from './../../styles/alarm'
+import { al, head, main, darkTheme, darkThemeObj } from './../../styles/alarm'
 
 const theme = darkTheme;
+const themeObj = darkThemeObj;
 
 class Alarm extends Component{
 	constructor(props){
@@ -31,15 +35,14 @@ class Alarm extends Component{
 	}
 
 	render(){
-		const { hour, minute, ampm } = this.props._alarm;
+		const { navigation, _alarm } = this.props;
+		const { hour, minute, ampm } = _alarm;
 		const { editTime } = this.state;
 
 		return (
 			<View style={al.container}>
 
-				<View style={[head.container, theme.bg]}>
-					<Text style={[head.name, theme.color]}>WakeMe</Text>
-				</View>
+				<AlarmHeader navigation={navigation} />
 
 				<View style={[main.container, theme.bg]}>
 					<Text style={[main.time, theme.color]}>{`${hour}:${minute}`}<Text style={main.ampm}>{ampm}</Text></Text>

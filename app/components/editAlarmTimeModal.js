@@ -58,13 +58,13 @@ class EditAlarmTime extends Component{
 							<TouchableOpacity
 								style={edit.btn}
 								onPress={ close }>
-									<Text style={edit.btnText}>Cancel</Text>
+									<Text style={[edit.btnText, edit.btnCancel]}>Cancel</Text>
 							</TouchableOpacity>
 
 							<TouchableOpacity 
 								style={edit.btn}
 								onPress={ this._save }>
-									<Text style={edit.btnText}>Save</Text>
+									<Text style={[edit.btnText, edit.btnSave]}>Save</Text>
 							</TouchableOpacity>
 
 						</View>

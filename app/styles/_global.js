@@ -2,6 +2,7 @@
 
 export const white = '#fff'
 export const error = 'firebrick'
+export const flatblack = '#202020'
 
 export const darkTheme = {
   shade1: '#29648A',
@@ -9,6 +10,7 @@ export const darkTheme = {
   shade3: '#AAABB8',
   shade4: '#464866',
   shade5: '#25274D',
+  shade6: '#42468a',
 }
 
 export const lightTheme = {
