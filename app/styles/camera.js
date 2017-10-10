@@ -14,7 +14,6 @@ export const cap = StyleSheet.create({
 		flex: 1,
 	    justifyContent: 'flex-end',
 	    alignItems: 'center',
-		// ..._g._border(1, 'green'),			
 	},
 	capture: {
 	    padding: 15,
@@ -33,7 +32,6 @@ export const cap = StyleSheet.create({
 		width: '100%',
 	},
 	headIcon: {
-		// ..._g._border(1, 'blue'),
 		backgroundColor: 'transparent',
 		height: 35,
 	},
