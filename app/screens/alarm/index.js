@@ -38,7 +38,7 @@ class Alarm extends Component{
 
 	render(){
 		const { navigation, _alarm } = this.props;
-		const { hour, minute, ampm } = _alarm;
+		const { hour, minute, ampm, enabled } = _alarm;
 		const { editTime } = this.state;
 
 		return (
@@ -50,9 +50,11 @@ class Alarm extends Component{
 
 				<View style={[main.container, theme.bg]}>
 					<View>
-						<View style={[main.setFor, main.setForTop]}>
-							<Animatable.Text animation="fadeInDown" style={[main.setText, main.setForTime]}>Alarm set for:</Animatable.Text>
+						<Animatable.Text animation="fadeInUp" style={main.setText}>
+							{ enabled ? 'Next time alarm will go off:' : 'Alarm disabled' }
+						</Animatable.Text>
 
+						<View style={main.setFor}>
 							<Animatable.Text 
 								animation="fadeInDown" 
 								style={[main.time, theme.color]}>
@@ -61,7 +63,6 @@ class Alarm extends Component{
 						</View>
 
 						<View style={main.setFor}>
-							<Animatable.Text animation="fadeInUp" style={main.setText}>Next time alarm will go off:</Animatable.Text>
 							<Animatable.Text animation="fadeInUp" style={[main.date, theme.color]}>Monday, October 9, 2017</Animatable.Text>
 						</View>
 					</View>

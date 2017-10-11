@@ -46,16 +46,6 @@ export const main = StyleSheet.create({
 		fontSize: 20,
 		fontWeight: '700',
 	},
-	setFor: {
-		// ..._g._border(1, 'red'),
-	},
-	setForTop: {
-		marginBottom: 20,
-	},
-	setForTime: {
-		marginBottom: -18,
-		zIndex: 1,
-	},
 	setText: {
 		color: _g.darkTheme.shade3,
 		fontSize: 11,
