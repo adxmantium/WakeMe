@@ -1,7 +1,6 @@
 // /components/editAlarmDaysModal.js
 
-// /screens/alarm/index.js
-
+import moment from 'moment'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import {
@@ -41,12 +40,41 @@ class EditAlarmDays extends Component{
 
 		const repeat = {};
 
+		const today = moment().day( moment().day() );
+		let selected_day = null;
+		let next_alarm_day = 'Never';
+		let next_alarm_day_moment = null;
+
 		// get only the days that are true
 		for( const day in _r ){
-			if( _r[day] ) repeat[day] = _r[day];
+			// if day is selected
+			if( _r[day] ){
+
+				repeat[day] = _r[day]; // cache this day
+				selected_day = moment().day(day); // turn day into moment
+				today_selected_diff = selected_day.diff(today, 'days'); // returns num
+
+				// if selected day has already passed, make this day the next week of this day
+				if( today_selected_diff < 0 ){
+					selected_day = selected_day.add(1, 'w');
+					today_selected_diff = selected_day.diff(today, 'days');
+				}
+
+				if( next_alarm_day_moment === null ) next_alarm_day_moment = selected_day;
+				else if( today_selected_diff < next_alarm_day_moment.diff(today, 'days') ) next_alarm_day_moment = selected_day;
+			}
 		}
 
-		dispatch( saveAlarm({ repeat_label, repeat }) );
+		// if next_alarm_day_moment is set, format for display
+		if( next_alarm_day_moment ) next_alarm_day = next_alarm_day_moment.format('dddd, MMM D, YYYY');
+
+		dispatch( saveAlarm({ 
+			repeat,
+			repeat_label, 
+			next_alarm_day,
+			next_alarm_day_moment,
+		}) );
+
 		close();
 	}
 

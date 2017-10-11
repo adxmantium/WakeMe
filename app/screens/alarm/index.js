@@ -38,7 +38,7 @@ class Alarm extends Component{
 
 	render(){
 		const { navigation, _alarm } = this.props;
-		const { hour, minute, ampm, enabled } = _alarm;
+		const { hour, minute, ampm, enabled, next_alarm_day } = _alarm;
 		const { editTime } = this.state;
 
 		return (
@@ -63,7 +63,7 @@ class Alarm extends Component{
 						</View>
 
 						<View style={main.setFor}>
-							<Animatable.Text animation="fadeInRight" style={[main.date, theme.color]}>Monday, October 9, 2017</Animatable.Text>
+							<Animatable.Text animation="fadeInRight" style={[main.date, theme.color]}>{ next_alarm_day }</Animatable.Text>
 						</View>
 					</View>
 				</View>

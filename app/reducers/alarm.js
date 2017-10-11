@@ -9,6 +9,7 @@ const init = {
 	repeat: {},
 	repeat_label: 'Never',
 	enabled: false,
+	next_alarm_day: 'Days not selected',
 };
 
 export default (state = init, action) => {
