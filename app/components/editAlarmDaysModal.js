@@ -37,8 +37,16 @@ class EditAlarmDays extends Component{
 
 	_save = () => {
 		const { dispatch, close } = this.props;
+		const { repeat_label, repeat: _r } = this.state;
 
-		dispatch( saveAlarm({...this.state}) );
+		const repeat = {};
+
+		// get only the days that are true
+		for( const day in _r ){
+			if( _r[day] ) repeat[day] = _r[day];
+		}
+
+		dispatch( saveAlarm({ repeat_label, repeat }) );
 		close();
 	}
 
