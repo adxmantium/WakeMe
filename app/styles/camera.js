@@ -37,5 +37,14 @@ export const cap = StyleSheet.create({
 	},
 	close: {
 		..._g._padding(3, 0, 0, 0),
+	},
+	captureBtn: {
+		width: 70,
+		height: 70,
+		marginBottom: 20,
+		..._g._borderRadius(100),
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#fff',
 	}
 });

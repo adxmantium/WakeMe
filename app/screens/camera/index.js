@@ -36,16 +36,28 @@ class WakeUpCamera extends Component{
 		this.state = {
 			type: 'front',
 			capture: 'camera',
+			isRecording: false,
 			activeIcon: 'camera',
 			inactiveIcon: 'video-camera',
 			aspect: Camera.constants.Aspect.fill,
 		};
 	}
 
-	_takePicture = () => {
-		const metadata = {};
+	_capture = () => {
+		const { mode, capture, isRecording } = this.state;
+		const metadata = { mode };
 
-		//options.location = ... 
+		// if is recording, stop recording
+		if( isRecording ){
+			this._camera.stopCapture();
+			this.setState({isRecording: false});
+			return;
+		}
+
+		// if capture mode is video, then start recording
+		if( capture === 'video' ) this.setState({isRecording: true});
+
+		// start capture of pic/vid
 		this._camera
 			.capture({ metadata })
 		 	.then((data) => console.log(data))
@@ -56,12 +68,14 @@ class WakeUpCamera extends Component{
 		let capture = 'camera',
 			activeIcon = 'camera',
 			inactiveIcon = 'video-camera',
+			captureBtn = 'camera',
 			mode = Camera.constants.CaptureMode.still;
 
 		if( this.state.capture === 'camera' ){
 			capture = 'video';
 			activeIcon = 'video-camera';
 			inactiveIcon = 'camera';
+			captureBtn = 'play';
 			mode = Camera.constants.CaptureMode.video;
 		}
 
@@ -83,7 +97,8 @@ class WakeUpCamera extends Component{
 
 	render(){
 		const { navigation } = this.props;
-		const { capture, type, mode, activeIcon, inactiveIcon } = this.state;
+		const { capture, type, mode, activeIcon, inactiveIcon, isRecording } = this.state;
+		const captureBtnIcon = capture === 'camera' ? capture : (isRecording ? 'stop' : 'play');
 
 		return (
 			<View style={cap.container}>
@@ -93,13 +108,19 @@ class WakeUpCamera extends Component{
 					aspect={ _cam.ASPECT }
 					style={ cap.preview }
 					type={ type }
+					keepAwake={true}
+					flashMode={Camera.constants.FlashMode.auto}
+					onFocusChanged={() => {}}
+					onZoomChanged={() => {}}
+					defaultTouchToFocus
+					mirrorImage={false}
 					captureMode={ mode }
 					captureTarget={ _cam.CAPTURE_TARGET }
 					captureQuality={ _cam.CAPTURE_QUALITY }>
 
 						<View style={cap.header}>
 							<TouchableOpacity onPress={ () => navigation.goBack(null) }>
-								<Icon name="times" size={25} color="#fff" style={[cap.headIcon, cap.close]} />
+								<Icon name="chevron-left" size={25} color="#fff" style={[cap.headIcon, cap.close]} />
 							</TouchableOpacity>
 
 							<TouchableOpacity onPress={ this._toggleCamType }>
@@ -107,11 +128,17 @@ class WakeUpCamera extends Component{
 							</TouchableOpacity>
 						</View>
 
+						<TouchableOpacity 
+							onPress={ this._capture }
+							style={cap.captureBtn}>
+								<Icon name={captureBtnIcon} size={30} color="#000" />	
+						</TouchableOpacity>
+
 						<Fab 
 							buttonColor="#fff"
-							position="center"
-							offsetX={30}
-							offsetY={30}
+							position="right"
+							offsetX={20}
+							offsetY={20}
 							icon={ <Icon name={activeIcon} size={SIZE} color={COLOR} /> }>
 
 								<Fab.Item 
