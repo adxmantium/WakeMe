@@ -5,6 +5,8 @@ const r = '_ALARM:';
 
 export const SAVE = r+'SAVE'
 export const UPDATE = r+'UPDATE'
+export const EMPTY_REPEAT_LABEL = 'Never'
+export const EMPTY_NEXT_ALARM_DAY_LABEL = 'Days not selected'
 
 export const DAYS_OF_WEEK = [
 	{name: 'Sunday', abbr: 'Sun', type: 'weekend'},
@@ -48,7 +50,7 @@ const isWeekday = selectedDays => {
 
 export const determineDaysSelectedType = selectedDays => {
 	// return if param is empty
-	if( !selectedDays || selectedDays.length === 0 ) return 'Never';
+	if( !selectedDays || selectedDays.length === 0 ) return EMPTY_REPEAT_LABEL;
 
 	if( isWeekend( selectedDays ) ) return 'Weekends Only';
 	else if( isWeekday( selectedDays ) ) return 'Weekdays Only';

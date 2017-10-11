@@ -22,6 +22,7 @@ import { edit } from './../styles/alarm'
 import { 
 	DAYS_OF_WEEK, 
 	determineDaysSelectedType,
+	EMPTY_NEXT_ALARM_DAY_LABEL,
 } from './../constants/alarm'
 
 class EditAlarmDays extends Component{
@@ -42,7 +43,7 @@ class EditAlarmDays extends Component{
 
 		const today = moment().day( moment().day() );
 		let selected_day = null;
-		let next_alarm_day = 'Never';
+		let next_alarm_day = EMPTY_NEXT_ALARM_DAY_LABEL;
 		let next_alarm_day_moment = null;
 
 		// get only the days that are true

@@ -7,9 +7,9 @@ const init = {
 	minute: '18',
 	ampm: 'am',
 	repeat: {},
-	repeat_label: 'Never',
+	repeat_label: _actions.EMPTY_REPEAT_LABEL,
 	enabled: false,
-	next_alarm_day: 'Days not selected',
+	next_alarm_day: _actions.EMPTY_NEXT_ALARM_DAY_LABEL,
 };
 
 export default (state = init, action) => {
