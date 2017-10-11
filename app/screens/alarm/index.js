@@ -20,7 +20,7 @@ import SetAlarm from './setAlarm'
 import AlarmHeader from './header'
 
 // styles
-import { al, head, main, darkTheme, darkThemeObj } from './../../styles/alarm'
+import { al, main, darkTheme, darkThemeObj } from './../../styles/alarm'
 
 const theme = darkTheme;
 const themeObj = darkThemeObj;
@@ -45,8 +45,16 @@ class Alarm extends Component{
 				<AlarmHeader navigation={navigation} />
 
 				<View style={[main.container, theme.bg]}>
-					<Text style={[main.time, theme.color]}>{`${hour}:${minute}`}<Text style={main.ampm}>{ampm}</Text></Text>
-					<Text style={[main.date, theme.color]}>Monday, October 9, 2017</Text>
+					<View>
+						<View style={[main.setFor, main.setForTop]}>
+							<Text style={[main.setText, main.setForTime]}>Alarm set for:</Text>
+							<Text style={[main.time, theme.color]}>{`${hour}:${minute}`}<Text style={main.ampm}>{ampm}</Text></Text>
+						</View>
+						<View style={main.setFor}>
+							<Text style={main.setText}>Next time alarm will go off:</Text>
+							<Text style={[main.date, theme.color]}>Monday, October 9, 2017</Text>
+						</View>
+					</View>
 				</View>
 
 				<SetAlarm />

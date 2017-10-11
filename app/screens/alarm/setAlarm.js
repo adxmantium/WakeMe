@@ -7,10 +7,14 @@ import {
   View,
   Text,
   Modal,
+  Switch,
   Picker,
   ScrollView,
   TouchableOpacity,
 } from 'react-native'
+
+// actions
+import { saveAlarm } from './../../actions/alarm'
 
 // components
 import EditAlarmTimeModal from './../../components/editAlarmTimeModal'
@@ -46,13 +50,22 @@ class SetAlarm extends Component{
 	}
 
 	render(){
-		const { hour, minute, ampm, repeat_label } = this.props._alarm;
+		const { dispatch, _alarm } = this.props;
+		const { hour, minute, ampm, repeat_label, enabled } = _alarm;
 		const { editTime, editDays, editSound } = this.state;
 
 		return (
 			<ScrollView style={[edit.container, theme.bg3]}>
 
 				<Text style={[edit.title, theme.color2]}>Set Alarm</Text>
+
+				<View style={[edit.field, edit.enabler]}>
+					<Text style={theme.color2}><Text style={edit.label}>{enabled ? 'Enabled' : 'Disabled'}</Text></Text>
+					<Switch 
+						value={ enabled }
+						onTintColor={themeObj.menuActive}
+						onValueChange={val => dispatch( saveAlarm({enabled: val}) )} />
+				</View>
 
 				<TouchableOpacity 
 					style={[edit.field]}

@@ -8,6 +8,7 @@ const init = {
 	ampm: 'am',
 	repeat: {},
 	repeat_label: 'Never',
+	enabled: false,
 };
 
 export default (state = init, action) => {

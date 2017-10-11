@@ -8,15 +8,15 @@ import * as _g from './_global'
 export const al = StyleSheet.create({
 	container: {
 		flex: 1,
-		// ..._g._border(1, 'red'),			
+		// ..._g._border(1, 'red'),
 	},
 });
 
 export const head = StyleSheet.create({
 	container: {
-		// ..._g._border(1, 'blue'),
-		alignItems: 'center',
-		flex: 0.4,
+		// ..._g._border(1, 'white'),
+		alignItems: 'flex-end',
+		flex: 0.3,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		..._g._padding(0, 15, 0, 15),
@@ -31,25 +31,41 @@ export const main = StyleSheet.create({
 	container: {
 		// ..._g._border(1, 'green'),
 		alignItems: 'center',
-		flex: 2,
+		flex: 1.5,
 		justifyContent: 'center',
 	},
 	time: {
 		fontSize: 100,
 		fontWeight: '200',
+		// height: 100,
+		// ..._g._border(1, 'red'),
 	},
 	ampm: {
 		fontSize: 40,
 	},
 	date: {
-		fontSize: 18,
+		fontSize: 20,
 		fontWeight: '700',
+	},
+	setFor: {
+		// ..._g._border(1, 'red'),
+	},
+	setForTop: {
+		marginBottom: 20,
+	},
+	setForTime: {
+		marginBottom: -18,
+		zIndex: 1,
+	},
+	setText: {
+		color: _g.darkTheme.shade3,
+		fontSize: 11,
 	}
 });
 
 export const edit = StyleSheet.create({
 	container: {
-		// ..._g._border(1, 'black'),
+		..._g._border(1, 'black'),
 		flex: 1,
 	},
 	modal: {
@@ -103,6 +119,7 @@ export const edit = StyleSheet.create({
 		..._g._padding(10, 10, 10, 10),
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		alignItems: 'center',
 		marginBottom: 1,
 	},
 	label: {
