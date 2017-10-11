@@ -1,7 +1,5 @@
 // /components/editAlarmTimeModal.js
 
-// /screens/alarm/index.js
-
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import {

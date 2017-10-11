@@ -50,20 +50,20 @@ class Alarm extends Component{
 
 				<View style={[main.container, theme.bg]}>
 					<View>
-						<Animatable.Text animation="fadeInUp" style={main.setText}>
+						<Animatable.Text animation="fadeInRight" style={main.setText}>
 							{ enabled ? 'Next time alarm will go off:' : 'Alarm disabled' }
 						</Animatable.Text>
 
 						<View style={main.setFor}>
 							<Animatable.Text 
-								animation="fadeInDown" 
+								animation="fadeInRight" 
 								style={[main.time, theme.color]}>
 									{`${hour}:${minute}`}<Text style={main.ampm}>{ampm}</Text>
 							</Animatable.Text>
 						</View>
 
 						<View style={main.setFor}>
-							<Animatable.Text animation="fadeInUp" style={[main.date, theme.color]}>Monday, October 9, 2017</Animatable.Text>
+							<Animatable.Text animation="fadeInRight" style={[main.date, theme.color]}>Monday, October 9, 2017</Animatable.Text>
 						</View>
 					</View>
 				</View>
