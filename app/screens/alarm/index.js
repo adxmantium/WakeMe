@@ -18,6 +18,7 @@ import {
 import Menu from './../menu'
 import SetAlarm from './setAlarm'
 import AlarmHeader from './header'
+import PushController from './../../components/pushController'
 
 // styles
 import { al, main, darkTheme, darkThemeObj } from './../../styles/alarm'
@@ -41,6 +42,8 @@ class Alarm extends Component{
 
 		return (
 			<View style={al.container}>
+
+				<PushController />
 
 				<AlarmHeader navigation={navigation} />
 
