@@ -3,6 +3,7 @@
 import { Fab } from 'native-base'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
+import * as Animatable from 'react-native-animatable'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   View,
@@ -50,12 +51,18 @@ class Alarm extends Component{
 				<View style={[main.container, theme.bg]}>
 					<View>
 						<View style={[main.setFor, main.setForTop]}>
-							<Text style={[main.setText, main.setForTime]}>Alarm set for:</Text>
-							<Text style={[main.time, theme.color]}>{`${hour}:${minute}`}<Text style={main.ampm}>{ampm}</Text></Text>
+							<Animatable.Text animation="fadeInDown" style={[main.setText, main.setForTime]}>Alarm set for:</Animatable.Text>
+
+							<Animatable.Text 
+								animation="fadeInDown" 
+								style={[main.time, theme.color]}>
+									{`${hour}:${minute}`}<Text style={main.ampm}>{ampm}</Text>
+							</Animatable.Text>
 						</View>
+
 						<View style={main.setFor}>
-							<Text style={main.setText}>Next time alarm will go off:</Text>
-							<Text style={[main.date, theme.color]}>Monday, October 9, 2017</Text>
+							<Animatable.Text animation="fadeInUp" style={main.setText}>Next time alarm will go off:</Animatable.Text>
+							<Animatable.Text animation="fadeInUp" style={[main.date, theme.color]}>Monday, October 9, 2017</Animatable.Text>
 						</View>
 					</View>
 				</View>
