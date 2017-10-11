@@ -16,7 +16,7 @@ export const head = StyleSheet.create({
 	container: {
 		// ..._g._border(1, 'white'),
 		alignItems: 'flex-end',
-		flex: 0.3,
+		flex: 0.2,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		..._g._padding(0, 15, 0, 15),
@@ -37,7 +37,6 @@ export const main = StyleSheet.create({
 	time: {
 		fontSize: 100,
 		fontWeight: '200',
-		// height: 100,
 		// ..._g._border(1, 'red'),
 	},
 	ampm: {
