@@ -8,6 +8,7 @@ import { StackNavigator } from 'react-navigation'
 import AlarmScreen from './../screens/alarm'
 import CameraScreen from './../screens/camera'
 import CollectionScreen from './../screens/collection'
+import CapturedScreen from './../screens/camera/captured'
 
 const StackNavigatorConfig = {}
 
@@ -27,6 +28,14 @@ const Camera = {
 	}),
 }
 
+const Captured = {
+	screen: CapturedScreen,
+	path: '/captured',
+	navigationOptions: ({ navigation }) => ({
+		header: null,
+	}),
+}
+
 const Collection = {
 	screen: CollectionScreen,
 	path: '/collection',
@@ -38,6 +47,7 @@ const Collection = {
 export default StackNavigator({
   Alarm,
   Camera,
+  Captured,
   Collection
 
 }, StackNavigatorConfig);

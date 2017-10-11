@@ -13,6 +13,9 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
+// actions
+import { captured } from './../../actions/camera'
+
 // styles
 import { cap } from './../../styles/camera'
 import { menu, darkThemeObj } from './../../styles/alarm'
@@ -57,10 +60,16 @@ class WakeUpCamera extends Component{
 		// if capture mode is video, then start recording
 		if( capture === 'video' ) this.setState({isRecording: true});
 
+		const { dispatch, navigation } = this.props;
+
 		// start capture of pic/vid
 		this._camera
 			.capture({ metadata })
-		 	.then((data) => console.log(data))
+		 	.then(capturedFile => {
+		 		console.log('captured file: ', capturedFile);
+		 		dispatch( captured({ capturedFile }) );
+		 		navigation.navigate('Captured');
+		 	})
 		 	.catch(err => console.error(err));
 	}
 
@@ -109,7 +118,7 @@ class WakeUpCamera extends Component{
 					style={ cap.preview }
 					type={ type }
 					keepAwake={true}
-					flashMode={Camera.constants.FlashMode.auto}
+					flashMode={Camera.constants.FlashMode.off}
 					onFocusChanged={() => {}}
 					onZoomChanged={() => {}}
 					defaultTouchToFocus

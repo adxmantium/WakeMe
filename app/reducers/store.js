@@ -9,6 +9,7 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 // reducers
 import _user from './user'
 import _alarm from './alarm'
+import _camera from './camera'
 
 // create and combine middleware
 
@@ -25,6 +26,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const reducers = combineReducers({
 	_user,
 	_alarm,
+	_camera,
 });
 
 // create store
