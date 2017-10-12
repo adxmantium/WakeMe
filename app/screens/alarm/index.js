@@ -45,7 +45,7 @@ class Alarm extends Component{
 
 				<View style={[main.container, theme.bg]}>
 
-					<Image style={main.bg} source={require('./../../images/wakeme_bg_1.jpg')} />
+					<Image style={main.bg} source={require('./../../images/wakeme_bg_3.jpg')} />
 
 					<View style={main.innerContainer}>
 
