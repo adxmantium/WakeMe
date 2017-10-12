@@ -8,11 +8,8 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   View,
   Text,
-  FlatList,
-  ScrollView,
+  Image,
   TouchableOpacity,
-  Picker,
-  Modal,
 } from 'react-native'
 
 // components
@@ -46,26 +43,34 @@ class Alarm extends Component{
 
 				<PushController />
 
-				<AlarmHeader navigation={navigation} />
-
 				<View style={[main.container, theme.bg]}>
-					<View>
-						<Animatable.Text animation="fadeInRight" style={main.setText}>
-							{ enabled ? 'Next time alarm will go off:' : 'Alarm disabled' }
-						</Animatable.Text>
 
-						<View style={main.setFor}>
-							<Animatable.Text 
-								animation="fadeInRight" 
-								style={[main.time, theme.color]}>
-									{`${hour}:${minute}`}<Text style={main.ampm}>{ampm}</Text>
+					<Image style={main.bg} source={require('./../../images/wakeme_bg_1.jpg')} />
+
+					<View style={main.innerContainer}>
+
+						<AlarmHeader navigation={navigation} />
+
+						<View style={main.inner}>
+							<Animatable.Text animation="fadeInRight" style={main.setText}>
+								{ enabled ? 'Next time alarm will go off:' : 'Alarm disabled' }
 							</Animatable.Text>
-						</View>
 
-						<View style={main.setFor}>
-							<Animatable.Text animation="fadeInRight" style={[main.date, theme.color]}>{ next_alarm_day }</Animatable.Text>
+							<View style={main.setFor}>
+								<Animatable.Text 
+									animation="fadeInRight" 
+									style={[main.time, theme.color]}>
+										{`${hour}:${minute}`}<Text style={main.ampm}>{ampm}</Text>
+								</Animatable.Text>
+							</View>
+
+							<View style={main.setFor}>
+								<Animatable.Text animation="fadeInRight" style={[main.date, theme.color]}>{ next_alarm_day }</Animatable.Text>
+							</View>
 						</View>
+						
 					</View>
+
 				</View>
 
 				<SetAlarm />

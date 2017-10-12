@@ -21,14 +21,14 @@ const themeObj = darkThemeObj;
 
 export default ({ navigation }) => (
 
-	<View style={[head.container, theme.bg]}>
-		<TouchableOpacity onPress={() => navigation.navigate('Collection')}>
+	<View style={[head.container]}>
+		<TouchableOpacity onPress={() => navigation.navigate('Collection')} style={head.btn}>
 			<Icon name="list" size={SIZE} color={themeObj.menuIcon} />
 		</TouchableOpacity>
 
 		<Text style={[head.name, theme.color]}>WakeMe</Text>
 
-		<TouchableOpacity onPress={() => navigation.navigate('Camera')}>
+		<TouchableOpacity onPress={() => navigation.navigate('Camera')} style={head.btn}>
 			<Icon name="camera" size={SIZE} color={themeObj.menuIcon} />
 		</TouchableOpacity>
 	</View>

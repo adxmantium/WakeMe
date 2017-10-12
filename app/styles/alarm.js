@@ -16,23 +16,49 @@ export const head = StyleSheet.create({
 	container: {
 		// ..._g._border(1, 'white'),
 		alignItems: 'flex-end',
-		flex: 0.2,
+		backgroundColor: 'transparent',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		..._g._padding(0, 15, 0, 15),
+		flex: 0.12,
 	},
 	name: {
 		fontSize: 20,
 		fontWeight: '500',
+		height: 26,
+	},
+	btn: {
+		height: 26,
+		justifyContent: 'center',
 	}
 });
 
 export const main = StyleSheet.create({
 	container: {
+		flex: 2,
 		// ..._g._border(1, 'green'),
+	},
+	innerContainer: {
+		// ..._g._border(1, 'red'),
+		flex: 1,
+	},
+	inner: {
+		backgroundColor: 'transparent',
 		alignItems: 'center',
-		flex: 1.5,
 		justifyContent: 'center',
+		// ..._g._border(1, 'blue'),
+		flex: 1,
+	},
+	bg: {
+		flex: 1,
+		width: undefined,
+		height: undefined,
+		position: 'absolute',
+		top: 0,
+		bottom: 0,
+		left: 0,
+		right: 0,
+		backgroundColor: 'transparent',
 	},
 	time: {
 		fontSize: 100,
@@ -49,12 +75,12 @@ export const main = StyleSheet.create({
 	setText: {
 		color: _g.darkTheme.shade3,
 		fontSize: 11,
-	}
+	},	
 });
 
 export const edit = StyleSheet.create({
 	container: {
-		..._g._border(1, 'black'),
+		// ..._g._border(1, 'black'),
 		flex: 1,
 	},
 	modal: {

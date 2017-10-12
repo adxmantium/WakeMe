@@ -6,7 +6,7 @@ const r = '_ALARM:';
 export const SAVE = r+'SAVE'
 export const UPDATE = r+'UPDATE'
 export const EMPTY_REPEAT_LABEL = 'Never'
-export const EMPTY_NEXT_ALARM_DAY_LABEL = 'Days not selected'
+export const EMPTY_NEXT_ALARM_DAY_LABEL = 'Alarm days not selected'
 
 export const DAYS_OF_WEEK = [
 	{name: 'Sunday', abbr: 'Sun', type: 'weekend'},
@@ -59,18 +59,18 @@ export const determineDaysSelectedType = selectedDays => {
 	const copy = [...DAYS_OF_WEEK];
 	let dayFound = null;
 
-	selectedDays.forEach(day => {
+	[...DAYS_OF_WEEK].forEach(day => {
 		// find selected day in DAYS_OF_WEEK
-		dayFound = copy.find(dayCopy => dayCopy.name === day);
+		dayFound = selectedDays.find(selectedDay => day.name === selectedDay);
 		// if found (should always be found), add to days arr
-		if( dayFound ) days.push( dayFound );
+		if( dayFound ) days.push( day );
 	});
 
 	const daysList = days.map(day => day.abbr);
 
 	if( daysList.length === DAYS_OF_WEEK.length ) return 'Everyday';
 
-	return daysList.join(', ');
+	return 'Every '+daysList.join(', ');
 }
 
 
