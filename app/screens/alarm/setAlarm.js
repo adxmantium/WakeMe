@@ -56,7 +56,7 @@ class SetAlarm extends Component{
 		const { editTime, editDays, editSound } = this.state;
 
 		return (
-			<Animatable.View animate="slideInUp" style={[edit.container, theme.bg3]}>
+			<View style={[edit.container, theme.bg3]}>
 				<ScrollView>
 
 					<View style={[edit.field, edit.enabler]}>
@@ -95,7 +95,7 @@ class SetAlarm extends Component{
 						<EditAlarmDaysModal close={ () => this.setState({editDays: false}) } /> }
 
 				</ScrollView>
-			</Animatable.View>
+			</View>
 		);
 	}
 }

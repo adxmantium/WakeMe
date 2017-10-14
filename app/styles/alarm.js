@@ -140,7 +140,7 @@ export const edit = StyleSheet.create({
 		..._g._padding(10, 0, 10, 0),
 	},
 	field: {
-		// ...g._border(1, 'black'),
+		// ..._g._border(1, 'black'),
 		..._g._padding(10, 10, 10, 10),
 		flexDirection: 'row',
 		justifyContent: 'space-between',
