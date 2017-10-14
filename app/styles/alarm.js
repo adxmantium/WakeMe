@@ -13,7 +13,7 @@ export const head = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		..._g._padding(0, 15, 0, 15),
-		flex: 0.22,
+		height: _g.header_height,
 	},
 	name: {
 		fontSize: 20,

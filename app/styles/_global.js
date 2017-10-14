@@ -4,6 +4,8 @@ export const white = '#fff'
 export const error = 'firebrick'
 export const flatblack = '#202020'
 
+export const header_height = 55
+
 export const darkTheme = {
   shade1: '#29648A',
   shade2: '#2E9CCA',
