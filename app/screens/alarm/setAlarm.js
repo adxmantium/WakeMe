@@ -56,46 +56,46 @@ class SetAlarm extends Component{
 		const { editTime, editDays, editSound } = this.state;
 
 		return (
-			<ScrollView style={[edit.container, theme.bg3]}>
+			<Animatable.View animate="slideInUp" style={[edit.container, theme.bg3]}>
+				<ScrollView>
 
-				<Text style={[edit.title, theme.color2]}>Set Alarm</Text>
+					<View style={[edit.field, edit.enabler]}>
+						<Text style={theme.color2}><Text style={edit.label}>{enabled ? 'Enabled' : 'Disabled'}</Text></Text>
+						<Switch 
+							value={ enabled }
+							onTintColor={themeObj.menuActive}
+							onValueChange={val => dispatch( saveAlarm({enabled: val}) )} />
+					</View>
 
-				<View style={[edit.field, edit.enabler]}>
-					<Text style={theme.color2}><Text style={edit.label}>{enabled ? 'Enabled' : 'Disabled'}</Text></Text>
-					<Switch 
-						value={ enabled }
-						onTintColor={themeObj.menuActive}
-						onValueChange={val => dispatch( saveAlarm({enabled: val}) )} />
-				</View>
+					<TouchableOpacity 
+						style={[edit.field]}
+						onPress={() => this.setState({editTime: true})}>
+							<Text style={theme.color2}><Text style={edit.label}>Time</Text>: {`${hour}:${minute} ${ampm}`}</Text>
+							<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
+					</TouchableOpacity>
 
-				<TouchableOpacity 
-					style={[edit.field]}
-					onPress={() => this.setState({editTime: true})}>
-						<Text style={theme.color2}><Text style={edit.label}>Time</Text>: {`${hour}:${minute} ${ampm}`}</Text>
-						<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
-				</TouchableOpacity>
+					<TouchableOpacity 
+						style={[edit.field]}
+						onPress={() => this.setState({editDays: true})}>
+							<Text style={theme.color2}><Text style={edit.label}>Repeat</Text>: { repeat_label }</Text>
+							<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
+					</TouchableOpacity>
 
-				<TouchableOpacity 
-					style={[edit.field]}
-					onPress={() => this.setState({editDays: true})}>
-						<Text style={theme.color2}><Text style={edit.label}>Repeat</Text>: { repeat_label }</Text>
-						<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
-				</TouchableOpacity>
+					<TouchableOpacity 
+						style={[edit.field]}
+						onPress={() => this.setState({editTime: true})}>
+							<Text style={theme.color2}><Text style={edit.label}>Sound</Text>: Default</Text>
+							<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
+					</TouchableOpacity>
 
-				<TouchableOpacity 
-					style={[edit.field]}
-					onPress={() => this.setState({editTime: true})}>
-						<Text style={theme.color2}><Text style={edit.label}>Sound</Text>: Default</Text>
-						<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
-				</TouchableOpacity>
+					{ editTime && 
+						<EditAlarmTimeModal close={ () => this.setState({editTime: false}) } /> }
 
-				{ editTime && 
-					<EditAlarmTimeModal close={ () => this.setState({editTime: false}) } /> }
+					{ editDays && 
+						<EditAlarmDaysModal close={ () => this.setState({editDays: false}) } /> }
 
-				{ editDays && 
-					<EditAlarmDaysModal close={ () => this.setState({editDays: false}) } /> }
-
-			</ScrollView>
+				</ScrollView>
+			</Animatable.View>
 		);
 	}
 }

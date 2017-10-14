@@ -5,13 +5,6 @@ import { StyleSheet } from 'react-native'
 // import global styles
 import * as _g from './_global'
 
-export const al = StyleSheet.create({
-	container: {
-		flex: 1,
-		// ..._g._border(1, 'red'),
-	},
-});
-
 export const head = StyleSheet.create({
 	container: {
 		// ..._g._border(1, 'white'),
@@ -20,7 +13,7 @@ export const head = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		..._g._padding(0, 15, 0, 15),
-		flex: 0.12,
+		flex: 0.22,
 	},
 	name: {
 		fontSize: 20,
@@ -35,19 +28,15 @@ export const head = StyleSheet.create({
 
 export const main = StyleSheet.create({
 	container: {
-		flex: 2,
+		flex: 1,
 		// ..._g._border(1, 'green'),
 	},
 	innerContainer: {
 		// ..._g._border(1, 'red'),
-		flex: 1,
-	},
-	inner: {
+		flex: 1.8,
 		backgroundColor: 'transparent',
 		alignItems: 'center',
 		justifyContent: 'center',
-		// ..._g._border(1, 'blue'),
-		flex: 1,
 	},
 	bg: {
 		flex: 1,
@@ -59,6 +48,7 @@ export const main = StyleSheet.create({
 		left: 0,
 		right: 0,
 		backgroundColor: 'transparent',
+		resizeMode: 'cover',
 	},
 	time: {
 		fontSize: 100,
@@ -76,6 +66,25 @@ export const main = StyleSheet.create({
 		color: _g.darkTheme.shade3,
 		fontSize: 11,
 	},	
+	editTitle: {
+		textAlign: 'center',
+		fontWeight: '700',
+		backgroundColor: 'transparent',
+		color: _g.darkTheme.shade3,
+		..._g._padding(10, 0, 10, 0),
+		marginRight: 10,
+	},
+	editBtn: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	editBtnOpen: {
+		backgroundColor: _g.darkTheme.shade3,
+	},
+	chevron: {
+		backgroundColor: 'transparent',
+	}
 });
 
 export const edit = StyleSheet.create({

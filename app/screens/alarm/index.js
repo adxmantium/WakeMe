@@ -19,16 +19,16 @@ import AlarmHeader from './header'
 import PushController from './../../components/pushController'
 
 // styles
-import { al, main, darkTheme, darkThemeObj } from './../../styles/alarm'
+import { main, darkTheme, darkThemeObj } from './../../styles/alarm'
 
 const theme = darkTheme;
-const themeObj = darkThemeObj;
 
 class Alarm extends Component{
 	constructor(props){
 		super(props);
 
 		this.state = {
+			slideUp: false,
 			editTime: false,
 		}
 	}
@@ -36,44 +36,45 @@ class Alarm extends Component{
 	render(){
 		const { navigation, _alarm } = this.props;
 		const { hour, minute, ampm, enabled, next_alarm_day } = _alarm;
-		const { editTime } = this.state;
+		const { editTime, slideUp } = this.state;
 
 		return (
-			<View style={al.container}>
+			<View style={[main.container, theme.bg]}>
 
-				<PushController />
+				<Image style={main.bg} source={require('./../../images/bg_1.jpg')} />
 
-				<View style={[main.container, theme.bg]}>
+				<AlarmHeader navigation={navigation} />
 
-					<Image style={main.bg} source={require('./../../images/wakeme_bg_3.jpg')} />
+				<View style={main.innerContainer}>
+					<Animatable.Text animation="fadeInRight" style={main.setText}>
+						{ enabled ? 'Next time alarm will go off:' : 'Alarm disabled' }
+					</Animatable.Text>
 
-					<View style={main.innerContainer}>
-
-						<AlarmHeader navigation={navigation} />
-
-						<View style={main.inner}>
-							<Animatable.Text animation="fadeInRight" style={main.setText}>
-								{ enabled ? 'Next time alarm will go off:' : 'Alarm disabled' }
-							</Animatable.Text>
-
-							<View style={main.setFor}>
-								<Animatable.Text 
-									animation="fadeInRight" 
-									style={[main.time, theme.color]}>
-										{`${hour}:${minute}`}<Text style={main.ampm}>{ampm}</Text>
-								</Animatable.Text>
-							</View>
-
-							<View style={main.setFor}>
-								<Animatable.Text animation="fadeInRight" style={[main.date, theme.color]}>{ next_alarm_day }</Animatable.Text>
-							</View>
-						</View>
-						
+					<View style={main.setFor}>
+						<Animatable.Text 
+							animation="fadeInRight" 
+							style={[main.time, theme.color]}>
+								{`${hour}:${minute}`}<Text style={main.ampm}>{ampm}</Text>
+						</Animatable.Text>
 					</View>
 
+					<View style={main.setFor}>
+						<Animatable.Text animation="fadeInRight" style={[main.date, theme.color]}>{ next_alarm_day }</Animatable.Text>
+					</View>
 				</View>
 
-				<SetAlarm />
+				<TouchableOpacity 
+					style={[main.editBtn]}
+					onPress={ () => this.setState({slideUp: !slideUp}) }>
+						<Text style={[main.editTitle,  slideUp && theme.color]}>Set Alarm</Text>
+						<Icon 
+							name={slideUp ? 'chevron-down' : 'chevron-up'} 
+							size={10} 
+							style={main.chevron}
+							color={darkThemeObj.menuIcon} />
+				</TouchableOpacity>
+
+				{ slideUp && <SetAlarm /> }
 
 			</View>
 		);
