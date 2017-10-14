@@ -89,14 +89,14 @@ export const main = StyleSheet.create({
 
 export const edit = StyleSheet.create({
 	container: {
-		// ..._g._border(1, 'black'),
-		flex: 1,
+		// ..._g._border(1, 'red'),
+		height: 210,
 	},
 	modal: {
 		flex: 1,
 		// ..._g._border(1, 'blue'),
 		backgroundColor: _g.darkTheme.shade3,
-		marginTop: '110%',
+		marginTop: '120%',
 	},
 	actions: {
 		flexDirection: 'row',
@@ -105,7 +105,8 @@ export const edit = StyleSheet.create({
 		// ..._g._border(1, 'red'),
 	},
 	btn: {
-		..._g._padding(5, 15, 5, 15),
+		// ..._g._border(1, 'red'),
+		..._g._padding(15, 15, 0, 15),
 		justifyContent: 'center',
 	},
 	btnText: {
@@ -139,12 +140,14 @@ export const edit = StyleSheet.create({
 		..._g._padding(10, 0, 10, 0),
 	},
 	field: {
-		// ..._g._border(1, 'black'),
+		// ...g._border(1, 'black'),
 		..._g._padding(10, 10, 10, 10),
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		marginBottom: 1,
+	},
+	incr: {
+		..._g._padding(15, 10, 15, 10),
 	},
 	label: {
 		fontWeight: '700',
@@ -158,8 +161,8 @@ export const edit = StyleSheet.create({
 	day: {
 		..._g._border(1, _g.darkTheme.shade5),
 		..._g._borderRadius(100),
-		width: 40,
-		height: 40,
+		width: 45,
+		height: 45,
 		alignItems: 'center',
 		justifyContent: 'center',
 		marginRight: 5,

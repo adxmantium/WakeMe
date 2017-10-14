@@ -68,21 +68,21 @@ class SetAlarm extends Component{
 					</View>
 
 					<TouchableOpacity 
-						style={[edit.field]}
+						style={[edit.field, edit.incr]}
 						onPress={() => this.setState({editTime: true})}>
 							<Text style={theme.color2}><Text style={edit.label}>Time</Text>: {`${hour}:${minute} ${ampm}`}</Text>
 							<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
 					</TouchableOpacity>
 
 					<TouchableOpacity 
-						style={[edit.field]}
+						style={[edit.field, edit.incr]}
 						onPress={() => this.setState({editDays: true})}>
 							<Text style={theme.color2}><Text style={edit.label}>Repeat</Text>: { repeat_label }</Text>
 							<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
 					</TouchableOpacity>
 
 					<TouchableOpacity 
-						style={[edit.field]}
+						style={[edit.field, edit.incr]}
 						onPress={() => this.setState({editTime: true})}>
 							<Text style={theme.color2}><Text style={edit.label}>Sound</Text>: Default</Text>
 							<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
