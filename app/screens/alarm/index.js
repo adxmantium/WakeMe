@@ -50,7 +50,7 @@ class Alarm extends Component{
 
 				<View style={main.innerContainer}>
 					<Animatable.Text animation="fadeInRight" style={main.setText}>
-						{ enabled ? 'Next time alarm will go off:' : 'Alarm disabled' }
+						{ enabled ? 'Wake me at:' : 'Alarm disabled' }
 					</Animatable.Text>
 
 					<View style={main.setFor}>
