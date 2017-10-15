@@ -15,6 +15,7 @@ import {
 
 // actions
 import { captured } from './../../actions/camera'
+import { add_to_queue } from './../../actions/waker'
 
 // styles
 import { cap } from './../../styles/camera'
@@ -60,7 +61,7 @@ class WakeUpCamera extends Component{
 		// if capture mode is video, then start recording
 		if( capture === 'video' ) this.setState({isRecording: true});
 
-		const { dispatch, navigation } = this.props;
+		const { dispatch, navigation, _waker } = this.props;
 
 		// start capture of pic/vid
 		this._camera
@@ -68,6 +69,7 @@ class WakeUpCamera extends Component{
 		 	.then(capturedFile => {
 		 		console.log('captured file: ', capturedFile);
 		 		dispatch( captured({ capturedFile }) );
+		 		dispatch( add_to_queue({queue: [..._waker.queue, capturedFile]}) );
 		 		navigation.navigate('Captured');
 		 	})
 		 	.catch(err => console.error(err));
@@ -168,6 +170,7 @@ class WakeUpCamera extends Component{
 const mapStateToProps = (state, props) => {
 	return {
 		_alarm: state._alarm,
+		_waker: state._waker,
 	}
 }
 

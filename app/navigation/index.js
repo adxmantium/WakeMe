@@ -7,6 +7,7 @@ import { StackNavigator } from 'react-navigation'
 // Navigators
 import AlarmScreen from './../screens/alarm'
 import CameraScreen from './../screens/camera'
+import WakerScreen from './../screens/waker/index'
 import CollectionScreen from './../screens/collection'
 import CapturedScreen from './../screens/camera/captured'
 
@@ -44,8 +45,17 @@ const Collection = {
 	}),
 }
 
+const Waker = {
+	screen: WakerScreen,
+	path: '/waker',
+	navigationOptions: ({ navigation }) => ({
+		header: null,
+	}),
+}
+
 export default StackNavigator({
   Alarm,
+  Waker,
   Camera,
   Captured,
   Collection

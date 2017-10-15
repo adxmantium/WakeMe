@@ -2,7 +2,9 @@
 
 import * as _actions from './../constants/waker'
 
-const init = {};
+const init = {
+	queue: []
+}
 
 export default (state = init, action) => {
 

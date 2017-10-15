@@ -22,7 +22,12 @@ class Captured extends Component{
 	}
 
 	_onProgress = (x, y) => {
-		console.log(x, y);
+		// console.log(x, y);
+	}
+
+	_send = () => {
+		const { navigation } = this.props;
+		navigation.navigate('Waker');
 	}
 
 	render(){
@@ -56,7 +61,7 @@ class Captured extends Component{
 
 					<View style={capt.action}>
 						<Text style={capt.label}>Send</Text>
-						<TouchableOpacity onPress={ () => {} } style={[capt.btn, capt.send]}>
+						<TouchableOpacity onPress={ this._send } style={[capt.btn, capt.send]}>
 							<Icon name="check" size={30} color="#fff" />
 						</TouchableOpacity>
 					</View>
