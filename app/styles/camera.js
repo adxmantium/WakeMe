@@ -53,11 +53,6 @@ export const capt = StyleSheet.create({
 	container: {
 		flex: 1,
 	},
-	header: {
-		..._g._padding(30, 0, 0, 0),
-		flexDirection: 'row',
-		backgroundColor: 'transparent',
-	},
 	file: {
 		flex: 1,
 		width: undefined,
@@ -97,6 +92,9 @@ export const capt = StyleSheet.create({
 		color: '#fff',
 		fontWeight: '600',
 		marginBottom: 5,
+	},
+	player: {
+		flex: 1,
 	}
 });
 

@@ -1,6 +1,7 @@
 // /screens/camera/index.js
 
 import { connect } from 'react-redux'
+import Video from 'react-native-video'
 import React, { Component } from 'react'
 import Fab from 'react-native-action-button'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -23,6 +24,8 @@ const SIZE = 20
 const COLOR = themeObj.menuColor;
 const BG_COLOR = themeObj.menuIcon;
 
+console.log('Vid: ', Video);
+
 class Captured extends Component{
 	constructor(props){
 		super(props);
@@ -37,15 +40,18 @@ class Captured extends Component{
 		return (
 			<View style={capt.container}>
 
-				<Image source={{uri: capturedFile.path}} style={capt.file} />
-
-				<View style={capt.header}>
-					<TouchableOpacity onPress={ () => navigation.goBack(null) }>
-						<Icon name="times" size={20} color="#fff" />
-					</TouchableOpacity>
-
-					<Text>in captured</Text>
-				</View>
+				{ capturedFile.duration ? 
+					<Video
+						ref={ p => { this._player = p; } }
+						source={{uri: capturedFile.path}}
+						resizeMode="cover"
+						repeat={true}
+				    	playInBackground={false}
+				    	playWhenInactive={false}
+				    	style={capt.player} /> 
+					: 
+					<Image source={{uri: capturedFile.path}} style={capt.file} /> 
+				}	
 
 				<View style={capt.actions}>
 					<View style={capt.action}>
