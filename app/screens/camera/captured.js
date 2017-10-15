@@ -1,28 +1,18 @@
-// /screens/camera/index.js
+// /screens/camera/captured.js
 
 import { connect } from 'react-redux'
 import Video from 'react-native-video'
 import React, { Component } from 'react'
-import Fab from 'react-native-action-button'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import Ionicon from 'react-native-vector-icons/Ionicons'
 import {
   View,
   Text,
   Image,
-  StyleSheet,
   TouchableOpacity,
 } from 'react-native'
 
 // styles
 import { capt } from './../../styles/camera'
-import { menu, darkThemeObj } from './../../styles/alarm'
-
-// constants
-const themeObj = darkThemeObj;
-const SIZE = 20
-const COLOR = themeObj.menuColor;
-const BG_COLOR = themeObj.menuIcon;
 
 class Captured extends Component{
 	constructor(props){
