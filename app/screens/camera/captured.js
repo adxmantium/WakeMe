@@ -24,13 +24,15 @@ const SIZE = 20
 const COLOR = themeObj.menuColor;
 const BG_COLOR = themeObj.menuIcon;
 
-console.log('Vid: ', Video);
-
 class Captured extends Component{
 	constructor(props){
 		super(props);
 
 		this.state = {};
+	}
+
+	_onProgress = (x, y) => {
+		console.log(x, y);
 	}
 
 	render(){
@@ -48,6 +50,7 @@ class Captured extends Component{
 						repeat={true}
 				    	playInBackground={false}
 				    	playWhenInactive={false}
+				    	onProgress={ this._onProgress }
 				    	style={capt.player} /> 
 					: 
 					<Image source={{uri: capturedFile.path}} style={capt.file} /> 
