@@ -9,6 +9,7 @@ import {
   View,
   Text,
   Image,
+  StatusBar,
   TouchableOpacity,
 } from 'react-native'
 
@@ -40,6 +41,8 @@ class Alarm extends Component{
 
 		return (
 			<View style={[main.container, theme.bg]}>
+
+				<StatusBar barStyle="light-content" />
 
 				<Image style={main.bg} source={require('./../../images/bg_1.jpg')} />
 
