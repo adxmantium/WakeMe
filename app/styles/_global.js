@@ -3,6 +3,7 @@
 export const white = '#fff'
 export const error = 'firebrick'
 export const flatblack = '#202020'
+export const fbBlue = '#3b5998'
 
 export const header_height = 55
 

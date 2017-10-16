@@ -18,6 +18,7 @@ import Menu from './../menu'
 import SetAlarm from './setAlarm'
 import AlarmHeader from './header'
 import PushController from './../../components/pushController'
+import BackgroundImage from './../../components/backgroundImage'
 
 // styles
 import { main, darkTheme, darkThemeObj } from './../../styles/alarm'
@@ -44,7 +45,7 @@ class Alarm extends Component{
 
 				<StatusBar barStyle="light-content" />
 
-				<Image style={main.bg} source={require('./../../images/bg_1.jpg')} />
+				<BackgroundImage />
 
 				<AlarmHeader navigation={navigation} />
 

@@ -8,6 +8,8 @@ import { StackNavigator } from 'react-navigation'
 import AlarmScreen from './../screens/alarm'
 import CameraScreen from './../screens/camera'
 import WakerScreen from './../screens/waker/index'
+import EntryScreen from './../screens/entry/index'
+import SplashScreen from './../screens/entry/splash'
 import CollectionScreen from './../screens/collection'
 import CapturedScreen from './../screens/camera/captured'
 
@@ -15,7 +17,6 @@ const StackNavigatorConfig = {}
 
 const Alarm = {
 	screen: AlarmScreen,
-	path: '/alarm',
 	navigationOptions: ({ navigation }) => ({
 		header: null,
 	}),
@@ -23,7 +24,6 @@ const Alarm = {
 
 const Camera = {
 	screen: CameraScreen,
-	path: '/camera',
 	navigationOptions: ({ navigation }) => ({
 		header: null,
 	}),
@@ -31,7 +31,6 @@ const Camera = {
 
 const Captured = {
 	screen: CapturedScreen,
-	path: '/captured',
 	navigationOptions: ({ navigation }) => ({
 		header: null,
 	}),
@@ -39,7 +38,6 @@ const Captured = {
 
 const Collection = {
 	screen: CollectionScreen,
-	path: '/collection',
 	navigationOptions: ({ navigation }) => ({
 		header: null,
 	}),
@@ -47,17 +45,32 @@ const Collection = {
 
 const Waker = {
 	screen: WakerScreen,
-	path: '/waker',
+	navigationOptions: ({ navigation }) => ({
+		header: null,
+	}),
+}
+
+const Entry = {
+	screen: EntryScreen,
+	navigationOptions: ({ navigation }) => ({
+		header: null,
+	}),
+}
+
+const Splash = {
+	screen: SplashScreen,
 	navigationOptions: ({ navigation }) => ({
 		header: null,
 	}),
 }
 
 export default StackNavigator({
-  Alarm,
-  Waker,
-  Camera,
-  Captured,
-  Collection
+	Entry,
+	Alarm,
+	Waker,
+	Splash,
+	Camera,
+	Captured,
+	Collection
 
 }, StackNavigatorConfig);
