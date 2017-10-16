@@ -1,7 +1,5 @@
 // /screens/waker/index.js
 
-// /screens/camera/index.js
-
 import { connect } from 'react-redux'
 import Video from 'react-native-video'
 import React, { Component } from 'react'
@@ -12,8 +10,12 @@ import {
   View,
   Text,
   Image,
+  ProgressViewIOS,
   TouchableOpacity,
 } from 'react-native'
+
+// components
+import ProgressBar from './../../components/progressBar'
 
 // styles
 import { wake } from './../../styles/waker'
@@ -69,6 +71,7 @@ class Waker extends Component{
 	render(){
 		const { queue } = this.props._waker;
 		const { index, playableItem } = this.state;
+		const duration = playableItem.duration ? (playableItem.duration * 1000) : TIMEMOUT;
 
 		return (
 			<View style={wake.container}>
@@ -91,6 +94,10 @@ class Waker extends Component{
 				    :
 				    <Image source={{uri: playableItem.path}} style={wake.file} />
 				}
+
+				<View style={wake.progessWrapper}>
+					<ProgressBar duration={duration} item={index} />
+				</View>
 
 			</View>
 		);

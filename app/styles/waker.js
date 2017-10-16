@@ -39,4 +39,9 @@ export const wake = StyleSheet.create({
 		right: 0,
 		backgroundColor: 'transparent',
 	},
+	progessWrapper: {
+		position: 'absolute',
+		bottom: 0,
+		width: '100%',
+	}
 });

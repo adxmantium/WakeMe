@@ -10,7 +10,6 @@ export default class ProgressBar extends Component{
 	constructor(props){
 		super(props);
 
-		console.log('total duration: ', props.duration);
 		this.state = {
 			progress: 0,
 			counter: 1,
@@ -19,15 +18,39 @@ export default class ProgressBar extends Component{
 	}
 
 	componentWillMount(){
+		this._startTimer();
+	}
+
+	componentWillReceiveProps(np){
+		const { item: _i } = this.props;
+		const { item: _ni, duration: _nd } = np;
+
+		if( _i !== _ni ){
+			this._clearTimer();
+			this.setState({
+				counter: 1,
+				progress: 0,
+				duration: _nd,
+			});
+			this._startTimer();
+		}
+	}
+
+	componentWillUnmount(){
+		this._clearTimer();
+	}
+
+	_startTimer = () => {
 		// every 1/2 second, update progress
 		const { duration } = this.state;
-		const repeat = 50; // 
+		const repeat = 100; // 1000
 
 		this._timer = setInterval(x => {
 			const { duration, counter } = this.state;
-			const progress = ((repeat * counter) / duration);
+			const rate = duration / 1000; // duration / 1 sec
+			const progress = (((repeat * counter) * 1.5) / duration);
 
-			if( progress >= 1 ) clearInterval(this._timer);
+			if( progress >= 1 ) this._clearTimer();
 
 			this.setState({
 				progress,
@@ -37,9 +60,7 @@ export default class ProgressBar extends Component{
 		}, repeat);
 	}
 
-	componentWillUnmount(){
-		clearInterval(this._timer);
-	}
+	_clearTimer = () => clearInterval(this._timer);
 
 	render(){
 		return (
