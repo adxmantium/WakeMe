@@ -48,7 +48,7 @@ export default class ProgressBar extends Component{
 		this._timer = setInterval(x => {
 			const { duration, counter } = this.state;
 			const rate = duration / 1000; // duration / 1 sec
-			const progress = (((repeat * counter) * 1.5) / duration);
+			const progress = (((repeat * counter) * 1.2) / duration);
 
 			if( progress >= 1 ) this._clearTimer();
 
