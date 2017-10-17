@@ -2,11 +2,11 @@
 
 import _axios from './../api/axios'
 import * as route from './../api/routes/user'
-import * as action from './../api/constants'
+import * as _actions from './../constants/user'
 
-export const update = data => ({
-	type: '_COLLEGE:TOGGLE_MODAL',
-	payload: data,
+export const updateUser = data => ({
+  type: _actions.UPDATE,
+  payload: data,
 })
 
 export const saveProfilePic = file => {

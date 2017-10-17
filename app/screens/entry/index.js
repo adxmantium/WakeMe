@@ -24,12 +24,13 @@ import { darkTheme } from './../../styles/_global'
 class Entry extends Component{
 	constructor(props){
 		super(props);
+
 		this.state = {
 			fb_login_pending: false,
 		};
 	}
 
-	_loginWithFacebook(){
+	_loginWithFacebook = () => {
 		// Attempt a login using the Facebook login dialog asking for default permissions.
 
 		// if currently signing in, don't do anything
@@ -37,7 +38,7 @@ class Entry extends Component{
 
 		this.setState({fb_login_pending: true});
 
-		LoginManager.logInWithReadPermissions(['public_profile email'])
+		LoginManager.logInWithReadPermissions(['public_profile email user_friends'])
 		            .then( this._onLoginFinished )
 		            .catch( this._onLoginError )
 	}
@@ -55,6 +56,7 @@ class Entry extends Component{
 	}
 
 	_getFBAccessTokenData = () => {
+		console.log('get tokeN?');
 		const { dispatch } = this.props;
 
 		AccessToken.getCurrentAccessToken()
@@ -73,7 +75,7 @@ class Entry extends Component{
 
 				<Text style={entry.title}>WakeMe</Text>
 
-				<Text style={entry.directions}>Don't worry, nothing will be posted to your Facebook account. I just use Facebook to handle logins so you don't have to create yet ANOTHER username and password.</Text>
+				<Text style={entry.directions}>Don't worry, nothing will be posted to your Facebook account. We just use Facebook to handle logins so you don't have to create yet ANOTHER username and password.</Text>
 
 				<TouchableOpacity style={entry.login} onPress={ this._loginWithFacebook }>
 					<Icon name="facebook-official" color="#fff" size={30} />

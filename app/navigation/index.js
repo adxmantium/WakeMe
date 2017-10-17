@@ -1,7 +1,7 @@
 // /navigation/index.js
 
 // libs
-// import { AccessToken } from 'react-native-fbsdk'
+import { AccessToken } from 'react-native-fbsdk'
 import { StackNavigator } from 'react-navigation'
 
 // Navigators
@@ -12,6 +12,18 @@ import EntryScreen from './../screens/entry/index'
 import SplashScreen from './../screens/entry/splash'
 import CollectionScreen from './../screens/collection'
 import CapturedScreen from './../screens/camera/captured'
+
+// store
+import store from './../reducers/store'
+
+// actions
+import { updateUser } from './../actions/user'
+
+AccessToken.getCurrentAccessToken()
+           .then(data => {
+           		if( !!data ) store.dispatch( updateUser({...data}) );
+           		else store.dispatch( updateUser({userID: false}) );
+           });
 
 const StackNavigatorConfig = {}
 
@@ -65,6 +77,7 @@ const Splash = {
 }
 
 export default StackNavigator({
+	Splash,
 	Entry,
 	Alarm,
 	Waker,

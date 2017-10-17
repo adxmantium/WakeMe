@@ -10,11 +10,11 @@ export const entry = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'space-around',
 		alignItems: 'center',
-		..._g._border(1, 'red'),
+		// ..._g._border(1, 'red'),
 	},
 	login: {
 		backgroundColor: _g.fbBlue,
-		..._g._padding(15, 40, 15, 40),
+		..._g._padding(10, 40, 10, 40),
 		..._g._borderRadius(5),
 		flexDirection: 'row',
 		alignItems: 'center',
@@ -22,7 +22,7 @@ export const entry = StyleSheet.create({
 	loginText: {
 		color: _g.white,
 		textAlign: 'center',
-		fontSize: 22,
+		fontSize: 18,
 		marginLeft: 10,
 	},
 	title: {
