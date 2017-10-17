@@ -7,6 +7,7 @@ import { StackNavigator } from 'react-navigation'
 // Navigators
 import AlarmScreen from './../screens/alarm'
 import CameraScreen from './../screens/camera'
+import ProfileScreen from './../screens/profile'
 import WakerScreen from './../screens/waker/index'
 import EntryScreen from './../screens/entry/index'
 import SplashScreen from './../screens/entry/splash'
@@ -76,6 +77,13 @@ const Splash = {
 	}),
 }
 
+const Profile = {
+	screen: ProfileScreen,
+	navigationOptions: ({ navigation }) => ({
+		header: null,
+	}),
+}
+
 export default StackNavigator({
 	Splash,
 	Entry,
@@ -83,6 +91,7 @@ export default StackNavigator({
 	Waker,
 	Splash,
 	Camera,
+	Profile,
 	Captured,
 	Collection
 

@@ -10,7 +10,7 @@ export const entry = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'space-around',
 		alignItems: 'center',
-		backgroundColor: _g.darkTheme.shade5
+		backgroundColor: _g.darkTheme.shade5,
 		// ..._g._border(1, 'red'),
 	},
 	login: {

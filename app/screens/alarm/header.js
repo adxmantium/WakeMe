@@ -26,7 +26,9 @@ export default ({ navigation }) => (
 			<Icon name="list" size={SIZE} color={themeObj.menuIcon} />
 		</TouchableOpacity>
 
-		<Text style={[head.name, theme.color]}>WakeMe</Text>
+		<TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+			<Text style={[head.name, theme.color]}>WakeMe</Text>
+		</TouchableOpacity>
 
 		<TouchableOpacity onPress={() => navigation.navigate('Camera')} style={head.btn}>
 			<Icon name="camera" size={SIZE} color={themeObj.menuIcon} />
