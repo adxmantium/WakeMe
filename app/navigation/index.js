@@ -18,6 +18,7 @@ import EntryScreen from './../screens/entry/index'
 import SplashScreen from './../screens/entry/splash'
 import CollectionScreen from './../screens/collection'
 import CapturedScreen from './../screens/camera/captured'
+import FindFriendsScreen from './../screens/profile/findFriends'
 
 // store
 import store from './../reducers/store'
@@ -118,6 +119,13 @@ const Profile = {
 	}),
 }
 
+const FindFriends = {
+	screen: FindFriendsScreen,
+	navigationOptions: ({ navigation }) => ({
+		header: null,
+	}),
+}
+
 export default StackNavigator({
 	Splash,
 	Entry,
@@ -127,6 +135,7 @@ export default StackNavigator({
 	Camera,
 	Profile,
 	Captured,
-	Collection
+	Collection,
+	FindFriends,
 
 }, StackNavigatorConfig);
