@@ -3,6 +3,7 @@
 import { connect } from 'react-redux'
 import { Spinner } from 'native-base'
 import React, { Component } from 'react'
+import { LoginManager } from 'react-native-fbsdk'
 import { 
 	View, 
 	Text,
@@ -23,6 +24,10 @@ import { darkTheme } from './../../styles/_global'
 class Splash extends Component{
 	constructor(props){
 		super(props);
+	}
+
+	componentDidMount(){
+		LoginManager.logOut();
 	}
 
 	componentWillReceiveProps(np){

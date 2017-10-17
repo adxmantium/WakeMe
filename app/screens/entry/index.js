@@ -4,7 +4,11 @@ import { connect } from 'react-redux'
 import { Spinner } from 'native-base'
 import React, { Component } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { LoginManager, AccessToken } from 'react-native-fbsdk'
+import { 
+	AccessToken, 
+	LoginManager, 
+	GraphRequest, 
+	GraphRequestManager } from 'react-native-fbsdk'
 import { 
 	View, 
 	Text,
@@ -17,6 +21,12 @@ import {
 // components
 import BackgroundImage from './../../components/backgroundImage'
 
+// constants
+import { resetStackAndNavTo } from './../../constants/user'
+
+// actions
+import { updateUser } from './../../actions/user'
+
 // styles
 import { entry } from './../../styles/entry'
 import { darkTheme } from './../../styles/_global'
@@ -27,7 +37,16 @@ class Entry extends Component{
 
 		this.state = {
 			fb_login_pending: false,
+			fb_data: {},
 		};
+	}
+
+	shouldComponentUpdate(np, ns){
+		const { fb_login_pending: thisPending } = this.state;
+		const { fb_login_pending: nextPending } = ns;
+
+		// only re-render when pending states are different
+		return thisPending !== nextPending;
 	}
 
 	_loginWithFacebook = () => {
@@ -60,11 +79,44 @@ class Entry extends Component{
 		const { dispatch } = this.props;
 
 		AccessToken.getCurrentAccessToken()
-	           	   .then( data => dispatch( getFbProfileData({ ...data }) ) );
+	           	   .then(data => {
+	           	   		this.setState({fb_data: data}); // cache accessToken data
+	           	   		new GraphRequestManager()
+	           	   			.addRequest(this._getGraphRequest({...data}))
+	           	   			.start();
+	           	   });
+	}
+
+	_getGraphRequest = ({ accessToken }) => {
+		const _this = this;
+
+		return new GraphRequest('/me', {
+				accessToken,
+				parameters: {
+					fields: {
+						string: 'email,name,first_name,last_name,picture',
+					}
+				}
+			}, 
+			_this._graphRequestCallback
+		);
+	}
+
+	_graphRequestCallback = (error, result) => {
+		if( error ) console.log('graph error: ', error);
+		else{
+			const { navigation, dispatch } = this.props;
+
+			this.setState({fb_login_pending: false}); // disable spinner
+			dispatch( updateUser({...this.state.fb_data, ...result}) ); // save data to store
+
+			navigation.dispatch( resetStackAndNavTo(['Alarm']) ); // reset stack and nav to Alarm screen
+		}
 	}
 
 	render(){
 		const { fb_login_pending } = this.state;
+		console.log('fb_data: ', this.state.fb_data);
 
 		return (
 			<View style={entry.container}>
