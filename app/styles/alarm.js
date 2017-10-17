@@ -14,11 +14,22 @@ export const head = StyleSheet.create({
 		justifyContent: 'space-between',
 		..._g._padding(0, 15, 0, 15),
 		height: _g.header_height,
+		width: '100%',
+		position: 'absolute',
+		top: 0,
+		zIndex: 1,
 	},
 	name: {
 		fontSize: 20,
 		fontWeight: '500',
 		height: 26,
+	},
+	title: {
+		fontSize: 20,
+		fontWeight: '500',
+		height: 26,
+		color: _g.darkTheme.shade3,
+		..._g._padding(1, 0, 0, 0),
 	},
 	btn: {
 		height: 26,

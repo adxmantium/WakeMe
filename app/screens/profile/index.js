@@ -3,6 +3,7 @@
 // libs
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
+import { LoginManager } from 'react-native-fbsdk'
 import * as Animatable from 'react-native-animatable'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {
@@ -11,6 +12,9 @@ import {
 	Image,
 	TouchableOpacity,
 } from 'react-native'
+
+// components
+import NavHeader from './../../components/navHeader'
 
 // styles
 import { pro } from './../../styles/profile'
@@ -21,29 +25,46 @@ class Profile extends Component{
 		super(props);
 	}
 
+	_signOut = () => {
+		LoginManager.logOut();
+		// dispatch reset state
+		// reset stack
+	}
+
 	render(){
-		const { name, picture } = this.props._user;
+		const { navigation, _user } = this.props;
+		const { name, picture } = _user;
 
 		return (
 			<View style={pro.container}>
 
-				<View style={pro.header}>
-					<TouchableOpacity style={pro.headBtn}>
-						<Icon name="user-plus" color={darkTheme.shade3} size={20} />
-					</TouchableOpacity>
-
-					<Text style={pro.headTitle}>Profile</Text>
-
-					<TouchableOpacity style={pro.headBtn}>
-						<Icon name="cogs" color={darkTheme.shade3} size={20} />
-					</TouchableOpacity>
-				</View>
+				<NavHeader
+					title="Profile"
+					leftIcon="chevron-left"
+					leftPress={() => navigation.goBack(null)} />
 
 				<View style={pro.main}>
 					<View style={pro.profilePic}>
 						<Image source={{uri: picture.data.url}} style={pro.pic} />
 					</View>
-					<Text style={pro.name}>{ name }</Text>
+					<Animatable.Text animation="fadeInRight" style={pro.name}>
+						{ name }
+					</Animatable.Text>
+				</View>
+
+				<View style={pro.links}>
+					<Text style={pro.label}>It looks like you have no friends :(</Text>
+					<Text style={pro.label}>Find friends to help wake you up!</Text>
+					
+					<TouchableOpacity style={pro.link}>
+						<Text style={pro.linkText}>Find Friends</Text>
+					</TouchableOpacity>	
+				</View>
+
+				<View style={pro.signoutWrapper}>
+					<TouchableOpacity style={pro.signout} onPress={ this._signOut }>
+						<Text style={pro.signoutText}>Sign Out</Text>
+					</TouchableOpacity>
 				</View>
 
 			</View>

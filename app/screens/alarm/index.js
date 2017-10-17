@@ -17,6 +17,7 @@ import {
 import Menu from './../menu'
 import SetAlarm from './setAlarm'
 import AlarmHeader from './header'
+import NavHeader from './../../components/navHeader'
 import PushController from './../../components/pushController'
 import BackgroundImage from './../../components/backgroundImage'
 
@@ -47,7 +48,13 @@ class Alarm extends Component{
 
 				<BackgroundImage />
 
-				<AlarmHeader navigation={navigation} />
+				<NavHeader
+					title="WakeMe"
+					leftIcon="list"
+					rightIcon="camera"
+					leftPress={() => navigation.navigate('Collection')}
+					middlePress={() => navigation.navigate('Profile')}
+					rightPress={() => navigation.navigate('Camera')}/>
 
 				<View style={main.innerContainer}>
 					<Animatable.Text animation="fadeInRight" style={main.setText}>

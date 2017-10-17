@@ -9,27 +9,9 @@ export const pro = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'space-around',
-		alignItems: 'center',
 		backgroundColor: _g.darkTheme.shade5,
+		..._g._padding(100, 0, 0, 0),
 		// ..._g._border(1, 'red'),
-	},
-	header: {
-		height: _g.header_height,
-		alignItems: 'flex-end',
-		backgroundColor: 'transparent',
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		..._g._padding(0, 15, 0, 15),
-		height: _g.header_height,
-		// ..._g._border(1, 'red'),
-		width: '100%',
-		position: 'absolute',
-		top: 0,
-	},
-	headTitle: {
-		color: _g.darkTheme.shade3,
-		fontSize: 20,
-		fontWeight: '500',
 	},
 	main: {
 		// ..._g._border(1,'red'),
@@ -50,5 +32,43 @@ export const pro = StyleSheet.create({
 		color: _g.darkTheme.shade3,
 		fontSize: 20,
 		marginTop: 10,
+	},
+	label: {
+		color: _g.darkTheme.shade3,
+		textAlign: 'center',
+		fontSize: 18,
+		marginBottom: 5,
+	},
+	links: {
+		// ..._g._border(1, 'white'),
+	},
+	link: {
+		// ..._g._border(1, 'red'),
+		..._g._padding(10),
+		backgroundColor: 'transparent',
+		alignItems: 'center',
+	},
+	linkText: {
+		color: _g.darkTheme.shade2,
+		fontSize: 18,
+		fontWeight: '400',
+	},
+	signoutWrapper: {
+		// ..._g._border(1, 'red'),
+	},
+	signout: {
+		backgroundColor: 'transparent',
+		..._g._padding(10),
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	signoutText: {
+		color: _g.darkTheme.shade3,
+	}
+});
+
+export const set = StyleSheet.create({
+	container: {
+		flex: 1,
 	}
 });
