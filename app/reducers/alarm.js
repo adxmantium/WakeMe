@@ -1,6 +1,7 @@
 // /reducers/user.js
 
 import * as _actions from './../constants/alarm'
+import * as _userActions from './../constants/user'
 
 const init = {
 	hour: '9',
@@ -18,6 +19,9 @@ export default (state = init, action) => {
 
 		case _actions.SAVE:
 			return {...state, ...action.payload};
+
+		case _userActions.SIGN_OUT:
+			return {...init};
 
 		default: return state;
 

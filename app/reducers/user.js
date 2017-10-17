@@ -11,6 +11,9 @@ export default (state = init, action) => {
 		case _actions.UPDATE:
 			return {...state, ...action.payload};
 
+		case _actions.SIGN_OUT:
+			return {...init};
+
 		default: return state;
 
 	}

@@ -16,19 +16,34 @@ import {
 // components
 import NavHeader from './../../components/navHeader'
 
+// actions
+import { signOut } from './../../actions/user'
+
 // styles
 import { pro } from './../../styles/profile'
 import { darkTheme } from './../../styles/_global'
+
+// constants
+import { resetStackAndNavTo } from './../../constants/user'
 
 class Profile extends Component{
 	constructor(props){
 		super(props);
 	}
 
+	shouldComponentUpdate(np, ns){
+		const { _user: _nu } = np;
+		return !!_nu.id;
+	}
+
 	_signOut = () => {
+		const { navigation, dispatch } = this.props;
+		// logout from fb
 		LoginManager.logOut();
 		// dispatch reset state
+		dispatch( signOut() );
 		// reset stack
+		navigation.dispatch( resetStackAndNavTo(['Entry']) );
 	}
 
 	render(){

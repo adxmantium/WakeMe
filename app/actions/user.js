@@ -9,6 +9,11 @@ export const updateUser = data => ({
   payload: data,
 })
 
+export const signOut = () => ({
+  type: _actions.SIGN_OUT,
+  payload: {},
+})
+
 export const saveProfilePic = file => {
   	const pending = 'saving_profile_pic',
     	  done = 'saved_profile_pic';

@@ -6,6 +6,7 @@ import { NavigationActions } from 'react-navigation'
 const r = '_USER:';
 
 export const UPDATE = r+'UPDATE';
+export const SIGN_OUT = r+'SIGN_OUT';
 
 export const pending = ({ reducerName, pendingName, type, data = {} }) => ({
   type: `${reducerName || '_USER'}:${type || 'GET_REQUEST_PENDING'}`,
