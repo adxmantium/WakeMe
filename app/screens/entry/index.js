@@ -8,7 +8,8 @@ import {
 	AccessToken, 
 	LoginManager, 
 	GraphRequest, 
-	GraphRequestManager } from 'react-native-fbsdk'
+	GraphRequestManager 
+} from 'react-native-fbsdk'
 import { 
 	View, 
 	Text,

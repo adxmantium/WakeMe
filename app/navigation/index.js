@@ -1,7 +1,12 @@
 // /navigation/index.js
 
 // libs
-import { AccessToken } from 'react-native-fbsdk'
+import { 
+	AccessToken, 
+	LoginManager, 
+	GraphRequest, 
+	GraphRequestManager 
+} from 'react-native-fbsdk'
 import { StackNavigator } from 'react-navigation'
 
 // Navigators
@@ -20,10 +25,39 @@ import store from './../reducers/store'
 // actions
 import { updateUser } from './../actions/user'
 
+let fbData = {};
+
+const _getGraphRequest = ({ accessToken }) => {
+	return new GraphRequest('/me', {
+			accessToken,
+			parameters: {
+				fields: {
+					string: 'email,name,first_name,last_name,picture',
+				}
+			}
+		}, 
+		_graphRequestCallback
+	);
+}
+
+const _graphRequestCallback = (error, result) => {
+	if( error ) console.log('graph error: ', error);
+	else store.dispatch( updateUser({...fbData, ...result}) )
+}
+
+// check fb if user is signed in or not
+// if accessToken still active (signed in), then use token to get user's data
 AccessToken.getCurrentAccessToken()
            .then(data => {
-           		if( !!data ) store.dispatch( updateUser({...data}) );
-           		else store.dispatch( updateUser({userID: false}) );
+           		if( data ){
+           			fbData = data;
+
+           			// use fb graph api to get users fb profile data
+           			new GraphRequestManager()
+           	   			.addRequest( _getGraphRequest({...data}) )
+           	   			.start();
+
+           		}else store.dispatch( updateUser({userID: false}) );
            });
 
 const StackNavigatorConfig = {}
