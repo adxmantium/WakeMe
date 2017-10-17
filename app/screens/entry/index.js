@@ -124,7 +124,7 @@ class Entry extends Component{
 
 				<StatusBar barStyle="light-content" />
 
-				<BackgroundImage />
+				{/*<BackgroundImage />*/}
 
 				<Text style={entry.title}>WakeMe</Text>
 
