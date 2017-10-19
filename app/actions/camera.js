@@ -1,37 +1,38 @@
 // /action/user.js
 
 import _axios from './../api/axios'
-import * as route from './../api/routes/user'
-import * as actions from './../constants/camera'
+import * as routes from './../api/routes/user'
+import * as _actions from './../constants/camera'
+import * as _userActions from './../constants/user'
 
 export const captured = data => ({
-	type: actions.CAPTURED,
+	type: _actions.CAPTURED,
 	payload: data,
 })
 
-export const saveFile = file => {
-  	const pending = 'saving_profile_pic',
-    	  done = 'saved_profile_pic';
+export const saveWakeupCall = file => {
+  	const pending = 'saving_file',
+      	  done = 'saved_file';
 
 	return (dispatch) => {
-	    dispatch( action.pending({ 
-	    	pending, 
-	    	type: pending.toUpperCase(),
-	    }) );
+    dispatch( _userActions.pending({pending: true, type: _actions.SAVING_FILE}) );
 
-		// _axios.post(`${action.save}`, file)
-  //         .then(res => {
-  //            var action = {
-  //              type: `_USER:${done.toUpperCase()}`,
-  //              payload: {
-  //                [done]: true,
-  //                [pending]: false,
-  //                profile_img_loc: res.data,
-  //              }
-  //            };
+		_axios.dev
+          .post(`${routes.WAKEUP_CALLS}`, {from: 'WakeMe app! :)'})
+          .then(res => {
+            console.log('res: ', res);
+            return;
+            const action = {
+              type: _actions.SAVED_FILE,
+              payload: {
+                [done]: true,
+                [pending]: false,
+                profile_img_loc: res.data,
+              }
+            };
 
-  //            dispatch( action );
-  //         })
-  //         .catch( err => dispatch( action.error({ pending, err }) ) );
+            dispatch( action );
+          })
+          .catch( err => dispatch( _userActions.error({ pending, err }) ) );
 	}
 }

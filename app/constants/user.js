@@ -8,8 +8,8 @@ const r = '_USER:';
 export const UPDATE = r+'UPDATE';
 export const SIGN_OUT = r+'SIGN_OUT';
 
-export const pending = ({ reducerName, pendingName, type, data = {} }) => ({
-  type: `${reducerName || '_USER'}:${type || 'GET_REQUEST_PENDING'}`,
+export const pending = ({ pendingName, type, data = {} }) => ({
+  type: type || '_USER:GET_REQUEST_PENDING',
   payload: {
     ...data,
     [pendingName]: true,
@@ -17,8 +17,8 @@ export const pending = ({ reducerName, pendingName, type, data = {} }) => ({
   }
 });
 
-export const error = ({ reducerName, pendingName, type, err }) => ({
-  type: `${reducerName || '_USER'}:${type || 'GET_REQUEST_PENDING_ERR'}`,
+export const error = ({ pendingName, type, err }) => ({
+  type: type || '_USER:GET_REQUEST_PENDING_ERR',
   payload: {
     [pendingName]: false,
     [pendingName+'_err']: err,

@@ -11,6 +11,9 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
+// actions
+import { saveWakeupCall } from './../../actions/camera'
+
 // styles
 import { capt } from './../../styles/camera'
 
@@ -21,13 +24,10 @@ class Captured extends Component{
 		this.state = {};
 	}
 
-	_onProgress = (x, y) => {
-		// console.log(x, y);
-	}
-
 	_send = () => {
-		const { navigation } = this.props;
-		navigation.navigate('Waker');
+		const { navigation, dispatch } = this.props;
+		// navigation.navigate('Waker');
+		dispatch( saveWakeupCall() );
 	}
 
 	render(){
