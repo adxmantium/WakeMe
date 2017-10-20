@@ -11,8 +11,8 @@ export const saveAlarm = data => ({
 })
 
 export const saveAlarmData = alarmData => {
-  const pending = _actions.SAVING_ALARM_DATA;
-  const done = _actions.SAVED_ALARM_DATA;
+  const pendingName = _actions.SAVING_ALARM_DATA.toLowerCase();
+  const done = _actions.SAVED_ALARM_DATA.toLowerCase();
 
   return (dispatch, getState) => {
 
@@ -26,7 +26,7 @@ export const saveAlarmData = alarmData => {
     console.log('data: ', postData);
 
     // dispatch pending
-    dispatch( _userActions.pending({pending, type: _actions.SAVING_ALARM_DATA_TYPE}) );
+    dispatch( _userActions.pending({pendingName, type: _actions.SAVING_ALARM_DATA_TYPE}) );
 
     const response = _axios.user.post(route.USER, postData);
 
@@ -37,11 +37,13 @@ export const saveAlarmData = alarmData => {
         type: _actions.SAVED_ALARM_DATA_TYPE,
         payload: {
           [done]: true,
-          [pending]: false,
+          [pendingName]: false,
         }
       }
+
+      dispatch( action );
     });
 
-    response.catch(err => dispatch( _userActions.error({ pending, err }) ) );
+    response.catch(err => dispatch( _userActions.error({ pendingName, err }) ) );
   }
 }

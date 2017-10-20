@@ -16,37 +16,33 @@ export const signOut = () => ({
 })
 
 export const getUserInfo = ({ userID }) => {
-  const pending = _actions.FETCHING_USER_INFO;
-  const done = _actions.FETCHED_USER_INFO;
+  const pendingName = _actions.FETCHING_USER_INFO.toLowerCase();
+  const done = _actions.FETCHED_USER_INFO.toLowerCase();
 
 	return dispatch => {
-	  dispatch( _actions.pending({pending, type: _actions.FETCHING_USER_INFO_TYPE}) );
+	  dispatch( _actions.pending({pendingName, type: _actions.FETCHING_USER_INFO_TYPE}) );
 
 		const response = _axios.user.get(`${route.USER}?fb_user_id=${userID}`);
     
     response.then(res => {
 
       console.log('res: ', res);
-      dispatch( saveAlarmData() );
-      return;
 
-      if( res.data.data.Item ){
-        const action = {
-          type: _actions.FETCHED_USER_INFO_TYPE,
-          payload: {
-            [done]: true,
-            [pending]: false,
-            profile_img_loc: res.data,
-          }
-        };
+      const action = {
+        type: _actions.FETCHED_USER_INFO_TYPE,
+        payload: {
+          [done]: true,
+          [pendingName]: false,
+        }
+      };
 
-        dispatch( action );
+      // if response does not contain Item, then user is NOT in db - save current user/alarm info now
+      if( !res.data.data.Item ) dispatch( saveAlarmData() );
+      else action.payload.Item = res.data.data.Item;
 
-      }else{
-
-      }
+      dispatch( action );
     });
     
-    response.catch(err => dispatch( _actions.error({ pending, err }) ) );
+    response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
 	}
 }

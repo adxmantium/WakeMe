@@ -9,9 +9,9 @@ export const UPDATE = r+'UPDATE'
 export const SIGN_OUT = r+'SIGN_OUT'
 
 export const FETCHED_USER_INFO = 'FETCHED_USER_INFO'
-export const FETCHING_USER_INFO = 'FETCHING_USER_INFO_PENDING'
-export const FETCHED_USER_INFO_TYPE = r+'FETCHED_USER_INFO'
-export const FETCHING_USER_INFO_TYPE = r+'FETCHING_USER_INFO_PENDING'
+export const FETCHING_USER_INFO = 'FETCHING_USER_INFO'
+export const FETCHED_USER_INFO_TYPE = r+FETCHED_USER_INFO
+export const FETCHING_USER_INFO_TYPE = r+FETCHING_USER_INFO
 
 export const pending = ({ pendingName, type, data = {} }) => ({
   type: type || '_USER:GET_REQUEST_PENDING',
