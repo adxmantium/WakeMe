@@ -8,6 +8,11 @@ export const UPDATE = r+'UPDATE'
 export const EMPTY_REPEAT_LABEL = 'Never'
 export const EMPTY_NEXT_ALARM_DAY_LABEL = 'Alarm days not selected'
 
+export const SAVED_ALARM_DATA = 'SAVED_ALARM_DATA'
+export const SAVING_ALARM_DATA = 'SAVING_ALARM_DATA'
+export const SAVED_ALARM_DATA_TYPE = r+'SAVED_ALARM_DATA'
+export const SAVING_ALARM_DATA_TYPE = r+'SAVING_ALARM_DATA'
+
 export const DAYS_OF_WEEK = [
 	{name: 'Sunday', abbr: 'Sun', type: 'weekend'},
 	{name: 'Monday', abbr: 'Mon', type: 'weekday'},
@@ -73,7 +78,10 @@ export const determineDaysSelectedType = selectedDays => {
 	return 'Every '+daysList.join(', ');
 }
 
-
-
-
-
+export const buildAlarmData = ({ _user, _alarm: alarm }) => ({
+	fb_user_id: _user.userID,
+	email: _user.email,
+	name: _user.name,
+	device_token: _user.device_token || '',
+	alarm,
+});

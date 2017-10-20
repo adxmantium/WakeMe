@@ -17,22 +17,24 @@ export const saveWakeupCall = file => {
 	return (dispatch) => {
     dispatch( _userActions.pending({pending: true, type: _actions.SAVING_FILE}) );
 
-		_axios.dev
-          .post(`${routes.WAKEUP_CALLS}`, {from: 'WakeMe app! :)'})
-          .then(res => {
-            console.log('res: ', res);
-            return;
-            const action = {
-              type: _actions.SAVED_FILE,
-              payload: {
-                [done]: true,
-                [pending]: false,
-                profile_img_loc: res.data,
-              }
-            };
+		const response = _axios.wakeupcall.post(`${routes.WAKEUP_CALLS}`, {from: 'WakeMe app! :)'});
+    
+    response.then(res => {
+      console.log('res: ', res);
+      return;
 
-            dispatch( action );
-          })
-          .catch( err => dispatch( _userActions.error({ pending, err }) ) );
+      const action = {
+        type: _actions.SAVED_FILE,
+        payload: {
+          [done]: true,
+          [pending]: false,
+          profile_img_loc: res.data,
+        }
+      };
+
+      dispatch( action );
+    })
+    
+    response.catch( err => dispatch( _userActions.error({ pending, err }) ) );
 	}
 }

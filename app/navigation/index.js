@@ -24,7 +24,7 @@ import FindFriendsScreen from './../screens/profile/findFriends'
 import store from './../reducers/store'
 
 // actions
-import { updateUser } from './../actions/user'
+import { updateUser, getUserInfo } from './../actions/user'
 
 let fbData = {};
 
@@ -43,7 +43,11 @@ const _getGraphRequest = ({ accessToken }) => {
 
 const _graphRequestCallback = (error, result) => {
 	if( error ) console.log('graph error: ', error);
-	else store.dispatch( updateUser({...fbData, ...result}) )
+	else{
+		const userData = {...fbData, ...result};
+		store.dispatch( updateUser(userData) ); // save fb data to store
+		store.dispatch( getUserInfo(userData) ); // get user/alarm data from db
+	}
 }
 
 // check fb if user is signed in or not

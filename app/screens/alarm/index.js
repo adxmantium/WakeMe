@@ -34,6 +34,10 @@ class Alarm extends Component{
 			slideUp: false,
 			editTime: false,
 		}
+	}	
+
+	componentDidMount(){
+		console.log('alarm screen mounted');
 	}
 
 	render(){

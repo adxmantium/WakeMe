@@ -2,4 +2,10 @@
 
 export const userInfo = '/userInfo' // GET : params(user_id: number)
 
-export const WAKEUP_CALLS = '/wakeup-calls' // POST : params (base64 file, to_user_id, from_user_id)
+// GET : params fb_user_id
+// POST : params (base64 file, to_user_id, from_user_id)
+export const WAKEUP_CALLS = '/wakeup-calls'
+
+// GET : params fb_user_id
+// POST : params fb_user_id, alarm data, device_token
+export const USER = '/user'

@@ -4,8 +4,8 @@ import * as _actions from './../constants/alarm'
 import * as _userActions from './../constants/user'
 
 const init = {
-	hour: '9',
-	minute: '18',
+	hour: '1',
+	minute: '23',
 	ampm: 'am',
 	repeat: {},
 	repeat_label: _actions.EMPTY_REPEAT_LABEL,

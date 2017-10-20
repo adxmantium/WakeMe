@@ -26,7 +26,7 @@ import BackgroundImage from './../../components/backgroundImage'
 import { resetStackAndNavTo } from './../../constants/user'
 
 // actions
-import { updateUser } from './../../actions/user'
+import { updateUser, getUserInfo } from './../../actions/user'
 
 // styles
 import { entry } from './../../styles/entry'
@@ -40,7 +40,7 @@ class Entry extends Component{
 			fb_login_pending: false,
 			fb_data: {},
 		};
-	}
+	}	
 
 	shouldComponentUpdate(np, ns){
 		const { fb_login_pending: thisPending } = this.state;
