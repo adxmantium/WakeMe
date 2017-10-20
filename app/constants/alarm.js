@@ -78,10 +78,17 @@ export const determineDaysSelectedType = selectedDays => {
 	return 'Every '+daysList.join(', ');
 }
 
-export const buildAlarmData = ({ _user, _alarm: alarm }) => ({
-	fb_user_id: _user.userID,
-	email: _user.email,
-	name: _user.name,
-	device_token: _user.device_token || '',
-	alarm,
-});
+export const buildAlarmData = ({ _user, _alarm }) => {
+	const { ampm, enabled, hour, minute, next_alarm_day, repeat, repeat_label } = _alarm;
+
+	// only want these props of _alarm being saved to db
+	const alarm = { ampm, enabled, hour, minute, next_alarm_day, repeat, repeat_label };
+
+	return {
+		fb_user_id: _user.userID,
+		email: _user.email,
+		name: _user.name,
+		device_token: _user.device_token || '',
+		alarm,
+	}	
+};

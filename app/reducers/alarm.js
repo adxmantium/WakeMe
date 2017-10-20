@@ -25,9 +25,7 @@ export default (state = init, action) => {
 		case _userActions.FETCHED_USER_INFO_TYPE:
 			var { Item } = action.payload;
 
-			if( Item ){
-				console.log('item in reducer: ', Item);
-			}
+			if( Item ) return {...state, ...Item.alarm};
 
 			return {...state};
 

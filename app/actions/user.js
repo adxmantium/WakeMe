@@ -22,8 +22,10 @@ export const getUserInfo = ({ userID }) => {
 	return dispatch => {
 	  dispatch( _actions.pending({pendingName, type: _actions.FETCHING_USER_INFO_TYPE}) );
 
+    // promise
 		const response = _axios.user.get(`${route.USER}?fb_user_id=${userID}`);
     
+    // promise then
     response.then(res => {
 
       console.log('res: ', res);
@@ -42,7 +44,8 @@ export const getUserInfo = ({ userID }) => {
 
       dispatch( action );
     });
-    
+
+    // promise catch
     response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
 	}
 }

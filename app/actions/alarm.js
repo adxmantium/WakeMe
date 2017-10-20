@@ -23,16 +23,14 @@ export const saveAlarmData = alarmData => {
     // build data based on how it will be saved to db
     const postData = _actions.buildAlarmData({ _user, _alarm });
 
-    console.log('data: ', postData);
-
     // dispatch pending
     dispatch( _userActions.pending({pendingName, type: _actions.SAVING_ALARM_DATA_TYPE}) );
 
+    // promise
     const response = _axios.user.post(route.USER, postData);
 
+    // promise then
     response.then(res => {
-      console.log('post res: ', res);
-
       const action = {
         type: _actions.SAVED_ALARM_DATA_TYPE,
         payload: {
@@ -44,6 +42,7 @@ export const saveAlarmData = alarmData => {
       dispatch( action );
     });
 
+    // promise catch
     response.catch(err => dispatch( _userActions.error({ pendingName, err }) ) );
   }
 }
