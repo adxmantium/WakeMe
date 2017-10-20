@@ -38,17 +38,11 @@ class SetAlarm extends Component{
 		}
 	}
 
-	_hourPress = () => {
-		this.setState({editTime: true});
-	}
+	_hourPress = () => this.setState({editTime: true})
 
-	_minutePress = () => {
-		this.setState({editDays: true});
-	}
+	_minutePress = () => this.setState({editDays: true})
 
-	_ampmPress = () => {
-		this.setState({editSound: true});
-	}
+	_ampmPress = () => this.setState({editSound: true})
 
 	render(){
 		const { dispatch, _alarm } = this.props;
