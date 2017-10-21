@@ -60,9 +60,9 @@ class Profile extends Component{
 					leftPress={() => navigation.goBack(null)} />
 
 				<View style={pro.main}>
-					<View style={pro.profilePic}>
+					<Animatable.View animation="fadeInLeft" style={pro.profilePic}>
 						<Image source={{uri: picture.data.url}} style={pro.pic} />
-					</View>
+					</Animatable.View>
 					<Animatable.Text animation="fadeInRight" style={pro.name}>
 						{ name }
 					</Animatable.Text>

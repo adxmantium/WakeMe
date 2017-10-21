@@ -101,5 +101,21 @@ export const findf = StyleSheet.create({
 	},
 	qrMsg: {
 		..._g._border(1, 'red'),
+	},
+	searchContainer: {
+		flex: 1,
+		..._g._padding(20),
+	},
+	searchInput: {
+		// ..._g._border(1, 'red'),
+		..._g._padding(5, 10, 5, 10),
+	},
+	searchBorder: {
+		borderTopColor: _g.darkTheme.shade2,
+		borderTopWidth: 1,
+		height: 2,
+	},
+	separator: {
+		..._g._border(1, _g.darkTheme.shade3),
 	}
 });
