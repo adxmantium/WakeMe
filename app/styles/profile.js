@@ -67,8 +67,30 @@ export const pro = StyleSheet.create({
 	}
 });
 
-export const set = StyleSheet.create({
+export const findf = StyleSheet.create({
 	container: {
 		flex: 1,
+		justifyContent: 'space-around',
+		backgroundColor: _g.darkTheme.shade5,
+		..._g._padding(100, 0, 0, 0),
+	},
+	tabbar: {
+		backgroundColor: 'transparent',
+		flex: 1,
+	},
+	tab: {
+		backgroundColor: 'transparent',
+	},
+	tabIndicator: {
+		backgroundColor: _g.darkTheme.shade2,
+	},
+	qrScanner: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		..._g._border(1, 'white'),
+	},
+	qrMsg: {
+		..._g._border(1, 'red'),
 	}
 });
