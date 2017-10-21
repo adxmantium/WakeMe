@@ -5,4 +5,8 @@ import { Image } from 'react-native'
 
 import { main } from './../styles/alarm'
 
-export default () => <Image style={main.bg} source={require('./../images/bg_1.jpg')} />
+export default ({ blur }) => 
+	<Image 
+		style={main.bg} 
+		source={require('./../images/bg_1.jpg')}
+		blurRadius={ blur || 0 } />
