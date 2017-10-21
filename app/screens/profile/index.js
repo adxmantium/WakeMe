@@ -3,6 +3,7 @@
 // libs
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
+import QRCode from 'react-native-qrcode'
 import { LoginManager } from 'react-native-fbsdk'
 import * as Animatable from 'react-native-animatable'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -65,6 +66,14 @@ class Profile extends Component{
 					<Animatable.Text animation="fadeInRight" style={pro.name}>
 						{ name }
 					</Animatable.Text>
+				</View>
+
+				<View style={pro.qrCode}>
+					<Text style={pro.qrText}>Have a friend scan your QR Code to easily become friends!</Text>
+					<QRCode 
+						value="https://awesome.com"
+						bgColor={darkTheme.shade4}
+						fgColor={darkTheme.shade3} />
 				</View>
 
 				<View style={pro.links}>

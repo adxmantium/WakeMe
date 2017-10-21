@@ -64,6 +64,15 @@ export const pro = StyleSheet.create({
 	},
 	signoutText: {
 		color: _g.darkTheme.shade3,
+	},
+	qrCode: {
+		alignItems: 'center',
+		..._g._padding(0, 60, 0, 60),
+	},
+	qrText: {
+		color: _g.darkTheme.shade3,
+		textAlign: 'center',
+		marginBottom: 10,
 	}
 });
 
