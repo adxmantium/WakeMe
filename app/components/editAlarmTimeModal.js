@@ -11,8 +11,11 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
+// components
+import EditModalActionBar from './editModalActionBar'
+
 // actions
-import { saveAlarm } from './../actions/alarm'
+import { saveAlarmData } from './../actions/alarm'
 
 // styles
 import { edit } from './../styles/alarm'
@@ -33,9 +36,10 @@ class EditAlarmTime extends Component{
 	}
 
 	_save = () => {
-		const { dispatch, close } = this.props;
+		const { dispatch, _alarm, close } = this.props;
+		const newAlarmState = {..._alarm, ...this.state};
 
-		dispatch( saveAlarm({...this.state}) );
+		dispatch( saveAlarmData( newAlarmState ) );
 		close();
 	}
 
@@ -51,21 +55,9 @@ class EditAlarmTime extends Component{
 
 					<View style={edit.modal}>
 
-						<View style={edit.actions}>
-
-							<TouchableOpacity
-								style={edit.btn}
-								onPress={ close }>
-									<Text style={[edit.btnText, edit.btnCancel]}>Cancel</Text>
-							</TouchableOpacity>
-
-							<TouchableOpacity 
-								style={edit.btn}
-								onPress={ this._save }>
-									<Text style={[edit.btnText, edit.btnSave]}>Save</Text>
-							</TouchableOpacity>
-
-						</View>
+						<EditModalActionBar
+							close={ close }
+							save={ this._save } />
 
 						<View style={edit.pickerWrapper}>
 

@@ -17,11 +17,13 @@ export default (state = init, action) => {
 
 	switch ( action.type ) {
 
+		// cases that don't require additional logic
 		case _actions.SAVE:
 		case _actions.SAVED_ALARM_DATA_TYPE:
 		case _actions.SAVING_ALARM_DATA_TYPE:
 			return {...state, ...action.payload};
 
+		// on user info fetch, spread returned alarm info into state
 		case _userActions.FETCHED_USER_INFO_TYPE:
 			var { Item } = action.payload;
 

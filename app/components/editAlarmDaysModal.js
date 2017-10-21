@@ -12,8 +12,11 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
+// components
+import EditModalActionBar from './editModalActionBar'
+
 // actions
-import { saveAlarm } from './../actions/alarm'
+import { saveAlarmData } from './../actions/alarm'
 
 // styles
 import { edit } from './../styles/alarm'
@@ -36,7 +39,7 @@ class EditAlarmDays extends Component{
 	}
 
 	_save = () => {
-		const { dispatch, close } = this.props;
+		const { dispatch, _alarm, close } = this.props;
 		const { repeat_label, repeat: _r } = this.state;
 
 		const repeat = {};
@@ -69,7 +72,8 @@ class EditAlarmDays extends Component{
 		// if next_alarm_day_moment is set, format for display
 		if( next_alarm_day_moment ) next_alarm_day = next_alarm_day_moment.format('dddd, MMM D, YYYY');
 
-		dispatch( saveAlarm({ 
+		dispatch( saveAlarmData({ 
+			..._alarm,
 			repeat,
 			repeat_label, 
 			next_alarm_day,
@@ -108,21 +112,9 @@ class EditAlarmDays extends Component{
 
 					<View style={edit.modal}>
 
-						<View style={edit.actions}>
-
-							<TouchableOpacity
-								style={edit.btn}
-								onPress={ close }>
-									<Text style={[edit.btnText, edit.btnCancel]}>Cancel</Text>
-							</TouchableOpacity>
-
-							<TouchableOpacity 
-								style={edit.btn}
-								onPress={ this._save }>
-									<Text style={[edit.btnText, edit.btnSave]}>Save</Text>
-							</TouchableOpacity>
-
-						</View>
+						<EditModalActionBar
+							close={ close }
+							save={ this._save } />
 
 						<View style={edit.dateWrapper}>
 							{ DAYS_OF_WEEK.map(day => <DaySelector 
@@ -153,7 +145,6 @@ const DaySelector = ({ name, abbr, active, onPress }) => (
 
 const mapStateToProps = (state, props) => {
 	return {
-		_user: state._user,
 		_alarm: state._alarm,
 	}
 }

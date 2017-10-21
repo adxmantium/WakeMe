@@ -15,7 +15,7 @@ import {
 } from 'react-native'
 
 // actions
-import { saveAlarm } from './../../actions/alarm'
+import { saveAlarmData } from './../../actions/alarm'
 
 // components
 import EditAlarmTimeModal from './../../components/editAlarmTimeModal'
@@ -38,11 +38,14 @@ class SetAlarm extends Component{
 		}
 	}
 
-	_hourPress = () => this.setState({editTime: true})
+	_onPress = name => this.setState({[name]: true})
 
-	_minutePress = () => this.setState({editDays: true})
+	_save = enabled => {
+		const { dispatch, _alarm } = this.props;
+		const newAlarmState = {..._alarm, enabled};
 
-	_ampmPress = () => this.setState({editSound: true})
+		dispatch( saveAlarmData( newAlarmState ) );
+	}
 
 	render(){
 		const { dispatch, _alarm } = this.props;
@@ -58,26 +61,26 @@ class SetAlarm extends Component{
 						<Switch 
 							value={ enabled }
 							onTintColor={themeObj.menuActive}
-							onValueChange={val => dispatch( saveAlarm({enabled: val}) )} />
+							onValueChange={ this._save } />
 					</View>
 
 					<TouchableOpacity 
 						style={[edit.field, edit.incr]}
-						onPress={() => this.setState({editTime: true})}>
+						onPress={ () => this._onPress('editTime') }>
 							<Text style={theme.color2}><Text style={edit.label}>Time</Text>: {`${hour}:${minute} ${ampm}`}</Text>
 							<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
 					</TouchableOpacity>
 
 					<TouchableOpacity 
 						style={[edit.field, edit.incr]}
-						onPress={() => this.setState({editDays: true})}>
+						onPress={ () => this._onPress('editDays') }>
 							<Text style={theme.color2}><Text style={edit.label}>Repeat</Text>: { repeat_label }</Text>
 							<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
 					</TouchableOpacity>
 
 					<TouchableOpacity 
 						style={[edit.field, edit.incr]}
-						onPress={() => this.setState({editTime: true})}>
+						onPress={ () => this._onPress('editTime') }>
 							<Text style={theme.color2}><Text style={edit.label}>Sound</Text>: Default</Text>
 							<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
 					</TouchableOpacity>
