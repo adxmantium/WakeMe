@@ -120,5 +120,9 @@ export const findf = StyleSheet.create({
 	},
 	separator: {
 		..._g._border(1, _g.darkTheme.shade3),
+	},
+	spinnerWrapper: {
+		alignItems: 'center',
+		justifyContent: 'center',
 	}
 });

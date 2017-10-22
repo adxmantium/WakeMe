@@ -1,6 +1,7 @@
 // /screens/profile/searchFriends.js
 
 // libs
+import { Spinner } from 'native-base'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import * as Animatable from 'react-native-animatable'
@@ -64,6 +65,10 @@ class SearchFriends extends Component{
 		            ItemSeparatorComponent={ () => <View style={findf.separator} /> }
 		            renderItem={ ({ item }) => <View><Text>row 1</Text></View> }
 		        />
+
+		        <View style={findf.spinnerWrapper}>
+		        	<Spinner color={darkTheme.shade3} />
+		        </View>
 
 			</View>
 		);

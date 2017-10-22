@@ -64,12 +64,16 @@ export const searchForFriends = searched => {
       console.log('search res: ', res);
 
       const action = {
-        type: _actions.FETCHED_USER_INFO_TYPE,
+        type: _actions.SEARCHED_FRIENDS_TYPE,
         payload: {
           [done]: true,
           [pendingName]: false,
         }
       }; 
+
+      if( res.data ){
+        action.payload.friendSearchResults = res.data.Items;
+      }
       
       dispatch( action );
     });
