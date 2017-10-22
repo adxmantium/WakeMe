@@ -14,9 +14,18 @@ import {
 	TouchableOpacity,
 } from 'react-native'
 
+// components
+import SearchedFriendItem from './searchedFriendItem'
+
+// actions
+import { searchForFriends, addFriend } from './../../actions/user'
+
 // styles
 import { findf } from './../../styles/profile'
 import { darkTheme } from './../../styles/_global'
+
+// constants
+import { buildAddFriendData } from './../../constants/user'
 
 class SearchFriends extends Component{
 	constructor(props){
@@ -33,9 +42,19 @@ class SearchFriends extends Component{
 		dispatch( searchForFriends( searched ) );
 	}
 
+	_addFriend = friend => {
+		console.log('add friend: ', friend);
+
+		const { dispatch, _user } = this.props;
+		const addFriendData = buildAddFriendData({ _user, friend });
+
+		dispatch( addFriend( addFriendData ) );
+	}
+
 	render(){
-		const { navigation } = this.props;
+		const { navigation, _friends } = this.props;
 		const { searched, focused } = this.state;
+		const { searchResults } = _friends;
 
 		return (
 			<View style={findf.searchContainer}>
@@ -57,18 +76,21 @@ class SearchFriends extends Component{
 					{ focused && <Animatable.View animation="fadeInRight" style={findf.searchBorder} /> }
 				</View>
 
+				{ _friends.searching_friends && 
+					<View style={findf.spinnerWrapper}>
+			        	<Spinner color={darkTheme.shade3} />
+			        </View>
+			    }
+
 				<FlatList
-		            data={ [] }
+		            data={ searchResults || [] }
+		            style={findf.searchResults}
 		            initialNumToRender={ 10 }
 		            removeClippedSubviews={false}
-		            keyExtractor={ (item, index) => item.thread_id }
+		            keyExtractor={ (item, index) => item.fb_user_id }
 		            ItemSeparatorComponent={ () => <View style={findf.separator} /> }
-		            renderItem={ ({ item }) => <View><Text>row 1</Text></View> }
-		        />
-
-		        <View style={findf.spinnerWrapper}>
-		        	<Spinner color={darkTheme.shade3} />
-		        </View>
+		            renderItem={ ({ item }) => <SearchedFriendItem {...item} onPress={ this._addFriend } /> }
+		        /> 
 
 			</View>
 		);
@@ -78,6 +100,7 @@ class SearchFriends extends Component{
 const mapStateToProps = (state, props) => {
 	return {
 		_user: state._user,
+		_friends: state._friends,
 	}
 }
 

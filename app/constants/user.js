@@ -18,6 +18,11 @@ export const SEARCHING_FRIENDS = 'SEARCHING_FRIENDS'
 export const SEARCHED_FRIENDS_TYPE = r+SEARCHED_FRIENDS
 export const SEARCHING_FRIENDS_TYPE = r+SEARCHING_FRIENDS
 
+export const ADDED_FRIEND = 'ADDED_FRIEND'
+export const ADDING_FRIEND = 'ADDING_FRIEND'
+export const ADDED_FRIEND_TYPE = r+ADDED_FRIEND
+export const ADDING_FRIEND_TYPE = r+ADDING_FRIEND
+
 export const pending = ({ pendingName, type, data = {} }) => ({
   type: type || '_USER:GET_REQUEST_PENDING',
   payload: {
@@ -40,4 +45,13 @@ export const resetStackAndNavTo = (routes = []) => {
           index: routes.length - 1,
           actions: routes.map(routeName => NavigationActions.navigate({ routeName }))
         });
+}
+
+export const buildAddFriendData = ({ _user, friend }) => {
+  return {
+    fb_user_id: _user.fb_user_id,
+    name: _user.name,
+    friend,
+    friend_request_accepted: false,
+  }
 }

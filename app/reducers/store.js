@@ -11,6 +11,7 @@ import _user from './user'
 import _alarm from './alarm'
 import _waker from './waker'
 import _camera from './camera'
+import _friends from './friends'
 
 // create and combine middleware
 
@@ -29,6 +30,7 @@ const reducers = combineReducers({
 	_alarm,
 	_waker,
 	_camera,
+	_friends,
 });
 
 // create store

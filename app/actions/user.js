@@ -71,9 +71,38 @@ export const searchForFriends = searched => {
         }
       }; 
 
-      if( res.data ){
-        action.payload.friendSearchResults = res.data.Items;
+      if( res.data.data ){
+        action.payload.searchResults = res.data.data.Items;
       }
+      
+      dispatch( action );
+    });
+
+    // promise catch
+    response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
+  }
+}
+
+export const addFriend = friend => {
+  const pendingName = _actions.ADDING_FRIEND.toLowerCase();
+  const done = _actions.ADDED_FRIEND.toLowerCase();  
+
+  return dispatch => {
+    dispatch( _actions.pending({pendingName, type: _actions.ADDING_FRIEND_TYPE}) );  
+
+    // promise
+    const response = _axios.user.post(route.ADD_FRIEND, friend);
+
+    response.then(res => {
+      console.log('add friend res: ', res);
+
+      const action = {
+        type: _actions.ADDED_FRIEND_TYPE,
+        payload: {
+          [done]: true,
+          [pendingName]: false,
+        }
+      }; 
       
       dispatch( action );
     });

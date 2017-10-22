@@ -10,5 +10,9 @@ export const WAKEUP_CALLS = '/wakeup-calls'
 // POST : params fb_user_id, alarm data, device_token
 export const USER = '/user'
 
-// GET : params searched
+// GET : params = searched text
 export const SEARCH_USER = '/user/search'
+
+// GET : params = fb_user_id - returns list of user's friends
+// POST : params = friend object - saves a single friend
+export const ADD_FRIEND = '/user/friends'
