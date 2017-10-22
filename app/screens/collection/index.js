@@ -8,9 +8,13 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   View,
   Text,
+  Alert,
   FlatList,
   TouchableOpacity,
 } from 'react-native'
+
+// components
+import NavHeader from './../../components/navHeader'
 
 // styles
 import { coll } from './../../styles/collection'
@@ -21,6 +25,11 @@ const theme = darkTheme;
 const themeObj = darkThemeObj;
 const SIZE = 20;
 const COLOR = themeObj.menuIcon;
+const ALERT_TITLE = "It's not time!"
+const ALERT_MSG = "You cannot view these wake up calls until your alarm goes off. It'll give you something to look forward to when you wake up :)"
+const ALERT_ACTIONS = [{
+	text: "Ok, I can wait. I think..."
+}]
 
 const tmp = [
 	{name: 'Michelle Clay'},
@@ -51,15 +60,10 @@ class Collection extends Component{
 		return (
 			<View style={coll.container}>
 
-				<View style={[coll.header, theme.bg]}>
-					<TouchableOpacity onPress={ () => navigation.goBack(null) }>
-						<Icon name="chevron-left" size={20} color={COLOR} />
-					</TouchableOpacity>
-
-					<Text style={[coll.title, theme.color]}>My Collection (10)</Text>
-
-					<Icon name="chevron-left" size={20} color="transparent" />
-				</View>
+				<NavHeader
+					title="Wake Up Calls"
+					leftIcon="chevron-left"
+					leftPress={ () => navigation.goBack(null) } />
 
 				<FlatList
 		            data={ tmp || [] }
@@ -77,10 +81,10 @@ class Collection extends Component{
 }
 
 const CollectionItem = ({ name }) => (
-	<View style={coll.item}>
+	<TouchableOpacity style={coll.item} onPress={ () => Alert.alert(ALERT_TITLE, ALERT_MSG, ALERT_ACTIONS) }>
 		<Icon name="camera" size={20} color="#000" />
 		<Text style={[coll.name, theme.color]}>{ name }</Text>
-	</View>
+	</TouchableOpacity>
 )
 
 const mapStateToProps = (state, props) => {

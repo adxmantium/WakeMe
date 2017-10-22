@@ -15,6 +15,7 @@ export const head = StyleSheet.create({
 		position: 'absolute',
 		top: 0,
 		zIndex: 1,
+		// ..._g._border(1, 'red'),
 	},
 	title: {
 		fontSize: 20,
