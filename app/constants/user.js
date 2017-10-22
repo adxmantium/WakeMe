@@ -13,6 +13,11 @@ export const FETCHING_USER_INFO = 'FETCHING_USER_INFO'
 export const FETCHED_USER_INFO_TYPE = r+FETCHED_USER_INFO
 export const FETCHING_USER_INFO_TYPE = r+FETCHING_USER_INFO
 
+export const SEARCHED_FRIENDS = 'SEARCHED_FRIENDS'
+export const SEARCHING_FRIENDS = 'SEARCHING_FRIENDS'
+export const SEARCHED_FRIENDS_TYPE = r+SEARCHED_FRIENDS
+export const SEARCHING_FRIENDS_TYPE = r+SEARCHING_FRIENDS
+
 export const pending = ({ pendingName, type, data = {} }) => ({
   type: type || '_USER:GET_REQUEST_PENDING',
   payload: {

@@ -49,3 +49,32 @@ export const getUserInfo = ({ userID }) => {
     response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
 	}
 }
+
+export const searchForFriends = searched => {
+  const pendingName = _actions.SEARCHING_FRIENDS.toLowerCase();
+  const done = _actions.SEARCHED_FRIENDS.toLowerCase();  
+
+  return dispatch => {
+    dispatch( _actions.pending({pendingName, type: _actions.SEARCHING_FRIENDS_TYPE}) );  
+
+    // promise
+    const response = _axios.user.get(`${route.SEARCH_USER}?searched=${searched}`);
+
+    response.then(res => {
+      console.log('search res: ', res);
+
+      const action = {
+        type: _actions.FETCHED_USER_INFO_TYPE,
+        payload: {
+          [done]: true,
+          [pendingName]: false,
+        }
+      }; 
+      
+      dispatch( action );
+    });
+
+    // promise catch
+    response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
+  }
+}

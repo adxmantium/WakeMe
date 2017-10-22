@@ -28,7 +28,8 @@ class SearchFriends extends Component{
 
 	_search = () => {
 		const { searched } = this.state;
-		console.log('search for: ', searched);
+		const { dispatch } = this.props;
+		dispatch( searchForFriends( searched ) );
 	}
 
 	render(){

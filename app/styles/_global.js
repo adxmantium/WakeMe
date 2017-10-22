@@ -5,7 +5,7 @@ export const error = 'firebrick'
 export const flatblack = '#202020'
 export const fbBlue = '#3b5998'
 
-export const header_height = 55
+export const header_height = 60
 
 export const darkTheme = {
   shade1: '#29648A',

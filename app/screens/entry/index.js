@@ -107,9 +107,12 @@ class Entry extends Component{
 		if( error ) console.log('graph error: ', error);
 		else{
 			const { navigation, dispatch } = this.props;
+			const userData = {...this.state.fb_data, ...result};
 
 			this.setState({fb_login_pending: false}); // disable spinner
-			dispatch( updateUser({...this.state.fb_data, ...result}) ); // save data to store
+
+			dispatch( updateUser(userData) ); // save userData to store
+			dispatch( getUserInfo(userData) );
 
 			navigation.dispatch( resetStackAndNavTo(['Alarm']) ); // reset stack and nav to Alarm screen
 		}

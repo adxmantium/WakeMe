@@ -14,7 +14,16 @@ import { darkTheme } from './../styles/_global'
 
 const SIZE = 20;
 
-export default ({ title, navigation, leftIcon, leftPress, rightIcon, rightPress, middlePress }) => (
+export default ({ 
+	title, 
+	navigation, 
+	leftIcon, 
+	leftPress, 
+	rightIcon, 
+	rightPress, 
+	middlePress,
+	rightIconComponent,
+}) => (
 
 	<View style={head.container}>
 
@@ -30,10 +39,15 @@ export default ({ title, navigation, leftIcon, leftPress, rightIcon, rightPress,
 		</TouchableOpacity>
 
 		<TouchableOpacity style={head.btn} onPress={ rightPress && rightPress }>
-			<Icon 
-				name={rightIcon ? rightIcon : "cogs"}
-				color={rightIcon ? darkTheme.shade3 : "transparent"} 
-				size={SIZE} />
+			{
+				rightIconComponent ?
+					rightIconComponent
+					:
+					<Icon 
+						name={rightIcon ? rightIcon : "cogs"}
+						color={rightIcon ? darkTheme.shade3 : "transparent"} 
+						size={SIZE} />
+			}
 		</TouchableOpacity>
 
 	</View>

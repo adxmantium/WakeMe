@@ -11,15 +11,13 @@ export const pro = StyleSheet.create({
 		justifyContent: 'space-around',
 		backgroundColor: _g.darkTheme.shade5,
 		..._g._padding(100, 0, 0, 0),
-		// ..._g._border(1, 'red'),
 	},
 	main: {
-		// ..._g._border(1,'red'),
 		alignItems: 'center',
 	},
 	profilePic: {
-		width: 60,
-		height: 60,
+		width: 50,
+		height: 50,
 		overflow: 'hidden',
 		..._g._borderRadius(5),
 	},
@@ -43,7 +41,6 @@ export const pro = StyleSheet.create({
 		// ..._g._border(1, 'white'),
 	},
 	link: {
-		// ..._g._border(1, 'red'),
 		..._g._padding(10),
 		backgroundColor: 'transparent',
 		alignItems: 'center',
@@ -93,14 +90,19 @@ export const findf = StyleSheet.create({
 	tabIndicator: {
 		backgroundColor: _g.darkTheme.shade2,
 	},
+	qrContainer: {
+		flex: 1,
+	},
 	qrScanner: {
 		flex: 1,
-		justifyContent: 'center',
+		justifyContent: 'space-around',
 		alignItems: 'center',
-		..._g._border(1, 'white'),
 	},
 	qrMsg: {
-		..._g._border(1, 'red'),
+		backgroundColor: 'transparent',
+	},
+	qrMsgText: {
+		color: _g.white,
 	},
 	searchContainer: {
 		flex: 1,
@@ -109,6 +111,7 @@ export const findf = StyleSheet.create({
 	searchInput: {
 		// ..._g._border(1, 'red'),
 		..._g._padding(5, 10, 5, 10),
+		color: _g.darkTheme.shade3,
 	},
 	searchBorder: {
 		borderTopColor: _g.darkTheme.shade2,

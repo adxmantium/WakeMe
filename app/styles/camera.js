@@ -21,19 +21,11 @@ export const cap = StyleSheet.create({
 	    backgroundColor: '#fff',
 	    ..._g._borderRadius(100),
 	},
-	header: {
-		..._g._padding(20, 10, 0, 10),
-		position: 'absolute',
-		top: 0,
-		right: 0,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		width: '100%',
-	},
 	headIcon: {
 		backgroundColor: 'transparent',
-		height: 35,
+		height: 30,
+		width: 29,
+		..._g._padding(0, 0, 0, 1),
 	},
 	close: {
 		..._g._padding(3, 0, 0, 0),

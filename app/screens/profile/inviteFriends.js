@@ -3,6 +3,7 @@
 // libs
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
+import Communications from 'react-native-communications'
 import {
 	View,
 	Text,
@@ -28,6 +29,11 @@ class InviteFriends extends Component{
 
 				<View>
 					<Text>Open contacts here</Text>
+					<TouchableOpacity 
+						style={{borderWidth: 1, borderColor: 'red'}} 
+						onPress={ () => Communications.text('19252164606', 'Hello from WakeMe?') }>
+							<Text>Text Me</Text>
+					</TouchableOpacity>
 				</View>
 
 			</View>

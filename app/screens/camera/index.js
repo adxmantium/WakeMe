@@ -13,6 +13,9 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
+// components
+import NavHeader from './../../components/navHeader'
+
 // actions
 import { captured } from './../../actions/camera'
 import { add_to_queue } from './../../actions/waker'
@@ -129,15 +132,11 @@ class WakeUpCamera extends Component{
 					captureTarget={ _cam.CAPTURE_TARGET }
 					captureQuality={ _cam.CAPTURE_QUALITY }>
 
-						<View style={cap.header}>
-							<TouchableOpacity onPress={ () => navigation.goBack(null) }>
-								<Icon name="chevron-left" size={25} color="#fff" style={[cap.headIcon, cap.close]} />
-							</TouchableOpacity>
-
-							<TouchableOpacity onPress={ this._toggleCamType }>
-								<Ionicon name="ios-reverse-camera-outline" size={35} color="#fff" style={cap.headIcon} />
-							</TouchableOpacity>
-						</View>
+						<NavHeader
+							leftIcon="chevron-left"
+							rightIconComponent={<Ionicon name="ios-reverse-camera-outline" size={35} color="#fff" style={cap.headIcon} />}
+							leftPress={ () => navigation.goBack(null) }
+							rightPress={ this._toggleCamType } />
 
 						<TouchableOpacity 
 							onPress={ this._capture }

@@ -58,7 +58,7 @@ class Alarm extends Component{
 					rightIcon="camera"
 					leftPress={() => navigation.navigate('Collection')}
 					middlePress={() => navigation.navigate('Profile')}
-					rightPress={() => navigation.navigate('Camera')}/>
+					rightPress={() => navigation.navigate('Camera')} />
 
 				<View style={main.innerContainer}>
 					<Animatable.Text animation="fadeInRight" style={main.setText}>

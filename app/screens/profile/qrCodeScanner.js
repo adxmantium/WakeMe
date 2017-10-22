@@ -38,7 +38,7 @@ class QRCodeScanner extends Component{
 		const { navigation } = this.props;
 
 		return (
-			<View style={findf.container}>
+			<View style={findf.qrContainer}>
 
 				<Camera
 					ref={ cam => { this._camera = cam; } }
@@ -57,8 +57,10 @@ class QRCodeScanner extends Component{
 					captureTarget={ _cam.CAPTURE_TARGET }
 					captureQuality={ _cam.CAPTURE_QUALITY }>
 
+						<Text style={findf.qrFiller} />
+
 						<View style={findf.qrMsg}>
-							<Text>Scanning for QR Code...</Text>
+							<Text style={findf.qrMsgText}>Scanning for QR Code...</Text>
 						</View>
 
 				</Camera>

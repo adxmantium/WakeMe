@@ -7,43 +7,35 @@ import * as _g from './_global'
 
 export const head = StyleSheet.create({
 	container: {
-		// ..._g._border(1, 'white'),
 		alignItems: 'flex-end',
 		backgroundColor: 'transparent',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		..._g._padding(0, 15, 0, 15),
-		height: _g.header_height,
 		width: '100%',
 		position: 'absolute',
 		top: 0,
 		zIndex: 1,
 	},
-	name: {
-		fontSize: 20,
-		fontWeight: '500',
-		height: 26,
-	},
 	title: {
 		fontSize: 20,
 		fontWeight: '500',
-		height: 26,
+		height: 23,
 		color: _g.darkTheme.shade3,
-		..._g._padding(1, 0, 0, 0),
 	},
 	btn: {
-		height: 26,
-		justifyContent: 'center',
+		height: _g.header_height,
+		width: 50,
+		alignItems: 'center',
+		justifyContent: 'flex-end',
+		// ..._g._border(1, 'white'),
 	}
 });
 
 export const main = StyleSheet.create({
 	container: {
 		flex: 1,
-		// ..._g._border(1, 'green'),
 	},
 	innerContainer: {
-		// ..._g._border(1, 'red'),
 		flex: 1.8,
 		backgroundColor: 'transparent',
 		alignItems: 'center',
@@ -64,7 +56,6 @@ export const main = StyleSheet.create({
 	time: {
 		fontSize: 100,
 		fontWeight: '200',
-		// ..._g._border(1, 'red'),
 	},
 	ampm: {
 		fontSize: 40,

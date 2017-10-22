@@ -55,6 +55,7 @@ const _graphRequestCallback = (error, result) => {
 AccessToken.getCurrentAccessToken()
            .then(data => {
            		if( data ){
+           			console.log('fb: ', data);
            			fbData = data;
 
            			// use fb graph api to get users fb profile data
