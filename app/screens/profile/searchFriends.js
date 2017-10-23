@@ -38,8 +38,9 @@ class SearchFriends extends Component{
 
 	_search = () => {
 		const { searched } = this.state;
-		const { dispatch } = this.props;
-		dispatch( searchForFriends( searched ) );
+		const { dispatch, _user } = this.props;
+		const { fb_user_id } = _user;
+		dispatch( searchForFriends({ searched, fb_user_id }) );
 	}
 
 	_addFriend = friend => {
@@ -76,7 +77,7 @@ class SearchFriends extends Component{
 					{ focused && <Animatable.View animation="fadeInRight" style={findf.searchBorder} /> }
 				</View>
 
-				{ _friends.searching_friends || _friends.adding_friend && 
+				{ (_friends.searching_friends || _friends.adding_friend) && 
 					<View style={findf.spinnerWrapper}>
 			        	<Spinner color={darkTheme.shade3} />
 			        </View>

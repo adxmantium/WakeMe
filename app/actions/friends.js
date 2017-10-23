@@ -5,7 +5,7 @@ import { saveAlarmData } from './alarm'
 import * as route from './../api/routes/user'
 import * as _actions from './../constants/user'
 
-export const searchForFriends = searched => {
+export const searchForFriends = ({ searched }) => {
   const pendingName = _actions.SEARCHING_FRIENDS.toLowerCase();
   const done = _actions.SEARCHED_FRIENDS.toLowerCase();  
 
@@ -13,7 +13,7 @@ export const searchForFriends = searched => {
     dispatch( _actions.pending({pendingName, type: _actions.SEARCHING_FRIENDS_TYPE}) );  
 
     // promise
-    const response = _axios.user.get(`${route.SEARCH_USER}?searched=${searched}`);
+    const response = _axios.user.get(`${route.SEARCH_USER}?searched=${searched}&fb_user_id=${fb_user_id}`);
 
     response.then(res => {
       const action = {
@@ -48,12 +48,16 @@ export const getFriends = userID => {
 
     // promise then
     response.then(res => {
-      console.log('get friends res: ', res);
+      let list = [];
+
+      if( res.data.data.Items ) list = res.data.data.Items;
+
       const action = {
         type: _actions.FETCHED_FRIENDS_TYPE,
         payload: {
           [done]: true,
           [pendingName]: false,
+          friends_list: list,
         }
       }; 
       
@@ -76,7 +80,6 @@ export const addFriend = friendData => {
     const response = _axios.friends.post(route.FRIENDS, friendData);
 
     response.then(res => {
-      console.log('res: ', res);
       const action = {
         type: _actions.ADDED_FRIEND_TYPE,
         payload: {
