@@ -1,6 +1,7 @@
 // /action/user.js
 
 import _axios from './../api/axios'
+import { getFriends } from './friends'
 import { saveAlarmData } from './alarm'
 import * as route from './../api/routes/user'
 import * as _actions from './../constants/user'
@@ -27,9 +28,6 @@ export const getUserInfo = ({ userID }) => {
     
     // promise then
     response.then(res => {
-
-      console.log('res: ', res);
-
       const action = {
         type: _actions.FETCHED_USER_INFO_TYPE,
         payload: {
@@ -40,7 +38,11 @@ export const getUserInfo = ({ userID }) => {
 
       // if response does not contain Item, then user is NOT in db - save current user/alarm info now
       if( !res.data.data.Item ) dispatch( saveAlarmData() );
-      else action.payload.Item = res.data.data.Item;
+      else{
+        // since we know if we get here, user was already saved in db, then fetch user's friends
+        action.payload.Item = res.data.data.Item;
+        dispatch( getFriends( userID ) );
+      }
 
       dispatch( action );
     });
@@ -48,66 +50,4 @@ export const getUserInfo = ({ userID }) => {
     // promise catch
     response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
 	}
-}
-
-export const searchForFriends = searched => {
-  const pendingName = _actions.SEARCHING_FRIENDS.toLowerCase();
-  const done = _actions.SEARCHED_FRIENDS.toLowerCase();  
-
-  return dispatch => {
-    dispatch( _actions.pending({pendingName, type: _actions.SEARCHING_FRIENDS_TYPE}) );  
-
-    // promise
-    const response = _axios.user.get(`${route.SEARCH_USER}?searched=${searched}`);
-
-    response.then(res => {
-      console.log('search res: ', res);
-
-      const action = {
-        type: _actions.SEARCHED_FRIENDS_TYPE,
-        payload: {
-          [done]: true,
-          [pendingName]: false,
-        }
-      }; 
-
-      if( res.data.data ){
-        action.payload.searchResults = res.data.data.Items;
-      }
-      
-      dispatch( action );
-    });
-
-    // promise catch
-    response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
-  }
-}
-
-export const addFriend = friend => {
-  const pendingName = _actions.ADDING_FRIEND.toLowerCase();
-  const done = _actions.ADDED_FRIEND.toLowerCase();  
-
-  return dispatch => {
-    dispatch( _actions.pending({pendingName, type: _actions.ADDING_FRIEND_TYPE}) );  
-
-    // promise
-    const response = _axios.user.post(route.ADD_FRIEND, friend);
-
-    response.then(res => {
-      console.log('add friend res: ', res);
-
-      const action = {
-        type: _actions.ADDED_FRIEND_TYPE,
-        payload: {
-          [done]: true,
-          [pendingName]: false,
-        }
-      }; 
-      
-      dispatch( action );
-    });
-
-    // promise catch
-    response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
-  }
 }

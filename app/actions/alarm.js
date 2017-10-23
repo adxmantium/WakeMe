@@ -16,7 +16,7 @@ export const saveAlarmData = alarmData => {
     const _alarm = alarmData || _a;
 
     // build data based on how it will be saved to db
-    const postData = _actions.buildAlarmData({ _user, _alarm });
+    const postData = _userActions.modelUsersTable({ _user, _alarm });
 
     // dispatch pending
     const pendingAction = {

@@ -19,9 +19,11 @@ export default ({ onPress, ...item }) => (
 
 		<Text style={findf.resultText}>{ item.name }</Text>
 
-		<TouchableOpacity style={findf.resultAdd} onPress={ () => onPress( item ) }>
-			<Icon name="user-plus" color={darkTheme.shade3} size={20} />
-		</TouchableOpacity>
+		{ !item.already_friends &&
+			<TouchableOpacity style={findf.resultAdd} onPress={ () => onPress( item ) }>
+				<Icon name="user-plus" color={darkTheme.shade3} size={20} />
+			</TouchableOpacity>
+		}
 
 	</View>
 

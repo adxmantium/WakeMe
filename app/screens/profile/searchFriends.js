@@ -18,14 +18,14 @@ import {
 import SearchedFriendItem from './searchedFriendItem'
 
 // actions
-import { searchForFriends, addFriend } from './../../actions/user'
+import { searchForFriends, addFriend } from './../../actions/friends'
 
 // styles
 import { findf } from './../../styles/profile'
 import { darkTheme } from './../../styles/_global'
 
 // constants
-import { buildAddFriendData } from './../../constants/user'
+import { modelFriendsTable } from './../../constants/user'
 
 class SearchFriends extends Component{
 	constructor(props){
@@ -43,10 +43,10 @@ class SearchFriends extends Component{
 	}
 
 	_addFriend = friend => {
-		console.log('add friend: ', friend);
-
 		const { dispatch, _user } = this.props;
-		const addFriendData = buildAddFriendData({ _user, friend });
+
+		// build data to model Users table in DB
+		const addFriendData = modelFriendsTable({ _user, friend });
 
 		dispatch( addFriend( addFriendData ) );
 	}
@@ -76,7 +76,7 @@ class SearchFriends extends Component{
 					{ focused && <Animatable.View animation="fadeInRight" style={findf.searchBorder} /> }
 				</View>
 
-				{ _friends.searching_friends && 
+				{ _friends.searching_friends || _friends.adding_friend && 
 					<View style={findf.spinnerWrapper}>
 			        	<Spinner color={darkTheme.shade3} />
 			        </View>
@@ -97,11 +97,9 @@ class SearchFriends extends Component{
 	}
 }
 
-const mapStateToProps = (state, props) => {
-	return {
-		_user: state._user,
-		_friends: state._friends,
-	}
-}
+const mapStateToProps = (state, props) => ({
+	_user: state._user,
+	_friends: state._friends,
+});
 
 export default connect(mapStateToProps)(SearchFriends);

@@ -27,7 +27,7 @@ export default (state = init, action) => {
 		case _userActions.FETCHED_USER_INFO_TYPE:
 			var { Item } = action.payload;
 
-			if( Item ) return {...state, ...Item.alarm};
+			if( Item && Item.alarm ) return {...state, ...Item.alarm};
 
 			return {...state};
 

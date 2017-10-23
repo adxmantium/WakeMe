@@ -15,4 +15,4 @@ export const SEARCH_USER = '/user/search'
 
 // GET : params = fb_user_id - returns list of user's friends
 // POST : params = friend object - saves a single friend
-export const ADD_FRIEND = '/user/friends'
+export const FRIENDS = '/friends'
