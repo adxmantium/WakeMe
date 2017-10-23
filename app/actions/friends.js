@@ -44,7 +44,7 @@ export const getFriends = userID => {
     dispatch( _actions.pending({pendingName, type: _actions.FETCHING_FRIENDS_TYPE}) );  
 
     // promise
-    const response = _axios.friends.get(`${route.FRIENDS}?fb_user_id=${userID}`);
+    const response = _axios.friends.get(`${route.FRIENDS}?value=${userID}`);
 
     // promise then
     response.then(res => {
