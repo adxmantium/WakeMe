@@ -39,8 +39,8 @@ class SearchFriends extends Component{
 	_search = () => {
 		const { searched } = this.state;
 		const { dispatch, _user } = this.props;
-		const { fb_user_id } = _user;
-		dispatch( searchForFriends({ searched, fb_user_id }) );
+		const { userID } = _user;
+		dispatch( searchForFriends({ searched, userID }) );
 	}
 
 	_addFriend = friend => {
