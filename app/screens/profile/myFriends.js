@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 
 // actions
-import { sendWakeUpCall } from './../../actions/waker'
+import { sendWaker } from './../../actions/waker'
 
 // components
 import FriendItem from './friendItem'
@@ -22,6 +22,9 @@ import NavHeader from './../../components/navHeader'
 // styles
 import { myf } from './../../styles/profile'
 import { darkTheme } from './../../styles/_global'
+
+// constants
+import { modelWakersTable } from './../../constants/waker'
 
 class MyFriends extends Component{
 	constructor(props){
@@ -61,7 +64,14 @@ class MyFriends extends Component{
 		// get only the friends that have been selected to sendTo
 		const friends = sendTo_list.filter(item => !!item.sendTo);
 
-		dispatch( sendWakeUpCall({ friends, file }) );
+		let wakerData = null;
+
+		// send waker to each friend
+		friends.forEach(to_friend => {
+			// get object that models the Waker table in db
+			wakerData = modelWakersTable({ _user, to_friend, file });
+			dispatch( sendWaker( wakerData ) );
+		})
 	}
 
 	render(){

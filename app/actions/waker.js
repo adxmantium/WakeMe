@@ -9,19 +9,48 @@ export const add_to_queue = data => ({
 	payload: data,
 })
 
-export const sendWakeUpCall = ({ friends, file }) => {
-  const pendingName = _actions.SENDING_WAKEUPCALL.toLowerCase();
-  const done = _actions.SENT_WAKEUPCALL.toLowerCase();  
+export const getWakers = userID => {
+  const pendingName = _actions.FETCHING_WAKERS.toLowerCase();
+  const done = _actions.FETCHED_WAKERS.toLowerCase();  
 
   return dispatch => {
-    dispatch( _actions.pending({pendingName, type: _actions.SENDING_WAKEUPCALL_TYPE}) );  
+    dispatch( _actions.pending({pendingName, type: _actions.FETCHING_WAKERS_TYPE}) );  
 
     // promise
-    const response = _axios.waker.get(`${route.SEARCH_USER}?searched=${searched}&fb_user_id=${userID}`);
+    const response = _axios.waker.post(`${route.WAKERS}?to_fb_user_id=${userID}`);
 
     response.then(res => {
+      console.log('GET wakers: ', res);
       const action = {
-        type: _actions.SENT_WAKEUPCALL_TYPE,
+        type: _actions.FETCHED_WAKERS_TYPE,
+        payload: {
+          [done]: true,
+          [pendingName]: false,
+        }
+      }; 
+      
+      dispatch( action );
+    });
+
+    // promise catch
+    response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
+  }
+}
+
+export const sendWaker = wakerData => {
+  const pendingName = _actions.SENDING_WAKER.toLowerCase();
+  const done = _actions.SENT_WAKER.toLowerCase();  
+
+  return dispatch => {
+    dispatch( _actions.pending({pendingName, type: _actions.SENDING_WAKER_TYPE}) );  
+
+    // promise
+    const response = _axios.waker.post(route.WAKERS, wakerData);
+
+    response.then(res => {
+      console.log('POST wakers: ', res);
+      const action = {
+        type: _actions.SENT_WAKER_TYPE,
         payload: {
           [done]: true,
           [pendingName]: false,

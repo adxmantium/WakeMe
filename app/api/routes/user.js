@@ -20,4 +20,4 @@ export const FRIENDS = '/friends'
 // GET : params = fb_user_id - should return all wakers(wakeup calls) for this user
 // POST: params = friends list, file
 // DELETE : params = waker_id
-export const WAKER = '/wakers'
+export const WAKERS = '/wakers'
