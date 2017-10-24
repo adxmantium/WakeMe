@@ -43,15 +43,11 @@ export default (state = init, action) => {
 				// filter out friends that HAVE accepted friend request and put into accepted_friends_list
 				// this is the list of friends that are able to receive wake up calls
 				const accepted_friends_list = fl.filter(friend => !!friend.friend_request_accepted);
-				// init sendTo_list with accepted_friends_list which will be updated when user selects users to send wake up calls to
-				// will reset back to initial accepted_friends_list when wake up call is sent
-				const sendTo_list = [...accepted_friends_list];
 				
 				return {
 					...state, 
 					...action.payload, 
 					accepted_friends_list, 
-					sendTo_list
 				};
 			}
 
