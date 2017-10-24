@@ -8,7 +8,7 @@ const userRoute = {
 	prod: ''
 }
 
-const wakeupcallRoute = {
+const wakerRoute = {
 	dev: 'https://mfpjrgr3gh.execute-api.us-west-1.amazonaws.com/dev/wakeme',
 	prod: '',
 }
@@ -23,8 +23,8 @@ const user = axios.create({
 	headers: {},
 })
 
-const wakeupcall = axios.create({
-	baseURL: wakeupcallRoute.dev,
+const waker = axios.create({
+	baseURL: wakerRoute.dev,
 	headers: {},
 })
 
@@ -35,6 +35,6 @@ const friends = axios.create({
 
 export default {
 	user,
+	waker,
 	friends,
-	wakeupcall,
 }

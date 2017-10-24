@@ -13,7 +13,6 @@ export default (state = init, action) => {
 
 	switch ( action.type ) {
 
-		case _actions.ADD_TO_SENDTO:
 		case _actions.ADDING_FRIEND_TYPE:
 		case _actions.FETCHING_FRIENDS_TYPE:
 		case _actions.SEARCHING_FRIENDS_TYPE:

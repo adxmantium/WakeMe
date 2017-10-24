@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 
 // actions
-import { addToSendList, send } from './../../actions/friends'
+import { sendWakeUpCall } from './../../actions/waker'
 
 // components
 import FriendItem from './friendItem'
@@ -54,7 +54,14 @@ class MyFriends extends Component{
 	}
 
 	_send = () => {
-		const { capturedFile } = this.props._camera;
+		const { sendTo_list } = this.state;
+		const { dispatch, _friends, _camera } = this.props;
+		const { capturedFile: file } = _camera;
+
+		// get only the friends that have been selected to sendTo
+		const friends = sendTo_list.filter(item => !!item.sendTo);
+
+		dispatch( sendWakeUpCall({ friends, file }) );
 	}
 
 	render(){
