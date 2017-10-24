@@ -3,13 +3,16 @@
 import * as _actions from './../constants/user'
 
 const init = {
+	sendTo_list: [],
 	friends_list: [],
+	accepted_friends_list: [],
 };
 
 export default (state = init, action) => {
 
 	switch ( action.type ) {
 
+		case _actions.ADD_TO_SENDTO:
 		case _actions.ADDING_FRIEND_TYPE:
 		case _actions.FETCHING_FRIENDS_TYPE:
 		case _actions.SEARCHING_FRIENDS_TYPE:
@@ -33,6 +36,24 @@ export default (state = init, action) => {
 			return {...state, ...rest, searchResults};
 
 		case _actions.FETCHED_FRIENDS_TYPE:
+			let { outstanding_list, friends_list: fl } = action.payload;
+
+			if( fl && Array.isArray(fl) ){
+				// filter out friends that HAVE accepted friend request and put into accepted_friends_list
+				// this is the list of friends that are able to receive wake up calls
+				const accepted_friends_list = fl.filter(friend => !!friend.friend_request_accepted);
+				// init sendTo_list with accepted_friends_list which will be updated when user selects users to send wake up calls to
+				// will reset back to initial accepted_friends_list when wake up call is sent
+				const sendTo_list = [...accepted_friends_list];
+				
+				return {
+					...state, 
+					...action.payload, 
+					accepted_friends_list, 
+					sendTo_list
+				};
+			}
+
 			return {...state, ...action.payload};
 
 		case _actions.ADDED_FRIEND_TYPE:

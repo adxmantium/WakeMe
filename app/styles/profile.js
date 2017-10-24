@@ -154,7 +154,6 @@ export const myf = StyleSheet.create({
 		flex: 1,
 		backgroundColor: _g.darkTheme.shade5,
 		..._g._padding(80, 0, 0, 0),
-		..._g._border(1, 'red'),
 	},
 	list: {
 		// ..._g._border(1, 'red'),

@@ -28,6 +28,8 @@ export const ADDING_FRIEND = 'ADDING_FRIEND'
 export const ADDED_FRIEND_TYPE = r+ADDED_FRIEND
 export const ADDING_FRIEND_TYPE = r+ADDING_FRIEND
 
+export const ADD_TO_SENDTO = r+'ADD_TO_SENDTO'
+
 export const pending = ({ pendingName, type, data = {} }) => ({
   type: type || '_USER:GET_REQUEST_PENDING',
   payload: {

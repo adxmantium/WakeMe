@@ -11,6 +11,9 @@ import {
 	TouchableOpacity,
 } from 'react-native'
 
+// actions
+import { addToSendList } from './../../actions/friends'
+
 // components
 import FriendItem from './friendItem'
 import NavHeader from './../../components/navHeader'
@@ -27,6 +30,12 @@ class MyFriends extends Component{
 
 	_addToSendList = friend => {
 		console.log('friend: ', friend);
+		const { dispatch, _friends: _f } = this.props;
+
+		const sendTo_list = _f.sendTo_list.map(item => 
+			item.friend_fb_user_id == friend.friend_fb_user_id ? {...item, sendTo: !item.sendTo} : item);
+
+		dispatch( addToSendList({ sendTo_list }) );
 	}
 
 	render(){
@@ -41,7 +50,7 @@ class MyFriends extends Component{
 					leftPress={() => navigation.goBack(null)} />
 
 				<FlatList
-		            data={ _f.friends_list || [] }
+		            data={ _f.sendTo_list || [] }
 		            style={myf.list}
 		            initialNumToRender={ 10 }
 		            removeClippedSubviews={false}

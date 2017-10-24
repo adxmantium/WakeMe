@@ -15,14 +15,14 @@ import { darkTheme } from './../../styles/_global'
 
 export default ({ onPress, ...item }) => {
 
-	const icon = item.added ? 'check-square-o' : 'square-o';
+	const icon = item.sendTo ? 'check-square-o' : 'square-o';
 
 	return (
 
 		<TouchableOpacity style={findf.result} onPress={ () => onPress( item ) }>
 
 			<Text style={findf.resultText}>{ item.friend_name }</Text>
-			<Icon name={icon} color={darkTheme.shade3} size={20} />
+			<Icon name={icon} color={darkTheme.shade3} size={25} />
 
 		</TouchableOpacity>
 		
