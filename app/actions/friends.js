@@ -36,15 +36,18 @@ export const searchForFriends = ({ searched, userID }) => {
   }
 }
 
-export const getFriends = userID => {
+export const getFriends = ({ userID, type }) => {
   const pendingName = _actions.FETCHING_FRIENDS.toLowerCase();
   const done = _actions.FETCHED_FRIENDS.toLowerCase();  
 
   return dispatch => {
     dispatch( _actions.pending({pendingName, type: _actions.FETCHING_FRIENDS_TYPE}) );  
 
+    // list name
+    const list_name = type ? 'outstanding_list' : 'friends_list';
+
     // promise
-    const response = _axios.friends.get(`${route.FRIENDS}?value=${userID}`);
+    const response = _axios.friends.get(`${route.FRIENDS}?value=${userID}&type=${type}`);
 
     // promise then
     response.then(res => {
@@ -57,7 +60,7 @@ export const getFriends = userID => {
         payload: {
           [done]: true,
           [pendingName]: false,
-          friends_list: list,
+          [list_name]: list,
         }
       }; 
       

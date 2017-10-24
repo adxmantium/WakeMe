@@ -41,7 +41,8 @@ export const getUserInfo = ({ userID }) => {
       else{
         // since we know if we get here, user was already saved in db, then fetch user's friends
         action.payload.Item = res.data.data.Item;
-        dispatch( getFriends( userID ) );
+        dispatch( getFriends({ userID }) ); // fetches my pending friend requests
+        dispatch( getFriends({ userID, type: 'outstanding' }) ); // fetches my outstanding friend requests
       }
 
       dispatch( action );
