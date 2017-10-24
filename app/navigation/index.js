@@ -18,6 +18,7 @@ import EntryScreen from './../screens/entry/index'
 import SplashScreen from './../screens/entry/splash'
 import CollectionScreen from './../screens/collection'
 import CapturedScreen from './../screens/camera/captured'
+import MyFriendsScreen from './../screens/profile/myFriends'
 import FindFriendsScreen from './../screens/profile/findFriends'
 
 // store
@@ -131,6 +132,13 @@ const FindFriends = {
 	}),
 }
 
+const MyFriends = {
+	screen: MyFriendsScreen,
+	navigationOptions: ({ navigation }) => ({
+		header: null,
+	}),
+}
+
 export default StackNavigator({
 	Splash,
 	Entry,
@@ -140,6 +148,7 @@ export default StackNavigator({
 	Camera,
 	Profile,
 	Captured,
+	MyFriends,
 	Collection,
 	FindFriends,
 

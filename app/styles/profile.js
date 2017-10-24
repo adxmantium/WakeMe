@@ -106,11 +106,13 @@ export const findf = StyleSheet.create({
 	},
 	searchContainer: {
 		flex: 1,
-		..._g._padding(20),
+	},
+	searchWrapper: {
+		..._g._padding(30, 50, 10, 50),
 	},
 	searchInput: {
 		// ..._g._border(1, 'red'),
-		..._g._padding(5, 10, 5, 10),
+		..._g._padding(5, 10, 0, 10),
 		color: _g.darkTheme.shade3,
 		textAlign: 'center',
 	},
@@ -125,28 +127,36 @@ export const findf = StyleSheet.create({
 	spinnerWrapper: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		// ..._g._border(1, 'red'),
 	},
 	searchResults: {
-		// ..._g._border(1, 'red'),
 		..._g._padding(10, 0, 0, 0),
 	},
 	result: {
-		// ..._g._border(1, 'red'),
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		// ..._g._padding(10, 0, 10, 0),
+		..._g._padding(10, 20, 10, 20),
 	},
 	resultText: {
 		color: _g.darkTheme.shade3,
 		fontSize: 18,
 	},
 	resultAdd: {
-		// ..._g._border(1, 'red'),
 		height: 45,
 		width: 40,
 		justifyContent: 'center',
 		alignItems: 'flex-end',
 	}
+});
+
+export const myf = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: _g.darkTheme.shade5,
+		..._g._padding(80, 0, 0, 0),
+		..._g._border(1, 'red'),
+	},
+	list: {
+		// ..._g._border(1, 'red'),
+	},
 });
