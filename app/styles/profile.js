@@ -158,4 +158,13 @@ export const myf = StyleSheet.create({
 	list: {
 		// ..._g._border(1, 'red'),
 	},
+	send: {
+		flexDirection: 'row',
+		alignItems: 'center',
+	},
+	count: {
+		color: _g.darkTheme.shade2,
+		fontSize: 14,
+		marginLeft: 3,
+	}
 });

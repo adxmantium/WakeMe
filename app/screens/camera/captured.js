@@ -61,7 +61,7 @@ class Captured extends Component{
 
 					<View style={capt.action}>
 						<Text style={capt.label}>Send</Text>
-						<TouchableOpacity onPress={ this._send } style={[capt.btn, capt.send]}>
+						<TouchableOpacity onPress={ () => navigation.navigate('MyFriends', {title: 'Send to...'}) } style={[capt.btn, capt.send]}>
 							<Icon name="check" size={30} color="#fff" />
 						</TouchableOpacity>
 					</View>

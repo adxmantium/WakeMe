@@ -5,6 +5,7 @@ import * as _actions from './../constants/user'
 const init = {
 	sendTo_list: [],
 	friends_list: [],
+	sendTo_list_count: 0,
 	accepted_friends_list: [],
 };
 
