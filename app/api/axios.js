@@ -3,13 +3,15 @@
 // lib
 import axios from 'axios'
 
+const env = 'dev';
+
 const userRoute = {
 	dev: 'https://3v4nvvp8b7.execute-api.us-west-1.amazonaws.com/dev/wakeme',
 	prod: ''
 }
 
 const wakerRoute = {
-	dev: 'https://mfpjrgr3gh.execute-api.us-west-1.amazonaws.com/dev/wakeme',
+	dev: 'https://0sm789hqof.execute-api.us-west-1.amazonaws.com/dev/wakeme',
 	prod: '',
 }
 
@@ -19,17 +21,17 @@ const friendsRoute = {
 }
 
 const user = axios.create({
-	baseURL: userRoute.dev,
+	baseURL: userRoute[env],
 	headers: {},
 })
 
 const waker = axios.create({
-	baseURL: wakerRoute.dev,
+	baseURL: wakerRoute[env],
 	headers: {},
 })
 
 const friends = axios.create({
-	baseURL: friendsRoute.dev,
+	baseURL: friendsRoute[env],
 	headers: {},
 })
 
