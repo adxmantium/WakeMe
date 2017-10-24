@@ -83,6 +83,10 @@ class Profile extends Component{
 					<TouchableOpacity style={pro.link} onPress={() => navigation.navigate('FindFriends')}>
 						<Text style={pro.linkText}>Find Friends</Text>
 					</TouchableOpacity>	
+
+					<TouchableOpacity style={pro.link} onPress={() => navigation.navigate('MyFriends')}>
+						<Text style={pro.linkText}>My Friends</Text>
+					</TouchableOpacity>	
 				</View>
 
 				<View style={pro.signoutWrapper}>
