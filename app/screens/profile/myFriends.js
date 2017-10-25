@@ -90,6 +90,7 @@ class MyFriends extends Component{
 		friends.forEach(to_friend => {
 			// get object that models the Waker table in db
 			wakerData = modelWakersTable({ _user, to_friend, file });
+			console.log('data: ', JSON.stringify(wakerData));
 			dispatch( sendWaker( wakerData ) );
 		})
 	}
