@@ -1,5 +1,7 @@
 // /constants/camera.js
 
+import moment from 'moment'
+
 // r = reducer name
 const r = '_WAKER:'
 
@@ -17,12 +19,12 @@ export const SENDING_WAKER_TYPE = r+SENDING_WAKER
 
 export const modelWakersTable = ({ _user, to_friend, file }) => {
   return {
-    waker_id: `${_user.userID}_${friend.fb_user_id}`,
+    waker_id: `${_user.userID}_${to_friend.friend_fb_user_id}__${moment().format('YYYY_M_D___H_m_s')}`,
     from_fb_user_id: _user.userID,
     from_name: _user.name,
-    to_fb_user_id: to_friend.fb_user_id,
-    to_name: to_friend.name,
-    to_device_token: to_friend.device_token,
-    // file: file.path,
+    to_fb_user_id: to_friend.friend_fb_user_id,
+    to_name: to_friend.friend_name,
+    to_device_token: to_friend.friend_device_token,
+    file
   }
 }

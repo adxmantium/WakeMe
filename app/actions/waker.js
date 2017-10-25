@@ -3,6 +3,7 @@
 import _axios from './../api/axios'
 import * as route from './../api/routes/user'
 import * as _actions from './../constants/waker'
+import * as _userActions from './../constants/user'
 
 export const add_to_queue = data => ({
 	type: _actions.ADD_TO_QUEUE,
@@ -14,10 +15,10 @@ export const getWakers = userID => {
   const done = _actions.FETCHED_WAKERS.toLowerCase();  
 
   return dispatch => {
-    dispatch( _actions.pending({pendingName, type: _actions.FETCHING_WAKERS_TYPE}) );  
+    dispatch( _userActions.pending({pendingName, type: _actions.FETCHING_WAKERS_TYPE}) );  
 
     // promise
-    const response = _axios.waker.post(`${route.WAKERS}?to_fb_user_id=${userID}`);
+    const response = _axios.waker.get(`${route.WAKERS}?to_fb_user_id=${userID}`);
 
     response.then(res => {
       console.log('GET wakers: ', res);
@@ -28,12 +29,14 @@ export const getWakers = userID => {
           [pendingName]: false,
         }
       }; 
+
+      if( res.data.data.Items ) action.payload.wakers = res.data.data.Items;
       
       dispatch( action );
     });
 
     // promise catch
-    response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
+    response.catch(err => dispatch( _userActions.error({ pendingName, err }) ) );
   }
 }
 
@@ -42,7 +45,7 @@ export const sendWaker = wakerData => {
   const done = _actions.SENT_WAKER.toLowerCase();  
 
   return dispatch => {
-    dispatch( _actions.pending({pendingName, type: _actions.SENDING_WAKER_TYPE}) );  
+    dispatch( _userActions.pending({pendingName, type: _actions.SENDING_WAKER_TYPE}) );  
 
     // promise
     const response = _axios.waker.post(route.WAKERS, wakerData);
@@ -65,6 +68,6 @@ export const sendWaker = wakerData => {
     });
 
     // promise catch
-    response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
+    response.catch(err => dispatch( _userActions.error({ pendingName, err }) ) );
   }
 }

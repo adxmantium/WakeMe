@@ -2,11 +2,13 @@
 
 // libs
 import { connect } from 'react-redux'
+import { Spinner } from 'native-base'
 import React, { Component } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {
 	View,
 	Text,
+	Alert,
 	Image,
 	FlatList,
 	TouchableOpacity,
@@ -25,6 +27,9 @@ import { darkTheme } from './../../styles/_global'
 
 // constants
 import { modelWakersTable } from './../../constants/waker'
+import { resetStackAndNavTo } from './../../constants/user'
+const ALERT_TITLE = "Success!"
+const ALERT_MSG = "You have successfully sent your wake up call!"
 
 class MyFriends extends Component{
 	constructor(props){
@@ -35,12 +40,27 @@ class MyFriends extends Component{
 		}
 	}
 
+	componentWillReceiveProps(np){
+		const { sending_waker: this_sending } = this.props._waker;
+		const { sending_waker: next_sending } = np._waker;
+
+		if( this_sending !== next_sending && !next_sending ){
+			const { navigation } = np;
+			const ALERT_ACTIONS = [{
+				text: "Sweet, thanks!",
+				onPress: () => navigation.dispatch( resetStackAndNavTo(['Alarm']) )
+			}];
+
+			Alert.alert(ALERT_TITLE, ALERT_MSG, ALERT_ACTIONS);
+		}
+	}
+
 	shouldComponentUpdate(np, ns){
-		const { sendTo_list_count: this_count } = this.state;
-		const { sendTo_list_count: next_count } = ns;
+		const { sendTo_list_count: this_count, sendTo_list: this_list } = this.state;
+		const { sendTo_list_count: next_count, sendTo_list: next_list } = ns;
 
 		// only update when a sendTo_list_count has changed
-		return this_count !== next_count;
+		return this_count !== next_count || this_list.length !== next_list;
 	}
 
 	_addToSendList = friend => {
@@ -58,7 +78,7 @@ class MyFriends extends Component{
 
 	_send = () => {
 		const { sendTo_list } = this.state;
-		const { dispatch, _friends, _camera } = this.props;
+		const { dispatch, _user, _friends, _camera } = this.props;
 		const { capturedFile: file } = _camera;
 
 		// get only the friends that have been selected to sendTo
@@ -75,7 +95,7 @@ class MyFriends extends Component{
 	}
 
 	render(){
-		const { navigation } = this.props;
+		const { navigation, _waker } = this.props;
 		const { sendTo_list, sendTo_list_count } = this.state;
 		const title = navigation.state.params.title || 'My Friends';
 
@@ -86,10 +106,14 @@ class MyFriends extends Component{
 					title={ title }
 					leftIcon="chevron-left"
 					rightIconComponent={
-						sendTo_list_count && <View style={myf.send}>
-							<Icon name="paper-plane" size={18} color={darkTheme.shade2} />
-							<Text style={myf.count}>({ sendTo_list_count || 0 })</Text>
-						</View>
+						sendTo_list_count && (
+							_waker.sending_waker ?
+							<Spinner color={darkTheme.shade3} style={myf.spinner} />
+							:
+							<View style={myf.send}>
+								<Icon name="paper-plane" size={18} color={darkTheme.shade2} />
+								<Text style={myf.count}>({ sendTo_list_count || 0 })</Text>
+							</View> )
 					}
 					rightPress={ this._send }
 					leftPress={ () => navigation.goBack(null) } />
@@ -111,6 +135,8 @@ class MyFriends extends Component{
 
 const mapStateToProps = (state, props) => ({
 	_user: state._user,
+	_waker: state._waker,
+	_camera: state._camera,
 	_friends: state._friends,
 })
 

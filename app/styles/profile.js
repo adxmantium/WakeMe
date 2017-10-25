@@ -166,5 +166,8 @@ export const myf = StyleSheet.create({
 		color: _g.darkTheme.shade2,
 		fontSize: 14,
 		marginLeft: 3,
+	},
+	spinner: {
+		height: 20,
 	}
 });

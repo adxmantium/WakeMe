@@ -1,6 +1,7 @@
 // /action/user.js
 
 import _axios from './../api/axios'
+import { getWakers } from './waker'
 import { getFriends } from './friends'
 import { saveAlarmData } from './alarm'
 import * as route from './../api/routes/user'
@@ -43,6 +44,7 @@ export const getUserInfo = ({ userID }) => {
         action.payload.Item = res.data.data.Item;
         dispatch( getFriends({ userID }) ); // fetches my pending friend requests
         dispatch( getFriends({ userID, type: 'outstanding' }) ); // fetches my outstanding friend requests
+        dispatch( getWakers( userID ) ); // fetches wakers sent to me
       }
 
       dispatch( action );
