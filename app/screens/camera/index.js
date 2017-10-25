@@ -1,5 +1,6 @@
 // /screens/camera/index.js
 
+import RNFS from 'react-native-fs'
 import { connect } from 'react-redux'
 import Camera from 'react-native-camera'
 import React, { Component } from 'react'
@@ -70,10 +71,13 @@ class WakeUpCamera extends Component{
 		this._camera
 			.capture({ metadata })
 		 	.then(capturedFile => {
-		 		console.log('captured file: ', capturedFile);
-		 		dispatch( captured({ capturedFile }) );
-		 		dispatch( add_to_queue({queue: [..._waker.queue, capturedFile]}) );
-		 		navigation.navigate('Captured');
+		 		// convert file into base64
+		 		RNFS
+		 		.readFile(capturedFile.path, 'base64')
+		 		.then(capturedFileBase64 => {
+			 		dispatch( captured({ capturedFile, capturedFileBase64 }) );
+			 		navigation.navigate('Captured');
+		 		});
 		 	})
 		 	.catch(err => console.error(err));
 	}

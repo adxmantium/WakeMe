@@ -79,7 +79,7 @@ class MyFriends extends Component{
 	_send = () => {
 		const { sendTo_list } = this.state;
 		const { dispatch, _user, _friends, _camera } = this.props;
-		const { capturedFile: file } = _camera;
+		const { capturedFileBase64: file } = _camera;
 
 		// get only the friends that have been selected to sendTo
 		const friends = sendTo_list.filter(item => !!item.sendTo);
