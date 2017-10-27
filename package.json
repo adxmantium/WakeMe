@@ -18,7 +18,6 @@
 		"react-native-camera": "^0.10.0",
 		"react-native-communications": "^2.2.1",
 		"react-native-fbsdk": "^0.6.3",
-		"react-native-fs": "^2.8.1",
 		"react-native-progress": "^3.4.0",
 		"react-native-push-notification": "^3.0.1",
 		"react-native-qrcode": "^0.2.6",
