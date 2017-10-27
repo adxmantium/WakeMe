@@ -75,7 +75,9 @@ class WakeUpCamera extends Component{
 		 		RNFS
 		 		.readFile(capturedFile.path, 'base64')
 		 		.then(res => {
-		 			const capturedFileBase64 = 'data:image/jpeg;base64,'+res;
+		 			const ext = capturedFile.path.split('.')[1];
+		 			const capturedFileBase64 = `data:image/${ext};base64,${res}`;
+		 			console.log('ext: ',ext);
 			 		dispatch( captured({ capturedFile, capturedFileBase64 }) );
 			 		navigation.navigate('Captured');
 		 		});
