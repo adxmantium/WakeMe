@@ -18,6 +18,8 @@ export const SENDING_WAKER = 'SENDING_WAKER'
 export const SENT_WAKER_TYPE = r+SENT_WAKER
 export const SENDING_WAKER_TYPE = r+SENDING_WAKER
 
+export const UPDATE_WAKER = r+'UPDATE_WAKER'
+
 export const buildFileName = ({ _user, to_friend }) => 
   `${_user.userID}_${to_friend.friend_fb_user_id}__${moment().format('YYYY-M-D_H-mm-ss')}`
 
@@ -37,4 +39,13 @@ export const S3_OPTIONS = {
   accessKey: ENV.S3_ACCESS,
   secretKey: ENV.S3_SECRET,
   awsUrl: ENV.S3_URL,
+}
+
+export const IMAGE_MIMETYPE = {
+  png: true,
+  jpg: true,
+  jpeg: true,
+  gif: true,
+  bmp: true,
+  webp: true
 }

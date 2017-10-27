@@ -4,13 +4,14 @@ import * as _actions from './../constants/waker'
 import * as _userActions from './../constants/user'
 
 const init = {
-	queue: []
+	queue: [],
 }
 
 export default (state = init, action) => {
 
 	switch ( action.type ) {
 
+		case _actions.UPDATE_WAKER:
 		case _actions.ADD_TO_QUEUE:
 		case _actions.SENT_WAKER_TYPE:
 		case _actions.SENDING_WAKER_TYPE:

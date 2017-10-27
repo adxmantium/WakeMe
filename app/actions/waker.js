@@ -5,6 +5,11 @@ import * as route from './../api/routes/user'
 import * as _actions from './../constants/waker'
 import * as _userActions from './../constants/user'
 
+export const updateWaker = payload => ({
+  type: _actions.UPDATE_WAKER,
+  payload
+})
+
 export const add_to_queue = data => ({
 	type: _actions.ADD_TO_QUEUE,
 	payload: data,
@@ -40,7 +45,7 @@ export const getWakers = userID => {
   }
 }
 
-export const sendWaker = wakerData => {
+export const sendWaker = ({ wakerData, last_waker_to_save }) => {
   const pendingName = _actions.SENDING_WAKER.toLowerCase();
   const done = _actions.SENT_WAKER.toLowerCase();  
 
@@ -57,6 +62,7 @@ export const sendWaker = wakerData => {
         payload: {
           [done]: true,
           [pendingName]: false,
+          last_waker_to_save,
         }
       }; 
 

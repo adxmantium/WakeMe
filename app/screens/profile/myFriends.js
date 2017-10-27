@@ -16,7 +16,7 @@ import {
 } from 'react-native'
 
 // actions
-import { sendWaker } from './../../actions/waker'
+import { sendWaker, updateWaker } from './../../actions/waker'
 
 // components
 import FriendItem from './friendItem'
@@ -31,6 +31,7 @@ import { resetStackAndNavTo } from './../../constants/user'
 import { 
 	S3_OPTIONS, 
 	buildFileName,
+	IMAGE_MIMETYPE,
 	modelWakersTable, 
 } from './../../constants/waker'
 
@@ -43,12 +44,13 @@ class MyFriends extends Component{
 		this.state = {
 			sendTo_list: [...props._friends.accepted_friends_list],
 			sendTo_list_count: 0,
+			saving_waker: false,
 		}
 	}
 
 	componentWillReceiveProps(np){
-		const { sending_waker: this_sending } = this.props._waker;
-		const { sending_waker: next_sending } = np._waker;
+		const { sending_waker: this_sending, last_waker_to_save: this_last } = this.props._waker;
+		const { sending_waker: next_sending, last_waker_to_save: next_last } = np._waker;
 
 		if( this_sending !== next_sending && !next_sending ){
 			const { navigation } = np;
@@ -58,15 +60,24 @@ class MyFriends extends Component{
 			}];
 
 			Alert.alert(ALERT_TITLE, ALERT_MSG, ALERT_ACTIONS);
+
+		}else if( this_last !== next_last && next_last ){
+			this.setState({saving_waker: false}); // turn off spinner when last friend's waker has finished POSTing
 		}
 	}
 
 	shouldComponentUpdate(np, ns){
-		const { sendTo_list_count: this_count, sendTo_list: this_list } = this.state;
-		const { sendTo_list_count: next_count, sendTo_list: next_list } = ns;
+		const { sendTo_list_count: this_count, sendTo_list: this_list, saving_waker: this_saving } = this.state;
+		const { sendTo_list_count: next_count, sendTo_list: next_list, saving_waker: next_saving } = ns;
 
-		// only update when a sendTo_list_count has changed
-		return this_count !== next_count || this_list.length !== next_list;
+		// only update when
+		return this_count !== next_count || // sendTo_list_count has changed
+			   this_list.length !== next_list.length || // list length changes (GET just finishes returning)
+			   (this_saving !== next_saving && next_saving); // saving prop changes
+	}
+
+	componentWillUnmount(){
+		this.props.dispatch( updateWaker({last_waker_to_save: false}) );
 	}
 
 	_addToSendList = friend => {
@@ -95,21 +106,25 @@ class MyFriends extends Component{
 		let file = null;
 		let file_name = '';
 		let file_path = '';
-		const ext = capturedFile.path.split('.')[1];
+		let last_waker_to_save = false;
+		const ext = capturedFile.path.split('.')[1]; // get file extension
+		const mime = IMAGE_MIMETYPE[ext] ? 'image' : 'video'; // get mime type
 		const s3File = {
 			name: '',
-			type: `image/${ext}`,
+			type: `${mime}/${ext}`,
 			uri: capturedFile.path,
 		};
 
 		// send waker to each friend
-		friends.forEach(to_friend => {	
+		friends.forEach((to_friend, i) => {	
 
 			// build file name - will be used as the waker id
 			file_name = buildFileName({ _user, to_friend });
 
 			// build s3 file obj to be saved to s3 bucket
 			file = {...s3File, name: `${file_name}.${ext}`};
+
+			this.setState({saving_waker: true});
 
 			RNS3.put(file, S3_OPTIONS)
 				.then(res => {
@@ -120,7 +135,12 @@ class MyFriends extends Component{
 					// get object that models the Waker table in db
 					wakerData = modelWakersTable({ _user, to_friend, file_name, file_path });
 					console.log('data: ', JSON.stringify(wakerData, null, 2));
-					// dispatch( sendWaker( wakerData ) );
+
+					// pass a trigger prop to store indicating this friend is the last in arr
+					// will use to stop spinner when this friend's POST is done
+					if( (i+1) === friends.length ) last_waker_to_save = true;
+
+					dispatch( sendWaker({ wakerData, last_waker_to_save }) );
 				})
 				.catch(err => console.log('s3 error: ', err));
 		})	
@@ -128,8 +148,8 @@ class MyFriends extends Component{
 
 	render(){
 		const { navigation, _waker } = this.props;
-		const { sendTo_list, sendTo_list_count } = this.state;
 		const title = navigation.state.params.title || 'My Friends';
+		const { sendTo_list, sendTo_list_count, saving_waker } = this.state;
 
 		return (
 			<View style={myf.container}>
@@ -139,7 +159,7 @@ class MyFriends extends Component{
 					leftIcon="chevron-left"
 					rightIconComponent={
 						sendTo_list_count && (
-							_waker.sending_waker ?
+							saving_waker ?
 							<Spinner color={darkTheme.shade3} style={myf.spinner} />
 							:
 							<View style={myf.send}>
