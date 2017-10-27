@@ -3,6 +3,7 @@
 // libs
 import { connect } from 'react-redux'
 import { Spinner } from 'native-base'
+import { RNS3 } from 'react-native-aws3'
 import React, { Component } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {
@@ -26,8 +27,13 @@ import { myf } from './../../styles/profile'
 import { darkTheme } from './../../styles/_global'
 
 // constants
-import { modelWakersTable } from './../../constants/waker'
 import { resetStackAndNavTo } from './../../constants/user'
+import { 
+	S3_OPTIONS, 
+	buildFileName,
+	modelWakersTable, 
+} from './../../constants/waker'
+
 const ALERT_TITLE = "Success!"
 const ALERT_MSG = "You have successfully sent your wake up call!"
 
@@ -79,20 +85,45 @@ class MyFriends extends Component{
 	_send = () => {
 		const { sendTo_list } = this.state;
 		const { dispatch, _user, _friends, _camera } = this.props;
-		const { capturedFileBase64: file } = _camera;
+		const { capturedFile } = _camera;	
 
 		// get only the friends that have been selected to sendTo
 		const friends = sendTo_list.filter(item => !!item.sendTo);
+		let wakerData = null;	
 
-		let wakerData = null;
+		// required props for s3 file
+		let file = null;
+		let file_name = '';
+		let file_path = '';
+		const ext = capturedFile.path.split('.')[1];
+		const s3File = {
+			name: '',
+			type: `image/${ext}`,
+			uri: capturedFile.path,
+		};
 
 		// send waker to each friend
-		friends.forEach(to_friend => {
-			// get object that models the Waker table in db
-			wakerData = modelWakersTable({ _user, to_friend, file });
-			console.log('data: ', JSON.stringify(wakerData));
-			dispatch( sendWaker( wakerData ) );
-		})
+		friends.forEach(to_friend => {	
+
+			// build file name - will be used as the waker id
+			file_name = buildFileName({ _user, to_friend });
+
+			// build s3 file obj to be saved to s3 bucket
+			file = {...s3File, name: `${file_name}.${ext}`};
+
+			RNS3.put(file, S3_OPTIONS)
+				.then(res => {
+					console.log('res here: ', res);
+
+					file_path = res.body.postResponse.location;
+
+					// get object that models the Waker table in db
+					wakerData = modelWakersTable({ _user, to_friend, file_name, file_path });
+					console.log('data: ', JSON.stringify(wakerData, null, 2));
+					// dispatch( sendWaker( wakerData ) );
+				})
+				.catch(err => console.log('s3 error: ', err));
+		})	
 	}
 
 	render(){
