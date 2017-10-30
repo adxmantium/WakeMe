@@ -18,11 +18,12 @@ export const coll = StyleSheet.create({
 	},
 	list: {
 		// ..._g._border(1, 'white'),
+		..._g._padding(20, 0, 20, 0),
 	},
 	item: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		..._g._padding(15, 10, 15, 10),
+		..._g._padding(15, 20, 15, 20),
 	},
 	name: {
 		marginLeft: 20,

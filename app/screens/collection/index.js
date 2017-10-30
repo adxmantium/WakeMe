@@ -66,7 +66,7 @@ class Collection extends Component{
 
 const CollectionItem = ({ from_name }) => (
 	<TouchableOpacity style={coll.item} onPress={ () => Alert.alert(ALERT_TITLE, ALERT_MSG, ALERT_ACTIONS) }>
-		<Icon name="camera" size={20} color={themeObj.shade3} />
+		<Icon name="camera" size={20} color={themeObj.menuIcon} />
 		<Text style={[coll.name, theme.color]}>{ from_name }</Text>
 	</TouchableOpacity>
 )
