@@ -128,13 +128,11 @@ class MyFriends extends Component{
 
 			RNS3.put(file, S3_OPTIONS)
 				.then(res => {
-					console.log('res here: ', res);
-
 					file_path = res.body.postResponse.location;
 
 					// get object that models the Waker table in db
 					wakerData = modelWakersTable({ _user, to_friend, file_name, file_path });
-					console.log('data: ', JSON.stringify(wakerData, null, 2));
+					// console.log('data: ', JSON.stringify(wakerData, null, 2));
 
 					// pass a trigger prop to store indicating this friend is the last in arr
 					// will use to stop spinner when this friend's POST is done
@@ -142,7 +140,7 @@ class MyFriends extends Component{
 
 					dispatch( sendWaker({ wakerData, last_waker_to_save }) );
 				})
-				.catch(err => console.log('s3 error: ', err));
+				.catch(err => {});
 		})	
 	}
 

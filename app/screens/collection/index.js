@@ -31,22 +31,6 @@ const ALERT_ACTIONS = [{
 	text: "Ok, I can wait. I think..."
 }]
 
-const tmp = [
-	{name: 'Michelle Clay'},
-	{name: 'Michelle Clay'},
-	{name: 'Michelle Clay'},
-	{name: 'Michelle Clay'},
-	{name: 'Michelle Clay'},
-	{name: 'Michelle Clay'},
-	{name: 'Michelle Clay'},
-	{name: 'Michelle Clay'},
-	{name: 'Michelle Clay'},
-	{name: 'Michelle Clay'},
-	{name: 'Michelle Clay'},
-	{name: 'Michelle Clay'},
-	{name: 'Michelle Clay'},
-]
-
 class Collection extends Component{
 	constructor(props){
 		super(props);
@@ -55,7 +39,7 @@ class Collection extends Component{
 	}
 
 	render(){
-		const { navigation } = this.props;
+		const { navigation, _waker } = this.props;
 
 		return (
 			<View style={coll.container}>
@@ -66,11 +50,11 @@ class Collection extends Component{
 					leftPress={ () => navigation.goBack(null) } />
 
 				<FlatList
-		            data={ tmp || [] }
+		            data={ _waker.queue || [] }
 		            style={[coll.list, theme.bg]}
 		            initialNumToRender={ 10 }
 		            removeClippedSubviews={false}
-		            keyExtractor={ (item, index) => index }
+		            keyExtractor={ (item, index) => item.from_fb_user_id || index }
 		            ItemSeparatorComponent={ () => <View style={coll.separator} /> }
 		            renderItem={ ({ item }) => <CollectionItem {...item} /> }
 		        />
@@ -80,17 +64,16 @@ class Collection extends Component{
 	}
 }
 
-const CollectionItem = ({ name }) => (
+const CollectionItem = ({ from_name }) => (
 	<TouchableOpacity style={coll.item} onPress={ () => Alert.alert(ALERT_TITLE, ALERT_MSG, ALERT_ACTIONS) }>
-		<Icon name="camera" size={20} color="#000" />
-		<Text style={[coll.name, theme.color]}>{ name }</Text>
+		<Icon name="camera" size={20} color={themeObj.shade3} />
+		<Text style={[coll.name, theme.color]}>{ from_name }</Text>
 	</TouchableOpacity>
 )
 
-const mapStateToProps = (state, props) => {
-	return {
-		_alarm: state._alarm,
-	}
-}
+const mapStateToProps = (state, props) => ({
+	_alarm: state._alarm,
+	_waker: state._waker,
+})
 
 export default connect(mapStateToProps)(Collection);
