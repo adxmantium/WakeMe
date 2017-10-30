@@ -48,7 +48,7 @@ class Profile extends Component{
 	}
 
 	render(){
-		const { navigation, _user } = this.props;
+		const { navigation, _user, _friends } = this.props;
 		const { name, picture } = _user;
 
 		return (
@@ -77,7 +77,7 @@ class Profile extends Component{
 				</View>
 
 				<View style={pro.links}>
-					<Text style={pro.label}>It looks like you have no friends :(</Text>
+					{ !_friends.accepted_friends_list.length && <Text style={pro.label}>It looks like you have no friends :(</Text> }
 					<Text style={pro.label}>Find friends to help wake you up!</Text>
 					
 					<TouchableOpacity style={pro.link} onPress={() => navigation.navigate('FindFriends')}>
@@ -96,10 +96,9 @@ class Profile extends Component{
 	}
 }
 
-const mapStateToProps = (state, props) => {
-	return {
-		_user: state._user,
-	}
-}
+const mapStateToProps = (state, props) => ({
+	_user: state._user,
+	_friends: state._friends,
+})
 
 export default connect(mapStateToProps)(Profile);

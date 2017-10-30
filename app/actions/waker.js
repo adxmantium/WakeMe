@@ -35,7 +35,7 @@ export const getWakers = userID => {
         }
       }; 
 
-      if( res.data.data.Items ) action.payload.wakers = res.data.data.Items;
+      if( res.data.data.Items ) action.payload.queue = res.data.data.Items;
       
       dispatch( action );
     });
