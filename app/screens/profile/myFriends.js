@@ -49,10 +49,13 @@ class MyFriends extends Component{
 	}
 
 	componentWillReceiveProps(np){
-		const { sending_waker: this_sending, last_waker_to_save: this_last } = this.props._waker;
-		const { sending_waker: next_sending, last_waker_to_save: next_last } = np._waker;
+		const { last_waker_to_save: this_last } = this.props._waker;
+		const { last_waker_to_save: next_last } = np._waker;
 
-		if( this_sending !== next_sending && !next_sending ){
+		if( next_last ){
+			 // turn off spinner when last friend's waker has finished POSTing
+			this.setState({saving_waker: false});
+
 			const { navigation } = np;
 			const ALERT_ACTIONS = [{
 				text: "Sweet, thanks!",
@@ -60,9 +63,6 @@ class MyFriends extends Component{
 			}];
 
 			Alert.alert(ALERT_TITLE, ALERT_MSG, ALERT_ACTIONS);
-
-		}else if( this_last !== next_last && next_last ){
-			this.setState({saving_waker: false}); // turn off spinner when last friend's waker has finished POSTing
 		}
 	}
 
@@ -73,7 +73,7 @@ class MyFriends extends Component{
 		// only update when
 		return this_count !== next_count || // sendTo_list_count has changed
 			   this_list.length !== next_list.length || // list length changes (GET just finishes returning)
-			   (this_saving !== next_saving && next_saving); // saving prop changes
+			   this_saving !== next_saving; // saving prop changes
 	}
 
 	componentWillUnmount(){
