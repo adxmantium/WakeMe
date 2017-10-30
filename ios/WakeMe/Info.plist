@@ -20,44 +20,30 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1488104127933986</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>1488104127933986</string>
+	<key>FacebookDisplayName</key>
+	<string>WakeMe</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string></string>
-	<key>NSCalendarsUsageDescription</key>
-	<string></string>
-	<key>NSCameraUsageDescription</key>
-	<string>We need to be able to access your camera so that you can send encouraging wake up calls to your friends!</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Get location related results</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>If you would like to send a photo from your photo album to your friends, we require access to it.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>If you want photos taken to be saved to your phone, we require permission to save to your photo album.</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string></string>
-	<key>NSAppleMusicUsageDescription</key>
-	<string></string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string></string>
-	<key>NSMotionUsageDescription</key>
-	<string></string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
@@ -69,6 +55,26 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string></string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string></string>
+	<key>NSCalendarsUsageDescription</key>
+	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need to be able to access your camera so that you can send encouraging wake up calls to your friends!</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Get location related results</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string></string>
+	<key>NSMotionUsageDescription</key>
+	<string></string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>If you want photos taken to be saved to your phone, we require permission to save to your photo album.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>If you would like to send a photo from your photo album to your friends, we require access to it.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -86,25 +92,24 @@
 		<string>Feather.ttf</string>
 		<string>MaterialCommunityIcons.ttf</string>
 	</array>
-	<key>CFBundleURLTypes</key>
+	<key>UIBackgroundModes</key>
 	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb1488104127933986</string>
-			</array>
-		</dict>
+		<string>fetch</string>
+		<string>remote-notification</string>
 	</array>
-	<key>FacebookAppID</key>
-	<string>1488104127933986</string>
-	<key>FacebookDisplayName</key>
-	<string>WakeMe</string>
-	<key>LSApplicationQueriesSchemes</key>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiredDeviceCapabilities</key>
 	<array>
-		<string>fbapi</string>
-		<string>fb-messenger-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
+		<string>armv7</string>
 	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

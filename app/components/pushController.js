@@ -1,9 +1,14 @@
 // /components/pushController.js
 
+// libs
 import { connect } from 'react-redux'
 import { AppState } from 'react-native'
 import React, { Component } from 'react'
+import OneSignal from 'react-native-onesignal'
 import PushNotification from 'react-native-push-notification'
+
+// actions
+import { saveAlarmData } from './../../actions/alarm'
 
 class PushController extends Component{
 	constructor(props){
@@ -17,12 +22,15 @@ class PushController extends Component{
 
 	_init = () => {
 		PushNotification.configure({
-			onRegister: ({ os, token }) => {
-				console.log('registered: ', os, token);
+			onRegister: ({ os, device_token }) => {
+				console.log('registered: ', os, device_token);
+				// const newAlarmState = {...this.props._alarm, device_token};
+				// dispatch( saveAlarmData( newAlarmState ) );
 			},
 
 			// (required) Called when a remote or local notification is opened or received
 			onNotification: notification => {
+				console.log('on notification: ', notification);
 				if( notification.data.remote ) this._onNotification({ notification });
 			},
 		});
