@@ -66,9 +66,11 @@ class SearchFriends extends Component{
 						value={ searched || '' }
 						placeholderTextColor="rgba(170, 171, 184, 0.2)"
 						placeholder="Search for a friends name..."
+						underlineColorAndroid="transparent"
 						returnKeyType="search"
 						clearButtonMode="always"
 						keyboardAppearance="dark"
+						selectionColor={darkTheme.shade1}
 						onFocus={ () => this.setState({focused: true}) }
 						onBlur={ () => this.setState({focused: false}) }
 						onSubmitEditing={ this._search }
