@@ -1,6 +1,6 @@
 // /styles/entry.js
 
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 // import global styles
 import * as _g from './_global'
@@ -24,6 +24,7 @@ export const pro = StyleSheet.create({
 	pic: {
 		width: '100%',
 		height: '100%',
+		borderRadius: Platform.OS === 'android' ? 1 : 0,
 		resizeMode: 'contain',
 	},
 	name: {

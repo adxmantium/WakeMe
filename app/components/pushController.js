@@ -8,7 +8,7 @@ import OneSignal from 'react-native-onesignal'
 import PushNotification from 'react-native-push-notification'
 
 // actions
-import { saveAlarmData } from './../../actions/alarm'
+import { saveAlarmData } from './../actions/alarm'
 
 class PushController extends Component{
 	constructor(props){

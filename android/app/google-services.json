@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "520917058228",
+    "firebase_url": "https://wakeme-bb294.firebaseio.com",
+    "project_id": "wakeme-bb294",
+    "storage_bucket": "wakeme-bb294.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520917058228:android:1a82b23c71f597f3",
+        "android_client_info": {
+          "package_name": "com.wakeme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520917058228-3pp7rcu08n4u1oobic37e6g4hv5i2ija.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0mDpMjS39ftQCND3lMprr-49PmFtOci4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
