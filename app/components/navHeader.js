@@ -34,8 +34,8 @@ export default ({
 				size={SIZE} />
 		</TouchableOpacity>
 
-		<TouchableOpacity onPress={ middlePress && middlePress }>
-			<Text style={head.title}>{ title || '' }</Text>
+		<TouchableOpacity style={head.title} onPress={ middlePress && middlePress }>
+			<Text style={head.titleText}>{ title || '' }</Text>
 		</TouchableOpacity>
 
 		<TouchableOpacity style={head.btn} onPress={ rightPress && rightPress }>

@@ -1,11 +1,11 @@
 // /styles/alarm.js
 
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 // import global styles
 import * as _g from './_global'
 
-export const head = StyleSheet.create({
+const headStyles = {
 	container: {
 		alignItems: 'flex-end',
 		backgroundColor: 'transparent',
@@ -18,9 +18,14 @@ export const head = StyleSheet.create({
 		// ..._g._border(1, 'red'),
 	},
 	title: {
+		height: '100%',
+		justifyContent: 'flex-end',
+		..._g._padding(0, 10, 0, 10),
+		// ..._g._border(1, 'white'),
+	},
+	titleText: {
 		fontSize: 20,
 		fontWeight: '500',
-		height: 23,
 		color: _g.darkTheme.shade3,
 	},
 	btn: {
@@ -30,7 +35,15 @@ export const head = StyleSheet.create({
 		justifyContent: 'flex-end',
 		// ..._g._border(1, 'white'),
 	}
-});
+};
+
+if( Platform.OS === 'android' ){
+	const position = 'center';
+	headStyles.title.justifyContent = position;
+	headStyles.btn.justifyContent = position;
+}
+
+export const head = StyleSheet.create(headStyles);
 
 export const main = StyleSheet.create({
 	container: {
