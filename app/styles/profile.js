@@ -74,12 +74,14 @@ export const pro = StyleSheet.create({
 	}
 });
 
+const paddTop = Platform.OS === 'android' ? 80 : 100;
+
 export const findf = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'space-around',
 		backgroundColor: _g.darkTheme.shade5,
-		..._g._padding(100, 0, 0, 0),
+		..._g._padding(paddTop, 0, 0, 0),
 	},
 	tabbar: {
 		backgroundColor: 'transparent',
