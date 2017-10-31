@@ -69,7 +69,7 @@ export const main = StyleSheet.create({
 	},
 	time: {
 		fontSize: 100,
-		fontWeight: '200',
+		fontWeight: Platform.OS === 'android' ? '100' : '200',
 	},
 	ampm: {
 		fontSize: 40,

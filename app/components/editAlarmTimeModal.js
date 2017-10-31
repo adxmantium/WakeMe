@@ -51,6 +51,7 @@ class EditAlarmTime extends Component{
 			<Modal
 				animationType="slide"
 				transparent={true}
+				onRequestClose={() => {}}
 				visible={true}>
 
 					<View style={edit.modal}>
