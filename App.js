@@ -18,6 +18,7 @@ import { updateUser } from './app/actions/user'
 
 export default class WakeMe extends Component<{}> {
     componentDidMount(){
+      // onesignal init events need to be in this file, but onReceived/onOpened events are handled in PushController
       OneSignal.addEventListener('ids', this._onIds);
       OneSignal.addEventListener('registered', this._onRegistered);
     }
@@ -27,9 +28,9 @@ export default class WakeMe extends Component<{}> {
       OneSignal.removeEventListener('registered', this._onRegistered);
     }
 
-    _onIds = ({ userId: onesignal_device_id, pushToken: onesignal_push_token }) => {
-      // on init, should be getting data from onesignal
-      store.dispatch( updateUser({ onesignal_device_id, onesignal_push_token }) );
+    _onIds = ({ userId: onesignal_device_token, pushToken: onesignal_push_token }) => {
+      // on init, should be getting data from onesignal, save ids to store
+      store.dispatch( updateUser({ onesignal_device_token, onesignal_push_token }) );
     }
 
     _onRegistered = (data) => {

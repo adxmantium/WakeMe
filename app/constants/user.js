@@ -62,7 +62,7 @@ export const modelUsersTable = ({ _user, _alarm }) => {
     fb_user_id: _user.userID || '',
     email: _user.email || '',
     name: _user.name || '',
-    device_token: _user.device_token || '1',
+    device_token: _user.onesignal_device_token || '1',
     alarm,
   } 
 };

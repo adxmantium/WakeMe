@@ -18,6 +18,7 @@ import Menu from './../menu'
 import SetAlarm from './setAlarm'
 import AlarmHeader from './header'
 import NavHeader from './../../components/navHeader'
+import PushController from './../../components/pushController'
 import BackgroundImage from './../../components/backgroundImage'
 
 // styles
@@ -46,6 +47,8 @@ class Alarm extends Component{
 				<StatusBar barStyle="light-content" />
 
 				<BackgroundImage />
+
+				<PushController />
 
 				<NavHeader
 					title="WakeMe"
