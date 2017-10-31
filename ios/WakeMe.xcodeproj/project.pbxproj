@@ -49,6 +49,7 @@
 		442FF88A08F4457C89371B66 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34EBFA9EA53944BAA37FDEA4 /* Entypo.ttf */; };
 		46852D36B3D443EAA904F539 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB7EA4D9E032436C874FB8EB /* Foundation.ttf */; };
 		48C7FDDC74EF418B85C12C03 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 318E5D8251104245A0439020 /* EvilIcons.ttf */; };
+		4AFFE23827BEBE61E68472D2 /* libPods-WakeMeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C000A045150659F6764156 /* libPods-WakeMeTests.a */; };
 		4EB31F8921AD4658822AC4BC /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D98F6B6301E46A6AD66700D /* MaterialIcons.ttf */; };
 		4F25B740C290421F979CB5D8 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187F45206C0F4D778FA0E93C /* EvilIcons.ttf */; };
 		4FD2BC00BAD249B8A317CC3F /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EFE855F644E48D5AD5FDB5D /* rubicon-icon-font.ttf */; };
@@ -58,6 +59,11 @@
 		5C1979FF1F94722B00C924F6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C1979DE1F946EF900C924F6 /* FBSDKCoreKit.framework */; };
 		5C197A001F94722D00C924F6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C1979DD1F946EEC00C924F6 /* Bolts.framework */; };
 		5C28B0921F8DC7BD00423C81 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C28B0781F8DC7A200423C81 /* libRCTPushNotification.a */; };
+		5CC6FAE81FA7FEB300DEE504 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CC6FAE71FA7FEB300DEE504 /* GoogleService-Info.plist */; };
+		5CC6FAE91FA7FEB300DEE504 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CC6FAE71FA7FEB300DEE504 /* GoogleService-Info.plist */; };
+		5CC6FAEA1FA7FEB300DEE504 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CC6FAE71FA7FEB300DEE504 /* GoogleService-Info.plist */; };
+		5CC6FAEB1FA7FEB300DEE504 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CC6FAE71FA7FEB300DEE504 /* GoogleService-Info.plist */; };
+		5D4EE6EECF4AA83B232911D6 /* libPods-WakeMe-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F672D340DD43E945CCA90CB /* libPods-WakeMe-tvOS.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		602B4066FC004F8B9BAC6FE5 /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7C18DD45C154A028FE0FAEE /* libRCTOneSignal.a */; };
 		6B8D179F15634D069B2D129E /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E67C749FB4B4F2893B17824 /* libRCTCamera.a */; };
@@ -68,6 +74,8 @@
 		A895772C1BD844E9BA70378E /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A86628FBDCBE40049C2E10B7 /* SimpleLineIcons.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		BE3147887F244A59B7A63430 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D14D56D4DC3A494DBFF41A5C /* MaterialCommunityIcons.ttf */; };
+		C3E8AEC924EDEC49EE2A9FC3 /* libPods-WakeMe-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFBA02E504FDAA144505D4C5 /* libPods-WakeMe-tvOSTests.a */; };
+		CF6F5102FC46A4A70588E3B6 /* libPods-WakeMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC46737E5373859D6F0848F1 /* libPods-WakeMe.a */; };
 		DE7693C36B904E60AFBC61F2 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE78E1D2B0F242BC9D208845 /* Zocial.ttf */; };
 		E390DBC68E7A4D61ACBA3EFF /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5F93A6559ED49528EA966C9 /* Octicons.ttf */; };
 		E6F6AD131B944F8B8842F60D /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0249D17634EA4EDEA1B198BD /* Ionicons.ttf */; };
@@ -411,6 +419,8 @@
 		00E356F21AD99517003FC87E /* WakeMeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WakeMeTests.m; sourceTree = "<group>"; };
 		0249D17634EA4EDEA1B198BD /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		09A4DF4B04424D6F90FD2A2B /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
+		0EB8481D7E56360EC9C265C3 /* Pods-WakeMe-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WakeMe-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WakeMe-tvOSTests/Pods-WakeMe-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		0F672D340DD43E945CCA90CB /* libPods-WakeMe-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WakeMe-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* WakeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WakeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -423,6 +433,8 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		187F45206C0F4D778FA0E93C /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		1C4EF3D0719044208FF36993 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		22D43E1B2BF5AE8A9B01600C /* Pods-WakeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WakeMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-WakeMe/Pods-WakeMe.release.xcconfig"; sourceTree = "<group>"; };
+		27C000A045150659F6764156 /* libPods-WakeMeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WakeMeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* WakeMe-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WakeMe-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* WakeMe-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WakeMe-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA0D32825BF465BB48F5BC5 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
@@ -441,6 +453,7 @@
 		5C28B0651F8DC7A200423C81 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		5C624AB98C3642C39C6EEBE8 /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
 		5CC6FA7E1FA78D0900DEE504 /* WakeMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = WakeMe.entitlements; path = WakeMe/WakeMe.entitlements; sourceTree = "<group>"; };
+		5CC6FAE71FA7FEB300DEE504 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Users/atom/Documents/WakeMe/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E67C749FB4B4F2893B17824 /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		5EEE723D5815497D8240E9CC /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
@@ -449,15 +462,21 @@
 		5FECF5C8AB2A44AF988F97DC /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		648802ADC992415EA0976E59 /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		7A950BD4CC716A69721ADF0D /* Pods-WakeMe-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WakeMe-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WakeMe-tvOSTests/Pods-WakeMe-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7AF9752D150C43E08BF916A7 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		87FE6C6C202647848589A7FC /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		88FB335087844F359501E0F5 /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
+		984DE75D1CD8C324F390178D /* Pods-WakeMeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WakeMeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WakeMeTests/Pods-WakeMeTests.release.xcconfig"; sourceTree = "<group>"; };
+		A1FFF1FD0566305038DE0588 /* Pods-WakeMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WakeMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WakeMe/Pods-WakeMe.debug.xcconfig"; sourceTree = "<group>"; };
 		A5D101EB91C34361B1F162A2 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		A729015D3990CC1E1B6EFFC2 /* Pods-WakeMe-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WakeMe-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WakeMe-tvOS/Pods-WakeMe-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A7A629C7764F47C3BD63163E /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		A86628FBDCBE40049C2E10B7 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		AB779F4DD40B3B3CC1F8410F /* Pods-WakeMe-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WakeMe-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-WakeMe-tvOS/Pods-WakeMe-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		AD61532D2194449E8F095C80 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		AFBA02E504FDAA144505D4C5 /* libPods-WakeMe-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WakeMe-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE78E1D2B0F242BC9D208845 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		C1C1C29ED3C548EB98B93F46 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		CCE308E87D7941B0BF1C9C55 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
@@ -466,7 +485,9 @@
 		D6F02414CA204B5D87DBA8FA /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		D7C18DD45C154A028FE0FAEE /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
 		D8BAFA352C0A4F2CAFAA2A29 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		E5D5986366A6D46A9D0CC84D /* Pods-WakeMeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WakeMeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WakeMeTests/Pods-WakeMeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB7EA4D9E032436C874FB8EB /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		FC46737E5373859D6F0848F1 /* libPods-WakeMe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WakeMe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -475,6 +496,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
+				4AFFE23827BEBE61E68472D2 /* libPods-WakeMeTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +529,7 @@
 				396A7CDDEDFF4345955C7259 /* libRCTFBSDK.a in Frameworks */,
 				602B4066FC004F8B9BAC6FE5 /* libRCTOneSignal.a in Frameworks */,
 				9CC6DA4F2DBD4634B6CA3D62 /* libRNFirebase.a in Frameworks */,
+				CF6F5102FC46A4A70588E3B6 /* libPods-WakeMe.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +545,7 @@
 				2D02E4C61E0B4AEC006451C7 /* libRCTSettings-tvOS.a in Frameworks */,
 				2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */,
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
+				5D4EE6EECF4AA83B232911D6 /* libPods-WakeMe-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +553,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3E8AEC924EDEC49EE2A9FC3 /* libPods-WakeMe-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,6 +642,7 @@
 		13B07FAE1A68108700A75B9A /* WakeMe */ = {
 			isa = PBXGroup;
 			children = (
+				5CC6FAE71FA7FEB300DEE504 /* GoogleService-Info.plist */,
 				5CC6FA7E1FA78D0900DEE504 /* WakeMe.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -690,6 +716,10 @@
 				5C1979DF1F946F0A00C924F6 /* FBSDKLoginKit.framework */,
 				5C1979DE1F946EF900C924F6 /* FBSDKCoreKit.framework */,
 				5C1979DD1F946EEC00C924F6 /* Bolts.framework */,
+				FC46737E5373859D6F0848F1 /* libPods-WakeMe.a */,
+				0F672D340DD43E945CCA90CB /* libPods-WakeMe-tvOS.a */,
+				AFBA02E504FDAA144505D4C5 /* libPods-WakeMe-tvOSTests.a */,
+				27C000A045150659F6764156 /* libPods-WakeMeTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -803,6 +833,7 @@
 				BD9C09A8F1994A79BAAF9123 /* Resources */,
 				5C7C5B9A1F8C6B1000CD3017 /* Recovered References */,
 				5C28B0911F8DC7BD00423C81 /* Frameworks */,
+				DF10E53D71FA7FDD3135A712 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -859,6 +890,21 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		DF10E53D71FA7FDD3135A712 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A1FFF1FD0566305038DE0588 /* Pods-WakeMe.debug.xcconfig */,
+				22D43E1B2BF5AE8A9B01600C /* Pods-WakeMe.release.xcconfig */,
+				A729015D3990CC1E1B6EFFC2 /* Pods-WakeMe-tvOS.debug.xcconfig */,
+				AB779F4DD40B3B3CC1F8410F /* Pods-WakeMe-tvOS.release.xcconfig */,
+				7A950BD4CC716A69721ADF0D /* Pods-WakeMe-tvOSTests.debug.xcconfig */,
+				0EB8481D7E56360EC9C265C3 /* Pods-WakeMe-tvOSTests.release.xcconfig */,
+				E5D5986366A6D46A9D0CC84D /* Pods-WakeMeTests.debug.xcconfig */,
+				984DE75D1CD8C324F390178D /* Pods-WakeMeTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -866,9 +912,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "WakeMeTests" */;
 			buildPhases = (
+				FBC0C39F858BE7451A36618C /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				9A944C9A5290A171988B66F7 /* [CP] Embed Pods Frameworks */,
+				97D6B3B2341274E7A22C6E1C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -884,10 +933,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "WakeMe" */;
 			buildPhases = (
+				0E8E5643E0CA13B9EF61146A /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				F1FAE652A0067988382D2AD8 /* [CP] Embed Pods Frameworks */,
+				12EEFD2F22B98892E620115D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -902,10 +954,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "WakeMe-tvOS" */;
 			buildPhases = (
+				1B127C2D7CBA6CA26A6BEA9A /* [CP] Check Pods Manifest.lock */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
 				2D02E4791E0B4A5D006451C7 /* Resources */,
 				2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */,
+				FB16845E79C9BFB237F478B6 /* [CP] Embed Pods Frameworks */,
+				49D92ACF62A0AD65FD336936 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -920,9 +975,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "WakeMe-tvOSTests" */;
 			buildPhases = (
+				5CBA19A43E02C69C2AB942EB /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
+				AA662B0EE704F5E995B9DCFF /* [CP] Embed Pods Frameworks */,
+				87A5215EC95D1818A96F4C5E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1393,6 +1451,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CC6FAE91FA7FEB300DEE504 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1413,6 +1472,7 @@
 				741557935E0F40F99AB18965 /* Roboto.ttf in Resources */,
 				4FD2BC00BAD249B8A317CC3F /* rubicon-icon-font.ttf in Resources */,
 				A895772C1BD844E9BA70378E /* SimpleLineIcons.ttf in Resources */,
+				5CC6FAE81FA7FEB300DEE504 /* GoogleService-Info.plist in Resources */,
 				2D7B47F0EB7045BD83CB4420 /* Zocial.ttf in Resources */,
 				442FF88A08F4457C89371B66 /* Entypo.ttf in Resources */,
 				48C7FDDC74EF418B85C12C03 /* EvilIcons.ttf in Resources */,
@@ -1433,6 +1493,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
+				5CC6FAEA1FA7FEB300DEE504 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1440,6 +1501,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CC6FAEB1FA7FEB300DEE504 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1460,6 +1522,57 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		0E8E5643E0CA13B9EF61146A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WakeMe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		12EEFD2F22B98892E620115D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WakeMe/Pods-WakeMe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1B127C2D7CBA6CA26A6BEA9A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WakeMe-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1473,6 +1586,147 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		49D92ACF62A0AD65FD336936 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WakeMe-tvOS/Pods-WakeMe-tvOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5CBA19A43E02C69C2AB942EB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WakeMe-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		87A5215EC95D1818A96F4C5E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WakeMe-tvOSTests/Pods-WakeMe-tvOSTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97D6B3B2341274E7A22C6E1C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WakeMeTests/Pods-WakeMeTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9A944C9A5290A171988B66F7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WakeMeTests/Pods-WakeMeTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA662B0EE704F5E995B9DCFF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WakeMe-tvOSTests/Pods-WakeMe-tvOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F1FAE652A0067988382D2AD8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WakeMe/Pods-WakeMe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB16845E79C9BFB237F478B6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WakeMe-tvOS/Pods-WakeMe-tvOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBC0C39F858BE7451A36618C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WakeMeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1541,6 +1795,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5D5986366A6D46A9D0CC84D /* Pods-WakeMeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1580,6 +1835,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 984DE75D1CD8C324F390178D /* Pods-WakeMeTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1616,6 +1872,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1FFF1FD0566305038DE0588 /* Pods-WakeMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WakeMe/WakeMe.entitlements;
@@ -1625,7 +1882,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = X65X4CJQW2;
-				FRAMEWORK_SEARCH_PATHS = "~/Documents/FacebookSDK_WakeMe/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"~/Documents/FacebookSDK_WakeMe/**",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1651,6 +1911,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22D43E1B2BF5AE8A9B01600C /* Pods-WakeMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WakeMe/WakeMe.entitlements;
@@ -1659,7 +1920,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X65X4CJQW2;
-				FRAMEWORK_SEARCH_PATHS = "~/Documents/FacebookSDK_WakeMe/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"~/Documents/FacebookSDK_WakeMe/**",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1685,6 +1949,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A729015D3990CC1E1B6EFFC2 /* Pods-WakeMe-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1725,6 +1990,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB779F4DD40B3B3CC1F8410F /* Pods-WakeMe-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1765,6 +2031,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A950BD4CC716A69721ADF0D /* Pods-WakeMe-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1791,6 +2058,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EB8481D7E56360EC9C265C3 /* Pods-WakeMe-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
