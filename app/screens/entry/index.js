@@ -64,19 +64,15 @@ class Entry extends Component{
 	}
 
 	_onLoginFinished = result => {
-		console.log('result: ', result);
 		const { dispatch } = this.props;
 
 		if ( result.isCancelled ) this.setState({fb_login_pending: false});
 		else this._getFBAccessTokenData();
 	}
 
-	_onLoginError = error => {
-		console.log('fb error: ', error);
-	}
+	_onLoginError = error => {}
 
 	_getFBAccessTokenData = () => {
-		console.log('get tokeN?');
 		const { dispatch } = this.props;
 
 		AccessToken.getCurrentAccessToken()
@@ -104,8 +100,9 @@ class Entry extends Component{
 	}
 
 	_graphRequestCallback = (error, result) => {
-		if( error ) console.log('graph error: ', error);
-		else{
+		if( error ){
+			// console.log('graph error: ', error);
+		}else{
 			const { navigation, dispatch } = this.props;
 			const userData = {...this.state.fb_data, ...result};
 
@@ -120,7 +117,6 @@ class Entry extends Component{
 
 	render(){
 		const { fb_login_pending } = this.state;
-		console.log('fb_data: ', this.state.fb_data);
 
 		return (
 			<View style={entry.container}>

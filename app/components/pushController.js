@@ -17,12 +17,33 @@ class PushController extends Component{
 
 	componentWillMount(){
 		this._init();
-		this._testNotification();
+		OneSignal.requestPermissions();
+		// OneSignal.addEventListener('received', this.onReceived);
+  //       OneSignal.addEventListener('opened', this.onOpened);
+        OneSignal.addEventListener('registered', this._onRegistered);
+        OneSignal.addEventListener('ids', this._onIds);
+		// this._testNotification();
+	}
+
+	componentWillUnmount(){
+		// OneSignal.removeEventListener('received', this.onReceived);
+  //       OneSignal.removeEventListener('opened', this.onOpened);
+        OneSignal.removeEventListener('registered', this._onRegistered);
+        OneSignal.removeEventListener('ids', this._onIds);
+	}
+
+	_onRegistered = data => {
+		console.log('registered data: ', data);
+	}
+
+	_onIds = device => {
+		console.log('onIds: ', device);
 	}
 
 	_init = () => {
+		console.log('here though?');
 		PushNotification.configure({
-			onRegister: ({ os, device_token }) => {
+			onRegister: ({ os, device: device_token }) => {
 				console.log('registered: ', os, device_token);
 				// const newAlarmState = {...this.props._alarm, device_token};
 				// dispatch( saveAlarmData( newAlarmState ) );
@@ -31,7 +52,7 @@ class PushController extends Component{
 			// (required) Called when a remote or local notification is opened or received
 			onNotification: notification => {
 				console.log('on notification: ', notification);
-				if( notification.data.remote ) this._onNotification({ notification });
+				// if( notification.data.remote ) this._onNotification({ notification });
 			},
 		});
 	}

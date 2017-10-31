@@ -18,7 +18,6 @@ import Menu from './../menu'
 import SetAlarm from './setAlarm'
 import AlarmHeader from './header'
 import NavHeader from './../../components/navHeader'
-import PushController from './../../components/pushController'
 import BackgroundImage from './../../components/backgroundImage'
 
 // styles
@@ -35,10 +34,6 @@ class Alarm extends Component{
 			editTime: false,
 		}
 	}	
-
-	componentDidMount(){
-		console.log('alarm screen mounted');
-	}
 
 	render(){
 		const { navigation, _alarm } = this.props;

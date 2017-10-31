@@ -43,8 +43,9 @@ const _getGraphRequest = ({ accessToken }) => {
 }
 
 const _graphRequestCallback = (error, result) => {
-	if( error ) console.log('graph error: ', error);
-	else{
+	if( error ){
+		// console.log('graph error: ', error);
+	}else{
 		const userData = {...fbData, ...result};
 		store.dispatch( updateUser(userData) ); // save fb data to store
 		store.dispatch( getUserInfo(userData) ); // get user/alarm data from db
@@ -56,7 +57,6 @@ const _graphRequestCallback = (error, result) => {
 AccessToken.getCurrentAccessToken()
            .then(data => {
            		if( data ){
-           			console.log('fb: ', data);
            			fbData = data;
 
            			// use fb graph api to get users fb profile data
