@@ -115,7 +115,7 @@ export const alarmNotificationModel = ({ _user, alarmData }) => {
       app_id: ENV.ONESIGNAL_APP_ID,
       template_id: ENV.ONESIGNAL_ALARM_TEMPLATE_ID, // fill rest of fields using template designed on dashboard
       include_player_ids: [_user.onesignal_device_token], // my device token
-      send_after: date,
+      send_after: `${date} ${timezone}`,
       delayed_option,
       delivery_time_of_day
     });
