@@ -64,7 +64,7 @@ export const sendNotification = ({ data, notification_type, pending_action_type,
     dispatch( _actions.pending({pendingName, type: pending_action_type}) );
 
     // promise
-    const response = _axios.onesignal.post('/', data);
+    const response = sendNotificationPromise( data );
 
     // then
     response.then(res => {
@@ -88,3 +88,10 @@ export const sendNotification = ({ data, notification_type, pending_action_type,
     response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
   }
 }
+
+export const sendNotificationPromise = data => _axios.onesignal.post('/', data);
+
+
+
+
+

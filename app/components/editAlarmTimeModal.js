@@ -17,6 +17,7 @@ import EditModalActionBar from './editModalActionBar'
 
 // actions
 import { saveAlarmData } from './../actions/alarm'
+import { sendNotificationPromise } from './../actions/user'
 
 // constants
 import { alarmNotificationModel } from './../constants/user'
@@ -36,16 +37,47 @@ class EditAlarmTime extends Component{
 			hour: props._alarm.hour,
 			minute: props._alarm.minute,
 			ampm: props._alarm.ampm,
+			notifications: props._alarm.notifications,
 		}
 	}
 
-	_save = () => {
-		const { dispatch, _alarm, _user, close } = this.props;
-		const newAlarmState = {..._alarm, ...this.state};
+	_sendAndSave = () => {
+		const { dispatch, _alarm, _user } = this.props;
+		const alarmData = {..._alarm, ...this.state};
 
-		const alarmNotifications = alarmNotificationModel({_user, alarmData: newAlarmState});
+		const alarmNotifications = alarmNotificationModel({ _user, alarmData });
 
-		dispatch( saveAlarmData({alarmData: newAlarmState, alarmNotifications}) );
+		// if there are alarm notifications, set them
+	    if( alarmNotifications && Array.isArray(alarmNotifications) )
+	    	this._sendAlarmNotifications({ alarmNotifications, index: 0 });
+	}
+
+	_sendAlarmNotifications = ({ alarmNotifications, index }) => {
+		if( index === 10 ) return; // just in case
+
+		// if this index of alarmNotifications exists, post to onesignal
+		if( alarmNotifications[index] ){
+			const promise = sendNotificationPromise( alarmNotifications[index] );
+
+			promise.then(res => {
+				this.setState({notifications: [...this.state.notifications, res.data.id]});
+				this._sendAlarmNotifications({ alarmNotifications, index: index + 1 }); // recurse
+			});
+
+			promise.catch(err => {
+				// console.log('err: ', err)
+			});
+		}else{
+			// no more alarm notifications to send
+			this._saveAlarm();
+		}
+	}
+
+	_saveAlarm = () => {
+		const { dispatch, _alarm, close } = this.props;
+		const alarmData = {..._alarm, ...this.state};
+
+		dispatch( saveAlarmData({ alarmData }) );
 		close();
 	}
 
@@ -64,7 +96,7 @@ class EditAlarmTime extends Component{
 
 						<EditModalActionBar
 							close={ close }
-							save={ this._save } />
+							save={ this._sendAndSave } />
 
 						<View style={edit.pickerWrapper}>
 

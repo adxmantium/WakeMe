@@ -60,10 +60,10 @@ export const resetStackAndNavTo = (routes = []) => {
 }
 
 export const modelUsersTable = ({ _user, _alarm }) => {
-  const { ampm, enabled, hour, minute, next_alarm_day, repeat, repeat_label } = _alarm;
+  const { ampm, enabled, hour, minute, next_alarm_day, repeat, repeat_label, notifications } = _alarm;
 
   // only want these props of _alarm being saved to db
-  const alarm = { ampm, enabled, hour, minute, next_alarm_day, repeat, repeat_label };
+  const alarm = { ampm, enabled, hour, minute, next_alarm_day, repeat, repeat_label, notifications };
 
   return {
     fb_user_id: _user.userID || '',
