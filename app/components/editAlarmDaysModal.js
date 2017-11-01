@@ -72,13 +72,15 @@ class EditAlarmDays extends Component{
 		// if next_alarm_day_moment is set, format for display
 		if( next_alarm_day_moment ) next_alarm_day = next_alarm_day_moment.format('dddd, MMM D, YYYY');
 
-		dispatch( saveAlarmData({ 
+		const alarmData = { 
 			..._alarm,
 			repeat,
 			repeat_label, 
 			next_alarm_day,
 			next_alarm_day_moment,
-		}) );
+		};
+
+		dispatch( saveAlarmData({ alarmData }) );
 
 		close();
 	}

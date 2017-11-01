@@ -42,9 +42,9 @@ class SetAlarm extends Component{
 
 	_save = enabled => {
 		const { dispatch, _alarm } = this.props;
-		const newAlarmState = {..._alarm, enabled};
+		const alarmData = {..._alarm, enabled};
 
-		dispatch( saveAlarmData( newAlarmState ) );
+		dispatch( saveAlarmData({ alarmData }) );
 	}
 
 	render(){
