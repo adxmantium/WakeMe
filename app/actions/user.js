@@ -1,5 +1,6 @@
-// /action/user.js
+// /actions/user.js
 
+import ENV from './../../env'
 import _axios from './../api/axios'
 import { getWakers } from './waker'
 import { getFriends } from './friends'
@@ -38,7 +39,7 @@ export const getUserInfo = ({ userID }) => {
       };
 
       // if response does not contain Item, then user is NOT in db - save current user/alarm info now
-      if( !res.data.data.Item ) dispatch( saveAlarmData() );
+      if( !res.data.data.Item ) dispatch( saveAlarmData({}) );
       else{
         // since we know if we get here, user was already saved in db, then fetch user's friends
         action.payload.Item = res.data.data.Item;
@@ -91,7 +92,7 @@ export const sendNotification = ({ data, notification_type, pending_action_type,
 
 export const sendNotificationPromise = data => _axios.onesignal.post('/', data);
 
-
+export const deleteNotificationPromise = id => _axios.onesignal.delete(`/${id}?app_id=${ENV.ONESIGNAL_APP_ID}`)
 
 
 

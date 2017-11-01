@@ -15,7 +15,8 @@ import {
 } from 'react-native'
 
 // actions
-import { saveAlarmData } from './../../actions/alarm'
+import { saveAlarmData, updateAlarm } from './../../actions/alarm'
+import { sendNotificationPromise, deleteNotificationPromise } from './../../actions/user'
 
 // components
 import EditAlarmTimeModal from './../../components/editAlarmTimeModal'
@@ -23,6 +24,9 @@ import EditAlarmDaysModal from './../../components/editAlarmDaysModal'
 
 // styles
 import { edit, darkTheme, darkThemeObj } from './../../styles/alarm'
+
+// constants
+import { alarmNotificationModel } from './../../constants/user'
 
 const theme = darkTheme;
 const themeObj = darkThemeObj;
@@ -35,16 +39,77 @@ class SetAlarm extends Component{
 			editTime: false,
 			editDays: false,
 			editSound: false,
+			notifications: [],
 		}
 	}
 
-	_onPress = name => this.setState({[name]: true})
+	_onPress = name => this.setState({[name]: true})	
 
 	_save = enabled => {
 		const { dispatch, _alarm } = this.props;
 		const alarmData = {..._alarm, enabled};
+		const { notifications } = _alarm;
 
-		dispatch( saveAlarmData({ alarmData }) );
+		// delete, if any, and save
+		if( notifications.length > 0 ){
+			this._deleteNotifications({ notifications, index: 0, alarmData, enabled });
+
+		}else this._sendOrSave({ enabled, alarmData });
+	}
+
+	_deleteNotifications = ({ notifications, index, alarmData, enabled }) => {
+		if( notifications[index] ){
+			const promise = deleteNotificationPromise( notifications[index] );
+
+			promise.then(res => this._deleteNotifications({ notifications, index: index + 1, alarmData, enabled }));
+
+			promise.catch(err => {});
+
+		}else this._sendOrSave({ enabled, alarmData });
+	}
+
+	_sendOrSave = ({ enabled, alarmData }) => {
+		if( enabled ){
+			// alarm enabled, so create alarm notifications
+			this._send( alarmData );
+		}else{
+			// alarm disabled, so just save the new alarm state to db
+			alarmData = {...alarmData, notifications: []};
+			this._saveAlarm( alarmData );
+		}
+	}
+
+	_send = alarmData => {
+		const { _user } = this.props;
+
+		const alarmNotifications = alarmNotificationModel({ _user, alarmData });
+
+		// if there are alarm notifications, set them
+	    if( alarmNotifications && Array.isArray(alarmNotifications) )
+	    	this._sendAlarmNotifications({ alarmNotifications, index: 0, alarmData });
+	}
+
+	_sendAlarmNotifications = ({ alarmNotifications, index, alarmData }) => {
+		// if this index of alarmNotifications exists, post to onesignal
+		if( alarmNotifications[index] ){
+			const promise = sendNotificationPromise( alarmNotifications[index] );
+
+			promise.then(res => {
+				this.setState({notifications: [...this.state.notifications, res.data.id]});
+				this._sendAlarmNotifications({ alarmNotifications, index: index + 1, alarmData }); // recurse
+			});
+
+			promise.catch(err => {});
+		}else{
+			// no more alarm notifications to send when here, now save alarm data to db
+			alarmData = {...alarmData, notifications: this.state.notifications};
+			this._saveAlarm( alarmData );
+		}
+	}	
+
+	_saveAlarm = alarmData => {
+		this.setState({notifications: []})
+		this.props.dispatch( saveAlarmData({ alarmData }) );
 	}
 
 	render(){
@@ -97,10 +162,9 @@ class SetAlarm extends Component{
 	}
 }
 
-const mapStateToProps = (state, props) => {
-	return {
-		_alarm: state._alarm,
-	}
-}
+const mapStateToProps = (state, props) => ({
+	_user: state._user,
+	_alarm: state._alarm,
+})
 
 export default connect(mapStateToProps)(SetAlarm);

@@ -16,8 +16,8 @@ import {
 import EditModalActionBar from './editModalActionBar'
 
 // actions
-import { saveAlarmData } from './../actions/alarm'
-import { sendNotificationPromise } from './../actions/user'
+import { saveAlarmData, updateAlarm } from './../actions/alarm'
+import { sendNotificationPromise, deleteNotificationPromise } from './../actions/user'
 
 // constants
 import { alarmNotificationModel } from './../constants/user'
@@ -42,6 +42,35 @@ class EditAlarmTime extends Component{
 	}
 
 	_sendAndSave = () => {
+		// delete all existing notifications first, if any
+		const { enabled } = this.props._alarm;
+		const { notifications } = this.state;
+
+		// only if alarm is already enabled should we delete/save new alarm notifications
+		if( enabled ){
+			// if we currently have alarms set, delete them first, before saving new alarm settings
+			// else just set new alarm
+			if( notifications.length > 0 ) this._deleteNotifications({ notifications, index: 0 });
+			else this._send();
+
+		}else this._saveAlarm();
+	}	
+
+	_deleteNotifications = ({ notifications, index }) => {
+		if( notifications[index] ){
+			const promise = deleteNotificationPromise( notifications[index] );
+
+			promise.then(res => this._deleteNotifications({ notifications, index: index + 1 }));
+
+			promise.catch(err => {});
+		}else{
+			this.props.dispatch( updateAlarm({notifications: []}) );
+			this.setState({notifications: []});
+			this._send();
+		}
+	}
+
+	_send = () => {
 		const { dispatch, _alarm, _user } = this.props;
 		const alarmData = {..._alarm, ...this.state};
 
@@ -53,8 +82,6 @@ class EditAlarmTime extends Component{
 	}
 
 	_sendAlarmNotifications = ({ alarmNotifications, index }) => {
-		if( index === 10 ) return; // just in case
-
 		// if this index of alarmNotifications exists, post to onesignal
 		if( alarmNotifications[index] ){
 			const promise = sendNotificationPromise( alarmNotifications[index] );
@@ -64,9 +91,7 @@ class EditAlarmTime extends Component{
 				this._sendAlarmNotifications({ alarmNotifications, index: index + 1 }); // recurse
 			});
 
-			promise.catch(err => {
-				// console.log('err: ', err)
-			});
+			promise.catch(err => {});
 		}else{
 			// no more alarm notifications to send
 			this._saveAlarm();

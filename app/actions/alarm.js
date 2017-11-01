@@ -6,6 +6,11 @@ import * as route from './../api/routes/user'
 import * as _actions from './../constants/alarm'
 import * as _userActions from './../constants/user'
 
+export const updateAlarm = payload => ({
+  type: _actions.UPDATE,
+  payload
+})
+
 export const saveAlarmData = ({ alarmData, alarmNotifications }) => {
   const pendingName = _actions.SAVING_ALARM_DATA.toLowerCase();
   const done = _actions.SAVED_ALARM_DATA.toLowerCase();
@@ -42,6 +47,9 @@ export const saveAlarmData = ({ alarmData, alarmNotifications }) => {
           [pendingName]: false,
         }
       } 
+
+      // if alarmData is set, pass alarmData as pending data so view updates reflecting alarm changes while saving
+      if( alarmData ) action.payload = {...action.payload, ...alarmData};
 
       dispatch( action );
     });

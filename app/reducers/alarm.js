@@ -20,6 +20,7 @@ export default (state = init, action) => {
 
 		// cases that don't require additional logic
 		case _actions.SAVE:
+		case _actions.UPDATE:
 		case _actions.SAVED_ALARM_DATA_TYPE:
 		case _actions.SAVING_ALARM_DATA_TYPE:
 		case _actions.SENDING_NOTIFICATION_TYPE:
