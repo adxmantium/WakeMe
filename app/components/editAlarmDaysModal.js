@@ -16,12 +16,14 @@ import {
 import EditModalActionBar from './editModalActionBar'
 
 // actions
-import { saveAlarmData } from './../actions/alarm'
+import { saveAlarmData, updateAlarm } from './../actions/alarm'
+import { sendNotificationPromise, deleteNotificationPromise } from './../actions/user'
 
 // styles
 import { edit } from './../styles/alarm'
 
 // constants
+import { alarmNotificationModel } from './../constants/user'
 import { 
 	DAYS_OF_WEEK, 
 	determineDaysSelectedType,
@@ -34,13 +36,29 @@ class EditAlarmDays extends Component{
 
 		this.state = {
 			repeat: props._alarm.repeat,
-			repeat_label: props._alarm.repeat,
+			repeat_label: props._alarm.repeat_label,
+			notifications: props._alarm.notifications,
 		}
 	}
 
-	_save = () => {
+	_sendAndSave = () => {
+		// delete all existing notifications first, if any
+		const { enabled } = this.props._alarm;
+		const { notifications } = this.state;
+
+		// only if alarm is already enabled should we delete/save new alarm notifications
+		if( enabled ){
+			// if we currently have alarms set, delete them first, before saving new alarm settings
+			// else just set new alarm
+			if( notifications.length > 0 ) this._deleteNotifications({ notifications, index: 0 });
+			else this._send();
+
+		}else this._saveAlarm();
+	}
+
+	_getAlarmData = () => {
 		const { dispatch, _alarm, close } = this.props;
-		const { repeat_label, repeat: _r } = this.state;
+		const { repeat_label, repeat: _r, notifications } = this.state;
 
 		const repeat = {};
 
@@ -72,16 +90,64 @@ class EditAlarmDays extends Component{
 		// if next_alarm_day_moment is set, format for display
 		if( next_alarm_day_moment ) next_alarm_day = next_alarm_day_moment.format('dddd, MMM D, YYYY');
 
-		const alarmData = { 
+		return { 
 			..._alarm,
 			repeat,
 			repeat_label, 
+			notifications,
 			next_alarm_day,
 			next_alarm_day_moment,
 		};
+	}
+
+	_deleteNotifications = ({ notifications, index }) => {
+		if( notifications[index] ){
+			const promise = deleteNotificationPromise( notifications[index] );
+
+			promise.then(res => this._deleteNotifications({ notifications, index: index + 1 }));
+
+			promise.catch(err => {});
+		}else{
+			this.props.dispatch( updateAlarm({notifications: []}) );
+			this.setState({notifications: []});
+			this._send();
+		}
+	}
+
+	_send = () => {
+		const { _user } = this.props;
+		const alarmData = this._getAlarmData();
+
+		const alarmNotifications = alarmNotificationModel({ _user, alarmData });
+
+		// if there are alarm notifications, set them
+	    if( alarmNotifications && Array.isArray(alarmNotifications) )
+	    	this._sendAlarmNotifications({ alarmNotifications, index: 0 });
+	}
+
+	_sendAlarmNotifications = ({ alarmNotifications, index }) => {
+		// if this index of alarmNotifications exists, post to onesignal
+		if( alarmNotifications[index] ){
+			const promise = sendNotificationPromise( alarmNotifications[index] );
+
+			promise.then(res => {
+				this.setState({notifications: [...this.state.notifications, res.data.id]});
+				this._sendAlarmNotifications({ alarmNotifications, index: index + 1 }); // recurse
+			});
+
+			promise.catch(err => {});
+		}else{
+			// no more alarm notifications to send
+			this._saveAlarm();
+		}
+	}
+
+	_saveAlarm = () => {
+		const { dispatch, close } = this.props;
+		const { notifications } = this.state;
+		const alarmData = this._getAlarmData();
 
 		dispatch( saveAlarmData({ alarmData }) );
-
 		close();
 	}
 
@@ -117,7 +183,7 @@ class EditAlarmDays extends Component{
 
 						<EditModalActionBar
 							close={ close }
-							save={ this._save } />
+							save={ this._sendAndSave } />
 
 						<View style={edit.dateWrapper}>
 							{ DAYS_OF_WEEK.map(day => <DaySelector 
@@ -148,6 +214,7 @@ const DaySelector = ({ name, abbr, active, onPress }) => (
 
 const mapStateToProps = (state, props) => {
 	return {
+		_user: state._user,
 		_alarm: state._alarm,
 	}
 }
