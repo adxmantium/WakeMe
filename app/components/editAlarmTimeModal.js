@@ -44,7 +44,6 @@ class EditAlarmTime extends Component{
 		const newAlarmState = {..._alarm, ...this.state};
 
 		const alarmNotifications = alarmNotificationModel({_user, alarmData: newAlarmState});
-		console.log('notif: ', alarmNotifications);
 
 		dispatch( saveAlarmData({alarmData: newAlarmState, alarmNotifications}) );
 		close();
