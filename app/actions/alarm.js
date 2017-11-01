@@ -45,7 +45,14 @@ export const saveAlarmData = ({ alarmData, alarmNotifications }) => {
 
       // if there are alarm notifications, set them
       if( alarmNotifications && Array.isArray(alarmNotifications) ){
-        alarmNotifications.forEach(data => dispatch( sendNotification({ data, type: 'alarm' }) ));
+        alarmNotifications.forEach(data => 
+          dispatch( sendNotification({ 
+            data, 
+            notification_type: 'alarm',
+            pending_action_type: _actions.SENDING_NOTIFICATION_TYPE,
+            done_action_type: _actions.SENT_NOTIFICATION_TYPE,
+          }) )
+        );
       }
 
       dispatch( action );

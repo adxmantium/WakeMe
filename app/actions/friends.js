@@ -97,7 +97,12 @@ export const addFriend = friendData => {
 
       // send friend request notification
       const data = _actions.friendRequestModel( friendData );
-      dispatch( sendNotification({ data, type: 'friend_request' }) );
+      dispatch( sendNotification({ 
+        data, 
+        notification_type: 'friend_request',
+        pending_action_type: _actions.SENDING_NOTIFICATION_TYPE,
+        done_action_type: _actions.SENT_NOTIFICATION_TYPE,
+      }) );
     });
 
     // promise catch

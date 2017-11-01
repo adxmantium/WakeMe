@@ -13,6 +13,11 @@ export const SAVING_ALARM_DATA = 'SAVING_ALARM_DATA'
 export const SAVED_ALARM_DATA_TYPE = r+'SAVED_ALARM_DATA'
 export const SAVING_ALARM_DATA_TYPE = r+'SAVING_ALARM_DATA'
 
+export const SENT_NOTIFICATION = 'SENT_NOTIFICATION'
+export const SENDING_NOTIFICATION = 'SENDING_NOTIFICATION'
+export const SENT_NOTIFICATION_TYPE = r+SENT_NOTIFICATION
+export const SENDING_NOTIFICATION_TYPE = r+SENDING_NOTIFICATION
+
 export const DAYS_OF_WEEK = [
 	{name: 'Sunday', abbr: 'Sun', type: 'weekend'},
 	{name: 'Monday', abbr: 'Mon', type: 'weekday'},

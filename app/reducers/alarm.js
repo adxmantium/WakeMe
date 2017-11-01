@@ -11,6 +11,7 @@ const init = {
 	repeat_label: _actions.EMPTY_REPEAT_LABEL,
 	enabled: false,
 	next_alarm_day: _actions.EMPTY_NEXT_ALARM_DAY_LABEL,
+	notifications: [],
 };
 
 export default (state = init, action) => {
@@ -21,7 +22,16 @@ export default (state = init, action) => {
 		case _actions.SAVE:
 		case _actions.SAVED_ALARM_DATA_TYPE:
 		case _actions.SAVING_ALARM_DATA_TYPE:
+		case _actions.SENDING_NOTIFICATION_TYPE:
 			return {...state, ...action.payload};
+
+		case _actions.SENT_NOTIFICATION_TYPE:
+			const { alarm_notification } = action.payload;
+
+			if( alarm_notification )
+				return {...state, notifications: [...state.notifications, alarm_notification]};
+
+			return {...state};
 
 		// on user info fetch, spread returned alarm info into state
 		case _userActions.FETCHED_USER_INFO_TYPE:

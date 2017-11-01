@@ -55,13 +55,13 @@ export const getUserInfo = ({ userID }) => {
 	}
 }
 
-export const sendNotification = ({ data, type }) => {
+export const sendNotification = ({ data, notification_type, pending_action_type, done_action_type }) => {
   const pendingName = _actions.SENDING_NOTIFICATION.toLowerCase();
   const done = _actions.SENT_NOTIFICATION.toLowerCase();  
 
   return dispatch => {
     // dispatch pending
-    dispatch( _actions.pending({pendingName, type: _actions.SENDING_NOTIFICATION_TYPE}) );
+    dispatch( _actions.pending({pendingName, type: pending_action_type}) );
 
     // promise
     const response = _axios.onesignal.post('/', data);
@@ -69,11 +69,15 @@ export const sendNotification = ({ data, type }) => {
     // then
     response.then(res => {
       const action = {
-        type: _actions.SENT_NOTIFICATION_TYPE,
+        type: done_action_type,
         payload: {
           [done]: true,
           [pendingName]: false,
-          [`${type}_notification_id_for_${data.include_player_ids[0]}`]: res.data.id
+          [`${notification_type}_notification`]: {
+            notification_id: res.data.id,
+            sentTo_id: data.include_player_ids[0]
+          }
+          
         }
       }; 
       
