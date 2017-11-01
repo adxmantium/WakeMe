@@ -1,5 +1,6 @@
 // /components/editAlarmTimeModal.js
 
+import moment from 'moment'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import {
@@ -16,6 +17,9 @@ import EditModalActionBar from './editModalActionBar'
 
 // actions
 import { saveAlarmData } from './../actions/alarm'
+
+// constants
+import { alarmNotificationModel } from './../constants/user'
 
 // styles
 import { edit } from './../styles/alarm'
@@ -36,10 +40,13 @@ class EditAlarmTime extends Component{
 	}
 
 	_save = () => {
-		const { dispatch, _alarm, close } = this.props;
+		const { dispatch, _alarm, _user, close } = this.props;
 		const newAlarmState = {..._alarm, ...this.state};
 
-		dispatch( saveAlarmData( newAlarmState ) );
+		const alarmNotifications = alarmNotificationModel({_user, alarmData: newAlarmState});
+		console.log('notif: ', alarmNotifications);
+
+		dispatch( saveAlarmData({alarmData: newAlarmState, alarmNotifications}) );
 		close();
 	}
 

@@ -1,5 +1,6 @@
 // /constants/user.js
 
+import moment from 'moment'
 import ENV from './../../env'
 import { NavigationActions } from 'react-navigation'
 
@@ -91,3 +92,34 @@ export const friendRequestModel = data => ({
   template_id: ENV.ONESIGNAL_FRIEND_REQUEST_TEMPLATE_ID, // fill rest of fields using template designed on dashboard
   include_player_ids: [data.friend_device_token], // device token of user who should receive notification
 })
+
+export const alarmNotificationModel = ({ _user, alarmData }) => {
+  const { hour, minute, ampm, repeat } = alarmData;
+  const notifications = [];
+
+  const timezone = new Date().toString().split(' ').reverse()[1]; // get just the timezone
+  const hours = ampm === 'pm' ? parseInt(hour) + 12 : hour; // convert to 24 hr clock
+  const delivery_time_of_day = moment({ hour, minute }).format('h:mm')+ampm.toUpperCase();
+  const delayed_option = 'timezone';
+  let date = null;
+
+  for(const day in repeat){
+    date = moment({ hours, minute }).day(day);
+
+    // if today is after the date, add one week to date, b/c date has already passed
+    if( moment().isAfter(date) ) date = date.add(1, 'w');
+    
+    date = date.format('YYYY-MM-DD HH:mm:ss');
+
+    notifications.push({
+      app_id: ENV.ONESIGNAL_APP_ID,
+      template_id: ENV.ONESIGNAL_ALARM_TEMPLATE_ID, // fill rest of fields using template designed on dashboard
+      include_player_ids: [_user.onesignal_device_token], // my device token
+      send_after: date,
+      delayed_option,
+      delivery_time_of_day
+    });
+  }
+
+  return notifications;
+}

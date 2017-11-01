@@ -1,6 +1,5 @@
 // /screens/alarm/index.js
 
-import { Fab } from 'native-base'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import * as Animatable from 'react-native-animatable'
@@ -8,13 +7,11 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   View,
   Text,
-  Image,
   StatusBar,
   TouchableOpacity,
 } from 'react-native'
 
 // components
-import Menu from './../menu'
 import SetAlarm from './setAlarm'
 import AlarmHeader from './header'
 import NavHeader from './../../components/navHeader'

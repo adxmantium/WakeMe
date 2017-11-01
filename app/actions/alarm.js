@@ -1,11 +1,12 @@
 // /action/user.js
 
 import _axios from './../api/axios'
+import { sendNotification } from './user'
 import * as route from './../api/routes/user'
 import * as _actions from './../constants/alarm'
 import * as _userActions from './../constants/user'
 
-export const saveAlarmData = alarmData => {
+export const saveAlarmData = ({ alarmData, alarmNotifications }) => {
   const pendingName = _actions.SAVING_ALARM_DATA.toLowerCase();
   const done = _actions.SAVED_ALARM_DATA.toLowerCase();
 
@@ -40,6 +41,11 @@ export const saveAlarmData = alarmData => {
           [done]: true,
           [pendingName]: false,
         }
+      }
+
+      // if there are alarm notifications, set them
+      if( alarmNotifications && Array.isArray(alarmNotifications) ){
+        alarmNotifications.forEach(data => dispatch( sendNotification({ data, type: 'alarm' }) ));
       }
 
       dispatch( action );
