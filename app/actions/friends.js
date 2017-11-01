@@ -2,6 +2,7 @@
 
 import _axios from './../api/axios'
 import { saveAlarmData } from './alarm'
+import { sendNotification } from './user'
 import * as route from './../api/routes/user'
 import * as _actions from './../constants/user'
 
@@ -93,6 +94,10 @@ export const addFriend = friendData => {
       }; 
       
       dispatch( action );
+
+      // send friend request notification
+      const data = _actions.friendRequestModel( friendData );
+      dispatch( sendNotification({ data, type: 'friend_request' }) );
     });
 
     // promise catch

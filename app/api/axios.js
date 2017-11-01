@@ -2,6 +2,7 @@
 
 // lib
 import axios from 'axios'
+import ENV from './../../env'
 
 const env = 'dev';
 
@@ -35,8 +36,17 @@ const friends = axios.create({
 	headers: {},
 })
 
+const onesignal = axios.create({
+	baseURL: ENV.ONESIGNAL_API,
+	headers: {
+		'content-type': 'application/json',
+	    'authorization': 'Basic '+ENV.ONESIGNAL_REST_KEY,
+	}
+})
+
 export default {
 	user,
 	waker,
 	friends,
+	onesignal,
 }

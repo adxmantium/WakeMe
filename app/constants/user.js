@@ -1,5 +1,6 @@
 // /constants/user.js
 
+import ENV from './../../env'
 import { NavigationActions } from 'react-navigation'
 
 // r = reducer name
@@ -27,6 +28,11 @@ export const ADDED_FRIEND = 'ADDED_FRIEND'
 export const ADDING_FRIEND = 'ADDING_FRIEND'
 export const ADDED_FRIEND_TYPE = r+ADDED_FRIEND
 export const ADDING_FRIEND_TYPE = r+ADDING_FRIEND
+
+export const SENT_NOTIFICATION = 'SENT_NOTIFICATION'
+export const SENDING_NOTIFICATION = 'SENDING_NOTIFICATION'
+export const SENT_NOTIFICATION_TYPE = r+SENT_NOTIFICATION
+export const SENDING_NOTIFICATION_TYPE = r+SENDING_NOTIFICATION
 
 export const pending = ({ pendingName, type, data = {} }) => ({
   type: type || '_USER:GET_REQUEST_PENDING',
@@ -78,3 +84,10 @@ export const modelFriendsTable = ({ _user, friend }) => {
     friend_request_accepted: false,
   }
 }
+
+export const friendRequestModel = data => ({
+  app_id: ENV.ONESIGNAL_APP_ID,
+  contents: {en: `${data.name} wants to be your friend :)`}, // main message
+  template_id: ENV.ONESIGNAL_FRIEND_REQUEST_TEMPLATE_ID, // fill rest of fields using template designed on dashboard
+  include_player_ids: [data.friend_device_token], // device token of user who should receive notification
+})

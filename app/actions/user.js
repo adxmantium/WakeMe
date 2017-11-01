@@ -54,3 +54,33 @@ export const getUserInfo = ({ userID }) => {
     response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
 	}
 }
+
+export const sendNotification = ({ data, type }) => {
+  const pendingName = _actions.SENDING_NOTIFICATION.toLowerCase();
+  const done = _actions.SENT_NOTIFICATION.toLowerCase();  
+
+  return dispatch => {
+    // dispatch pending
+    dispatch( _actions.pending({pendingName, type: _actions.SENDING_NOTIFICATION_TYPE}) );
+
+    // promise
+    const response = _axios.onesignal.post('/', data);
+
+    // then
+    response.then(res => {
+      const action = {
+        type: _actions.SENT_NOTIFICATION_TYPE,
+        payload: {
+          [done]: true,
+          [pendingName]: false,
+          [`${type}_notification_id_for_${data.include_player_ids[0]}`]: res.data.id
+        }
+      }; 
+      
+      dispatch( action );
+    });
+
+    // promise catch
+    response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
+  }
+}

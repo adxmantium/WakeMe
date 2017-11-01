@@ -19,13 +19,14 @@ import SearchedFriendItem from './searchedFriendItem'
 
 // actions
 import { searchForFriends, addFriend } from './../../actions/friends'
+import { sendNotification } from './../../actions/user'
 
 // styles
 import { findf } from './../../styles/profile'
 import { darkTheme } from './../../styles/_global'
 
 // constants
-import { modelFriendsTable } from './../../constants/user'
+import { modelFriendsTable, friendRequestModel } from './../../constants/user'
 
 class SearchFriends extends Component{
 	constructor(props){
