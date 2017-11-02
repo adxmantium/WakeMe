@@ -30,18 +30,54 @@ export const wake = StyleSheet.create({
 	},
 	file: {
 		flex: 1,
-		width: undefined,
-		height: undefined,
-		position: 'absolute',
-		top: 0,
-		bottom: 0,
-		left: 0,
-		right: 0,
-		backgroundColor: 'transparent',
 	},
 	progessWrapper: {
 		position: 'absolute',
 		bottom: 0,
 		width: '100%',
+	},
+	start: {
+		backgroundColor: _g.darkTheme.shade5,
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	startText: {
+		color: _g.darkTheme.shade1,
+		fontSize: 40,
+		fontWeight: '200',
+		textAlign: 'center',
+	},
+	timeText: {
+		color: _g.darkTheme.shade2,
+		fontSize: 100,
+	},
+	ampm: {
+		fontSize: 50,
+	},
+	nav: {
+		..._g._border(1, _g.darkTheme.shade1),
+		borderRadius: 3,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+		..._g._padding(5, 10, 7, 10),
+		backgroundColor: 'transparent',
+		zIndex: 1,
+	},
+	pos1: {
+		position: 'absolute',
+		bottom: 20,
+		right: 20,
+	},
+	navTitle: {
+		color: _g.darkTheme.shade1,
+		fontWeight: '100',
+		fontSize: 30,
+		marginRight: 10,
+	},
+	navIcon: {
+		fontWeight: '100',
+		color: _g.darkTheme.shade1,
 	}
 });

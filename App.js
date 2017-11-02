@@ -37,10 +37,17 @@ export default class WakeMe extends Component<{}> {
       console.log('register data: ', data);
     }
 
+    _navStateChange = (prevState, currentState) => {
+      console.log('=======================');
+      console.log('prevState: ', prevState);
+      console.log('currentState: ', currentState);
+      console.log('=======================');
+    }
+
     render() {
         return (
             <Provider store={store}>
-                <AppNavigation onNavigationStateChange={ null } />
+                <AppNavigation onNavigationStateChange={ this._navStateChange } />
             </Provider>
         )
     }

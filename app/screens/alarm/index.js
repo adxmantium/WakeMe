@@ -45,14 +45,14 @@ class Alarm extends Component{
 
 				<BackgroundImage />
 
-				<PushController />
+				<PushController {...this.props} />
 
 				<NavHeader
 					title="WakeMe"
 					leftIcon="list"
 					rightIcon="camera"
 					leftPress={() => navigation.navigate('Collection')}
-					middlePress={() => navigation.navigate('Profile')}
+					middlePress={() => navigation.navigate('Waker')}
 					rightPress={() => navigation.navigate('Camera')} />
 
 				<View style={main.innerContainer}>

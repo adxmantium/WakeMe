@@ -1,7 +1,6 @@
 // /components/pushController.js
 
 // libs
-import { connect } from 'react-redux'
 import { Platform } from 'react-native'
 import React, { Component } from 'react'
 import OneSignal from 'react-native-onesignal'
@@ -11,7 +10,7 @@ import { saveAlarmData } from './../actions/alarm'
 
 let count = 0;
 
-class PushController extends Component{
+export default class PushController extends Component{
 	constructor(props){
 		super(props);
 	}
@@ -53,7 +52,14 @@ class PushController extends Component{
 			console.log('count: ', count);
 
 		}else{
-			console.log('is iOS');
+			const { navigation } = this.props;
+			console.log('navigation: ', navigation);
+			const { notification_type } = notification.payload.rawPayload.custom.a;
+
+			console.log('type: ', notification_type);
+			if( notification_type === 'alarm' ){
+				navigation.navigate('Waker');
+			}
 		}
 	}
 
@@ -61,12 +67,3 @@ class PushController extends Component{
 		return null;
 	}
 }
-
-const mapStateToProps = (state, props) => {
-	return {
-		_user: state._user,
-		_alarm: state._alarm,
-	}
-}
-
-export default connect(mapStateToProps)(PushController);
