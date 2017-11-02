@@ -57,13 +57,13 @@ const _wake = {
 		fontSize: 50,
 	},
 	nav: {
-		..._g._border(1, _g.darkTheme.shade2),
-		borderRadius: 3,
-		..._g._padding(5, 10, 7, 10),
 		backgroundColor: 'transparent',
 		zIndex: 2,
 	},
 	navBtn: {
+		..._g._border(1, _g.darkTheme.shade2),
+		borderRadius: 3,
+		..._g._padding(5, 10, 7, 10),
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'center',
