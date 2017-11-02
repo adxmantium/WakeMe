@@ -13,13 +13,14 @@ export const wake = StyleSheet.create({
 	header: {
 		flexDirection: 'row',
 		alignItems: 'flex-end',
-		justifyContent: 'flex-end',
-		height: _g.header_height,
+		justifyContent: 'space-between',
+		height: _g.header_height + 50,
 		position: 'absolute',
 		width: '100%',
 		..._g._padding(0, 15, 0, 15),
-		zIndex: 1,
+		zIndex: 2,
 		backgroundColor: 'transparent',
+		// ..._g._border(1, 'red'),
 	},
 	pagination: {
 		color: _g.white,
@@ -56,7 +57,7 @@ export const wake = StyleSheet.create({
 		fontSize: 50,
 	},
 	nav: {
-		..._g._border(1, _g.darkTheme.shade1),
+		..._g._border(1, _g.darkTheme.shade2),
 		borderRadius: 3,
 		flexDirection: 'row',
 		alignItems: 'center',
@@ -71,13 +72,37 @@ export const wake = StyleSheet.create({
 		right: 20,
 	},
 	navTitle: {
-		color: _g.darkTheme.shade1,
+		color: _g.darkTheme.shade2,
 		fontWeight: '100',
 		fontSize: 30,
 		marginRight: 10,
 	},
 	navIcon: {
-		fontWeight: '100',
-		color: _g.darkTheme.shade1,
+		color: _g.darkTheme.shade2,
+	},
+	loader: {
+		position: 'absolute',
+		zIndex: 0,
+		top: 0,
+		bottom: 0,
+		right: 0,
+		left: 0,
+		zIndex: 2,
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: 'rgba(170, 171, 184, 0.7)',
+	},
+	from: {
+		color: _g.darkTheme.shade2,
+		fontSize: 14,
+	},
+	fromWho: {
+		color: _g.darkTheme.shade2,
+		fontSize: 28,
+	},
+	txtShadow: {
+		textShadowColor: 'rgba(0,0,0,1)',
+		textShadowOffset: {width: -1, height: -1},
+		textShadowRadius: 10,
 	}
 });
