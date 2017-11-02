@@ -41,11 +41,19 @@ export const S3_OPTIONS = {
   awsUrl: ENV.S3_URL,
 }
 
-export const IMAGE_MIMETYPE = {
-  png: true,
-  jpg: true,
-  jpeg: true,
-  gif: true,
-  bmp: true,
-  webp: true
+export const MIMETYPES = {
+  mov: 'video/quicktime',
+  mp4: 'video/mp4',
+  avi: 'video/x-msvideo',
+  wmv: 'video/x-ms-wmv',
+  '3pg': 'video/3gpp',
+  ts: 'video/MP2T',
+  'm3u8': 'application/x-mpegURL',
+  flv: 'video/x-flv',
+  'gif': 'image/gif',
+  'png': 'image/png',
+  'jpeg': 'image/jpeg',
+  'jpg': 'image/jpeg',
+  'bmp': 'image/bmp',
+  'webp': 'image/webp',
 }

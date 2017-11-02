@@ -29,9 +29,9 @@ import { darkTheme } from './../../styles/_global'
 // constants
 import { resetStackAndNavTo } from './../../constants/user'
 import { 
+	MIMETYPES,
 	S3_OPTIONS, 
 	buildFileName,
-	IMAGE_MIMETYPE,
 	modelWakersTable, 
 } from './../../constants/waker'
 
@@ -107,11 +107,11 @@ class MyFriends extends Component{
 		let file_name = '';
 		let file_path = '';
 		let last_waker_to_save = false;
-		const ext = capturedFile.path.split('.')[1]; // get file extension
-		const mime = IMAGE_MIMETYPE[ext] ? 'image' : 'video'; // get mime type
+		let ext = capturedFile.path.split('.')[1]; // get file extension
+		const mime = MIMETYPES[ext]; // get mime type
 		const s3File = {
 			name: '',
-			type: `${mime}/${ext}`,
+			type: mime,
 			uri: capturedFile.path,
 		};
 
@@ -127,12 +127,12 @@ class MyFriends extends Component{
 			this.setState({saving_waker: true});
 
 			RNS3.put(file, S3_OPTIONS)
+				// .progress(e => console.log(e.loaded / e.total))
 				.then(res => {
 					file_path = res.body.postResponse.location;
 
 					// get object that models the Waker table in db
 					wakerData = modelWakersTable({ _user, to_friend, file_name, file_path });
-					// console.log('data: ', JSON.stringify(wakerData, null, 2));
 
 					// pass a trigger prop to store indicating this friend is the last in arr
 					// will use to stop spinner when this friend's POST is done
