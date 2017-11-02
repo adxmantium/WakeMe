@@ -40,12 +40,13 @@ const headStyles = {
 if( Platform.OS === 'android' ){
 	const position = 'center';
 	headStyles.title.justifyContent = position;
+	headStyles.titleText.fontFamily = _g.androidFontFamily;
 	headStyles.btn.justifyContent = position;
 }
 
 export const head = StyleSheet.create(headStyles);
 
-export const main = StyleSheet.create({
+const _main = {
 	container: {
 		flex: 1,
 	},
@@ -101,7 +102,14 @@ export const main = StyleSheet.create({
 	chevron: {
 		backgroundColor: 'transparent',
 	}
-});
+};
+
+if( Platform.OS === 'android' ){
+	_main.time.fontFamily = _g.androidFontFamily;
+	_main.date.fontFamily = _g.androidFontFamily;
+}
+
+export const main = StyleSheet.create(_main);
 
 export const edit = StyleSheet.create({
 	container: {

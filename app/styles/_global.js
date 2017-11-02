@@ -6,6 +6,7 @@ export const white = '#fff'
 export const error = 'firebrick'
 export const flatblack = '#202020'
 export const fbBlue = '#3b5998'
+export const androidFontFamily = 'sans-serif-thin'
 
 export const header_height = Platform.OS === 'android' ? 50 : 60;
 

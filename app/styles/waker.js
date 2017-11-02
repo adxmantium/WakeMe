@@ -1,11 +1,11 @@
 // /styles/collection.js
 
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 // import global styles
 import * as _g from './_global'
 
-export const wake = StyleSheet.create({
+const _wake = {
 	container: {
 		flex: 1,
 		// ..._g._border(1, 'red'),
@@ -14,7 +14,7 @@ export const wake = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'flex-end',
 		justifyContent: 'space-between',
-		height: _g.header_height + 50,
+		height: Platform.OS === 'android' ? _g.header_height + 20 : _g.header_height + 50,
 		position: 'absolute',
 		width: '100%',
 		..._g._padding(0, 15, 0, 15),
@@ -59,12 +59,14 @@ export const wake = StyleSheet.create({
 	nav: {
 		..._g._border(1, _g.darkTheme.shade2),
 		borderRadius: 3,
+		..._g._padding(5, 10, 7, 10),
+		backgroundColor: 'transparent',
+		zIndex: 2,
+	},
+	navBtn: {
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'center',
-		..._g._padding(5, 10, 7, 10),
-		backgroundColor: 'transparent',
-		zIndex: 1,
 	},
 	pos1: {
 		position: 'absolute',
@@ -105,4 +107,13 @@ export const wake = StyleSheet.create({
 		textShadowOffset: {width: -1, height: -1},
 		textShadowRadius: 10,
 	}
-});
+};
+
+if( Platform.OS === 'android' ){
+	_wake.startText.fontFamily = _g.androidFontFamily;
+	_wake.from.fontFamily = _g.androidFontFamily;
+	_wake.fromWho.fontFamily = _g.androidFontFamily;
+	_wake.navTitle.fontFamily = _g.androidFontFamily;
+}
+
+export const wake = StyleSheet.create(_wake);

@@ -231,8 +231,8 @@ const ThreeLineMessage = ({ row1, row2, row2component, row3 }) => (
 )
 
 const NavButton = ({ title, onPress }) => (
-	<Animatable.View animation="fadeInLeft" delay={5000}>
-		<TouchableOpacity style={[wake.nav, wake.pos1]} onPress={ onPress }>
+	<Animatable.View animation="fadeInLeft" delay={5000} style={[wake.nav, wake.pos1]}>
+		<TouchableOpacity style={wake.navBtn} onPress={ onPress }>
 			<Text style={wake.navTitle}>{ title || 'Next' }</Text>
 			<Icon name="chevron-right" size={16} style={wake.navIcon} />
 		</TouchableOpacity>
