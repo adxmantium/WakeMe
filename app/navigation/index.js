@@ -101,6 +101,7 @@ const Waker = {
 	screen: WakerScreen,
 	navigationOptions: ({ navigation }) => ({
 		header: null,
+		gesturesEnabled: false,
 	}),
 }
 
