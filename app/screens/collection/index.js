@@ -21,6 +21,8 @@ import { coll } from './../../styles/collection'
 import { menu, darkTheme, darkThemeObj } from './../../styles/alarm'
 
 // constants
+import { MIMETYPES } from './../../constants/waker'
+
 const theme = darkTheme;
 const themeObj = darkThemeObj;
 const SIZE = 20;
@@ -54,7 +56,7 @@ class Collection extends Component{
 		            style={[coll.list, theme.bg]}
 		            initialNumToRender={ 10 }
 		            removeClippedSubviews={false}
-		            keyExtractor={ (item, index) => item.from_fb_user_id || index }
+		            keyExtractor={ (item, index) => item.waker_id || index }
 		            ItemSeparatorComponent={ () => <View style={coll.separator} /> }
 		            renderItem={ ({ item }) => <CollectionItem {...item} /> }
 		        />
@@ -64,12 +66,17 @@ class Collection extends Component{
 	}
 }
 
-const CollectionItem = ({ from_name }) => (
-	<TouchableOpacity style={coll.item} onPress={ () => Alert.alert(ALERT_TITLE, ALERT_MSG, ALERT_ACTIONS) }>
-		<Icon name="camera" size={20} color={themeObj.menuIcon} />
-		<Text style={[coll.name, theme.color]}>{ from_name }</Text>
-	</TouchableOpacity>
-)
+const CollectionItem = ({ from_name, file_path }) => {
+	const ext = file_path.split('__')[1].split('.')[1];
+	const icon = MIMETYPES[ext].includes('video') ? 'video-camera' : 'camera';
+
+	return (
+		<TouchableOpacity style={coll.item} onPress={ () => Alert.alert(ALERT_TITLE, ALERT_MSG, ALERT_ACTIONS) }>
+			<Icon name={icon} size={20} color={themeObj.menuIcon} />
+			<Text style={[coll.name, theme.color]}>{ from_name }</Text>
+		</TouchableOpacity>
+	)
+}
 
 const mapStateToProps = (state, props) => ({
 	_alarm: state._alarm,

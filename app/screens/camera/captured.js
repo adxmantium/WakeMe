@@ -8,6 +8,7 @@ import {
   View,
   Text,
   Image,
+  Platform,
   TouchableOpacity,
 } from 'react-native'
 
@@ -16,6 +17,9 @@ import { saveWakeupCall } from './../../actions/camera'
 
 // styles
 import { capt } from './../../styles/camera'
+
+// constants
+import { MIMETYPES } from './../../constants/waker'
 
 class Captured extends Component{
 	constructor(props){
@@ -26,8 +30,22 @@ class Captured extends Component{
 
 	_send = () => {
 		const { navigation, dispatch } = this.props;
-		// navigation.navigate('Waker');
 		dispatch( saveWakeupCall() );
+	}
+
+	_isVideo = () => {
+		const { capturedFile } = this.props._camera;
+		let isVideo = false;
+
+		if( Platform.OS === 'android' ){
+			const ext = capturedFile.path.split('.')[1];
+			const mime = MIMETYPES[ext];
+			isVideo = mime.includes('video'); // is video if mimetype contains video
+		}else{
+			isVideo = !!capturedFile.duration;
+		}
+
+		return isVideo;
 	}
 
 	render(){
@@ -37,7 +55,7 @@ class Captured extends Component{
 		return (
 			<View style={capt.container}>
 
-				{ capturedFile.duration ? 
+				{ this._isVideo() ? 
 					<Video
 						ref={ p => { this._player = p; } }
 						source={{uri: capturedFile.path}}
