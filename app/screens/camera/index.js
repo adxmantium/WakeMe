@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Camera from 'react-native-camera'
 import React, { Component } from 'react'
 import Fab from 'react-native-action-button'
+import * as Progress from 'react-native-progress'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Ionicon from 'react-native-vector-icons/Ionicons'
 import {
@@ -22,6 +23,8 @@ import { add_to_queue } from './../../actions/waker'
 
 // styles
 import { cap } from './../../styles/camera'
+import { wake } from './../../styles/waker'
+import { darkTheme } from './../../styles/_global'
 import { menu, darkThemeObj } from './../../styles/alarm'
 
 // constants
@@ -29,11 +32,13 @@ const themeObj = darkThemeObj;
 const SIZE = 20
 const COLOR = themeObj.menuColor;
 const BG_COLOR = themeObj.menuIcon;
+const MAX_RECORDING = 5000;
+const PROGRESS_INTERVAL = 200;
 
 const _cam = {
 	ASPECT: Camera.constants.Aspect.fill,
 	CAPTURE_TARGET: Camera.constants.CaptureTarget.disk,
-	CAPTURE_QUALITY: Camera.constants.CaptureQuality.high,
+	CAPTURE_QUALITY: Camera.constants.CaptureQuality.medium,
 }
 
 class WakeUpCamera extends Component{
@@ -41,13 +46,17 @@ class WakeUpCamera extends Component{
 		super(props);
 
 		this.state = {
+			progress: 0,
 			type: 'front',
 			capture: 'camera',
 			isRecording: false,
 			activeIcon: 'camera',
 			inactiveIcon: 'video-camera',
-			aspect: Camera.constants.Aspect.fill,
 		};
+	}
+
+	componentWillUnmount(){
+		this._stopTimer();
 	}
 
 	_capture = () => {
@@ -57,12 +66,16 @@ class WakeUpCamera extends Component{
 		// if is recording, stop recording
 		if( isRecording ){
 			this._camera.stopCapture();
+			this._stopTimer();
 			this.setState({isRecording: false});
 			return;
 		}
 
 		// if capture mode is video, then start recording
-		if( capture === 'video' ) this.setState({isRecording: true});
+		if( capture === 'video' ){
+			this.setState({isRecording: true});
+			this._startTimer();
+		}
 
 		const { dispatch, navigation, _waker } = this.props;
 
@@ -74,26 +87,44 @@ class WakeUpCamera extends Component{
 	 			dispatch( captured({ capturedFile }) );
 		 		navigation.navigate('Captured');
 		 	})
-		 	.catch(err => console.error(err));
+		 	.catch(err => {});
+	}
+
+	_startTimer = () => {
+		this._timer = setTimeout(() => {
+			this._stopTimer(true);
+		}, MAX_RECORDING);
+
+		this._progress = setInterval(() => {
+			this.setState({progress: this.state.progress + (PROGRESS_INTERVAL/MAX_RECORDING)});
+		}, PROGRESS_INTERVAL);
+	}
+
+	_stopTimer = hitTimeLimit => {
+		if( hitTimeLimit ) this._camera.stopCapture();
+
+		clearTimeout( this._timer );
+		clearInterval( this._progress );
+
+		this.setState({
+			progress: 0,
+			isRecording: false,
+		});
 	}
 
 	_toggleCapture = () => {
 		let capture = 'camera',
 			activeIcon = 'camera',
-			inactiveIcon = 'video-camera',
-			captureBtn = 'camera',
-			mode = Camera.constants.CaptureMode.still;
+			inactiveIcon = 'video-camera';
 
+		// if capture is camera, set everything to video, else it's video, so everything will be set for camera
 		if( this.state.capture === 'camera' ){
 			capture = 'video';
 			activeIcon = 'video-camera';
 			inactiveIcon = 'camera';
-			captureBtn = 'play';
-			mode = Camera.constants.CaptureMode.video;
 		}
 
 		this.setState({
-			mode,
 			capture,
 			activeIcon,
 			inactiveIcon,
@@ -110,7 +141,7 @@ class WakeUpCamera extends Component{
 
 	render(){
 		const { navigation } = this.props;
-		const { capture, type, mode, activeIcon, inactiveIcon, isRecording } = this.state;
+		const { capture, type, mode, activeIcon, inactiveIcon, isRecording, progress } = this.state;
 		const captureBtnIcon = capture === 'camera' ? capture : (isRecording ? 'stop' : 'play');
 
 		return (
@@ -121,13 +152,14 @@ class WakeUpCamera extends Component{
 					aspect={ _cam.ASPECT }
 					style={ cap.preview }
 					type={ type }
+					audio={true}
 					keepAwake={true}
 					flashMode={Camera.constants.FlashMode.off}
 					onFocusChanged={() => {}}
 					onZoomChanged={() => {}}
 					defaultTouchToFocus
 					mirrorImage={false}
-					captureMode={ mode }
+					captureMode={ capture === 'video' ? Camera.constants.CaptureMode.video : Camera.constants.CaptureMode.still }
 					captureTarget={ _cam.CAPTURE_TARGET }
 					captureQuality={ _cam.CAPTURE_QUALITY }>
 
@@ -157,6 +189,17 @@ class WakeUpCamera extends Component{
 								</Fab.Item>
 
 						</Fab>
+
+						{ capture === 'video' && 
+							<View style={wake.progessWrapper}>
+								<Progress.Bar 
+									progress={ progress }
+									width={null}
+									color={ darkTheme.shade1 }
+									borderWidth={0}
+									borderRadius={0} />
+							</View>
+						}
 
 				</Camera>
 
