@@ -127,6 +127,7 @@ class EditAlarmTime extends Component{
 
 							<Picker 
 								style={edit.picker}
+								mode="dropdown"
 								selectedValue={ hour }
 								onValueChange={ hour => this.setState({ hour }) }>
 									{ this.hours.map(x => <Picker.Item key={x} label={x} value={x} />) }
@@ -136,6 +137,7 @@ class EditAlarmTime extends Component{
 
 							<Picker 
 								style={edit.picker}
+								mode="dropdown"
 								selectedValue={ minute }
 								onValueChange={ minute => this.setState({ minute }) }>
 									{ this.minutes.map(x => <Picker.Item key={x} label={x} value={x} />) }
@@ -143,6 +145,7 @@ class EditAlarmTime extends Component{
 
 							<Picker 
 								style={edit.picker}
+								mode="dropdown"
 								selectedValue={ ampm }
 								onValueChange={ ampm => this.setState({ ampm }) }>
 									{ this.ampm.map(x => <Picker.Item key={x} label={x} value={x} />) }

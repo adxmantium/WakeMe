@@ -126,6 +126,7 @@ class SetAlarm extends Component{
 						<Switch 
 							value={ enabled }
 							onTintColor={themeObj.menuActive}
+							thumbTintColor={themeObj.menuInactive}
 							onValueChange={ this._save } />
 					</View>
 

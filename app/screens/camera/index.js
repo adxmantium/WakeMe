@@ -25,7 +25,7 @@ import { add_to_queue } from './../../actions/waker'
 import { cap } from './../../styles/camera'
 import { wake } from './../../styles/waker'
 import { darkTheme } from './../../styles/_global'
-import { menu, darkThemeObj } from './../../styles/alarm'
+import { darkThemeObj } from './../../styles/alarm'
 
 // constants
 const themeObj = darkThemeObj;

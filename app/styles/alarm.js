@@ -1,9 +1,12 @@
 // /styles/alarm.js
 
-import { StyleSheet, Platform } from 'react-native'
+import { StyleSheet, Dimensions, Platform } from 'react-native'
 
 // import global styles
 import * as _g from './_global'
+
+const { width: dim_width, height: dim_height } = Dimensions.get('window');
+const EDIT_ALARM_CONTAINER_HEIGHT = 210;
 
 const headStyles = {
 	container: {
@@ -114,22 +117,19 @@ export const main = StyleSheet.create(_main);
 export const edit = StyleSheet.create({
 	container: {
 		// ..._g._border(1, 'red'),
-		height: 210,
+		height: EDIT_ALARM_CONTAINER_HEIGHT,
 	},
 	modal: {
 		flex: 1,
-		// ..._g._border(1, 'blue'),
 		backgroundColor: _g.darkTheme.shade3,
-		marginTop: '120%',
+		marginTop: Platform.OS === 'android' ? (dim_height - (EDIT_ALARM_CONTAINER_HEIGHT+20)) : '120%',
 	},
 	actions: {
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		// ..._g._border(1, 'red'),
 	},
 	btn: {
-		// ..._g._border(1, 'red'),
 		..._g._padding(15, 15, 0, 15),
 		justifyContent: 'center',
 	},
@@ -146,17 +146,18 @@ export const edit = StyleSheet.create({
 	pickerWrapper: {
 		flexDirection: 'row',
 		justifyContent: 'center',
+		alignItems: 'center',
 		flex: 1,
 	},
 	picker: {
-		// ..._g._border(1, 'green'),
-		width: 75,
+		width: Platform.OS === 'android' ? 88 : 75,
 	},
 	colon: {
 		fontSize: 30,
 		width: 20,
 		textAlign: 'center',
-		..._g._padding(87, 0, 0, 0),
+		paddingTop: Platform.OS === 'android' ? 0 : 87,
+		height: 48,
 	},
 	title: {
 		textAlign: 'center',
@@ -164,7 +165,6 @@ export const edit = StyleSheet.create({
 		..._g._padding(10, 0, 10, 0),
 	},
 	field: {
-		// ..._g._border(1, 'black'),
 		..._g._padding(10, 10, 10, 10),
 		flexDirection: 'row',
 		justifyContent: 'space-between',
@@ -200,19 +200,6 @@ export const edit = StyleSheet.create({
 	dayTextActive: {
 		color: _g.darkTheme.shade3,
 	}
-});
-
-export const menu = StyleSheet.create({
-	container: {
-		width: 50,
-		height: 50,
-		position: 'absolute',
-		bottom: 5,
-		left: '43%',
-	},
-	items: {
-
-	},
 });
 
 export const darkTheme = StyleSheet.create({

@@ -18,7 +18,7 @@ import NavHeader from './../../components/navHeader'
 
 // styles
 import { coll } from './../../styles/collection'
-import { menu, darkTheme, darkThemeObj } from './../../styles/alarm'
+import { darkTheme, darkThemeObj } from './../../styles/alarm'
 
 // constants
 import { MIMETYPES } from './../../constants/waker'

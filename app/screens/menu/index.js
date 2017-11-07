@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 
 // styles
-import { menu, darkThemeObj } from './../../styles/alarm'
+import { darkThemeObj } from './../../styles/alarm'
 
 // constants
 const themeObj = darkThemeObj;
