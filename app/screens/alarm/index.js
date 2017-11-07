@@ -52,7 +52,7 @@ class Alarm extends Component{
 					leftIcon="list"
 					rightIcon="camera"
 					leftPress={() => navigation.navigate('Collection')}
-					middlePress={() => navigation.navigate('Waker')}
+					middlePress={() => navigation.navigate('Profile')}
 					rightPress={() => navigation.navigate('Camera')} />
 
 				<View style={main.innerContainer}>

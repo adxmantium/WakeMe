@@ -8,8 +8,6 @@ import OneSignal from 'react-native-onesignal'
 // actions
 import { saveAlarmData } from './../actions/alarm'
 
-let count = 0;
-
 export default class PushController extends Component{
 	constructor(props){
 		super(props);
@@ -27,19 +25,6 @@ export default class PushController extends Component{
 
 	_onReceived = data => {
 		console.log('notification received: ', data);
-
-		// if( Platform.OS === 'android' ){
-		// 	console.log('is android');
-
-		// 	if( notification && notification.isAppInFocus ){
-		// 		console.log('user pressed notification');
-		// 	}else{
-		// 		console.log('user did NOT press notification - alarm should still be playing');
-		// 	}
-
-		// }else{
-		// 	console.log('is iOS');
-		// }
 	}
 
 	_onOpened = ({ action, notification }) => {
@@ -47,9 +32,7 @@ export default class PushController extends Component{
 
 		if( Platform.OS === 'android' ){
 			OneSignal.clearOneSignalNotifications(); // clear once opened
-			// console.log('is android');
-			count++;
-			console.log('count: ', count);
+			console.log('is android');
 
 		}else{
 			const { navigation } = this.props;
