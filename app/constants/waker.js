@@ -10,13 +10,18 @@ export const ADD_TO_QUEUE = r+'ADD_TO_QUEUE'
 
 export const FETCHED_WAKERS = 'FETCHED_WAKERS'
 export const FETCHING_WAKERS = 'FETCHING_WAKERS'
-export const FETCHED_WAKERS_TYPE = r+'FETCHED_WAKERS'
-export const FETCHING_WAKERS_TYPE = r+'FETCHING_WAKERS'
+export const FETCHED_WAKERS_TYPE = r+FETCHED_WAKERS
+export const FETCHING_WAKERS_TYPE = r+FETCHING_WAKERS
 
 export const SENT_WAKER = 'SENT_WAKER'
 export const SENDING_WAKER = 'SENDING_WAKER'
 export const SENT_WAKER_TYPE = r+SENT_WAKER
 export const SENDING_WAKER_TYPE = r+SENDING_WAKER
+
+export const DELETED_WAKERS = 'DELETED_WAKERS'
+export const DELETING_WAKERS = 'DELETING_WAKERS'
+export const DELETED_WAKERS_TYPE = r+DELETED_WAKERS
+export const DELETING_WAKERS_TYPE = r+DELETING_WAKERS
 
 export const UPDATE_WAKER = r+'UPDATE_WAKER'
 
@@ -32,6 +37,11 @@ export const modelWakersTable = ({ _user, to_friend, file_name, file_path }) => 
   to_device_token: to_friend.friend_device_token,
   file_path
 })
+
+// input: array of wakers
+// return: array of waker file names only
+export const modelDeleteWakers = wakers => 
+  wakers.map(waker => ({"Key": waker.file_path.split('/').reverse()[0] }));
 
 export const S3_OPTIONS = {
   bucket: ENV.S3_BUCKET,

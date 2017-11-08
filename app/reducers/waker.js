@@ -17,6 +17,8 @@ export default (state = init, action) => {
 		case _actions.SENDING_WAKER_TYPE:
 		case _actions.FETCHED_WAKERS_TYPE:
 		case _actions.FETCHING_WAKERS_TYPE:
+		case _actions.DELETED_WAKERS_TYPE:
+		case _actions.DELETING_WAKERS_TYPE:
 			return {...state, ...action.payload};
 
 		case _userActions.SIGN_OUT:

@@ -17,12 +17,16 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
+// actions
+import { deleteWakers } from './../../actions/waker'
+
 // styles
 import { wake } from './../../styles/waker'
 import { darkTheme } from './../../styles/_global'
 
 // constants
-import { MIMETYPES } from './../../constants/waker'
+import { deleteAlarmNotifications } from './../../constants/alarm'
+import { MIMETYPES, modelDeleteWakers } from './../../constants/waker'
 
 /*
 	sections:
@@ -43,6 +47,13 @@ class Waker extends Component{
 			isLoading: false,
 			playableItem: null,
 		};
+	}
+
+	componentWillUnmount(){
+		const { dispatch, _waker } = this.props;
+		const deleteModel = modelDeleteWakers( _waker.queue );
+
+		dispatch( deleteWakers( deleteModel ) );
 	}
 
 	_isVideo = () => {
@@ -72,21 +83,21 @@ class Waker extends Component{
 	}
 
 	_onEnd = e => {
-		// console.log('onEnd: ', e);
+		console.log('onEnd: ', e);
 		// triggered when video is done playing
 		this.setState({progress: 0});
 	}
 
 	_onError = e => {
-		// console.log('onError: ', e);
+		console.log('onError: ', e);
 	}
 
 	_onBuffer = e => {
-		// console.log('onBuffer: ', e);
+		console.log('onBuffer: ', e);
 	}
 
 	_onTimedMetaData = e => {
-		// console.log('_onTimedMetaData: ', e);
+		console.log('_onTimedMetaData: ', e);
 	}	
 
 	_start = () => {

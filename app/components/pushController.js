@@ -14,13 +14,13 @@ export default class PushController extends Component{
 	}
 
 	componentWillMount(){
-		OneSignal.addEventListener('received', this._onReceived);
         OneSignal.addEventListener('opened', this._onOpened);
+		OneSignal.addEventListener('received', this._onReceived);
 	}
 
 	componentWillUnmount(){
-		OneSignal.removeEventListener('received', this._onReceived);
         OneSignal.removeEventListener('opened', this._onOpened);
+		OneSignal.removeEventListener('received', this._onReceived);
 	}
 
 	_onReceived = data => {

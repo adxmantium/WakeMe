@@ -15,6 +15,7 @@ export const add_to_queue = data => ({
 	payload: data,
 })
 
+// get my wakers
 export const getWakers = userID => {
   const pendingName = _actions.FETCHING_WAKERS.toLowerCase();
   const done = _actions.FETCHED_WAKERS.toLowerCase();  
@@ -45,6 +46,7 @@ export const getWakers = userID => {
   }
 }
 
+// send/save waker
 export const sendWaker = ({ wakerData, last_waker_to_save }) => {
   const pendingName = _actions.SENDING_WAKER.toLowerCase();
   const done = _actions.SENT_WAKER.toLowerCase();  
@@ -69,6 +71,37 @@ export const sendWaker = ({ wakerData, last_waker_to_save }) => {
       if( res.data.data ){
         action.payload.searchResults = res.data.data.Items;
       }
+      
+      dispatch( action );
+    });
+
+    // promise catch
+    response.catch(err => dispatch( _userActions.error({ pendingName, err }) ) );
+  }
+}
+
+// delete wakers
+export const deleteWakers = wakers => {
+  const pendingName = _actions.DELETING_WAKERS.toLowerCase();
+  const done = _actions.DELETED_WAKERS.toLowerCase();  
+
+  return dispatch => {
+    dispatch( _userActions.pending({pendingName, type: _actions.DELETING_WAKERS_TYPE}) );  
+
+    // promise
+    const response = _axios.waker.delete(route.WAKERS, {data: { wakers }});
+
+    response.then(res => {
+      console.log('DELETE wakers: ', res);
+
+      const action = {
+        type: _actions.DELETED_WAKERS_TYPE,
+        payload: {
+          queue: [],
+          [done]: true,
+          [pendingName]: false,
+        }
+      }; 
       
       dispatch( action );
     });
