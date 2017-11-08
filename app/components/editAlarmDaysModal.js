@@ -24,6 +24,7 @@ import { edit } from './../styles/alarm'
 
 // constants
 import { alarmNotificationModel } from './../constants/user'
+import { deleteAlarmNotifications } from './../constants/alarm'
 import { 
 	DAYS_OF_WEEK, 
 	determineDaysSelectedType,
@@ -50,8 +51,18 @@ class EditAlarmDays extends Component{
 		if( enabled ){
 			// if we currently have alarms set, delete them first, before saving new alarm settings
 			// else just set new alarm
-			if( notifications.length > 0 ) this._deleteNotifications({ notifications, index: 0 });
-			else this._send();
+			if( notifications.length > 0 ){
+				deleteAlarmNotifications({ 
+					index: 0,
+					notifications, 
+					onDone: () => {
+						this.props.dispatch( updateAlarm({notifications: []}) );
+						this.setState({notifications: []});
+						this._send();
+					}
+				});
+
+			}else this._send();
 
 		}else this._saveAlarm();
 	}
@@ -98,21 +109,6 @@ class EditAlarmDays extends Component{
 			next_alarm_day,
 			next_alarm_day_moment,
 		};
-	}
-
-	_deleteNotifications = ({ notifications, index }) => {
-		if( notifications[index] ){
-			const promise = deleteNotificationPromise( notifications[index] );
-
-			promise.then(res => this._deleteNotifications({ notifications, index: index + 1 }));
-
-			// if err, just continue to next notification
-			promise.catch(err => this._deleteNotifications({ notifications, index: index + 1 }));
-		}else{
-			this.props.dispatch( updateAlarm({notifications: []}) );
-			this.setState({notifications: []});
-			this._send();
-		}
 	}
 
 	_send = () => {
