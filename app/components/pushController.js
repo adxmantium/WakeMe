@@ -30,13 +30,18 @@ export default class PushController extends Component{
 	_onOpened = ({ action, notification }) => {
 		console.log('notification opened: ', { action, notification });
 
+		const { navigation } = this.props;
+
 		if( Platform.OS === 'android' ){
 			OneSignal.clearOneSignalNotifications(); // clear once opened
-			console.log('is android');
+			const { notification_type } = notification.payload.additionalData;
+
+			if( notification_type === 'alarm' ){
+				navigation.navigate('Waker');
+			}
 
 		}else{
 			const { navigation } = this.props;
-			console.log('navigation: ', navigation);
 			const { notification_type } = notification.payload.rawPayload.custom.a;
 
 			console.log('type: ', notification_type);
