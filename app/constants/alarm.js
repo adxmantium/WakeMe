@@ -1,5 +1,7 @@
 // /constants/user.js
 
+import { sendNotificationPromise, deleteNotificationPromise } from './../actions/user'
+
 // r = reducer name
 const r = '_ALARM:';
 
@@ -81,4 +83,17 @@ export const determineDaysSelectedType = selectedDays => {
 	if( daysList.length === DAYS_OF_WEEK.length ) return 'Everyday';
 
 	return 'Every '+daysList.join(', ');
+}
+
+export const deleteAlarmNotifications = ({ notifications, index, ...rest }) => {
+	// if new index of notifications arr exists, delete notification from onesignal and call this function again until !notifcations[index]
+	if( notifications[index] ){
+		const promise = deleteNotificationPromise( notifications[index] );
+
+		promise.then(res => deleteAlarmNotifications({ notifications, index: index + 1, ...rest }));
+
+		// if err, just continue to next notification
+		promise.catch(err => deleteAlarmNotifications({ notifications, index: index + 1, ...rest }));
+
+	}else rest.onDone();
 }

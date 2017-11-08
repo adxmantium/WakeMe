@@ -27,6 +27,7 @@ import { edit, darkTheme, darkThemeObj } from './../../styles/alarm'
 
 // constants
 import { alarmNotificationModel } from './../../constants/user'
+import { deleteAlarmNotifications } from './../../constants/alarm'
 
 const theme = darkTheme;
 const themeObj = darkThemeObj;
@@ -51,21 +52,12 @@ class SetAlarm extends Component{
 		const { notifications } = _alarm;
 
 		// delete, if any, and save
-		console.log('notifications.length: ', notifications.length);
 		if( notifications.length > 0 ){
-			this._deleteNotifications({ notifications, index: 0, alarmData, enabled });
-
-		}else this._sendOrSave({ enabled, alarmData });
-	}
-
-	_deleteNotifications = ({ notifications, index, alarmData, enabled }) => {
-		if( notifications[index] ){
-			const promise = deleteNotificationPromise( notifications[index] );
-
-			promise.then(res => this._deleteNotifications({ notifications, index: index + 1, alarmData, enabled }));
-
-			// if err, just continue to next notification
-			promise.catch(err => this._deleteNotifications({ notifications, index: index + 1, alarmData, enabled }));
+			deleteAlarmNotifications({ 
+				index: 0, 
+				notifications, 
+				onDone: () => this._sendOrSave({ enabled, alarmData }),
+			});
 
 		}else this._sendOrSave({ enabled, alarmData });
 	}
