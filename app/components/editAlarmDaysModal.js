@@ -106,7 +106,8 @@ class EditAlarmDays extends Component{
 
 			promise.then(res => this._deleteNotifications({ notifications, index: index + 1 }));
 
-			promise.catch(err => {});
+			// if err, just continue to next notification
+			promise.catch(err => this._deleteNotifications({ notifications, index: index + 1 }));
 		}else{
 			this.props.dispatch( updateAlarm({notifications: []}) );
 			this.setState({notifications: []});

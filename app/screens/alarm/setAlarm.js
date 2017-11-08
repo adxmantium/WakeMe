@@ -51,6 +51,7 @@ class SetAlarm extends Component{
 		const { notifications } = _alarm;
 
 		// delete, if any, and save
+		console.log('notifications.length: ', notifications.length);
 		if( notifications.length > 0 ){
 			this._deleteNotifications({ notifications, index: 0, alarmData, enabled });
 
@@ -63,7 +64,8 @@ class SetAlarm extends Component{
 
 			promise.then(res => this._deleteNotifications({ notifications, index: index + 1, alarmData, enabled }));
 
-			promise.catch(err => {});
+			// if err, just continue to next notification
+			promise.catch(err => this._deleteNotifications({ notifications, index: index + 1, alarmData, enabled }));
 
 		}else this._sendOrSave({ enabled, alarmData });
 	}

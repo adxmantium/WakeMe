@@ -160,7 +160,6 @@ dependencies {
     compile project(':react-native-fbsdk')
     compile project(':react-native-video')
     compile project(':react-native-push-notification')
-    compile "com.google.android.gms:play-services-base:11.6.0"
     compile "com.google.android.gms:play-services-location:11.6.0"
     compile "com.google.android.gms:play-services-ads:11.6.0"
     compile project(':react-native-camera')
