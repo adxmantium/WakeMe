@@ -10,7 +10,7 @@ export const pro = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'space-around',
 		backgroundColor: _g.darkTheme.shade5,
-		..._g._padding(100, 0, 0, 0),
+		..._g._padding(80, 0, 0, 0),
 	},
 	main: {
 		alignItems: 'center',
