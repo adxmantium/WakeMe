@@ -2,7 +2,7 @@
 
 // libs
 import { connect } from 'react-redux'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import QRCode from 'react-native-qrcode'
 import { LoginManager } from 'react-native-fbsdk'
 import * as Animatable from 'react-native-animatable'
@@ -27,14 +27,9 @@ import { darkTheme } from './../../styles/_global'
 // constants
 import { resetStackAndNavTo } from './../../constants/user'
 
-class Profile extends Component{
+class Profile extends PureComponent{
 	constructor(props){
 		super(props);
-	}
-
-	shouldComponentUpdate(np, ns){
-		const { _user: _nu } = np;
-		return !!_nu.id;
 	}
 
 	_signOut = () => {

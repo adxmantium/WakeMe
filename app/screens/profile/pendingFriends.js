@@ -1,7 +1,7 @@
 // /screens/profile/pendingFriends.js
 
 import { connect } from 'react-redux'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
 	Text,
 	View,
@@ -14,7 +14,7 @@ import { allf } from './../../styles/profile'
 // components
 import AllFriendsItem from './allFriendsItem'
 
-class PendingFriends extends Component {
+class PendingFriends extends PureComponent {
 	constructor(props){
 		super(props);
 	}
