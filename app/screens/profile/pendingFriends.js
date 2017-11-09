@@ -34,7 +34,7 @@ class PendingFriends extends Component {
 			        removeClippedSubviews={ false }
 			        keyExtractor={ (item, index) => item.friend_fb_user_id }
 			        ItemSeparatorComponent={ () => <View style={allf.separator} /> }
-			        renderItem={ ({ item }) => <AllFriendsItem {...item} /> }
+			        renderItem={ ({ item }) => <AllFriendsItem {...item} name={item.friend_name} /> }
 			    />
 
 			</View>

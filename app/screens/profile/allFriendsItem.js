@@ -13,12 +13,12 @@ import {
 import { allf } from './../../styles/profile'
 import { darkTheme } from './../../styles/_global'
 
-export default ({ onPress, friend_name, ...item }) => {
+export default ({ onPress, name, ...item }) => {
 
 	return (
 
 		<View style={allf.item}>
-			<Text style={allf.itemName}>{ friend_name }</Text>
+			<Text style={allf.itemName}>{ name }</Text>
 
 			{ onPress && 
 				<TouchableOpacity style={allf.acceptBtn}>

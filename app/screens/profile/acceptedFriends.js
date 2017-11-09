@@ -20,7 +20,7 @@ class AcceptedFriends extends Component {
 	}
 
 	render(){
-		const { _friends } = this.props;
+		const { _user, _friends } = this.props;
 
 		return (
 			<View style={allf.container}>
@@ -34,7 +34,7 @@ class AcceptedFriends extends Component {
 			        removeClippedSubviews={ false }
 			        keyExtractor={ (item, index) => item.friend_fb_user_id }
 			        ItemSeparatorComponent={ () => <View style={allf.separator} /> }
-			        renderItem={ ({ item }) => <AllFriendsItem {...item} /> }
+			        renderItem={ ({ item }) => <AllFriendsItem {...item} name={ _user.userID === item.fb_user_id ? item.friend_name : item.name } /> }
 			    />
 
 			</View>
@@ -44,6 +44,7 @@ class AcceptedFriends extends Component {
 
 const mapStateToProps = (state, props) => {
 	return {
+		_user: state._user,
 		_friends: state._friends,
 	}
 }

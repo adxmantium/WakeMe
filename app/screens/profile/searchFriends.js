@@ -19,7 +19,6 @@ import SearchedFriendItem from './searchedFriendItem'
 
 // actions
 import { searchForFriends, addFriend } from './../../actions/friends'
-import { sendNotification } from './../../actions/user'
 
 // styles
 import { findf } from './../../styles/profile'

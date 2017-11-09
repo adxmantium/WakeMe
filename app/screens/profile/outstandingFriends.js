@@ -36,9 +36,9 @@ class OutstandingFriends extends Component {
 			        style={ allf.list }
 			        initialNumToRender={ 10 }
 			        removeClippedSubviews={ false }
-			        keyExtractor={ (item, index) => item.friend_fb_user_id }
+			        keyExtractor={ (item, index) => item.id }
 			        ItemSeparatorComponent={ () => <View style={allf.separator} /> }
-			        renderItem={ ({ item }) => <AllFriendsItem {...item} onPress={ this._accept } /> }
+			        renderItem={ ({ item }) => <AllFriendsItem {...item} name={item.name} onPress={ this._accept } /> }
 			    />
 
 			</View>

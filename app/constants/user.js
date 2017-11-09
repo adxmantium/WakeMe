@@ -86,11 +86,12 @@ export const modelFriendsTable = ({ _user, friend }) => {
   }
 }
 
-export const friendRequestModel = data => ({
+export const friendRequestModel = notification => ({
   app_id: ENV.ONESIGNAL_APP_ID,
-  contents: {en: `${data.name} wants to be your friend :)`}, // main message
+  contents: {en: `${notification.name} wants to be your friend :)`}, // main message
   template_id: ENV.ONESIGNAL_FRIEND_REQUEST_TEMPLATE_ID, // fill rest of fields using template designed on dashboard
-  include_player_ids: [data.friend_device_token], // device token of user who should receive notification
+  include_player_ids: [notification.friend_device_token], // device token of user who should receive notification
+  data: notification
 })
 
 export const alarmNotificationModel = ({ _user, alarmData }) => {
