@@ -21,7 +21,7 @@ import { sendNotificationPromise, deleteNotificationPromise } from './../actions
 
 // constants
 import { alarmNotificationModel } from './../constants/user'
-import { deleteAlarmNotifications } from './../constants/alarm'
+import { sendAlarmNotifications, deleteAlarmNotifications } from './../constants/alarm'
 
 // styles
 import { edit } from './../styles/alarm'
@@ -75,24 +75,12 @@ class EditAlarmTime extends Component{
 
 		// if there are alarm notifications, set them
 	    if( alarmNotifications && Array.isArray(alarmNotifications) )
-	    	this._sendAlarmNotifications({ alarmNotifications, index: 0 });
-	}
-
-	_sendAlarmNotifications = ({ alarmNotifications, index }) => {
-		// if this index of alarmNotifications exists, post to onesignal
-		if( alarmNotifications[index] ){
-			const promise = sendNotificationPromise( alarmNotifications[index] );
-
-			promise.then(res => {
-				this.setState({notifications: [...this.state.notifications, res.data.id]});
-				this._sendAlarmNotifications({ alarmNotifications, index: index + 1 }); // recurse
-			});
-
-			promise.catch(err => {});
-		}else{
-			// no more alarm notifications to send
-			this._saveAlarm();
-		}
+	    	sendAlarmNotifications({ 
+	    		alarmNotifications, 
+	    		index: 0,
+	    		callback: notif_id => this.setState({notifications: [...this.state.notifications, notif_id]}),
+	    		onDone: () => this._saveAlarm(),
+	    	});
 	}
 
 	_saveAlarm = () => {
