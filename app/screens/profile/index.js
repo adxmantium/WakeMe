@@ -78,14 +78,14 @@ class Profile extends Component{
 
 				<View style={pro.links}>
 				
-					{ !_friends.accepted_friends_list.length && 
+					{ !_friends.accepted_list.length && 
 						<View>
 							<Text style={pro.label}>It looks like you have no friends :(</Text>
 							<Text style={pro.label}>Find friends to help wake you up!</Text>
 						</View>
 					}
 
-					{ _friends.accepted_friends_list.length && 
+					{ _friends.accepted_list.length && 
 						<TouchableOpacity style={pro.link} onPress={() => navigation.navigate('AllFriends')}>
 							<Text style={pro.linkText}>My Friends</Text>
 						</TouchableOpacity> 

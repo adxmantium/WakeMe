@@ -42,7 +42,7 @@ class MyFriends extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			sendTo_list: [...props._friends.accepted_friends_list],
+			sendTo_list: [...props._friends.accepted_list],
 			sendTo_list_count: 0,
 			saving_waker: false,
 		}

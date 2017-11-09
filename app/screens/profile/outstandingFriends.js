@@ -32,7 +32,7 @@ class OutstandingFriends extends Component {
 				<Text style={allf.title}>These people are waiting on you to respond to their friend request...</Text>
 
 				<FlatList
-			        data={ _friends.accepted_friends_list || [] }
+			        data={ _friends.outstanding_list || [] }
 			        style={ allf.list }
 			        initialNumToRender={ 10 }
 			        removeClippedSubviews={ false }

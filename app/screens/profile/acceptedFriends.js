@@ -28,7 +28,7 @@ class AcceptedFriends extends Component {
 				<Text style={allf.title}>These people are your friends!</Text>
 
 				<FlatList
-			        data={ _friends.accepted_friends_list || [] }
+			        data={ _friends.accepted_list || [] }
 			        style={ allf.list }
 			        initialNumToRender={ 10 }
 			        removeClippedSubviews={ false }
