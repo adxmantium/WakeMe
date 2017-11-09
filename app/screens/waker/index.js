@@ -3,7 +3,7 @@
 import { connect } from 'react-redux'
 import { Spinner } from 'native-base'
 import Video from 'react-native-video'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import Fab from 'react-native-action-button'
 import * as Progress from 'react-native-progress'
 import { NavigationActions } from 'react-navigation'
@@ -35,7 +35,7 @@ import { MIMETYPES, modelDeleteWakers } from './../../constants/waker'
 	- closing
 */
 
-class Waker extends Component{
+class Waker extends PureComponent{
 	constructor(props){
 		super(props);
 

@@ -1,7 +1,7 @@
 // /screens/alarm/index.js
 
 import { connect } from 'react-redux'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import * as Animatable from 'react-native-animatable'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {
@@ -23,7 +23,7 @@ import { main, darkTheme, darkThemeObj } from './../../styles/alarm'
 
 const theme = darkTheme;
 
-class Alarm extends Component{
+class Alarm extends PureComponent{
 	constructor(props){
 		super(props);
 

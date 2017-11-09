@@ -3,7 +3,7 @@
 // /screens/camera/index.js
 
 import { connect } from 'react-redux'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   View,
@@ -33,7 +33,7 @@ const ALERT_ACTIONS = [{
 	text: "Ok, I can wait. I think..."
 }]
 
-class Collection extends Component{
+class Collection extends PureComponent{
 	constructor(props){
 		super(props);
 
