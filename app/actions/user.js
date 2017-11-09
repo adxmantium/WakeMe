@@ -3,7 +3,7 @@
 import ENV from './../../env'
 import _axios from './../api/axios'
 import { getWakers } from './waker'
-import { getFriends } from './friends'
+import { getAllFriends } from './friends'
 import { saveAlarmData } from './alarm'
 import * as route from './../api/routes/user'
 import * as _actions from './../constants/user'
@@ -43,8 +43,7 @@ export const getUserInfo = ({ userID }) => {
       else{
         // since we know if we get here, user was already saved in db, then fetch user's friends
         action.payload.Item = res.data.data.Item;
-        dispatch( getFriends({ userID }) ); // fetches my pending friend requests
-        dispatch( getFriends({ userID, type: 'outstanding' }) ); // fetches my outstanding friend requests
+        dispatch( getAllFriends({ userID }) );
         dispatch( getWakers( userID ) ); // fetches wakers sent to me
       }
 

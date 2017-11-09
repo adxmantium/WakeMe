@@ -36,22 +36,18 @@ export default (state = init, action) => {
 		// filter friend types into separate array - accepted, pending, outstanding
 		case _actions.FETCHED_FRIENDS_TYPE:
 			const { outstanding_list: ol, friends_list: fl, my_user_id, ...restOf } = action.payload;
-			
-			if( fl && Array.isArray(fl) ) list = fl;
-			else if( ol && Array.isArray(ol) ) list = ol;
+			const friendsList = [...ol, ...fl];
 
-			if( list ){
-				const friendTypes = filterFriendTypes({ list, my_user_id });
+			const friendTypes = filterFriendTypes({ list: friendsList, my_user_id });
 
-				return {
-					...state, 
-					...restOf,
-					friends_list: [...state.friends_list, ...(fl || ol)],
-					pending_list: [...state.pending_list, ...(friendTypes.pending || [])],
-					accepted_list: [...state.accepted_list, ...(friendTypes.accepted || [])],
-					outstanding_list: [...state.outstanding_list, ...(friendTypes.outstanding || [])],
-				};
-			}	
+			return {
+				...state, 
+				...restOf,
+				friends_list: friendsList,
+				pending_list: friendTypes.pending,
+				accepted_list: friendTypes.accepted,
+				outstanding_list: friendTypes.outstanding,
+			};
 
 			return {...state, ...action.payload};
 
@@ -103,15 +99,11 @@ const filterFriendTypes = ({ list, my_user_id }) => {
 		// pending -> friend_request_accepted = false && fb_user_id == my fb_user_id && friend_fb_user_id != my fb_user_id
 		else if( !list[i].friend_request_accepted && list[i].fb_user_id == my_user_id ) pending.push( list[i] );
 		// outstanding -> friend_request_accepted = false && fb_user_id != my fb_user_id && friend_fb_user_id == my fb_user_id
-		else if( !list[i].friend_request_accepted && list[i].fb_user_id != my_user_id ) outstanding.push( list[i] )
+		else if( !list[i].friend_request_accepted && list[i].fb_user_id != my_user_id && list[i].friend_fb_user_id == my_user_id ) outstanding.push( list[i] );
 
 	}
 
-	if( accepted.length > 0 ) types.accepted = accepted;
-	if( pending.length > 0 ) types.pending = pending;
-	if( outstanding.length > 0 ) types.outstanding = outstanding;
-
-	return types;
+	return { accepted, pending, outstanding };
 
 }
 

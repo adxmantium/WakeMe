@@ -1,5 +1,6 @@
 // /action/friends.js
 
+import axios from 'axios'
 import _axios from './../api/axios'
 import { saveAlarmData } from './alarm'
 import { sendNotification } from './user'
@@ -37,36 +38,33 @@ export const searchForFriends = ({ searched, userID }) => {
   }
 }
 
-export const getFriends = ({ userID, type }) => {
+export const getAllFriends = ({ userID }) => {
   const pendingName = _actions.FETCHING_FRIENDS.toLowerCase();
   const done = _actions.FETCHED_FRIENDS.toLowerCase();  
 
   return dispatch => {
     dispatch( _actions.pending({pendingName, type: _actions.FETCHING_FRIENDS_TYPE}) );  
 
-    // list name
-    const list_name = type ? 'outstanding_list' : 'friends_list';
-
     // promise
-    const response = _axios.friends.get(`${route.FRIENDS}?value=${userID}&type=${type}`);
+    const acceptedPendingFriends = () => _axios.friends.get(`${route.FRIENDS}?value=${userID}&type=`);
+    const outstandingFriends = () => _axios.friends.get(`${route.FRIENDS}?value=${userID}&type=outstanding`);
 
-    // promise then
-    response.then(res => {
-      let list = [];
+    const response = axios.all([acceptedPendingFriends(), outstandingFriends()]);
 
-      if( res.data.data.Items ) list = res.data.data.Items;
-
+    response.then(axios.spread((accPenFr, outsFr) => {
       const action = {
         type: _actions.FETCHED_FRIENDS_TYPE,
         payload: {
           [done]: true,
+          my_user_id: userID,
           [pendingName]: false,
-          [list_name]: list,
+          friends_list: accPenFr.data.data.Items,
+          outstanding_list: outsFr.data.data.Items,
         }
       }; 
       
       dispatch( action );
-    });
+    }));
 
     // promise catch
     response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );

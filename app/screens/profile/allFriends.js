@@ -13,6 +13,9 @@ import {
 	TouchableOpacity,
 } from 'react-native'
 
+// actions
+import { getAllFriends } from './../../actions/friends'
+
 // components
 import PendingFriends from './pendingFriends'
 import AcceptedFriends from './acceptedFriends'
@@ -34,6 +37,15 @@ class FindFriends extends Component{
 		    	{ key: 'OutstandingFriends', icon: 'plus' },
 		    ],
 		}
+	}
+
+	componentWillMount(){
+		// fetch friends every time this is mounted
+		const { dispatch, _user } = this.props;
+		const { userID } = _user;
+		const isFollowUp = true;
+
+		dispatch( getAllFriends({ userID }) ); // fetches my pending friend requests
 	}
 
 	render(){
