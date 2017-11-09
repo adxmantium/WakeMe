@@ -27,7 +27,7 @@ import { edit, darkTheme, darkThemeObj } from './../../styles/alarm'
 
 // constants
 import { alarmNotificationModel } from './../../constants/user'
-import { deleteAlarmNotifications } from './../../constants/alarm'
+import { sendAlarmNotifications, deleteAlarmNotifications } from './../../constants/alarm'
 
 const theme = darkTheme;
 const themeObj = darkThemeObj;
@@ -80,26 +80,17 @@ class SetAlarm extends Component{
 
 		// if there are alarm notifications, set them
 	    if( alarmNotifications && Array.isArray(alarmNotifications) )
-	    	this._sendAlarmNotifications({ alarmNotifications, index: 0, alarmData });
+	    	sendAlarmNotifications({ 
+	    		alarmNotifications, 
+	    		index: 0, 
+	    		callback: notif_id => this.setState({notifications: [...this.state.notifications, notif_id]}),
+	    		onDone: () => {
+	    			// no more alarm notifications to send when here, now save alarm data to db
+					alarmData = {...alarmData, notifications: this.state.notifications};
+					this._saveAlarm( alarmData );
+	    		}
+	    	});
 	}
-
-	_sendAlarmNotifications = ({ alarmNotifications, index, alarmData }) => {
-		// if this index of alarmNotifications exists, post to onesignal
-		if( alarmNotifications[index] ){
-			const promise = sendNotificationPromise( alarmNotifications[index] );
-
-			promise.then(res => {
-				this.setState({notifications: [...this.state.notifications, res.data.id]});
-				this._sendAlarmNotifications({ alarmNotifications, index: index + 1, alarmData }); // recurse
-			});
-
-			promise.catch(err => {});
-		}else{
-			// no more alarm notifications to send when here, now save alarm data to db
-			alarmData = {...alarmData, notifications: this.state.notifications};
-			this._saveAlarm( alarmData );
-		}
-	}	
 
 	_saveAlarm = alarmData => {
 		this.setState({notifications: []})

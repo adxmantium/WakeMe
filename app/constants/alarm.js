@@ -97,3 +97,18 @@ export const deleteAlarmNotifications = ({ notifications, index, ...rest }) => {
 
 	}else rest.onDone();
 }
+
+export const sendAlarmNotifications = ({ alarmNotifications, index, ...rest }) => {
+	// if this index of alarmNotifications exists, post to onesignal
+	if( alarmNotifications[index] ){
+		const promise = sendNotificationPromise( alarmNotifications[index] );
+
+		promise.then(res => {
+			if( rest.callback ) rest.callback(res.data.id);
+			sendAlarmNotifications({ alarmNotifications, index: index + 1, ...rest }); // recurse
+		});
+
+		promise.catch(err => console.log('send alarm err: ', err));
+
+	}else rest.onDone();
+}
