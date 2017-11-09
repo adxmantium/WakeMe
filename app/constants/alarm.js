@@ -96,8 +96,7 @@ export const determineDaysSelectedType = selectedDays => {
 	return 'Every '+daysList.join(', ');
 }
 
-export const determineNextAlarmDay = ({ selected_days, _alarm }) => {
-	const { hour, minute } = _alarm;
+export const determineNextAlarmDay = ({ selected_days, hour, minute }) => {
 	const repeat = {};
 	const todayVal = moment().day();
 	const today = moment().day( todayVal );

@@ -71,8 +71,9 @@ class EditAlarmDays extends Component{
 	_getAlarmData = () => {
 		const { dispatch, _alarm } = this.props;
 		const { repeat_label, repeat: _r, notifications } = this.state;
+		const { hour, minute } = _alarm;
 
-		const nextAlarmDayData = determineNextAlarmDay({ selected_days: _r, _alarm });
+		const nextAlarmDayData = determineNextAlarmDay({ selected_days: _r, hour, minute });
 
 		return { 
 			..._alarm,

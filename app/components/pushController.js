@@ -25,6 +25,12 @@ export default class PushController extends Component{
 
 	_onReceived = data => {
 		console.log('notification received: ', data);
+		const { _alarm } = this.props;
+
+		// after 1 min, determine next alarm day
+		setTimeout(() => {
+			console.log('determine next alarm day');
+		}, 60000);
 	}
 
 	_onOpened = ({ action, notification }) => {

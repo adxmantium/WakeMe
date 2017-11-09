@@ -21,7 +21,12 @@ import { sendNotificationPromise, deleteNotificationPromise } from './../actions
 
 // constants
 import { alarmNotificationModel } from './../constants/user'
-import { sendAlarmNotifications, deleteAlarmNotifications } from './../constants/alarm'
+
+import { 
+	determineNextAlarmDay, 
+	sendAlarmNotifications, 
+	deleteAlarmNotifications
+} from './../constants/alarm'
 
 // styles
 import { edit } from './../styles/alarm'
@@ -67,6 +72,20 @@ class EditAlarmTime extends Component{
 		}else this._saveAlarm();
 	}	
 
+	_getAlarmData = () => {
+		const { dispatch, _alarm } = this.props;
+		const { repeat_label, repeat } = _alarm;
+		const { notifications, hour, minute } = this.state;
+
+		const nextAlarmDayData = determineNextAlarmDay({ selected_days: repeat, hour, minute });
+
+		return { 
+			..._alarm,
+			...this.state,
+			...nextAlarmDayData,
+		};
+	}
+
 	_send = () => {
 		const { dispatch, _alarm, _user } = this.props;
 		const alarmData = {..._alarm, ...this.state};
@@ -85,7 +104,7 @@ class EditAlarmTime extends Component{
 
 	_saveAlarm = () => {
 		const { dispatch, _alarm, close } = this.props;
-		const alarmData = {..._alarm, ...this.state};
+		const alarmData = this._getAlarmData();
 
 		dispatch( saveAlarmData({ alarmData }) );
 		close();
