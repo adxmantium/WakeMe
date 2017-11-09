@@ -25,17 +25,21 @@ class AcceptedFriends extends PureComponent {
 		return (
 			<View style={allf.container}>
 
-				<Text style={allf.title}>These people are your friends!</Text>
+				<Text style={allf.title}>
+					{ !_friends.accepted_list.length ? 'You have no friends :(' : 'These people are your friends!' }
+				</Text>
 
-				<FlatList
-			        data={ _friends.accepted_list || [] }
-			        style={ allf.list }
-			        initialNumToRender={ 10 }
-			        removeClippedSubviews={ false }
-			        keyExtractor={ (item, index) => item.friend_fb_user_id }
-			        ItemSeparatorComponent={ () => <View style={allf.separator} /> }
-			        renderItem={ ({ item }) => <AllFriendsItem {...item} name={ _user.userID === item.fb_user_id ? item.friend_name : item.name } /> }
-			    />
+				{ !!_friends.accepted_list.length &&
+					<FlatList
+				        data={ _friends.accepted_list || [] }
+				        style={ allf.list }
+				        initialNumToRender={ 10 }
+				        removeClippedSubviews={ false }
+				        keyExtractor={ (item, index) => item.friend_fb_user_id }
+				        ItemSeparatorComponent={ () => <View style={allf.separator} /> }
+				        renderItem={ ({ item }) => <AllFriendsItem {...item} display_name={ _user.userID === item.fb_user_id ? item.friend_name : item.name } /> }
+				    />
+				}	
 
 			</View>
 		);

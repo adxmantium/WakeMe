@@ -18,6 +18,7 @@ export default (state = init, action) => {
 		case _actions.ADDING_FRIEND_TYPE:
 		case _actions.FETCHING_FRIENDS_TYPE:
 		case _actions.SEARCHING_FRIENDS_TYPE:
+		case _actions.ACCEPTING_FRIENDSHIP_TYPE:
 			return {...state, ...action.payload};
 
 		// filter out friends from search results
@@ -68,6 +69,16 @@ export default (state = init, action) => {
 					results: state.searchResults
 				})
 			};
+
+		case _actions.ACCEPTED_FRIENDSHIP_TYPE:
+			const { friendData: fd, ...restOfProps } = action.payload;
+
+			return {
+				...state,
+				...restOfProps,
+				outstanding_list: state.outstanding_list.filter(friend => friend.id != fd.id), // we don't want this friend in outstanding list anymore
+				accepted_list: [...state.accepted_list, fd], // add this friend to accepted list
+			}
 
 		// return state back to original
 		case _actions.SIGN_OUT:

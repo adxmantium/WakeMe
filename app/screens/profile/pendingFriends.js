@@ -24,18 +24,23 @@ class PendingFriends extends PureComponent {
 
 		return (
 			<View style={allf.container}>
+				 
+				<Text style={allf.title}>
+					{ !_friends.pending_list.length ? 
+						'Pending requests list is empty.' : 'These people are still deciding if they want to be your friend...' }
+				</Text>
 
-				<Text style={allf.title}>These people are still deciding if they want to be your friend...</Text>
-
-				<FlatList
-			        data={ _friends.pending_friends_list || [] }
-			        style={ allf.list }
-			        initialNumToRender={ 10 }
-			        removeClippedSubviews={ false }
-			        keyExtractor={ (item, index) => item.friend_fb_user_id }
-			        ItemSeparatorComponent={ () => <View style={allf.separator} /> }
-			        renderItem={ ({ item }) => <AllFriendsItem {...item} name={item.friend_name} /> }
-			    />
+				{ !!_friends.pending_list.length && 
+					<FlatList
+				        data={ _friends.pending_list || [] }
+				        style={ allf.list }
+				        initialNumToRender={ 10 }
+				        removeClippedSubviews={ false }
+				        keyExtractor={ (item, index) => item.friend_fb_user_id }
+				        ItemSeparatorComponent={ () => <View style={allf.separator} /> }
+				        renderItem={ ({ item }) => <AllFriendsItem {...item} display_name={item.friend_name} /> }
+				    /> 
+				}	
 
 			</View>
 		);

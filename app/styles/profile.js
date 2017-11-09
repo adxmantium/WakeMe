@@ -196,18 +196,26 @@ export const allf = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
+		..._g._border(1, _g.darkTheme.shade5),
 	},
 	itemName: {
 		color: _g.darkTheme.shade3,
 		fontSize: 18,
+		..._g._border(1, _g.darkTheme.shade5),
 	},
 	separator: {
 		..._g._border(1, _g.darkTheme.shade5),
 	},
 	acceptBtn: {
+		..._g._border(1, _g.darkTheme.shade5),
 		width: 40,
 		height: 40,
 		alignItems: 'flex-end',
 		justifyContent: 'center',
+	},
+	empty: {
+		color: _g.darkTheme.shade3,
+		textAlign: 'center',
+		marginTop: 50,
 	}
 });

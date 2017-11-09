@@ -13,15 +13,15 @@ import {
 import { allf } from './../../styles/profile'
 import { darkTheme } from './../../styles/_global'
 
-export default ({ onPress, name, ...item }) => {
+export default ({ onPress, display_name, ...item }) => {
 
 	return (
 
 		<View style={allf.item}>
-			<Text style={allf.itemName}>{ name }</Text>
+			<Text style={allf.itemName}>{ display_name }</Text>
 
 			{ onPress && 
-				<TouchableOpacity style={allf.acceptBtn}>
+				<TouchableOpacity style={allf.acceptBtn} onPress={ () => onPress(item) }>
 					<Icon name="plus" size={20} color={darkTheme.shade3} />			
 				</TouchableOpacity> 
 			}

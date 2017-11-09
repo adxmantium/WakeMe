@@ -8,6 +8,9 @@ import {
 	FlatList,
 } from 'react-native'
 
+// actions
+import { acceptFriendship } from './../../actions/friends'
+
 // styles
 import { allf } from './../../styles/profile'
 
@@ -19,8 +22,8 @@ class OutstandingFriends extends Component {
 		super(props);
 	}
 
-	_accept = () => {
-		console.log('accept friend request');
+	_accept = friend => {
+		this.props.dispatch( acceptFriendship({...friend, friend_request_accepted: true}) );
 	}
 
 	render(){
@@ -29,17 +32,22 @@ class OutstandingFriends extends Component {
 		return (
 			<View style={allf.container}>
 
-				<Text style={allf.title}>These people are waiting on you to respond to their friend request...</Text>
+				<Text style={allf.title}>
+					{ !_friends.outstanding_list.length ?
+						'Outstanding requests list is empty.' : 'These people are waiting on you to respond to their friend request...' }
+				</Text>
 
-				<FlatList
-			        data={ _friends.outstanding_list || [] }
-			        style={ allf.list }
-			        initialNumToRender={ 10 }
-			        removeClippedSubviews={ false }
-			        keyExtractor={ (item, index) => item.id }
-			        ItemSeparatorComponent={ () => <View style={allf.separator} /> }
-			        renderItem={ ({ item }) => <AllFriendsItem {...item} name={item.name} onPress={ this._accept } /> }
-			    />
+				{ !!_friends.outstanding_list.length &&
+					<FlatList
+				        data={ _friends.outstanding_list || [] }
+				        style={ allf.list }
+				        initialNumToRender={ 10 }
+				        removeClippedSubviews={ false }
+				        keyExtractor={ (item, index) => item.id }
+				        ItemSeparatorComponent={ () => <View style={allf.separator} /> }
+				        renderItem={ ({ item }) => <AllFriendsItem {...item} display_name={item.name} onPress={ this._accept } /> }
+				    />
+				}
 
 			</View>
 		);

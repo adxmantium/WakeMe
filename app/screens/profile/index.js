@@ -80,7 +80,7 @@ class Profile extends PureComponent{
 						</View>
 					}
 
-					{ !!_friends.accepted_list.length && 
+					{ !!_friends.friends_list.length && 
 						<TouchableOpacity style={pro.link} onPress={() => navigation.navigate('AllFriends')}>
 							<Text style={pro.linkText}>My Friends</Text>
 						</TouchableOpacity> 

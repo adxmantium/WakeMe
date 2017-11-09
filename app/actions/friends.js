@@ -109,3 +109,31 @@ export const addFriend = friendData => {
     response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
   }
 }
+
+export const acceptFriendship = friendData => {
+  const pendingName = _actions.ACCEPTING_FRIENDSHIP.toLowerCase();
+  const done = _actions.ACCEPTED_FRIENDSHIP.toLowerCase();  
+
+  return dispatch => {
+    dispatch( _actions.pending({pendingName, type: _actions.ACCEPTING_FRIENDSHIP_TYPE}) );  
+
+    // promise
+    const response = _axios.friends.post(route.FRIENDS, friendData);
+
+    response.then(res => {
+      const action = {
+        type: _actions.ACCEPTED_FRIENDSHIP_TYPE,
+        payload: {
+          friendData,
+          [done]: true,
+          [pendingName]: false,
+        }
+      }; 
+      
+      dispatch( action );
+    });
+
+    // promise catch
+    response.catch(err => dispatch( _actions.error({ pendingName, err }) ) );
+  }
+}
