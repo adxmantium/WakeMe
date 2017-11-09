@@ -77,16 +77,24 @@ class Profile extends Component{
 				</View>
 
 				<View style={pro.links}>
-					{ !_friends.accepted_friends_list.length && <Text style={pro.label}>It looks like you have no friends :(</Text> }
-					<Text style={pro.label}>Find friends to help wake you up!</Text>
+				
+					{ !_friends.accepted_friends_list.length && 
+						<View>
+							<Text style={pro.label}>It looks like you have no friends :(</Text>
+							<Text style={pro.label}>Find friends to help wake you up!</Text>
+						</View>
+					}
+
+					{ _friends.accepted_friends_list.length && 
+						<TouchableOpacity style={pro.link} onPress={() => navigation.navigate('AllFriends')}>
+							<Text style={pro.linkText}>My Friends</Text>
+						</TouchableOpacity> 
+					}
 					
 					<TouchableOpacity style={pro.link} onPress={() => navigation.navigate('FindFriends')}>
 						<Text style={pro.linkText}>Find Friends</Text>
 					</TouchableOpacity>
-
-					<TouchableOpacity style={pro.link} onPress={() => navigation.navigate('AllFriends')}>
-						<Text style={pro.linkText}>Friends List</Text>
-					</TouchableOpacity>
+					
 				</View>
 
 				<View style={pro.signoutWrapper}>

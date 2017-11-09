@@ -14,9 +14,9 @@ import {
 } from 'react-native'
 
 // components
-import SearchFriends from './searchFriends'
-import InviteFriends from './inviteFriends'
-import QRCodeScanner from './qrCodeScanner'
+import PendingFriends from './pendingFriends'
+import AcceptedFriends from './acceptedFriends'
+import OutstandingFriends from './outstandingFriends'
 import NavHeader from './../../components/navHeader'
 
 // styles
@@ -29,9 +29,9 @@ class FindFriends extends Component{
 		this.state = {
 			index: 0,
 		    routes: [
-		    	{ key: 'SearchFriends', icon: 'check' },
-		    	{ key: 'InviteFriends', icon: 'minus' },
-		    	{ key: 'QRCodeScanner', icon: 'plus' },
+		    	{ key: 'AcceptedFriends', icon: 'check' },
+		    	{ key: 'PendingFriends', icon: 'minus' },
+		    	{ key: 'OutstandingFriends', icon: 'plus' },
 		    ],
 		}
 	}
@@ -43,20 +43,20 @@ class FindFriends extends Component{
 			<View style={findf.container}>
 
 				<NavHeader
-					title="Friends List"
+					title="All Friends"
 					leftIcon="chevron-left"
 					leftPress={() => navigation.goBack(null)} />
 
 				<TabViewAnimated
 			        style={findf.tabbar}
 			        navigationState={ this.state }
-			        renderScene={ SceneMap({ SearchFriends, InviteFriends, QRCodeScanner }) }
+			        renderScene={ SceneMap({ AcceptedFriends, PendingFriends, OutstandingFriends }) }
 			        renderHeader={ props => 
 			        	<TabBar 
 			        		{...props} 
 			        		style={findf.tab}
 			        		indicatorStyle={findf.tabIndicator}
-			        		renderIcon={({route}) => 
+			        		renderIcon={({ route }) => 
 			        			<Icon name={route.icon} size={20} color="#fff" />
 			        		} 
 			        	/> 

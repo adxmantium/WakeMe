@@ -56,7 +56,7 @@ export const pro = StyleSheet.create({
 	},
 	signout: {
 		backgroundColor: 'transparent',
-		..._g._padding(10),
+		..._g._padding(20),
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -74,7 +74,7 @@ export const pro = StyleSheet.create({
 	}
 });
 
-const paddTop = Platform.OS === 'android' ? 80 : 100;
+const paddTop = Platform.OS === 'android' ? 60 : 100;
 
 export const findf = StyleSheet.create({
 	container: {
@@ -172,5 +172,42 @@ export const myf = StyleSheet.create({
 	},
 	spinner: {
 		height: 20,
+	}
+});
+
+export const allf = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: _g.darkTheme.shade5,
+		..._g._padding(20),
+	},
+	title: {
+		color: _g.darkTheme.shade3,
+		fontSize: 20,
+		textAlign: 'center',
+	},
+	list: {
+		borderTopWidth: 1,
+		borderTopColor: _g.darkTheme.shade3,
+		marginTop: 20,
+		paddingTop: 20,
+	},
+	item: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	itemName: {
+		color: _g.darkTheme.shade3,
+		fontSize: 18,
+	},
+	separator: {
+		..._g._border(1, _g.darkTheme.shade5),
+	},
+	acceptBtn: {
+		width: 40,
+		height: 40,
+		alignItems: 'flex-end',
+		justifyContent: 'center',
 	}
 });
