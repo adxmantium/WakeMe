@@ -41,7 +41,7 @@ class SearchFriends extends Component{
 		const { searched } = this.state;
 		const { dispatch, _user } = this.props;
 		const { userID } = _user;
-		dispatch( searchForFriends({ searched, userID }) );
+		dispatch( searchForFriends({ searched: searched.trim(), userID }) );
 	}
 
 	_addFriend = friend => {
@@ -70,6 +70,7 @@ class SearchFriends extends Component{
 						underlineColorAndroid="transparent"
 						returnKeyType="search"
 						clearButtonMode="always"
+						autoCapitalize="words"
 						keyboardAppearance="dark"
 						selectionColor={darkTheme.shade1}
 						onFocus={ () => this.setState({focused: true}) }
