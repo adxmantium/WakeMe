@@ -1,5 +1,6 @@
 // /constants/user.js
 
+import moment from 'moment'
 import { sendNotificationPromise, deleteNotificationPromise } from './../actions/user'
 
 // r = reducer name
@@ -29,6 +30,16 @@ export const DAYS_OF_WEEK = [
 	{name: 'Friday', abbr: 'Fri', type: 'weekday'},
 	{name: 'Saturday', abbr: 'Sat', type: 'weekend'},
 ]
+
+export const DAYS_MAP = {
+	Sunday: 0,
+	Monday: 1,
+	Tuesday: 2,
+	Wednesday: 3,
+	Thursday: 4,
+	Friday: 5,
+	Saturday: 6
+}
 
 const doSelectedDaysMatchType = ({ selectedDays, daysOfType }) => {
 	let matchesType = true;
@@ -83,6 +94,63 @@ export const determineDaysSelectedType = selectedDays => {
 	if( daysList.length === DAYS_OF_WEEK.length ) return 'Everyday';
 
 	return 'Every '+daysList.join(', ');
+}
+
+export const determineNextAlarmDay = ({ selected_days, _alarm }) => {
+	const { hour, minute } = _alarm;
+	const repeat = {};
+	const todayVal = moment().day();
+	const today = moment().day( todayVal );
+
+	let selected_day = null;
+	let smallest_diff = null;
+	let dayVal = 0;
+	let diff_in_min = 0;
+	let temp_diff_in_min = 0;
+	let next_alarm_day = EMPTY_NEXT_ALARM_DAY_LABEL;
+	let next_alarm_day_moment = null;
+
+	// get only the days that are true
+	for( const day in selected_days ){
+		// if day is selected
+		if( selected_days[day] ){
+
+			repeat[day] = selected_days[day]; // cache this day
+			dayVal = DAYS_MAP[day]; // get day value from days map
+
+			selected_day = moment({ hour, minute }).day(day); // convert this day into moment object
+
+			// if same day as today, and diff in min is negative, add one week
+			// else if this day occured prior to today, add one week to this day
+			// else day comes after today, no need to manipulate day
+			if( todayVal === dayVal ){
+				temp_diff_in_min = selected_day.diff(today, 'minutes');
+				// if diff is negative value, that means set alarm time has already passed, so add one week
+				if( temp_diff_in_min < 0 ) selected_day.add(1, 'w');
+
+			}else if( todayVal > dayVal ){
+				selected_day.add(1, 'w'); // since this day already occured this week, this day next week is the day we want
+			}
+
+			diff_in_min = selected_day.diff(today, 'minutes');
+
+			// if this days diff in minutes is less than the prev diff in min (this day is closer to today), then set as closest day and update smallest_diff
+			if( diff_in_min < smallest_diff || smallest_diff === null ){
+				smallest_diff = diff_in_min;
+				next_alarm_day = day;
+				next_alarm_day_moment = selected_day;
+			}
+		}
+	}
+
+	// if next_alarm_day_moment is set, format for display
+	if( next_alarm_day_moment ) next_alarm_day = next_alarm_day_moment.format('dddd, MMM D, YYYY');
+
+	return {
+		repeat,
+		next_alarm_day,
+		next_alarm_day_moment
+	}
 }
 
 export const deleteAlarmNotifications = ({ notifications, index, ...rest }) => {
