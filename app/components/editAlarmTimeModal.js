@@ -75,9 +75,9 @@ class EditAlarmTime extends Component{
 	_getAlarmData = () => {
 		const { dispatch, _alarm } = this.props;
 		const { repeat_label, repeat } = _alarm;
-		const { notifications, hour, minute } = this.state;
+		const { notifications, hour, minute, ampm } = this.state;
 
-		const nextAlarmDayData = determineNextAlarmDay({ selected_days: repeat, hour, minute });
+		const nextAlarmDayData = determineNextAlarmDay({ selected_days: repeat, hour, minute, ampm });
 
 		return { 
 			..._alarm,
@@ -88,7 +88,7 @@ class EditAlarmTime extends Component{
 
 	_send = () => {
 		const { dispatch, _alarm, _user } = this.props;
-		const alarmData = {..._alarm, ...this.state};
+		const alarmData = this._getAlarmData();
 
 		const alarmNotifications = alarmNotificationModel({ _user, alarmData });
 

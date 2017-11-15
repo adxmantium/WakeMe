@@ -59,6 +59,7 @@
 		5C1979FF1F94722B00C924F6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C1979DE1F946EF900C924F6 /* FBSDKCoreKit.framework */; };
 		5C197A001F94722D00C924F6 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C1979DD1F946EEC00C924F6 /* Bolts.framework */; };
 		5C28B0921F8DC7BD00423C81 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C28B0781F8DC7A200423C81 /* libRCTPushNotification.a */; };
+		5C73B58F1FB546490095AEDE /* wakeme_alarm_v4_mp3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5C73B5621FB546490095AEDE /* wakeme_alarm_v4_mp3.mp3 */; };
 		5CC6FAE81FA7FEB300DEE504 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CC6FAE71FA7FEB300DEE504 /* GoogleService-Info.plist */; };
 		5CC6FAE91FA7FEB300DEE504 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CC6FAE71FA7FEB300DEE504 /* GoogleService-Info.plist */; };
 		5CC6FAEA1FA7FEB300DEE504 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CC6FAE71FA7FEB300DEE504 /* GoogleService-Info.plist */; };
@@ -452,6 +453,7 @@
 		5C1979E01F946F1700C924F6 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../../../Users/atom/Documents/FacebookSDKs-iOS-WakeMe/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		5C28B0651F8DC7A200423C81 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		5C624AB98C3642C39C6EEBE8 /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
+		5C73B5621FB546490095AEDE /* wakeme_alarm_v4_mp3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = wakeme_alarm_v4_mp3.mp3; path = ../../../../Users/atom/Documents/WakeMe/sounds/wakeme_alarm_v4_mp3.mp3; sourceTree = "<group>"; };
 		5CC6FA7E1FA78D0900DEE504 /* WakeMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = WakeMe.entitlements; path = WakeMe/WakeMe.entitlements; sourceTree = "<group>"; };
 		5CC6FAE71FA7FEB300DEE504 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Users/atom/Documents/WakeMe/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E67C749FB4B4F2893B17824 /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
@@ -826,6 +828,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				5C73B5621FB546490095AEDE /* wakeme_alarm_v4_mp3.mp3 */,
 				13B07FAE1A68108700A75B9A /* WakeMe */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* WakeMeTests */,
@@ -1471,6 +1474,7 @@
 				0907C4DDD340444286F0456D /* Roboto_medium.ttf in Resources */,
 				741557935E0F40F99AB18965 /* Roboto.ttf in Resources */,
 				4FD2BC00BAD249B8A317CC3F /* rubicon-icon-font.ttf in Resources */,
+				5C73B58F1FB546490095AEDE /* wakeme_alarm_v4_mp3.mp3 in Resources */,
 				A895772C1BD844E9BA70378E /* SimpleLineIcons.ttf in Resources */,
 				5CC6FAE81FA7FEB300DEE504 /* GoogleService-Info.plist in Resources */,
 				2D7B47F0EB7045BD83CB4420 /* Zocial.ttf in Resources */,

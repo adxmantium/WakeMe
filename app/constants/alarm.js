@@ -96,7 +96,7 @@ export const determineDaysSelectedType = selectedDays => {
 	return 'Every '+daysList.join(', ');
 }
 
-export const determineNextAlarmDay = ({ selected_days, hour, minute }) => {
+export const determineNextAlarmDay = ({ selected_days, hour, minute, ampm }) => {
 	const repeat = {};
 	const todayVal = moment().day();
 	const today = moment().day( todayVal );
@@ -108,6 +108,9 @@ export const determineNextAlarmDay = ({ selected_days, hour, minute }) => {
 	let temp_diff_in_min = 0;
 	let next_alarm_day = EMPTY_NEXT_ALARM_DAY_LABEL;
 	let next_alarm_day_moment = null;
+
+	// if pm, convert to military time
+	if( ampm === 'pm' ) hour = ''+(parseInt(hour) + 12);
 
 	// get only the days that are true
 	for( const day in selected_days ){
@@ -124,6 +127,7 @@ export const determineNextAlarmDay = ({ selected_days, hour, minute }) => {
 			// else day comes after today, no need to manipulate day
 			if( todayVal === dayVal ){
 				temp_diff_in_min = selected_day.diff(today, 'minutes');
+
 				// if diff is negative value, that means set alarm time has already passed, so add one week
 				if( temp_diff_in_min < 0 ) selected_day.add(1, 'w');
 
