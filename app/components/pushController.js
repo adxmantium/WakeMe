@@ -24,40 +24,48 @@ export default class PushController extends Component{
 
 		this.state = {
 			notifications: [],
+			notification_opened: false,
+			appState: AppState.currentState,
 		}
 	}
 
 	componentWillMount(){
         OneSignal.addEventListener('opened', this._onOpened);
 		OneSignal.addEventListener('received', this._onReceived);
+		AppState.addEventListener('change', this._appStateChange);
 	}
 
 	componentWillUnmount(){
         OneSignal.removeEventListener('opened', this._onOpened);
 		OneSignal.removeEventListener('received', this._onReceived);
+		AppState.removeEventListener('change', this._appStateChange);
 	}
 
-	componentWillUpdate(){
-		console.log('app state: ', {...AppState});
+	_appStateChange = nextAppState => {
+		const { appState, notification_opened } = this.state;
+
+		if ( appState.match(/inactive|background/) && nextAppState === 'active' ){
+			const { navigation } = this.props;
+			console.log('nav: ', navigation);
+			console.log('opened: ', this.state.notification_opened);
+	    	console.log('App has come to the foreground!')
+	    	if( !notification_opened ) navigation.navigate('Waker');
+	    }
+
+	    this.setState({appState: nextAppState});
 	}
 
 	_onReceived = data => {
 		console.log('notification received: ', data);
-
-		const { dispatch, navigation, _user, _alarm } = this.props;
-		const { repeat: selected_days, hour, minute } = _alarm;
 		const { notificationID } = data.payload;
 
-		// if( !data.isAppInFocus ){
-		// 	navigation.navigate('Waker');
-		// }
-
-		// after 1 min, determine next alarm day and create next alarm
 		this._determineNextAlarm({ notificationID });	
 	}
 
 	_onOpened = ({ action, notification }) => {
 		console.log('notification opened: ', { action, notification });
+
+		this.setState({notification_opened: true});
 
 		const { dispatch, navigation } = this.props;
 		const { notification_type, ...restOf } = notification.payload.additionalData;
