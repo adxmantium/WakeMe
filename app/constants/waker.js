@@ -40,9 +40,14 @@ export const modelWakersTable = ({ _user, to_friend, file_name, file_path }) => 
 
 // input: array of wakers
 // return: array of waker file names only
-export const modelDeleteWakers = wakers => 
+export const modelDeleteWakersFromS3 = wakers => 
   wakers.map(waker => ({"Key": waker.file_path.split('/').reverse()[0] }));
 
+// input: array of wakers
+// return: array of objects of waker_id's only
+export const modelDeleteWakersFromDB = wakers => wakers.map(({ waker_id }) => ({ waker_id }));
+
+// sensitive info required to upload files to my s3 bucket
 export const S3_OPTIONS = {
   bucket: ENV.S3_BUCKET,
   region: ENV.S3_REGION,

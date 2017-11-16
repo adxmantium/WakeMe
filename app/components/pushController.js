@@ -1,9 +1,9 @@
 // /components/pushController.js
 
 // libs
+import { Platform } from 'react-native'
 import React, { Component } from 'react'
 import OneSignal from 'react-native-onesignal'
-import { AppState, Platform } from 'react-native'
 
 // actions
 import { acceptFriendship } from './../actions/friends'
@@ -17,10 +17,6 @@ import { sendNotificationPromise, deleteAlarmNotifications } from './../actions/
 export default class PushController extends Component{
 	constructor(props){
 		super(props);
-
-		this.state = {
-			appState: AppState.currentState,
-		}
 	}
 
 	componentWillMount(){
@@ -33,24 +29,8 @@ export default class PushController extends Component{
 		OneSignal.removeEventListener('received', this._onReceived);
 	}
 
-	componentWillUpdate(){
-		console.log('AppState here: ', AppState);
-		if( AppState.currentState !== this.state.appState ){
-			const { navigation, _alarm } = this.props;
-
-			console.log(' ----- app state has changed! ----- ');
-			console.log('AppState: ', AppState);
-			console.log('appState: ', this.state.appState);
-
-			if( _alarm.triggered ){
-				console.log('alarm triggered! open waker');
-			}
-		}
-	}
-
 	_onReceived = data => {
 		console.log('notification received: ', data);
-		console.log('app state: ', AppState);
 
 		const { dispatch, navigation, _user, _alarm } = this.props;
 		const { repeat: selected_days, hour, minute } = _alarm;

@@ -81,7 +81,7 @@ export const sendWaker = ({ wakerData, last_waker_to_save }) => {
 }
 
 // delete wakers
-export const deleteWakers = wakers => {
+export const deleteWakers = ({ wakers, wakerObjects }) => {
   const pendingName = _actions.DELETING_WAKERS.toLowerCase();
   const done = _actions.DELETED_WAKERS.toLowerCase();  
 
@@ -89,7 +89,7 @@ export const deleteWakers = wakers => {
     dispatch( _userActions.pending({pendingName, type: _actions.DELETING_WAKERS_TYPE}) );  
 
     // promise
-    const response = _axios.waker.delete(route.WAKERS, {data: { wakers }});
+    const response = _axios.waker.delete(route.WAKERS, {data: { wakers, wakerObjects }});
 
     response.then(res => {
       console.log('DELETE wakers: ', res);

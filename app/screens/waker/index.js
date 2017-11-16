@@ -26,7 +26,11 @@ import { darkTheme } from './../../styles/_global'
 
 // constants
 import { deleteAlarmNotifications } from './../../constants/alarm'
-import { MIMETYPES, modelDeleteWakers } from './../../constants/waker'
+import { 
+	MIMETYPES, 
+	modelDeleteWakersFromDB,
+	modelDeleteWakersFromS3, 
+} from './../../constants/waker'
 
 /*
 	sections:
@@ -51,9 +55,14 @@ class Waker extends PureComponent{
 
 	componentWillUnmount(){
 		const { dispatch, _waker } = this.props;
-		const deleteModel = modelDeleteWakers( _waker.queue );
 
-		dispatch( deleteWakers( deleteModel ) );
+		const deleteFromS3Model = modelDeleteWakersFromS3( _waker.queue );
+		const deleteFromDBModel = modelDeleteWakersFromDB( _waker.queue );
+
+		dispatch( deleteWakers({
+			wakers: deleteFromS3Model,
+			wakerObjects: deleteFromDBModel,
+		}) );
 	}
 
 	_isVideo = () => {
