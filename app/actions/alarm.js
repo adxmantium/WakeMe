@@ -11,7 +11,7 @@ export const updateAlarm = payload => ({
   payload
 })
 
-export const saveAlarmData = ({ alarmData, alarmNotifications }) => {
+export const saveAlarmData = ({ alarmData }) => {
   const pendingName = _actions.SAVING_ALARM_DATA.toLowerCase();
   const done = _actions.SAVED_ALARM_DATA.toLowerCase();
 

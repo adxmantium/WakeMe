@@ -100,6 +100,7 @@ export const determineNextAlarmDay = ({ selected_days, hour, minute, ampm }) => 
 	const repeat = {};
 	const todayVal = moment().day();
 	const today = moment().day( todayVal );
+	const diffBy_unit = 'seconds';
 
 	let selected_day = null;
 	let smallest_diff = null;
@@ -126,7 +127,7 @@ export const determineNextAlarmDay = ({ selected_days, hour, minute, ampm }) => 
 			// else if this day occured prior to today, add one week to this day
 			// else day comes after today, no need to manipulate day
 			if( todayVal === dayVal ){
-				temp_diff_in_min = selected_day.diff(today, 'minutes');
+				temp_diff_in_min = selected_day.diff(today, diffBy_unit);
 
 				// if diff is negative value, that means set alarm time has already passed, so add one week
 				if( temp_diff_in_min < 0 ) selected_day.add(1, 'w');
@@ -135,7 +136,7 @@ export const determineNextAlarmDay = ({ selected_days, hour, minute, ampm }) => 
 				selected_day.add(1, 'w'); // since this day already occured this week, this day next week is the day we want
 			}
 
-			diff_in_min = selected_day.diff(today, 'minutes');
+			diff_in_min = selected_day.diff(today, diffBy_unit);
 
 			// if this days diff in minutes is less than the prev diff in min (this day is closer to today), then set as closest day and update smallest_diff
 			if( diff_in_min < smallest_diff || smallest_diff === null ){

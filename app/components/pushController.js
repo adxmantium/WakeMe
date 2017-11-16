@@ -1,22 +1,30 @@
 // /components/pushController.js
 
 // libs
-import { Platform } from 'react-native'
 import React, { Component } from 'react'
 import OneSignal from 'react-native-onesignal'
+import { Platform, AppState } from 'react-native'
 
 // actions
 import { acceptFriendship } from './../actions/friends'
 import { saveAlarmData, updateAlarm } from './../actions/alarm'
 
 // constants
-import { determineNextAlarmDay } from './../constants/alarm'
+import { 
+	determineNextAlarmDay,
+	sendAlarmNotifications,
+	deleteAlarmNotifications,
+} from './../constants/alarm'
+
 import { alarmNotificationModel } from './../constants/user'
-import { sendNotificationPromise, deleteAlarmNotifications } from './../actions/user'
 
 export default class PushController extends Component{
 	constructor(props){
 		super(props);
+
+		this.state = {
+			notifications: [],
+		}
 	}
 
 	componentWillMount(){
@@ -29,6 +37,10 @@ export default class PushController extends Component{
 		OneSignal.removeEventListener('received', this._onReceived);
 	}
 
+	componentWillUpdate(){
+		console.log('app state: ', {...AppState});
+	}
+
 	_onReceived = data => {
 		console.log('notification received: ', data);
 
@@ -36,14 +48,12 @@ export default class PushController extends Component{
 		const { repeat: selected_days, hour, minute } = _alarm;
 		const { notificationID } = data.payload;
 
-		if( !data.isAppInFocus ){
-			navigation.navigate('Waker');
-		}
+		// if( !data.isAppInFocus ){
+		// 	navigation.navigate('Waker');
+		// }
 
 		// after 1 min, determine next alarm day and create next alarm
-		setTimeout(() => {
-			this._sendNextAlarm({ notificationID }); 
-		}, 60000);
+		this._determineNextAlarm({ notificationID });	
 	}
 
 	_onOpened = ({ action, notification }) => {
@@ -70,8 +80,8 @@ export default class PushController extends Component{
 		}
 	}
 
-	_sendNextAlarm = ({ notificationID }) => {
-		const { notifications = [] } = _alarm;
+	_determineNextAlarm = ({ notificationID }) => {
+		const { notifications = [] } = this.props._alarm;
 		let notificationMinusThisAlarm = [...notifications];
 
 		// if notificationID is in notifications arr, remove it
@@ -83,15 +93,23 @@ export default class PushController extends Component{
 		// only if notifications is empty should we set the next set of alarms
 		if( notificationMinusThisAlarm.length === 0 ){
 			console.log('no alarm left, set new ones');
-			this._sendNewAlarms();	
+			this._createNewAlarms();	
+
 		}else{
 			console.log('there are still alarms set - no need to do anything');
+			// update db with new alarm notification list without the alarm notification that was just sent
+			const alarmData = {
+				...this.props._alarm,
+				notifications: notificationMinusThisAlarm,
+			};
+
+			this._saveAlarm( alarmData );
 		}
 
 		
 	}
 
-	_sendNewAlarms = () => {
+	_createNewAlarms = () => {
 		const { _user, _alarm } = this.props;
 		const { repeat: selected_days, hour, minute, ampm } = _alarm;
 
@@ -107,8 +125,18 @@ export default class PushController extends Component{
     	sendAlarmNotifications({ 
     		alarmNotifications, 
     		index: 0,
-    		onDone: () => console.log('sent next alarm!'),
+    		callback: notif_id => this.setState({notifications: [...this.state.notifications, notif_id]}),
+    		onDone: () => {
+    			// update alarm notifications with created alarm notifications
+    			alarmData.notifications = this.state.notifications;
+    			this._saveAlarm( alarmData );
+    		},
     	});
+	}
+
+	_saveAlarm = alarmData => {
+		console.log('new alarm data', alarmData);
+		this.props.dispatch( saveAlarmData({ alarmData }) );
 	}
 
 	render(){
