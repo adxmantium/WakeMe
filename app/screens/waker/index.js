@@ -48,6 +48,7 @@ class Waker extends PureComponent{
 			progress: 0,
 			isEnd: false,
 			isStart: true,
+			isEmpty: false,
 			isLoading: false,
 			playableItem: null,
 		};
@@ -56,13 +57,15 @@ class Waker extends PureComponent{
 	componentWillUnmount(){
 		const { dispatch, _waker } = this.props;
 
-		const deleteFromS3Model = modelDeleteWakersFromS3( _waker.queue );
-		const deleteFromDBModel = modelDeleteWakersFromDB( _waker.queue );
+		if( _waker.queue.length > 0 ){
+			const deleteFromS3Model = modelDeleteWakersFromS3( _waker.queue );
+			const deleteFromDBModel = modelDeleteWakersFromDB( _waker.queue );
 
-		dispatch( deleteWakers({
-			wakers: deleteFromS3Model,
-			wakerObjects: deleteFromDBModel,
-		}) );
+			dispatch( deleteWakers({
+				wakers: deleteFromS3Model,
+				wakerObjects: deleteFromDBModel,
+			}) );
+		}	
 	}
 
 	_isVideo = () => {
@@ -111,11 +114,14 @@ class Waker extends PureComponent{
 
 	_start = () => {
 		const { queue } = this.props._waker;
+		const newState = {isStart: false};
 
-		this.setState({
-			isStart: false,
-			playableItem: queue[this.state.index]
-		});
+		// if queue is empty, make isEmpty true
+		// else set playableItem with first queue item
+		if( !queue.length ) newState.isEmpty = true;
+		else newState.playableItem = queue[this.state.index]
+
+		this.setState( newState );
 	}
 
 	_nextItem = () => {
@@ -125,13 +131,15 @@ class Waker extends PureComponent{
 
 		if( queue[nextIndex] ){
 			this.setState({
+				isEmpty: false,
 				index: nextIndex,
 				playableItem: queue[nextIndex]
 			});
 		}else{
 			this.setState({
-				playableItem: null,
 				isEnd: true,
+				isEmpty: false,
+				playableItem: null,
 			});
 		}
 	}
@@ -148,7 +156,7 @@ class Waker extends PureComponent{
 	render(){
 		const { queue } = this.props._waker;
 		const { hour, minute, ampm } = this.props._alarm;
-		const { index, playableItem, isStart, isEnd, isLoading, progress } = this.state;
+		const { index, playableItem, isStart, isEnd, isLoading, isEmpty, progress } = this.state;
 		const isVideo = playableItem && this._isVideo();
 
 		return (
@@ -216,8 +224,15 @@ class Waker extends PureComponent{
 						<Spinner color={darkTheme.shade2} style={wake.spinner} />
 					</View> }
 
+				{ isEmpty && 
+					<ThreeLineMessage 
+						row1="You have no Wakers" 
+						row2=":(" 
+						row3="This is a good excuse to go make a friend!" /> 
+				}
+
 				{ !!isStart && <NavButton title="Start" onPress={ this._start } /> }
-				{ !!(!isStart && playableItem && !isLoading) && <NavButton title="Next" onPress={ this._nextItem } /> }
+				{ !!(!isStart && (playableItem || isEmpty) && !isLoading) && <NavButton title="Next" onPress={ this._nextItem } /> }
 				{ !!(!isStart && isEnd) && <NavButton title="Done" onPress={ this._finished } /> }
 
 				{ (!isStart && playableItem && isVideo) && 
