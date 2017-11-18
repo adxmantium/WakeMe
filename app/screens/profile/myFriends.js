@@ -108,6 +108,7 @@ class MyFriends extends Component{
 		let file_path = '';
 		let last_waker_to_save = false;
 		let ext = capturedFile.path.split('.')[1]; // get file extension
+		let friends_id = '';
 		const mime = MIMETYPES[ext]; // get mime type
 		const s3File = {
 			name: '',
@@ -117,9 +118,11 @@ class MyFriends extends Component{
 
 		// send waker to each friend
 		friends.forEach((to_friend, i) => {	
+			// if item is a friend request initiated by me, then use friend_name, else it was initiated by friend, so use name
+			friends_id = _user.id === to_friend.fb_user_id ? 'friend_fb_user_id' : 'fb_user_id';
 
 			// build file name - will be used as the waker id
-			file_name = buildFileName({ _user, to_friend });
+			file_name = buildFileName({ _user, to_friend, friends_id });
 
 			// build s3 file obj to be saved to s3 bucket
 			file = {...s3File, name: `${file_name}.${ext}`};
@@ -145,7 +148,7 @@ class MyFriends extends Component{
 	}
 
 	render(){
-		const { navigation, _waker } = this.props;
+		const { navigation, _user, _waker } = this.props;
 		const title = navigation.state.params.title || 'My Friends';
 		const { sendTo_list, sendTo_list_count, saving_waker } = this.state;
 
@@ -175,7 +178,7 @@ class MyFriends extends Component{
 		            removeClippedSubviews={false}
 		            keyExtractor={ (item, index) => item.fb_user_id }
 		            ItemSeparatorComponent={ () => <View style={myf.separator} /> }
-		            renderItem={ ({ item }) => <FriendItem {...item} onPress={ this._addToSendList } /> }
+		            renderItem={ ({ item }) => <FriendItem {...item} onPress={ this._addToSendList } my={_user} /> }
 		        />
 
 			</View>

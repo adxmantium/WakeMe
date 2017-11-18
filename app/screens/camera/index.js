@@ -38,7 +38,7 @@ const PROGRESS_INTERVAL = 200;
 const _cam = {
 	ASPECT: Camera.constants.Aspect.fill,
 	CAPTURE_TARGET: Camera.constants.CaptureTarget.disk,
-	CAPTURE_QUALITY: Camera.constants.CaptureQuality.medium,
+	CAPTURE_QUALITY: Camera.constants.CaptureQuality.high,
 }
 
 class WakeUpCamera extends Component{

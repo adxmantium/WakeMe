@@ -25,16 +25,16 @@ export const DELETING_WAKERS_TYPE = r+DELETING_WAKERS
 
 export const UPDATE_WAKER = r+'UPDATE_WAKER'
 
-export const buildFileName = ({ _user, to_friend }) => 
-  `${_user.userID}_${to_friend.friend_fb_user_id}__${moment().format('YYYY-M-D_H-mm-ss')}`
+export const buildFileName = ({ _user, to_friend, friends_id }) => 
+  `${_user.userID}_${to_friend[friends_id]}__${moment().format('YYYY-M-D_H-mm-ss')}`
 
 export const modelWakersTable = ({ _user, to_friend, file_name, file_path }) => ({
   waker_id: file_name,
   from_fb_user_id: _user.userID,
   from_name: _user.name,
-  to_fb_user_id: to_friend.friend_fb_user_id,
-  to_name: to_friend.friend_name,
-  to_device_token: to_friend.friend_device_token,
+  to_fb_user_id: _user.id === to_friend.fb_user_id ? to_friend.friend_fb_user_id : to_friend.fb_user_id,
+  to_name: _user.id === to_friend.fb_user_id ? to_friend.friend_name : name,
+  to_device_token: _user.id === to_friend.fb_user_id ? to_friend.friend_device_token : to_friend.device_token,
   file_path
 })
 

@@ -84,6 +84,7 @@ export const modelFriendsTable = ({ _user, friend }) => {
     id: `${_user.userID}_${friend.fb_user_id}`,
     fb_user_id: _user.userID,
     name: _user.name,
+    device_token: _user.onesignal_device_token,
     friend_fb_user_id: friend.fb_user_id,
     friend_name: friend.name,
     friend_device_token: friend.device_token,
