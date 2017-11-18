@@ -33,7 +33,7 @@ export const modelWakersTable = ({ _user, to_friend, file_name, file_path }) => 
   from_fb_user_id: _user.userID,
   from_name: _user.name,
   to_fb_user_id: _user.id === to_friend.fb_user_id ? to_friend.friend_fb_user_id : to_friend.fb_user_id,
-  to_name: _user.id === to_friend.fb_user_id ? to_friend.friend_name : name,
+  to_name: _user.id === to_friend.fb_user_id ? to_friend.friend_name : to_friend.name,
   to_device_token: _user.id === to_friend.fb_user_id ? to_friend.friend_device_token : to_friend.device_token,
   file_path
 })
