@@ -25,6 +25,7 @@ export default class PushController extends Component{
 		this.state = {
 			notifications: [],
 			notification_opened: false,
+			notification_received: null,
 			appState: AppState.currentState,
 		}
 	}
@@ -42,14 +43,19 @@ export default class PushController extends Component{
 	}
 
 	_appStateChange = nextAppState => {
-		const { appState, notification_opened } = this.state;
+		const { appState, notification_opened, notification_received } = this.state;
 
 		if ( appState.match(/inactive|background/) && nextAppState === 'active' ){
 			const { navigation } = this.props;
-			console.log('nav: ', navigation);
-			console.log('opened: ', this.state.notification_opened);
-	    	console.log('App has come to the foreground!')
-	    	if( !notification_opened ) navigation.navigate('Waker');
+
+	    	if( !notification_opened && notification_received ){
+	    		navigation.navigate('Waker');
+
+	    		this.setState({
+	    			notification_opened: true,
+	    			notification_received: null
+	    		});
+	    	}
 	    }
 
 	    this.setState({appState: nextAppState});
@@ -57,15 +63,19 @@ export default class PushController extends Component{
 
 	_onReceived = data => {
 		console.log('notification received: ', data);
-		const { notificationID } = data.payload;
+		const { notificationID, additionalData } = data.payload;
+		const { notification_type } = additionalData;
 
-		this._determineNextAlarm({ notificationID });	
+		if( notification_type === 'alarm' ){
+			this.setState({notification_received: notificationID});
+			this._determineNextAlarm({ notificationID });	
+		}else if( notification_type === 'friend_request_inquiry' ){
+			console.log('friend notification received');
+		}
 	}
 
 	_onOpened = ({ action, notification }) => {
 		console.log('notification opened: ', { action, notification });
-
-		this.setState({notification_opened: true});
 
 		const { dispatch, navigation } = this.props;
 		const { notification_type, ...restOf } = notification.payload.additionalData;
@@ -75,6 +85,7 @@ export default class PushController extends Component{
 
 		// if notification type is alarm - start waker
 		if( notification_type === 'alarm' ){
+			this.setState({notification_opened: true}); // set to open so that the AppState listener doesn't navigate
 			navigation.navigate('Waker');
 
 		}else if( notification_type === 'friend_request_inquiry' ){
@@ -100,7 +111,6 @@ export default class PushController extends Component{
 		// if notifications still has any alarms left after filtering don't do anything
 		// only if notifications is empty should we set the next set of alarms
 		if( notificationMinusThisAlarm.length === 0 ){
-			console.log('no alarm left, set new ones');
 			this._createNewAlarms();	
 
 		}else{
