@@ -64,7 +64,7 @@ class Profile extends PureComponent{
 				</View>
 
 				<View style={pro.qrCode}>
-					<Text style={pro.qrText}>Have a friend scan your QR Code to easily become friends!</Text>
+					<Text style={pro.qrText}>Have a friend scan your QR Code to instantly become friends!</Text>
 					<QRCode 
 						value="https://awesome.com"
 						bgColor={darkTheme.shade4}

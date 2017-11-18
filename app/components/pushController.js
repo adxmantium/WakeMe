@@ -3,7 +3,7 @@
 // libs
 import React, { Component } from 'react'
 import OneSignal from 'react-native-onesignal'
-import { Platform, AppState } from 'react-native'
+import { Platform, AppState, Alert } from 'react-native'
 
 // actions
 import { acceptFriendship } from './../actions/friends'
@@ -47,6 +47,7 @@ export default class PushController extends Component{
 
 		if ( appState.match(/inactive|background/) && nextAppState === 'active' ){
 			const { navigation } = this.props;
+			console.log('appState changed');
 
 	    	if( !notification_opened && notification_received ){
 	    		navigation.navigate('Waker');
@@ -94,9 +95,26 @@ export default class PushController extends Component{
 			if( action.actionID === 'accept' ){
 				const friend = restOf;
 				console.log('friend: ', friend);
-				// dispatch( acceptFriendship({...friend, friend_request_accepted: true}) );
+				this._acceptFriendship( friend );
+			}else{
+				console.log('no action type');
+				this._showRequestAlert( notification.payload );
 			}
 		}
+	}
+
+	_showRequestAlert = ({ title, body, additionalData, ...rest }) => {
+		const { notification_type, ...friend } = additionalData;
+		const buttons = [
+			{text: 'Accept', onPress: () => this._acceptFriendship( friend )},
+			{text: 'Not Now'},
+		];
+
+		Alert.alert(title, body, buttons);
+	}
+
+	_acceptFriendship = friend => {
+		this.props.dispatch( acceptFriendship({...friend, friend_request_accepted: true}) );
 	}
 
 	_determineNextAlarm = ({ notificationID }) => {

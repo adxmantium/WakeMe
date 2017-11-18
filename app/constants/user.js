@@ -88,6 +88,7 @@ export const modelFriendsTable = ({ _user, friend }) => {
     friend_name: friend.name,
     friend_device_token: friend.device_token,
     friend_request_accepted: false,
+    notification_type: 'friend_request_inquiry',
   }
 }
 

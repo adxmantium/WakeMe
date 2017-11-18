@@ -74,6 +74,7 @@ export default (state = init, action) => {
 				...restOfProps,
 				outstanding_list: state.outstanding_list.filter(friend => friend.id != fd.id), // we don't want this friend in outstanding list anymore
 				accepted_list: [...state.accepted_list, fd], // add this friend to accepted list
+				friends_list: [...state.friends_list, fd], // add this friend to accepted list
 			}
 
 		// return state back to original
