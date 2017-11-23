@@ -50,6 +50,7 @@
 		46852D36B3D443EAA904F539 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB7EA4D9E032436C874FB8EB /* Foundation.ttf */; };
 		48C7FDDC74EF418B85C12C03 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 318E5D8251104245A0439020 /* EvilIcons.ttf */; };
 		4AFFE23827BEBE61E68472D2 /* libPods-WakeMeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C000A045150659F6764156 /* libPods-WakeMeTests.a */; };
+		4B6476EAED704D44B9FC0523 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78171EEF249A4A2488E6FC29 /* libReactNativePermissions.a */; };
 		4EB31F8921AD4658822AC4BC /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D98F6B6301E46A6AD66700D /* MaterialIcons.ttf */; };
 		4F25B740C290421F979CB5D8 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 187F45206C0F4D778FA0E93C /* EvilIcons.ttf */; };
 		4FD2BC00BAD249B8A317CC3F /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2EFE855F644E48D5AD5FDB5D /* rubicon-icon-font.ttf */; };
@@ -357,6 +358,13 @@
 			remoteGlobalIDString = 4107012F1ACB723B00C6AA39;
 			remoteInfo = RCTCamera;
 		};
+		5CA95FE11FC02C7A00DAAF4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8A981FBE15B4DD0A6342B75 /* ReactNativePermissions.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9D23B34F1C767B80008B4819;
+			remoteInfo = ReactNativePermissions;
+		};
 		5CC6FA7C1FA78BF800DEE504 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5C624AB98C3642C39C6EEBE8 /* RCTOneSignal.xcodeproj */;
@@ -463,6 +471,7 @@
 		5FE5B0841C2442789B1C3D86 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		5FECF5C8AB2A44AF988F97DC /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		648802ADC992415EA0976E59 /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
+		78171EEF249A4A2488E6FC29 /* libReactNativePermissions.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativePermissions.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7A950BD4CC716A69721ADF0D /* Pods-WakeMe-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WakeMe-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WakeMe-tvOSTests/Pods-WakeMe-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7AF9752D150C43E08BF916A7 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
@@ -486,6 +495,7 @@
 		D5F93A6559ED49528EA966C9 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		D6F02414CA204B5D87DBA8FA /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		D7C18DD45C154A028FE0FAEE /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
+		D8A981FBE15B4DD0A6342B75 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
 		D8BAFA352C0A4F2CAFAA2A29 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		E5D5986366A6D46A9D0CC84D /* Pods-WakeMeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WakeMeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WakeMeTests/Pods-WakeMeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EB7EA4D9E032436C874FB8EB /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
@@ -532,6 +542,7 @@
 				602B4066FC004F8B9BAC6FE5 /* libRCTOneSignal.a in Frameworks */,
 				9CC6DA4F2DBD4634B6CA3D62 /* libRNFirebase.a in Frameworks */,
 				CF6F5102FC46A4A70588E3B6 /* libPods-WakeMe.a in Frameworks */,
+				4B6476EAED704D44B9FC0523 /* libReactNativePermissions.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,6 +746,7 @@
 				648802ADC992415EA0976E59 /* libRCTFBSDK.a */,
 				D7C18DD45C154A028FE0FAEE /* libRCTOneSignal.a */,
 				87FE6C6C202647848589A7FC /* libRNFirebase.a */,
+				78171EEF249A4A2488E6FC29 /* libReactNativePermissions.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -751,6 +763,14 @@
 			isa = PBXGroup;
 			children = (
 				5C7C5BF61F8C990E00CD3017 /* libRCTCamera.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5CA95FDE1FC02C7A00DAAF4D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5CA95FE21FC02C7A00DAAF4D /* libReactNativePermissions.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -812,6 +832,7 @@
 				09A4DF4B04424D6F90FD2A2B /* RCTFBSDK.xcodeproj */,
 				5C624AB98C3642C39C6EEBE8 /* RCTOneSignal.xcodeproj */,
 				D6F02414CA204B5D87DBA8FA /* RNFirebase.xcodeproj */,
+				D8A981FBE15B4DD0A6342B75 /* ReactNativePermissions.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1120,6 +1141,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 5CA95FDE1FC02C7A00DAAF4D /* Products */;
+					ProjectRef = D8A981FBE15B4DD0A6342B75 /* ReactNativePermissions.xcodeproj */;
+				},
+				{
 					ProductGroup = 5CC6FADB1FA7FA2200DEE504 /* Products */;
 					ProjectRef = D6F02414CA204B5D87DBA8FA /* RNFirebase.xcodeproj */;
 				},
@@ -1396,6 +1421,13 @@
 			fileType = archive.ar;
 			path = libRCTCamera.a;
 			remoteRef = 5C7C5BF51F8C990E00CD3017 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5CA95FE21FC02C7A00DAAF4D /* libReactNativePermissions.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativePermissions.a;
+			remoteRef = 5CA95FE11FC02C7A00DAAF4D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5CC6FA7D1FA78BF800DEE504 /* libRCTOneSignal.a */ = {
@@ -1818,12 +1850,14 @@
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/RCTOneSignal/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 				INFOPLIST_FILE = WakeMeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1855,12 +1889,14 @@
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/RCTOneSignal/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 				INFOPLIST_FILE = WakeMeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -1899,6 +1935,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 				INFOPLIST_FILE = WakeMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1937,6 +1974,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 				INFOPLIST_FILE = WakeMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1972,11 +2010,13 @@
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/RCTOneSignal/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 				INFOPLIST_FILE = "WakeMe-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -2013,11 +2053,13 @@
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/RCTOneSignal/**",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions/**",
 				);
 				INFOPLIST_FILE = "WakeMe-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -2051,6 +2093,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.WakeMe-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2076,6 +2119,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);

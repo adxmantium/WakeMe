@@ -5,6 +5,7 @@ import Camera from 'react-native-camera'
 import React, { Component } from 'react'
 import Fab from 'react-native-action-button'
 import * as Progress from 'react-native-progress'
+import Permissions from 'react-native-permissions'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Ionicon from 'react-native-vector-icons/Ionicons'
 import {
@@ -53,6 +54,23 @@ class WakeUpCamera extends Component{
 			activeIcon: 'camera',
 			inactiveIcon: 'video-camera',
 		};
+	}
+
+	componentWillMount(){
+		const { navigation } = this.props;
+
+		Permissions.check('microphone')
+				   .then(perm => {
+				   		// if microphone is not authorized, then request it
+					   	if( perm !== 'authorized' ){
+					   		Permissions.request('microphone')
+									   .then(res => {
+									   		console.log('res: ', res)
+									   		// if permission declined, then go back
+									   		if( res !== 'authorized' ) navigation.goBack(null);
+									   });
+					   	}
+				   });	
 	}
 
 	componentWillUnmount(){

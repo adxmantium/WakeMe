@@ -20,6 +20,7 @@
 		"react-native-fbsdk": "^0.6.3",
 		"react-native-firebase": "^3.0.5",
 		"react-native-onesignal": "^3.0.6",
+		"react-native-permissions": "^1.0.1",
 		"react-native-progress": "^3.4.0",
 		"react-native-push-notification": "^3.0.1",
 		"react-native-qrcode": "^0.2.6",

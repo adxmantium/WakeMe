@@ -3719,6 +3719,10 @@ react-native-onesignal@^3.0.6:
   dependencies:
     invariant "^2.2.2"
 
+react-native-permissions@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-1.0.1.tgz#b45c369763c4e298ba52ff9392ca807cbcdd6424"
+
 react-native-progress@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/react-native-progress/-/react-native-progress-3.4.0.tgz#c002e6efb2f0b82dd6889510e669c492da2718ac"
