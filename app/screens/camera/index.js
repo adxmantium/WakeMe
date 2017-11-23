@@ -56,9 +56,11 @@ class WakeUpCamera extends Component{
 		};
 	}
 
-	componentWillMount(){
-		const { navigation } = this.props;
+	componentWillUnmount(){
+		this._stopTimer();
+	}
 
+	_checkPermissions = () => {
 		Permissions.check('microphone')
 				   .then(perm => {
 				   		// if microphone is not authorized, then request it
@@ -66,15 +68,9 @@ class WakeUpCamera extends Component{
 					   		Permissions.request('microphone')
 									   .then(res => {
 									   		console.log('res: ', res)
-									   		// if permission declined, then go back
-									   		if( res !== 'authorized' ) navigation.goBack(null);
 									   });
 					   	}
-				   });	
-	}
-
-	componentWillUnmount(){
-		this._stopTimer();
+				   });
 	}
 
 	_capture = () => {
