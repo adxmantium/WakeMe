@@ -149,6 +149,28 @@ export const findf = StyleSheet.create({
 		width: 40,
 		justifyContent: 'center',
 		alignItems: 'flex-end',
+	},
+	qrFound: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	qrAdding: {
+		color: _g.white,
+		fontSize: 18,
+	},
+	qrAddingName: {
+		color: _g.darkTheme.shade2,
+		fontSize: 24,
+		fontWeight: '600',
+	},
+	qrAddSuccess: {
+		fontSize: 30,
+		color: _g.white,
+		textAlign: 'center',
+	},
+	qrMarg: {
+		..._g._margin(20, 0, 20, 0),
 	}
 });
 

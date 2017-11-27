@@ -25,7 +25,7 @@ import { findf } from './../../styles/profile'
 import { darkTheme } from './../../styles/_global'
 
 // constants
-import { modelFriendsTable, friendRequestModel } from './../../constants/user'
+import { modelFriendsTable } from './../../constants/user'
 
 class SearchFriends extends Component{
 	constructor(props){
@@ -50,7 +50,7 @@ class SearchFriends extends Component{
 		const addFriendData = modelFriendsTable({ _user, friend });
 
 		dispatch( addFriend( addFriendData ) );
-	}
+	}	
 
 	render(){
 		const { navigation, _friends } = this.props;

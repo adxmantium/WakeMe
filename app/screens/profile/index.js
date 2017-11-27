@@ -42,9 +42,20 @@ class Profile extends PureComponent{
 		navigation.dispatch( resetStackAndNavTo(['Entry']) );
 	}
 
+	_qrValue = () => {
+		const { _user } = this.props;
+
+		return JSON.stringify({
+			name: _user.name,
+			fb_user_id: _user.id,
+			device_token: _user.onesignal_device_token,
+		});
+	}
+
 	render(){
 		const { navigation, _user, _friends } = this.props;
 		const { name, picture } = _user;
+		const qrValue = this._qrValue();
 
 		return (
 			<View style={pro.container}>
@@ -66,7 +77,7 @@ class Profile extends PureComponent{
 				<View style={pro.qrCode}>
 					<Text style={pro.qrText}>Have a friend scan your QR Code to instantly become friends!</Text>
 					<QRCode 
-						value="https://awesome.com"
+						value={ qrValue }
 						bgColor={darkTheme.shade4}
 						fgColor={darkTheme.shade3} />
 				</View>

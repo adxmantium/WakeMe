@@ -30,7 +30,7 @@ class FindFriends extends Component{
 			index: 0,
 		    routes: [
 		    	{ key: 'SearchFriends', icon: 'search' },
-		    	{ key: 'InviteFriends', icon: 'address-book-o' },
+		    	// { key: 'InviteFriends', icon: 'address-book-o' },
 		    	{ key: 'QRCodeScanner', icon: 'qrcode' },
 		    ],
 		}
