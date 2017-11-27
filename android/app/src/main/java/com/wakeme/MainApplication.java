@@ -3,6 +3,7 @@ package com.wakeme;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.imagepicker.ImagePickerPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -39,6 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ImagePickerPackage(),
             new RNFirebasePackage(),
             new ReactNativeOneSignalPackage(),
             new FBSDKPackage(mCallbackManager),

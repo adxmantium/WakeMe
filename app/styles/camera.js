@@ -38,6 +38,17 @@ export const cap = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#fff',
+	},
+	upload: {
+		..._g._border(1, '#fff'),
+		borderRadius: 100,
+		padding: 13,
+		position: 'absolute',
+		bottom: 20,
+		left: 20,
+	},
+	uploadIcon: {
+		backgroundColor: 'transparent'
 	}
 });
 
@@ -87,6 +98,12 @@ export const capt = StyleSheet.create({
 	},
 	player: {
 		flex: 1,
+	},
+	mute: {
+		backgroundColor: 'transparent',
+	},
+	muteIcon: {
+		backgroundColor: 'transparent',
 	}
 });
 

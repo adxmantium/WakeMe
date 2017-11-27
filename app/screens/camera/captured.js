@@ -25,12 +25,14 @@ class Captured extends Component{
 	constructor(props){
 		super(props);
 
-		this.state = {};
+		this.state = {
+			mute: false,
+		};
 	}
 
 	_send = () => {
-		const { navigation, dispatch } = this.props;
-		dispatch( saveWakeupCall() );
+		this._mute(true);
+		this.props.navigation.navigate('MyFriends', {title: 'Send to...'});
 	}
 
 	_isVideo = () => {
@@ -42,31 +44,40 @@ class Captured extends Component{
 			const mime = MIMETYPES[ext];
 			isVideo = mime.includes('video'); // is video if mimetype contains video
 		}else{
-			isVideo = !!capturedFile.duration;
+			isVideo = capturedFile.uri && capturedFile.fileName.toLowerCase().includes('mov');
 		}
 
 		return isVideo;
 	}
 
+	_mute = forceTo => {
+		this.setState({mute: typeof forceTo != 'undefined' ? forceTo : !this.state.mute});
+	}
+
 	render(){
 		const { navigation, _camera } = this.props;
+		const { mute } = this.state;
 		const { capturedFile } = _camera;
+		const { uri, path } = capturedFile;
+		const isVideo = this._isVideo();
 
 		return (
-			<View style={capt.container}>
+			<View style={capt.container}>	
 
-				{ this._isVideo() ? 
+				{ isVideo ? 
 					<Video
 						ref={ p => { this._player = p; } }
-						source={{uri: capturedFile.path}}
-						resizeMode="cover"
+						source={{uri: path || uri}}
+						resizeMode="contain"
 						repeat={true}
+						volume={1.0}
+						muted={mute}
 				    	playInBackground={false}
 				    	playWhenInactive={false}
 				    	onProgress={ this._onProgress }
 				    	style={capt.player} /> 
 					: 
-					<Image source={{uri: capturedFile.path}} style={capt.file} /> 
+					<Image source={{uri: path || uri}} style={capt.file} /> 
 				}	
 
 				<View style={capt.actions}>
@@ -77,9 +88,20 @@ class Captured extends Component{
 						</TouchableOpacity>
 					</View>
 
+					{ isVideo && 
+						<View style={capt.action}>
+							<Text style={capt.label}>{mute ? 'Off' : 'On'}</Text>
+							<TouchableOpacity 
+								style={[capt.btn, capt.mute]}
+								onPress={ () => this._mute() }>
+									<Icon name={mute ? 'volume-off' : 'volume-up'} color="#fff" size={30} style={capt.muteIcon} />
+							</TouchableOpacity> 
+						</View>
+					}
+
 					<View style={capt.action}>
 						<Text style={capt.label}>Send</Text>
-						<TouchableOpacity onPress={ () => navigation.navigate('MyFriends', {title: 'Send to...'}) } style={[capt.btn, capt.send]}>
+						<TouchableOpacity onPress={ this._send } style={[capt.btn, capt.send]}>
 							<Icon name="check" size={30} color="#fff" />
 						</TouchableOpacity>
 					</View>

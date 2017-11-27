@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 import Fab from 'react-native-action-button'
 import * as Progress from 'react-native-progress'
 import Permissions from 'react-native-permissions'
+import ImagePicker from 'react-native-image-picker'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Ionicon from 'react-native-vector-icons/Ionicons'
 import {
@@ -42,6 +43,11 @@ const _cam = {
 	CAPTURE_QUALITY: Camera.constants.CaptureQuality.high,
 }
 
+const PICKER_OPTIONS = {
+	title: 'Choose Image/Video from your Library',
+	mediaType: 'mixed'
+}
+
 class WakeUpCamera extends Component{
 	constructor(props){
 		super(props);
@@ -56,6 +62,11 @@ class WakeUpCamera extends Component{
 		};
 	}
 
+	componentWillMount(){
+		this._checkPermissions();
+		Camera.checkDeviceAuthorizationStatus().then(res => console.log('res here: ', res));
+	}
+
 	componentWillUnmount(){
 		this._stopTimer();
 	}
@@ -64,6 +75,7 @@ class WakeUpCamera extends Component{
 		Permissions.check('microphone')
 				   .then(perm => {
 				   		// if microphone is not authorized, then request it
+				   		console.log('perm: ', perm);
 					   	if( perm !== 'authorized' ){
 					   		Permissions.request('microphone')
 									   .then(res => {
@@ -93,14 +105,13 @@ class WakeUpCamera extends Component{
 
 		const { dispatch, navigation, _waker } = this.props;
 
+
+		Camera.checkDeviceAuthorizationStatus().then(res => console.log('res here: ', res));
+
 		// start capture of pic/vid
 		this._camera
 			.capture({ metadata })
-		 	.then(capturedFile => {
-		 		// dispatch captured file to store
-	 			dispatch( captured({ capturedFile }) );
-		 		navigation.navigate('Captured');
-		 	})
+		 	.then(this._imageCaptured)
 		 	.catch(err => {});
 	}
 
@@ -153,6 +164,15 @@ class WakeUpCamera extends Component{
 		this.setState({ type });
 	}
 
+	_imageCaptured = capturedFile => {
+		console.log('picker res: ', capturedFile);
+		if( !capturedFile.didCancel ){
+			const { navigation, dispatch } = this.props;
+			dispatch( captured({ capturedFile }) );
+			navigation.navigate('Captured');
+		}	
+	}
+
 	render(){
 		const { navigation } = this.props;
 		const { capture, type, mode, activeIcon, inactiveIcon, isRecording, progress } = this.state;
@@ -183,13 +203,20 @@ class WakeUpCamera extends Component{
 							leftPress={ () => navigation.goBack(null) }
 							rightPress={ this._toggleCamType } />
 
+						<TouchableOpacity
+							style={cap.upload}
+							onPress={() => ImagePicker.launchImageLibrary(PICKER_OPTIONS, this._imageCaptured)}>
+							<Icon name="upload" size={25} color="#fff" style={cap.uploadIcon} />
+						</TouchableOpacity>
+
 						<TouchableOpacity 
 							onPress={ this._capture }
 							style={cap.captureBtn}>
 								<Icon name={captureBtnIcon} size={30} color="#000" />	
 						</TouchableOpacity>
 
-						<Fab 
+						{/* will come back and fix in v2 */}
+						{/*<Fab 
 							buttonColor="#fff"
 							position="right"
 							offsetX={20}
@@ -202,7 +229,7 @@ class WakeUpCamera extends Component{
 										<Icon name={inactiveIcon} size={SIZE} color={COLOR} />
 								</Fab.Item>
 
-						</Fab>
+						</Fab>*/}
 
 						{ capture === 'video' && 
 							<View style={wake.progessWrapper}>

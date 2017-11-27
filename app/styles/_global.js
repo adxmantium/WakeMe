@@ -61,7 +61,7 @@ export const _borderRadius = (tl, tr, br, bl) => ({
 
 export const _border = (width, color, type) => ({
   borderWidth: width || 1,
-  borderColor: color || _gray,
+  borderColor: color || error,
   borderStyle: type || 'solid',
 });
 

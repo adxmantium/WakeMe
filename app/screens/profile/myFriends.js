@@ -107,13 +107,14 @@ class MyFriends extends Component{
 		let file_name = '';
 		let file_path = '';
 		let last_waker_to_save = false;
-		let ext = capturedFile.path.split('.')[1]; // get file extension
 		let friends_id = '';
+		const pathname = capturedFile.path || capturedFile.uri;
+		const ext = pathname.split('.')[1].toLowerCase(); // get file extension
 		const mime = MIMETYPES[ext]; // get mime type
 		const s3File = {
 			name: '',
 			type: mime,
-			uri: capturedFile.path,
+			uri: capturedFile.uri || capturedFile.path,
 		};
 
 		// send waker to each friend
@@ -143,7 +144,7 @@ class MyFriends extends Component{
 
 					dispatch( sendWaker({ wakerData, last_waker_to_save }) );
 				})
-				.catch(err => {});
+				.catch(err => {console.log('s3 err: ', err);});
 		})	
 	}
 
