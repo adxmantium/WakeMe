@@ -64,7 +64,6 @@ class WakeUpCamera extends Component{
 
 	componentWillMount(){
 		this._checkPermissions();
-		Camera.checkDeviceAuthorizationStatus().then(res => console.log('res here: ', res));
 	}
 
 	componentWillUnmount(){
@@ -104,9 +103,6 @@ class WakeUpCamera extends Component{
 		}
 
 		const { dispatch, navigation, _waker } = this.props;
-
-
-		Camera.checkDeviceAuthorizationStatus().then(res => console.log('res here: ', res));
 
 		// start capture of pic/vid
 		this._camera
