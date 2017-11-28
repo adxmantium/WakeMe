@@ -38,9 +38,6 @@ export const pro = StyleSheet.create({
 		fontSize: 18,
 		marginBottom: 5,
 	},
-	links: {
-		// ..._g._border(1, 'white'),
-	},
 	link: {
 		..._g._padding(10),
 		backgroundColor: 'transparent',
@@ -50,9 +47,6 @@ export const pro = StyleSheet.create({
 		color: _g.darkTheme.shade2,
 		fontSize: 18,
 		fontWeight: '400',
-	},
-	signoutWrapper: {
-		// ..._g._border(1, 'red'),
 	},
 	signout: {
 		backgroundColor: 'transparent',
@@ -65,12 +59,16 @@ export const pro = StyleSheet.create({
 	},
 	qrCode: {
 		alignItems: 'center',
-		..._g._padding(0, 60, 0, 60),
 	},
 	qrText: {
 		color: _g.darkTheme.shade3,
 		textAlign: 'center',
-		marginBottom: 10,
+		..._g._margin(0, 70, 10, 70),
+	},
+	qrBg: {
+		backgroundColor: _g.darkTheme.shade3,
+		padding: 10,
+		borderRadius: 5,
 	}
 });
 
@@ -156,21 +154,31 @@ export const findf = StyleSheet.create({
 		alignItems: 'center',
 	},
 	qrAdding: {
-		color: _g.white,
+		color: _g.darkTheme.shade3,
 		fontSize: 18,
+		textAlign: 'center',
 	},
 	qrAddingName: {
-		color: _g.darkTheme.shade2,
+		color: _g.darkTheme.shade3,
 		fontSize: 24,
 		fontWeight: '600',
+		textAlign: 'center',
 	},
 	qrAddSuccess: {
 		fontSize: 30,
-		color: _g.white,
+		color: _g.darkTheme.shade3,
 		textAlign: 'center',
 	},
 	qrMarg: {
 		..._g._margin(20, 0, 20, 0),
+	},
+	reset: {
+		..._g._padding(10, 50, 10, 50),
+		marginTop: 20,
+	},
+	resetText: {
+		color: _g.darkTheme.shade2,
+		fontSize: 16,
 	}
 });
 

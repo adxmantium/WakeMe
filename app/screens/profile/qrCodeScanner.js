@@ -4,6 +4,7 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import Camera from 'react-native-camera'
+import * as Animatable from 'react-native-animatable'
 import {
 	View,
 	Text,
@@ -35,9 +36,11 @@ class QRCodeScanner extends Component{
 		super(props);
 
 		this.state = {
+			qrFriend: {},
 			captured: false,
+			addPending: false,
 			addedFriend: false,
-			qrFriend: {}
+			alreadyFriends: false,
 		}
 	}
 
@@ -45,53 +48,88 @@ class QRCodeScanner extends Component{
 		const pending = this.props._friends[ACCEPTING_FRIENDSHIP.toLowerCase()];
 		const next_pending = np._friends[ACCEPTING_FRIENDSHIP.toLowerCase()];
 
-		console.log('this: ', pending);
-		console.log('next: ', next_pending);
 		// change state of addedFriend only when this pending is true and next pending is false, meaning the request has returned
 		if( pending !== next_pending && pending && !next_pending ){
-			this.setState({addedFriend: true});
+			this.setState({
+				addedFriend: true, 
+				addPending: false,
+				alreadyFriends: false,
+			});
 		}
 	}
 
 	_qrCaptured = ({ bounds, data, type }) => {
-		console.log('qr data: ', data);
-
 		if( type === 'org.iso.QRCode' ){
-			this.setState({captured: true});
-			this._addFriend( JSON.parse(data) );
+			const qrFriend = JSON.parse(data);
+
+			this.setState({ captured: true, qrFriend });
+			this._addFriend( qrFriend );
 		}
 	}
 
 	_addFriend = friend => {
-		const { dispatch, _user } = this.props;
+		const { dispatch, _user, _friends } = this.props;
 
-		// build data to model Users table in DB
-		const addFriendData = modelFriendsTable({ _user, friend });
-		console.log('qr add: ', {...addFriendData, friend_request_accepted: true});
+		// check if this person is already a friend
+		const friend_found = _friends.friends_list.slice().find(fr => fr.id.includes(friend.fb_user_id));
 
-		// dispatch( acceptFriendship( {...addFriendData, friend_request_accepted: true} ) );
+		if( !friend_found ){
+			// if here, this person is not your friend yet
+			const addFriendData = modelFriendsTable({ _user, friend });
+			dispatch( acceptFriendship( {...addFriendData, friend_request_accepted: true} ) );
+
+		}else if( friend_found.friend_request_accepted ){
+			// if here, this person is already your friend
+			this.setState({captured: true, alreadyFriends: true});
+
+		}else{
+			// if here, friend found, but has not accepted friend request
+			this.setState({addPending: true});
+			dispatch( acceptFriendship( {...friend_found, friend_request_accepted: true} ) );
+		}
+
+	}
+
+	_reset = () => {
+		this.setState({
+			qrFriend: {},
+			captured: false, 
+			addPending: false,
+			addedFriend: false,
+			alreadyFriends: false,
+		});
 	}
 
 	render(){
 		const { navigation } = this.props;
-		const { captured, addedFriend, qrFriend } = this.state;
+		const { captured, addedFriend, qrFriend, alreadyFriends, addPending } = this.state;
 
 		return (
 			<View style={findf.qrContainer}>
 
-				{ !captured ? 
+				{ captured ? 
 					<View style={findf.qrFound}>
-						{ !addedFriend ? 
-							<Text style={findf.qrAdding}>Adding 
-								<Text style={findf.qrAddingName}>{qrFriend.name}</Text>
+						{ (!addedFriend && !alreadyFriends) &&
+							<Animatable.Text animation="fadeInRight" style={findf.qrAdding}>Adding 
+								<Text style={findf.qrAddingName}> {qrFriend.name}</Text>
 								...
-							</Text>
-							:
-							<View>
-								<Text style={findf.qrAddSuccess}>Success!</Text>
-								<Text style={[findf.qrAdding, findf.qrMarg]}>You are now friends with</Text>
+							</Animatable.Text>
+						}
+
+						{ ((!addedFriend && alreadyFriends) || (addedFriend && !alreadyFriends)) && 
+							<Animatable.View animation="fadeInRight">
+								<Text style={findf.qrAddSuccess}>{ alreadyFriends ? 'Hey, Silly!' : 'Success!' }</Text>
+								<Text style={[findf.qrAdding, findf.qrMarg]}>{ alreadyFriends ? 'You are already friends with' : 'You are now friends with' }</Text>
 								<Text style={findf.qrAddingName}>{qrFriend.name}</Text>
-							</View>
+							</Animatable.View>
+						}
+
+						{ !addPending && 
+							<TouchableOpacity 
+								style={findf.reset}
+								onPress={ this._reset }>
+									<Animatable.Text animation="fadeInRight" style={findf.resetText}>Scan another friend</Animatable.Text>
+							</TouchableOpacity>
 						}
 					</View>
 					:
