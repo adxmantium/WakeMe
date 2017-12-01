@@ -8,12 +8,14 @@ import {
   View,
   Text,
   StatusBar,
+  AsyncStorage,
   TouchableOpacity,
 } from 'react-native'
 
 // components
 import SetAlarm from './setAlarm'
 import AlarmHeader from './header'
+import InfoModal from './../../components/infoModal'
 import NavHeader from './../../components/navHeader'
 import PushController from './../../components/pushController'
 import BackgroundImage from './../../components/backgroundImage'
@@ -22,6 +24,10 @@ import BackgroundImage from './../../components/backgroundImage'
 import { main, darkTheme, darkThemeObj } from './../../styles/alarm'
 
 const theme = darkTheme;
+const infoBody = [
+	'Do not close the app after you enable your alarm.',
+	'Do not put your phone in silent mode in order to hear the alarm sound.',
+];
 
 class Alarm extends PureComponent{
 	constructor(props){
@@ -30,13 +36,35 @@ class Alarm extends PureComponent{
 		this.state = {
 			slideUp: false,
 			editTime: false,
+			hideUsageMsg: false,
+			openInfoModal: false,
+			infoActions: [
+				{name: 'ok', title: 'Ok, got it!', onPress: () => this.setState({openInfoModal: false})},
+				{name: 'dontshow', title: "Got it and don't show this message again.", onPress: this._dontShowMsgAgain}
+			]
 		}
 	}	
+
+	componentWillMount(){
+		console.log('mounted');		
+
+		AsyncStorage.getItem('neverShowAppUsageMsg')
+					.then(val => this.setState({hideUsageMsg: val === '1'}));
+	}
+
+	_dontShowMsgAgain = () => {
+		AsyncStorage.setItem('neverShowAppUsageMsg', '1');
+		this._toggleModal(false);
+	}
+
+	_toggleModal = bool => {
+		this.setState({openInfoModal: bool});
+	}
 
 	render(){
 		const { navigation, _alarm } = this.props;
 		const { hour, minute, ampm, enabled, next_alarm_day } = _alarm;
-		const { editTime, slideUp } = this.state;
+		const { editTime, slideUp, openInfoModal, infoActions, hideUsageMsg } = this.state;
 
 		return (
 			<View style={[main.container, theme.bg]}>
@@ -84,7 +112,14 @@ class Alarm extends PureComponent{
 							color={darkThemeObj.menuIcon} />
 				</TouchableOpacity>
 
-				{ slideUp && <SetAlarm /> }
+				{ slideUp && <SetAlarm toggleModal={!hideUsageMsg && this._toggleModal} /> }
+
+				{ openInfoModal && 
+					<InfoModal 
+						title="For the alarm to work completely..."
+						body={ infoBody }
+						actions={ infoActions } />
+				}
 
 			</View>
 		);

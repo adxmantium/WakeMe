@@ -97,6 +97,14 @@ class SetAlarm extends Component{
 		this.props.dispatch( saveAlarmData({ alarmData }) );
 	}
 
+	_toggleModalThenSave = enabled => {
+		const { toggleModal } = this.props;
+
+		toggleModal && toggleModal(enabled);
+		
+		this._save(enabled);	
+	}
+
 	render(){
 		const { dispatch, _alarm } = this.props;
 		const { hour, minute, ampm, repeat_label, enabled } = _alarm;
@@ -112,7 +120,7 @@ class SetAlarm extends Component{
 							value={ enabled }
 							onTintColor={themeObj.menuActive}
 							thumbTintColor={themeObj.menuInactive}
-							onValueChange={ this._save } />
+							onValueChange={ this._toggleModalThenSave } />
 					</View>
 
 					<TouchableOpacity 

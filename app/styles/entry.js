@@ -43,3 +43,47 @@ export const entry = StyleSheet.create({
 		marginLeft: 10,
 	}
 });
+
+export const info = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: 'rgba(0,0,0,0.8)',
+		padding: 25,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	innerContainer: {
+		padding: 25,
+		borderRadius: 3,
+		..._g._border(1, _g.darkTheme.shade3),
+		backgroundColor: 'rgba(0,0,0,0.75)',
+	},
+	title: {
+		fontSize: 25,
+		color: _g.darkTheme.shade3,
+	},
+	body: {
+		color: _g.darkTheme.shade3,
+		marginTop: 20,
+		fontSize: 18,
+	},
+	actions: {
+		alignItems: 'flex-start',
+	},
+	action: {
+		marginTop: 20,
+	},
+	ok: {
+		..._g._border(1, _g.darkTheme.shade2),
+		borderRadius: 3,
+		..._g._padding(5, 10, 5, 10),
+	},
+	dontshow: {
+		fontSize: 14,
+		color: _g.darkTheme.shade1,
+	},
+	actionTxt: {
+		color: _g.darkTheme.shade2,
+		fontSize: 20,
+	}
+});

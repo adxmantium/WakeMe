@@ -47,7 +47,7 @@ export default class PushController extends Component{
 
 		if ( appState.match(/inactive|background/) && nextAppState === 'active' ){
 			const { navigation } = this.props;
-			console.log('appState changed');
+			// console.log('appState changed');
 
 	    	if( !notification_opened && notification_received ){
 	    		navigation.navigate('Waker');
@@ -63,7 +63,7 @@ export default class PushController extends Component{
 	}
 
 	_onReceived = data => {
-		console.log('notification received: ', data);
+		// console.log('notification received: ', data);
 		const { notificationID, additionalData } = data.payload;
 		const { notification_type } = additionalData;
 
@@ -71,12 +71,12 @@ export default class PushController extends Component{
 			this.setState({notification_received: notificationID});
 			this._determineNextAlarm({ notificationID });	
 		}else if( notification_type === 'friend_request_inquiry' ){
-			console.log('friend notification received');
+			// console.log('friend notification received');
 		}
 	}
 
 	_onOpened = ({ action, notification }) => {
-		console.log('notification opened: ', { action, notification });
+		// console.log('notification opened: ', { action, notification });
 
 		const { dispatch, navigation } = this.props;
 		const { notification_type, ...restOf } = notification.payload.additionalData;
@@ -94,10 +94,10 @@ export default class PushController extends Component{
 			// accept friend request only if actionID is 'accept'
 			if( action.actionID === 'accept' ){
 				const friend = restOf;
-				console.log('friend: ', friend);
+				// console.log('friend: ', friend);
 				this._acceptFriendship( friend );
 			}else{
-				console.log('no action type');
+				// console.log('no action type');
 				this._showRequestAlert( notification.payload );
 			}
 		}
@@ -132,7 +132,7 @@ export default class PushController extends Component{
 			this._createNewAlarms();	
 
 		}else{
-			console.log('there are still alarms set - no need to do anything');
+			// console.log('there are still alarms set - no need to do anything');
 			// update db with new alarm notification list without the alarm notification that was just sent
 			const alarmData = {
 				...this.props._alarm,
@@ -171,7 +171,7 @@ export default class PushController extends Component{
 	}
 
 	_saveAlarm = alarmData => {
-		console.log('new alarm data', alarmData);
+		// console.log('new alarm data', alarmData);
 		this.props.dispatch( saveAlarmData({ alarmData }) );
 	}
 

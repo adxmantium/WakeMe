@@ -85,7 +85,7 @@ const _main = {
 	},
 	setText: {
 		color: _g.darkTheme.shade3,
-		fontSize: 11,
+		fontSize: 18,
 	},	
 	editTitle: {
 		textAlign: 'center',
