@@ -104,7 +104,7 @@ class SetAlarm extends Component{
 
 		return (
 			<Animatable.View animation="slideInUp" duration={500} style={[edit.container, theme.bg3]}>
-				<ScrollView>
+				<View style={edit.alarmEditContainer}>
 
 					<View style={[edit.field, edit.enabler]}>
 						<Text style={theme.color2}><Text style={edit.label}>{enabled ? 'Enabled' : 'Disabled'}</Text></Text>
@@ -116,7 +116,7 @@ class SetAlarm extends Component{
 					</View>
 
 					<TouchableOpacity 
-						style={[edit.field, edit.incr]}
+						style={[edit.field, edit.incr, edit.bor]}
 						onPress={ () => this._onPress('editTime') }>
 							<Text style={theme.color2}><Text style={edit.label}>Time</Text>: {`${hour}:${minute} ${ampm}`}</Text>
 							<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
@@ -129,12 +129,12 @@ class SetAlarm extends Component{
 							<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
 					</TouchableOpacity>
 
-					<TouchableOpacity 
+					{/*<TouchableOpacity 
 						style={[edit.field, edit.incr]}
 						onPress={ () => this._onPress('editTime') }>
 							<Text style={theme.color2}><Text style={edit.label}>Sound</Text>: Default</Text>
 							<Icon name="chevron-right" size={20} color={darkThemeObj.icon} />
-					</TouchableOpacity>
+					</TouchableOpacity>*/}
 
 					{ editTime && 
 						<EditAlarmTimeModal close={ () => this.setState({editTime: false}) } /> }
@@ -142,7 +142,7 @@ class SetAlarm extends Component{
 					{ editDays && 
 						<EditAlarmDaysModal close={ () => this.setState({editDays: false}) } /> }
 
-				</ScrollView>
+				</View>
 			</Animatable.View>
 		);
 	}

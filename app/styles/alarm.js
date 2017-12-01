@@ -7,6 +7,7 @@ import * as _g from './_global'
 
 const { width: dim_width, height: dim_height } = Dimensions.get('window');
 const EDIT_ALARM_CONTAINER_HEIGHT = 210;
+const editFieldPadding = 15;
 
 const headStyles = {
 	container: {
@@ -116,8 +117,12 @@ export const main = StyleSheet.create(_main);
 
 export const edit = StyleSheet.create({
 	container: {
-		// ..._g._border(1, 'red'),
 		height: EDIT_ALARM_CONTAINER_HEIGHT,
+	},
+	alarmEditContainer: {
+		// ..._g._border(),
+		flex: 1,
+		justifyContent: 'center',
 	},
 	modal: {
 		flex: 1,
@@ -165,13 +170,14 @@ export const edit = StyleSheet.create({
 		..._g._padding(10, 0, 10, 0),
 	},
 	field: {
-		..._g._padding(10, 10, 10, 10),
+		..._g._padding(editFieldPadding, 10, editFieldPadding, 10),
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
+		// ..._g._border(),
 	},
 	incr: {
-		..._g._padding(15, 10, 15, 10),
+		..._g._padding(editFieldPadding+5, 10, editFieldPadding+5, 10),
 	},
 	label: {
 		fontWeight: '700',
@@ -199,7 +205,7 @@ export const edit = StyleSheet.create({
 	},
 	dayTextActive: {
 		color: _g.darkTheme.shade3,
-	}
+	},	
 });
 
 export const darkTheme = StyleSheet.create({
