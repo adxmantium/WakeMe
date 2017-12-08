@@ -39,6 +39,7 @@ class Alarm extends PureComponent{
 			editTime: false,
 			hideUsageMsg: false,
 			openInfoModal: false,
+			notification: 0,
 			infoActions: [
 				{name: 'ok', title: 'Ok, got it!', onPress: () => this.setState({openInfoModal: false})},
 				{name: 'dontshow', title: "Got it and don't show this message again.", onPress: this._dontShowMsgAgain}
@@ -60,10 +61,32 @@ class Alarm extends PureComponent{
 		this.setState({openInfoModal: bool});
 	}
 
+	_openCollection = () => {
+		const { navigation, _friends } = this.props;
+
+		// if user has friends to send wakers to, allow them to access camera
+		if( !_friends.accepted_list || !_friends.accepted_list.length ) this.setState({notification: '!'});
+		else navigation.navigate('Collection')
+	}
+
+	_openProfile = () => {
+		this._clearNotification();
+		this.props.navigation.navigate('Profile');
+	}
+
+	_openCamera = () => {
+		const { navigation, _friends } = this.props;
+
+		// if user has friends to send wakers to, allow them to access camera
+		if( !_friends.accepted_list || !_friends.accepted_list.length ) this.setState({notification: '!'});
+		else navigation.navigate('Camera');
+	}
+
+	_clearNotification = () => this.setState({notification: 0});
+
 	render(){
-		const { navigation, _alarm } = this.props;
-		const { hour, minute, ampm, enabled, next_alarm_day } = _alarm;
-		const { editTime, slideUp, openInfoModal, infoActions, hideUsageMsg } = this.state;
+		const { hour, minute, ampm, enabled, next_alarm_day } = this.props._alarm;
+		const { editTime, slideUp, openInfoModal, infoActions, hideUsageMsg, notification } = this.state;
 
 		return (
 			<View style={[main.container, theme.bg]}>
@@ -78,9 +101,10 @@ class Alarm extends PureComponent{
 					title="WakeMe"
 					leftIcon="list"
 					rightIcon="camera"
-					leftPress={() => navigation.navigate('Collection')}
-					middlePress={() => navigation.navigate('Profile')}
-					rightPress={() => navigation.navigate('Camera')} />
+					notification={ notification }
+					leftPress={ this._openCollection }
+					middlePress={ this._openProfile }
+					rightPress={ this._openCamera } />
 
 				<View style={main.innerContainer}>
 					<Animatable.Text animation="fadeInRight" style={main.setText}>
@@ -100,16 +124,18 @@ class Alarm extends PureComponent{
 					</View>
 				</View>
 
-				<TouchableOpacity 
-					style={[main.editBtn]}
-					onPress={ () => this.setState({slideUp: !slideUp}) }>
-						<Text style={[main.editTitle,  slideUp && theme.color]}>Set Alarm</Text>
-						<Icon 
-							name={slideUp ? 'chevron-down' : 'chevron-up'} 
-							size={10} 
-							style={main.chevron}
-							color={darkThemeObj.menuIcon} />
-				</TouchableOpacity>
+				<Animatable.View animation="swing" iterationCount={7}>
+					<TouchableOpacity 
+						style={[main.editBtn]}
+						onPress={ () => this.setState({slideUp: !slideUp}) }>
+							<Text style={[main.editTitle,  slideUp && theme.color]}>Set Alarm</Text>
+							<Icon 
+								name={slideUp ? 'chevron-down' : 'chevron-up'} 
+								size={10} 
+								style={main.chevron}
+								color={darkThemeObj.menuIcon} />
+					</TouchableOpacity>
+				</Animatable.View>
 
 				{ slideUp && <SetAlarm toggleModal={!hideUsageMsg && this._toggleModal} /> }
 
@@ -129,6 +155,7 @@ const mapStateToProps = (state, props) => {
 	return {
 		_user: state._user,
 		_alarm: state._alarm,
+		_friends: state._friends,
 	}
 }
 

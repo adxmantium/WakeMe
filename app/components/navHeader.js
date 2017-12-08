@@ -1,6 +1,7 @@
 // /components/navHeader.js
 
 import React, { Component } from 'react'
+import * as Animatable from 'react-native-animatable'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {
 	View,
@@ -17,6 +18,7 @@ const SIZE = 20;
 export default ({ 
 	title, 
 	navigation, 
+	notification,
 	leftIcon, 
 	leftPress, 
 	rightIcon, 
@@ -36,6 +38,11 @@ export default ({
 
 		<TouchableOpacity style={head.title} onPress={ middlePress && middlePress }>
 			<Text style={head.titleText}>{ title || '' }</Text>
+			{ !!notification && 
+				<Animatable.View style={head.notification} animation="zoomIn" iterationCount={10} easing="ease-out">
+					<Text style={head.notificationTxt}>{ notification }</Text>
+				</Animatable.View>
+			}
 		</TouchableOpacity>
 
 		<TouchableOpacity style={head.btn} onPress={ rightPress && rightPress }>

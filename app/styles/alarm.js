@@ -19,13 +19,11 @@ const headStyles = {
 		position: 'absolute',
 		top: 0,
 		zIndex: 1,
-		// ..._g._border(1, 'red'),
 	},
 	title: {
 		height: '100%',
 		justifyContent: 'flex-end',
 		..._g._padding(0, 10, 0, 10),
-		// ..._g._border(1, 'white'),
 	},
 	titleText: {
 		fontSize: 20,
@@ -37,7 +35,22 @@ const headStyles = {
 		width: 50,
 		alignItems: 'center',
 		justifyContent: 'flex-end',
-		// ..._g._border(1, 'white'),
+	},
+	notification: {
+		width: 20,
+		height: 20,
+		borderRadius: 100,
+		backgroundColor: _g.darkTheme.shade2,
+		alignItems: 'center',
+		justifyContent: 'center',
+		position: 'absolute',
+		bottom: 10,
+		right: 0,
+		zIndex: 1,
+	},
+	notificationTxt: {
+		color: _g.white,
+		fontSize: 11,
 	}
 };
 
