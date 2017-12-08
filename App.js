@@ -47,7 +47,7 @@ export default class WakeMe extends Component<{}> {
     render() {
         return (
             <Provider store={store}>
-                <AppNavigation onNavigationStateChange={ this._navStateChange } />
+                <AppNavigation />
             </Provider>
         )
     }

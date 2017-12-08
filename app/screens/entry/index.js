@@ -14,12 +14,12 @@ import {
 	View, 
 	Text,
 	Image, 
-	Modal,
 	StatusBar,
 	TouchableOpacity,
 } from 'react-native'
 
 // components
+import InfoModal from './../../components/infoModal'
 import BackgroundImage from './../../components/backgroundImage'
 
 // constants
@@ -39,15 +39,16 @@ class Entry extends Component{
 		this.state = {
 			fb_login_pending: false,
 			fb_data: {},
+			open: false,
 		};
 	}	
 
 	shouldComponentUpdate(np, ns){
-		const { fb_login_pending: thisPending } = this.state;
-		const { fb_login_pending: nextPending } = ns;
+		const { fb_login_pending: thisPending, open } = this.state;
+		const { fb_login_pending: nextPending, open: nextOpen } = ns;
 
 		// only re-render when pending states are different
-		return thisPending !== nextPending;
+		return thisPending !== nextPending || open !== nextOpen;
 	}
 
 	_loginWithFacebook = () => {
@@ -116,24 +117,38 @@ class Entry extends Component{
 	}
 
 	render(){
-		const { fb_login_pending } = this.state;
+		const { fb_login_pending, open } = this.state;
 
 		return (
 			<View style={entry.container}>
 
 				<StatusBar barStyle="light-content" />
 
-				{/*<BackgroundImage blur={100} />*/}
+				<BackgroundImage custom={require('./../../images/icon_v8_2048x2048.png')} />
 
 				<Text style={entry.title}>WakeMe</Text>
 
-				<Text style={entry.directions}>Don't worry, nothing will be posted to your Facebook account. We just use Facebook to handle logins so you don't have to create yet ANOTHER username and password.</Text>
+				<View style={entry.actions}>
+					<TouchableOpacity style={entry.login} onPress={ this._loginWithFacebook }>
+						<Icon name="facebook-official" color="#fff" size={30} />
+						<Text style={entry.loginText}>Login with Facebook</Text>
+						{ fb_login_pending && <Spinner color="#fff" style={entry.loader} /> }
+					</TouchableOpacity>
 
-				<TouchableOpacity style={entry.login} onPress={ this._loginWithFacebook }>
-					<Icon name="facebook-official" color="#fff" size={30} />
-					<Text style={entry.loginText}>Login with Facebook</Text>
-					{ fb_login_pending && <Spinner color={darkTheme.shade3} style={entry.loader} /> }
-				</TouchableOpacity>
+					<TouchableOpacity onPress={() => this.setState({open: true})}>
+						<Text style={entry.directions}>Why do I have to use Facebook?</Text>
+					</TouchableOpacity>
+				</View>
+
+				{ open && 
+					<InfoModal 
+						title="Don't Worry!"
+						body={[
+							"Nothing will be posted to your Facebook account. We just use Facebook to handle logins so you don't have to create yet ANOTHER username and password.", 
+							":)"
+						]}
+						close={() => this.setState({open: false})} />
+				}
 
 			</View>
 		);

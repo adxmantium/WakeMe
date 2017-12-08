@@ -16,10 +16,10 @@ import _friends from './friends'
 // create and combine middleware
 
 // dev
-const middleware = applyMiddleware(thunk, promise(), logger);
+// const middleware = applyMiddleware(thunk, promise(), logger);
 
 // prod
-// const middleware = applyMiddleware(thunk, promise());
+const middleware = applyMiddleware(thunk, promise());
 
 //
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

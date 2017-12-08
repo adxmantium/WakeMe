@@ -18,7 +18,6 @@ import { resetStackAndNavTo } from './../../constants/user'
 
 // styles
 import { entry } from './../../styles/entry'
-import { darkTheme } from './../../styles/_global'
 
 class Splash extends Component{
 	constructor(props){
@@ -48,11 +47,11 @@ class Splash extends Component{
 
 				<StatusBar barStyle="light-content" />
 
-				{/*<BackgroundImage blur={100} />*/}
+				<BackgroundImage custom={require('./../../images/icon_v8_1242x2208.png')} />
 
 				<Text style={entry.title}>WakeMe</Text>
 
-				<Spinner color={darkTheme.shade3} />
+				<Spinner color="#fff" />
 
 			</View>
 		);

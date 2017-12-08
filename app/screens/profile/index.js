@@ -71,7 +71,7 @@ class Profile extends PureComponent{
 
 				<View style={pro.main}>
 					<Animatable.View animation="fadeInLeft" style={pro.profilePic}>
-						<Image source={{uri: picture.data.url}} style={pro.pic} />
+						{ !!picture && <Image source={{uri: picture.data.url}} style={pro.pic} /> }
 					</Animatable.View>
 					<Animatable.Text animation="fadeInRight" style={pro.name}>
 						{ name }

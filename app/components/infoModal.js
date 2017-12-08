@@ -1,17 +1,19 @@
 // /components/infoModal.js
 
 import React from 'react'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { 
 	Text, 
 	View, 
 	Modal,
 	TouchableOpacity,
+	TouchableHighlight,
 } from 'react-native'
 
 // styles
 import { info } from './../styles/entry'
 
-export default ({ title, body, actions }) => (
+export default ({ title, body, actions, close }) => (
 
 	<Modal 
 		animationType="slide"
@@ -19,22 +21,26 @@ export default ({ title, body, actions }) => (
 		onRequestClose={() => {}}
 		visible={true}>
 
-			<View style={info.container}>
+			<View style={info.container}>	
 
-				<View style={info.innerContainer}>
+				<TouchableHighlight style={info.innerContainer} onPress={ close }>
+					<View>
 
-					<Text style={info.title}>{ title }</Text>
+						{ close && <View style={info.close}><Icon name="times" color="#fff" size={20} /></View> }
 
-					{ body.map(txt => <Text style={info.body} key={txt}>{ txt }</Text>) }
+						<Text style={info.title}>{ title }</Text>
 
-					<View style={info.actions}>
-						{ actions.map(btn => <TouchableOpacity key={btn.name} style={info.action} onPress={btn.onPress}>
-												<Text style={[info.actionTxt, info[btn.name]]}>{ btn.title }</Text>
-											 </TouchableOpacity>) 
-						}
+						{ body.map(txt => <Text style={info.body} key={txt}>{ txt }</Text>) }
+
+						<View style={info.actions}>
+							{ !!actions && actions.map(btn => <TouchableOpacity key={btn.name} style={info.action} onPress={btn.onPress}>
+																<Text style={[info.actionTxt, info[btn.name]]}>{ btn.title }</Text>
+															 </TouchableOpacity>) 
+							}
+						</View>
+						
 					</View>
-
-				</View>
+				</TouchableHighlight>
 
 			</View>
 

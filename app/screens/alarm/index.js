@@ -46,8 +46,6 @@ class Alarm extends PureComponent{
 	}	
 
 	componentWillMount(){
-		console.log('mounted');		
-
 		AsyncStorage.getItem('neverShowAppUsageMsg')
 					.then(val => this.setState({hideUsageMsg: val === '1'}));
 	}

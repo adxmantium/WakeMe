@@ -8,39 +8,43 @@ import * as _g from './_global'
 export const entry = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'space-around',
+		justifyContent: 'space-between',
 		alignItems: 'center',
 		backgroundColor: _g.darkTheme.shade5,
-		// ..._g._border(1, 'red'),
+		..._g._padding(100, 40, 100, 40),
 	},
 	login: {
 		backgroundColor: _g.fbBlue,
-		..._g._padding(10, 40, 10, 40),
+		..._g._padding(10, 0, 10, 0),
 		..._g._borderRadius(5),
 		flexDirection: 'row',
 		alignItems: 'center',
+		justifyContent: 'center',
+		width: '100%',
 	},
 	loginText: {
 		color: _g.white,
-		textAlign: 'center',
 		fontSize: 18,
 		marginLeft: 10,
 	},
 	title: {
 		backgroundColor: 'transparent',
-		color: _g.darkTheme.shade3,
+		color: _g.white,
 		fontSize: 40,
 	},
 	directions: {
-		fontSize: 20,
+		fontSize: 16,
+		marginTop: 20,
 		backgroundColor: 'transparent',
 		color: _g.darkTheme.shade3,
-		width: 300,
+		textAlign: 'center',
 	},
 	loader: {
-		// ..._g._border(1, 'red'),
 		height: 30,
 		marginLeft: 10,
+	},
+	actions: {
+		width: '100%'
 	}
 });
 
@@ -85,5 +89,8 @@ export const info = StyleSheet.create({
 	actionTxt: {
 		color: _g.darkTheme.shade2,
 		fontSize: 20,
+	},
+	close: {
+		alignItems: 'flex-end',
 	}
 });
