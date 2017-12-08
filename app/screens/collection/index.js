@@ -22,6 +22,7 @@ import { darkTheme, darkThemeObj } from './../../styles/alarm'
 
 // constants
 import { MIMETYPES } from './../../constants/waker'
+import { resetStackAndNavTo } from './../../constants/user'
 
 const theme = darkTheme;
 const themeObj = darkThemeObj;
@@ -40,6 +41,8 @@ class Collection extends PureComponent{
 		this.state = {}
 	}
 
+	_navAway = () => this.props.navigation.dispatch( resetStackAndNavTo(['Alarm', 'Profile']) );
+
 	render(){
 		const { navigation, _waker } = this.props;
 
@@ -50,6 +53,16 @@ class Collection extends PureComponent{
 					title="Wake Up Calls"
 					leftIcon="chevron-left"
 					leftPress={ () => navigation.goBack(null) } />
+
+				{ (!_waker.queue || !_waker.queue.length) && 
+					<View style={coll.noWakeup}>
+						<Text style={coll.noWake}>You currently have 0 Wake Up Calls</Text> 
+						<TouchableOpacity style={coll.navAwayBtn} onPress={ this._navAway }>
+							<Text style={coll.navAwayText}>Invite your friends</Text> 
+						</TouchableOpacity>
+						<Text style={coll.noWake}>to the app!</Text> 
+					</View>
+				}
 
 				<FlatList
 		            data={ _waker.queue || [] }

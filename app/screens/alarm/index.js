@@ -27,6 +27,7 @@ const theme = darkTheme;
 const infoBody = [
 	'Do not close the app after you enable your alarm.',
 	'Do not put your phone in silent mode in order to hear the alarm sound.',
+	'Make sure Notifications are enabled so that you can receive your alarm.'
 ];
 
 class Alarm extends PureComponent{
@@ -90,12 +91,12 @@ class Alarm extends PureComponent{
 						<Animatable.Text 
 							animation="fadeInRight" 
 							style={[main.time, theme.color]}>
-								{`${hour}:${minute}`}<Text style={main.ampm}>{ampm}</Text>
+								{enabled ? `${hour}:${minute}` : '---'}<Text style={main.ampm}>{ enabled ? ampm : ''}</Text>
 						</Animatable.Text>
 					</View>
 
 					<View style={main.setFor}>
-						<Animatable.Text animation="fadeInRight" style={[main.date, theme.color]}>{ next_alarm_day }</Animatable.Text>
+						{ enabled && <Animatable.Text animation="fadeInRight" style={[main.date, theme.color]}>{ next_alarm_day }</Animatable.Text> }
 					</View>
 				</View>
 

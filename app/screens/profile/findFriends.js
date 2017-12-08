@@ -29,9 +29,9 @@ class FindFriends extends Component{
 		this.state = {
 			index: 0,
 		    routes: [
+		    	{ key: 'QRCodeScanner', icon: 'qrcode' },
 		    	{ key: 'SearchFriends', icon: 'search' },
 		    	// { key: 'InviteFriends', icon: 'address-book-o' },
-		    	{ key: 'QRCodeScanner', icon: 'qrcode' },
 		    ],
 		}
 	}

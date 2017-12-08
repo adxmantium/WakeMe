@@ -27,5 +27,21 @@ export const coll = StyleSheet.create({
 	},
 	name: {
 		marginLeft: 20,
+	},
+	noWakeup: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	navAwayText: {
+		color: _g.darkTheme.shade2,
+		textAlign: 'center',
+		fontSize: 24,
+		..._g._margin(20, 0, 20, 0),
+	},
+	noWake: {
+		color: _g.white,
+		fontSize: 18,
+		textAlign: 'center',
 	}
 });

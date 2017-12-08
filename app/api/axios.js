@@ -4,21 +4,22 @@
 import axios from 'axios'
 import ENV from './../../env'
 
-const env = 'dev';
+// const env = 'dev';
+const env = 'production';
 
 const userRoute = {
 	dev: 'https://3v4nvvp8b7.execute-api.us-west-1.amazonaws.com/dev/wakeme',
-	prod: ''
+	production: 'https://a091iz9y74.execute-api.us-west-1.amazonaws.com/production/wakeme'
 }
 
 const wakerRoute = {
 	dev: 'https://8bahxebpw9.execute-api.us-west-1.amazonaws.com/dev/wakeme',
-	prod: '',
+	production: 'https://d39z1ijqb5.execute-api.us-west-1.amazonaws.com/production/wakeme',
 }
 
 const friendsRoute = {
 	dev: 'https://zrcrnfiepl.execute-api.us-west-1.amazonaws.com/dev/wakeme',
-	prod: '',
+	production: 'https://7amej8hgyh.execute-api.us-west-1.amazonaws.com/production/wakeme',
 }
 
 const user = axios.create({
