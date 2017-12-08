@@ -39,7 +39,7 @@ export default ({
 		<TouchableOpacity style={head.title} onPress={ middlePress && middlePress }>
 			<Text style={head.titleText}>{ title || '' }</Text>
 			{ !!notification && 
-				<Animatable.View style={head.notification} animation="zoomIn" iterationCount={10} easing="ease-out">
+				<Animatable.View style={head.notification} animation="zoomIn" iterationCount={1} easing="ease-out">
 					<Text style={head.notificationTxt}>{ notification }</Text>
 				</Animatable.View>
 			}

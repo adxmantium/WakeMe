@@ -52,6 +52,16 @@ class Alarm extends PureComponent{
 					.then(val => this.setState({hideUsageMsg: val === '1'}));
 	}
 
+	componentWillReceiveProps(np){
+		const { outstanding_list: this_list } = this.props._friends;
+		const { outstanding_list: next_list} = np._friends;
+
+		// if there are any in the outstanding list, add count notifications
+		if( this_list.length !== next_list.length && next_list.length > this_list.length ){
+			this.setState({notification: next_list.length});
+		}
+	}
+
 	_dontShowMsgAgain = () => {
 		AsyncStorage.setItem('neverShowAppUsageMsg', '1');
 		this._toggleModal(false);
