@@ -20,6 +20,9 @@ import NavHeader from './../../components/navHeader'
 import PushController from './../../components/pushController'
 import BackgroundImage from './../../components/backgroundImage'
 
+// constants
+import { tomorrowsMoment } from './../../constants/alarm'
+
 // styles
 import { main, darkTheme, darkThemeObj } from './../../styles/alarm'
 
@@ -67,9 +70,7 @@ class Alarm extends PureComponent{
 		this._toggleModal(false);
 	}
 
-	_toggleModal = bool => {
-		this.setState({openInfoModal: bool});
-	}
+	_toggleModal = bool => this.setState({openInfoModal: bool})
 
 	_openCollection = () => {
 		const { navigation, _friends } = this.props;
@@ -92,7 +93,7 @@ class Alarm extends PureComponent{
 		else navigation.navigate('Camera');
 	}
 
-	_clearNotification = () => this.setState({notification: 0});
+	_clearNotification = () => this.setState({notification: 0})
 
 	render(){
 		const { hour, minute, ampm, enabled, next_alarm_day } = this.props._alarm;
@@ -130,7 +131,11 @@ class Alarm extends PureComponent{
 					</View>
 
 					<View style={main.setFor}>
-						{ enabled && <Animatable.Text animation="fadeInRight" style={[main.date, theme.color]}>{ next_alarm_day }</Animatable.Text> }
+						{ enabled && 
+							<Animatable.Text animation="fadeInRight" style={[main.date, theme.color]}>
+								{ enabled ? next_alarm_day : '' }
+							</Animatable.Text> 
+						}
 					</View>
 				</View>
 

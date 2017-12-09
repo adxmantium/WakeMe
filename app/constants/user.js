@@ -110,12 +110,34 @@ export const alarmNotificationModel = ({ _user, alarmData }) => {
   const delivery_time_of_day = moment({ hour, minute }).format('h:mm')+ampm.toUpperCase();
   const delayed_option = 'timezone';
   let date = null;
+  let repeat_empty = true;
 
   for(const day in repeat){
+    repeat_empty = false;
+
     date = moment({ hours, minute }).day(day);
 
     // if today is after the date, add one week to date, b/c date has already passed
     if( moment().isAfter(date) ) date = date.add(1, 'w');
+    
+    date = date.format('YYYY-MM-DD HH:mm:ss');
+
+    notifications.push({
+      app_id: ENV.ONESIGNAL_APP_ID,
+      template_id: ENV.ONESIGNAL_ALARM_TEMPLATE_ID, // fill rest of fields using template designed on dashboard
+      include_player_ids: [_user.onesignal_device_token], // my device token
+      send_after: `${date} ${timezone}`,
+      delayed_option,
+      delivery_time_of_day
+    });
+  }
+
+  // if there are no repeat days selected, just set the alarm for tomorrow
+  if( repeat_empty ){
+    date = moment({ hours, minute });
+
+    // if today is after the date, add one day to date, b/c date has already passed
+    if( moment().isAfter(date) ) date = date.add(1, 'd');
     
     date = date.format('YYYY-MM-DD HH:mm:ss');
 

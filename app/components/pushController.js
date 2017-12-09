@@ -118,7 +118,7 @@ export default class PushController extends Component{
 	}
 
 	_determineNextAlarm = ({ notificationID }) => {
-		const { notifications = [] } = this.props._alarm;
+		const { notifications = [], repeat } = this.props._alarm;
 		let notificationMinusThisAlarm = [...notifications];
 
 		// if notificationID is in notifications arr, remove it
@@ -126,9 +126,13 @@ export default class PushController extends Component{
 			notificationMinusThisAlarm = notifications.filter(noti => noti !== notificationID);
 		} 
 
-		// if notifications still has any alarms left after filtering don't do anything
+		// if there are no repeat days, disable alarm
+		// else if notifications still has any alarms left after filtering don't do anything
 		// only if notifications is empty should we set the next set of alarms
-		if( notificationMinusThisAlarm.length === 0 ){
+		if( JSON.stringify(repeat) === JSON.stringify({}) ){
+			this._saveAlarm({...this.props._alarm, enabled: false});
+
+		}else if( notificationMinusThisAlarm.length === 0 ){
 			this._createNewAlarms();	
 
 		}else{

@@ -27,7 +27,11 @@ import { edit, darkTheme, darkThemeObj } from './../../styles/alarm'
 
 // constants
 import { alarmNotificationModel } from './../../constants/user'
-import { sendAlarmNotifications, deleteAlarmNotifications } from './../../constants/alarm'
+import { 
+	determineNextAlarmDay, 
+	sendAlarmNotifications, 
+	deleteAlarmNotifications 
+} from './../../constants/alarm'
 
 const theme = darkTheme;
 const themeObj = darkThemeObj;
@@ -41,6 +45,7 @@ class SetAlarm extends Component{
 			editDays: false,
 			editSound: false,
 			notifications: [],
+			enabled: props._alarm.enabled,
 		}
 	}
 
@@ -92,13 +97,27 @@ class SetAlarm extends Component{
 	    	});
 	}
 
+	_getAlarmData = () => {
+		const { dispatch, _alarm } = this.props;
+		const { repeat, hour, minute, ampm } = _alarm;
+
+		const nextAlarmDayData = determineNextAlarmDay({ selected_days: repeat, hour, minute, ampm });
+
+		return nextAlarmDayData.next_alarm_day;
+	}
+
 	_saveAlarm = alarmData => {
+		alarmData.next_alarm_day = this._getAlarmData();
+
 		this.setState({notifications: []})
+
 		this.props.dispatch( saveAlarmData({ alarmData }) );
 	}
 
 	_toggleModalThenSave = enabled => {
 		const { toggleModal } = this.props;
+
+		this.setState({ enabled });
 
 		toggleModal && toggleModal(enabled);
 		
@@ -107,8 +126,8 @@ class SetAlarm extends Component{
 
 	render(){
 		const { dispatch, _alarm } = this.props;
-		const { hour, minute, ampm, repeat_label, enabled } = _alarm;
-		const { editTime, editDays, editSound } = this.state;
+		const { hour, minute, ampm, repeat_label } = _alarm;
+		const { editTime, editDays, editSound, enabled } = this.state;
 
 		return (
 			<Animatable.View animation="slideInUp" duration={500} style={[edit.container, theme.bg3]}>

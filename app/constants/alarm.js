@@ -148,7 +148,23 @@ export const determineNextAlarmDay = ({ selected_days, hour, minute, ampm }) => 
 	}
 
 	// if next_alarm_day_moment is set, format for display
+	// else set as tomorrow's date
 	if( next_alarm_day_moment ) next_alarm_day = next_alarm_day_moment.format('dddd, MMM D, YYYY');
+	else{
+		let date = moment({ hour, minute });
+		let format = '';
+
+	    // if today is after the date, add one day to date, b/c date has already passed, format for tomorrow
+	    // else format for today
+	    if( moment().isAfter(date) ){
+	    	date = date.add(1, 'd');
+		    format = `Tomorrow, ${date.format('MMM D')}`;
+	    }else{
+		    format = 'Today';
+	    }
+
+		next_alarm_day = format;
+	}
 
 	return {
 		repeat,
