@@ -175,7 +175,6 @@ export default class PushController extends Component{
 	}
 
 	_saveAlarm = alarmData => {
-		// console.log('new alarm data', alarmData);
 		this.props.dispatch( saveAlarmData({ alarmData }) );
 	}
 

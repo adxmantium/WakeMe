@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   View,
   Text,
+  Alert,
   StatusBar,
   AsyncStorage,
   TouchableOpacity,
@@ -20,6 +21,9 @@ import NavHeader from './../../components/navHeader'
 import PushController from './../../components/pushController'
 import BackgroundImage from './../../components/backgroundImage'
 
+// actions
+import { saveAlarmData, updateAlarm } from './../../actions/alarm'
+
 // constants
 import { tomorrowsMoment } from './../../constants/alarm'
 
@@ -28,7 +32,6 @@ import { main, darkTheme, darkThemeObj } from './../../styles/alarm'
 
 const theme = darkTheme;
 const infoBody = [
-	'Do not close the app after you enable your alarm.',
 	'Do not put your phone in silent mode in order to hear the alarm sound.',
 	'Make sure Notifications are enabled so that you can receive your alarm.'
 ];
@@ -51,17 +54,42 @@ class Alarm extends PureComponent{
 	}	
 
 	componentWillMount(){
+		const { _alarm } = this.props;	
+
+		// check the phones storage if neverShowAppUsageMsg was set, if so, shouldn't show enabled modal
 		AsyncStorage.getItem('neverShowAppUsageMsg')
-					.then(val => this.setState({hideUsageMsg: val === '1'}));
+					.then(val => this.setState({hideUsageMsg: val === '1'}));	
 	}
 
 	componentWillReceiveProps(np){
 		const { outstanding_list: this_list } = this.props._friends;
-		const { outstanding_list: next_list} = np._friends;
+		const { outstanding_list: next_list} = np._friends;	
 
 		// if there are any in the outstanding list, add count notifications
 		if( this_list.length !== next_list.length && next_list.length > this_list.length ){
 			this.setState({notification: next_list.length});
+		}	
+	}
+
+	componentDidUpdate(pp, ps){
+		const { fetched_user_info: this_fetched } = this.props._user;
+		const { fetched_user_info: prev_fetched } = pp._user;
+
+		// if notification was open while app was inactive, check store if on app open there is a notification trigger that we set in app.js
+		if( this_fetched !== prev_fetched && this_fetched ){
+			this._checkIfAlarmWentOffWhenAppWasClosed();
+		}
+	}
+
+	_checkIfAlarmWentOffWhenAppWasClosed = () => {
+		const { dispatch, navigation, _alarm } = this.props;
+		
+		if( _alarm.receivedAlarm ){
+	        const alarmData = {..._alarm, enabled: false};
+	        
+	        navigation.navigate('Waker'); // start waker
+	        dispatch( updateAlarm({receivedAlarm: false}) ); // reset receivedAlarm
+	        dispatch( saveAlarmData({ alarmData }) ); // disable alarm
 		}
 	}
 

@@ -145,12 +145,7 @@ class Waker extends PureComponent{
 	}
 
 	_finished = () => {
-		this.props.navigation.dispatch( 
-			NavigationActions.reset({
-		        index: 0,
-		        actions: [NavigationActions.navigate({routeName: 'Alarm'})]
-	        }) 
-		);
+		this.props.navigation.goBack(null);
 	}
 
 	render(){
