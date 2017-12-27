@@ -20,9 +20,6 @@ export const saveWakeupCall = file => {
 		const response = _axios.wakeupcall.post(`${routes.WAKEUP_CALLS}`, {from: 'WakeMe app! :)'});
     
     response.then(res => {
-      console.log('res: ', res);
-      return;
-
       const action = {
         type: _actions.SAVED_FILE,
         payload: {
