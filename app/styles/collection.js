@@ -40,7 +40,7 @@ export const coll = StyleSheet.create({
 		..._g._margin(20, 0, 20, 0),
 	},
 	noWake: {
-		color: _g.white,
+		color: _g.darkTheme.shade3,
 		fontSize: 18,
 		textAlign: 'center',
 	}
