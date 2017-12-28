@@ -7,7 +7,6 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   View,
   Text,
-  Alert,
   StatusBar,
   AsyncStorage,
   TouchableOpacity,
@@ -96,19 +95,9 @@ class Alarm extends PureComponent{
 		}else if( _alarm.receivedFriendRequest ){
 			// else if user received friend request while app was closed
 	        dispatch( updateAlarm({receivedFriendRequest: false}) ); // reset receivedFriendRequest
-			this._showRequestAlert();
+	        //  !!!! if you want to do something when user receives new friend request on app cold open, do it here !!!!!
 		}
 	}
-
-	_showRequestAlert = () => {
-		const { navigation } = this.props;
-    	const buttons = [
-	        {text: 'Yes', onPress: () => navigation.navigate('AllFriends')},
-	        {text: 'Not Now'},
-    	];
-
-    	Alert.alert('You have new friend requests!', 'View now?', buttons);
-    }
 
 	_dontShowMsgAgain = () => {
 		AsyncStorage.setItem('neverShowAppUsageMsg', '1');
