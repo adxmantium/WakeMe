@@ -74,11 +74,11 @@ class WakeUpCamera extends Component{
 		Permissions.check('microphone')
 				   .then(perm => {
 				   		// if microphone is not authorized, then request it
-				   		console.log('perm: ', perm);
+				   		// console.log('perm: ', perm);
 					   	if( perm !== 'authorized' ){
 					   		Permissions.request('microphone')
 									   .then(res => {
-									   		console.log('res: ', res)
+									   		// console.log('res: ', res)
 									   });
 					   	}
 				   });
@@ -161,7 +161,6 @@ class WakeUpCamera extends Component{
 	}
 
 	_imageCaptured = capturedFile => {
-		console.log('picker res: ', capturedFile);
 		if( !capturedFile.didCancel ){
 			const { navigation, dispatch } = this.props;
 			dispatch( captured({ capturedFile }) );

@@ -27,7 +27,6 @@ export const getWakers = userID => {
     const response = _axios.waker.get(`${route.WAKERS}?to_fb_user_id=${userID}`);
 
     response.then(res => {
-      // console.log('GET wakers: ', res);
       const action = {
         type: _actions.FETCHED_WAKERS_TYPE,
         payload: {
@@ -58,7 +57,6 @@ export const sendWaker = ({ wakerData, last_waker_to_save }) => {
     const response = _axios.waker.post(route.WAKERS, wakerData);
 
     response.then(res => {
-      // console.log('POST wakers: ', res);
       const action = {
         type: _actions.SENT_WAKER_TYPE,
         payload: {
@@ -92,8 +90,6 @@ export const deleteWakers = ({ wakers, wakerObjects }) => {
     const response = _axios.waker.delete(route.WAKERS, {data: { wakers, wakerObjects }});
 
     response.then(res => {
-      console.log('DELETE wakers: ', res);
-
       const action = {
         type: _actions.DELETED_WAKERS_TYPE,
         payload: {

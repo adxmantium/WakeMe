@@ -91,25 +91,25 @@ class Waker extends PureComponent{
 	_onLoadEnd = e => this.setState({isLoading: false});
 
 	_onLoad = e => {
-		console.log('onLoad: ', e);
+		// console.log('onLoad: ', e);
 	}
 
 	_onEnd = e => {
-		console.log('onEnd: ', e);
+		// console.log('onEnd: ', e);
 		// triggered when video is done playing
 		this.setState({progress: 0});
 	}
 
 	_onError = e => {
-		console.log('onError: ', e);
+		// console.log('onError: ', e);
 	}
 
 	_onBuffer = e => {
-		console.log('onBuffer: ', e);
+		// console.log('onBuffer: ', e);
 	}
 
 	_onTimedMetaData = e => {
-		console.log('_onTimedMetaData: ', e);
+		// console.log('_onTimedMetaData: ', e);
 	}	
 
 	_start = () => {

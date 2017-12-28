@@ -48,6 +48,9 @@ export const pro = StyleSheet.create({
 		fontSize: 18,
 		fontWeight: '400',
 	},
+	outReq: {
+		fontWeight: '800',
+	},
 	signout: {
 		backgroundColor: 'transparent',
 		..._g._padding(20),

@@ -32,9 +32,9 @@ class FindFriends extends Component{
 		this.state = {
 			index: 0,
 		    routes: [
-		    	{ key: 'AcceptedFriends', icon: 'check' },
-		    	{ key: 'PendingFriends', icon: 'minus' },
-		    	{ key: 'OutstandingFriends', icon: 'plus' },
+		    	{ key: 'AcceptedFriends', icon: 'check', listName: 'accepted_list' },
+		    	{ key: 'PendingFriends', icon: 'minus', listName: 'pending_list' },
+		    	{ key: 'OutstandingFriends', icon: 'plus', listName: 'outstanding_list' },
 		    ],
 		}
 	}
@@ -49,7 +49,7 @@ class FindFriends extends Component{
 	}
 
 	render(){
-		const { navigation } = this.props;
+		const { navigation, _friends } = this.props;
 
 		return (
 			<View style={findf.container}>
@@ -68,9 +68,10 @@ class FindFriends extends Component{
 			        		{...props} 
 			        		style={findf.tab}
 			        		indicatorStyle={findf.tabIndicator}
-			        		renderIcon={({ route }) => 
-			        			<Icon name={route.icon} size={20} color="#fff" />
-			        		} 
+			        		renderIcon={ ({ route }) => {
+			        			let countIndicator = (route.icon === 'minus' || route.icon === 'plus') && !!_friends[route.listName].length;
+			        			return <Icon name={route.icon} size={20} color={ countIndicator ? darkTheme.shade2 : "#fff" } /> 
+			        		}} 
 			        	/> 
 			        }
 			        onIndexChange={ index => this.setState({ index }) }
@@ -84,6 +85,7 @@ class FindFriends extends Component{
 const mapStateToProps = (state, props) => {
 	return {
 		_user: state._user,
+		_friends: state._friends,
 	}
 }
 

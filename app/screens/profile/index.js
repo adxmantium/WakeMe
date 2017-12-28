@@ -30,6 +30,10 @@ import { resetStackAndNavTo } from './../../constants/user'
 class Profile extends PureComponent{
 	constructor(props){
 		super(props);
+
+		this.state = {
+			hasSeenFriendsList: false,
+		}
 	}
 
 	_signOut = () => {
@@ -56,10 +60,18 @@ class Profile extends PureComponent{
         });
 	}
 
+	_goToMyFriends = () => {
+		if( !this.state.hasSeenFriendsList ) this.setState({hasSeenFriendsList: true});
+		this.props.navigation.navigate('AllFriends');
+	}
+
+	_goToFindFriends = () => this.props.navigation.navigate('FindFriends')
+
 	render(){
 		const { navigation, _user, _friends } = this.props;
 		const { name, picture } = _user;
 		const qrValue = this._qrValue();
+		const hasOutstandingReq = !!_friends.outstanding_list.length && !this.state.hasSeenFriendsList;
 
 		return (
 			<View style={pro.container}>
@@ -98,12 +110,12 @@ class Profile extends PureComponent{
 					}
 
 					{ !!_friends.friends_list.length && 
-						<TouchableOpacity style={pro.link} onPress={() => navigation.navigate('AllFriends')}>
-							<Text style={pro.linkText}>My Friends</Text>
+						<TouchableOpacity style={pro.link} onPress={ this._goToMyFriends }>
+							<Text style={[pro.linkText, hasOutstandingReq && pro.outReq]}>My Friends</Text>
 						</TouchableOpacity> 
 					}
 					
-					<TouchableOpacity style={pro.link} onPress={() => navigation.navigate('FindFriends')}>
+					<TouchableOpacity style={pro.link} onPress={ this._goToFindFriends }>
 						<Text style={pro.linkText}>Find Friends</Text>
 					</TouchableOpacity>
 					

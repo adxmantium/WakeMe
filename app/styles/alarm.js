@@ -35,6 +35,7 @@ const headStyles = {
 		width: 50,
 		alignItems: 'center',
 		justifyContent: 'flex-end',
+		marginBottom: 2,
 	},
 	notification: {
 		width: 20,
