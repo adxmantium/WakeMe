@@ -4,8 +4,7 @@
 import axios from 'axios'
 import ENV from './../../env'
 
-// const env = 'dev';
-const env = 'production';
+const env = ENV.env;
 
 const userRoute = {
 	dev: 'https://3v4nvvp8b7.execute-api.us-west-1.amazonaws.com/dev/wakeme',
