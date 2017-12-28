@@ -111,7 +111,13 @@ class Profile extends PureComponent{
 
 					{ !!_friends.friends_list.length && 
 						<TouchableOpacity style={pro.link} onPress={ this._goToMyFriends }>
-							<Text style={[pro.linkText, hasOutstandingReq && pro.outReq]}>My Friends</Text>
+							{ hasOutstandingReq ?
+								<Animatable.Text style={[pro.linkText, pro.outReq]} animation="zoomIn" iterationCount={1}>
+									My Friends
+								</Animatable.Text>
+								:
+								<Text style={pro.linkText}>My Friends</Text>
+							}
 						</TouchableOpacity> 
 					}
 					

@@ -69,7 +69,7 @@ class FindFriends extends Component{
 			        		style={findf.tab}
 			        		indicatorStyle={findf.tabIndicator}
 			        		renderIcon={ ({ route }) => {
-			        			let countIndicator = (route.icon === 'minus' || route.icon === 'plus') && !!_friends[route.listName].length;
+			        			const countIndicator = (route.icon === 'minus' || route.icon === 'plus') && !!_friends[route.listName].length;
 			        			return <Icon name={route.icon} size={20} color={ countIndicator ? darkTheme.shade2 : "#fff" } /> 
 			        		}} 
 			        	/> 
