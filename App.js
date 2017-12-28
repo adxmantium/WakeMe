@@ -9,7 +9,6 @@ import { Provider } from 'react-redux'
 import store from './app/reducers/store'
 import React, { Component } from 'react'
 import OneSignal from 'react-native-onesignal' // onesignal register events ONLY works at root file (aka this file)
-import { Alert } from 'react-native'
 
 // components
 import AppNavigation from './app/navigation'
@@ -47,23 +46,16 @@ export default class WakeMe extends Component<{}> {
       // clear notifications for android - ios done automagically
       if( Platform.OS === 'android' ) OneSignal.clearOneSignalNotifications();
 
-      // if notification type is alarm - start waker
+      // save a trigger if notification received to be handled when app starts and init data is fetched
       if( notification_type === 'alarm' ){
         store.dispatch( updateAlarm({receivedAlarm: true}) );
-
       }else if( notification_type === 'friend_request_inquiry' ){
-
-        // accept friend request only if actionID is 'accept'
-        // if( action.actionID === 'accept' ){
-        //   const friend = restOf;
-        //   // console.log('friend: ', friend);
-        //   this._acceptFriendship( friend );
-        // }else{
-        //   // console.log('no action type');
-        //   this._showRequestAlert( notification.payload );
-        // }
+        store.dispatch( updateAlarm({
+          receivedFriendRequest: true,
+          receivedFriendRequestData: notification.payload
+        }) );
       }
-    }
+    } 
 
     _navStateChange = (prevState, currentState) => {
       console.log('=======================');

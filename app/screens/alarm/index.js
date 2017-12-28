@@ -22,6 +22,7 @@ import PushController from './../../components/pushController'
 import BackgroundImage from './../../components/backgroundImage'
 
 // actions
+import { acceptFriendship } from './../../actions/friends'
 import { saveAlarmData, updateAlarm } from './../../actions/alarm'
 
 // constants
@@ -84,14 +85,30 @@ class Alarm extends PureComponent{
 	_checkIfAlarmWentOffWhenAppWasClosed = () => {
 		const { dispatch, navigation, _alarm } = this.props;
 		
+		// check if user has received alarm while app was closed
 		if( _alarm.receivedAlarm ){
 	        const alarmData = {..._alarm, enabled: false};
 	        
 	        navigation.navigate('Waker'); // start waker
 	        dispatch( updateAlarm({receivedAlarm: false}) ); // reset receivedAlarm
 	        dispatch( saveAlarmData({ alarmData }) ); // disable alarm
+
+		}else if( _alarm.receivedFriendRequest ){
+			// else if user received friend request while app was closed
+	        dispatch( updateAlarm({receivedFriendRequest: false}) ); // reset receivedFriendRequest
+			this._showRequestAlert();
 		}
 	}
+
+	_showRequestAlert = () => {
+		const { navigation } = this.props;
+    	const buttons = [
+	        {text: 'Yes', onPress: () => navigation.navigate('AllFriends')},
+	        {text: 'Not Now'},
+    	];
+
+    	Alert.alert('You have new friend requests!', 'View now?', buttons);
+    }
 
 	_dontShowMsgAgain = () => {
 		AsyncStorage.setItem('neverShowAppUsageMsg', '1');
