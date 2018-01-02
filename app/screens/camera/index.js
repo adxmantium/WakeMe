@@ -193,6 +193,7 @@ class WakeUpCamera extends Component{
 					captureQuality={ _cam.CAPTURE_QUALITY }>
 
 						<NavHeader
+							bg={{backgroundColor: 'rgba(0,0,0,0.4)'}}
 							leftIcon="chevron-left"
 							rightIconComponent={<Ionicon name="ios-reverse-camera-outline" size={35} color="#fff" style={cap.headIcon} />}
 							leftPress={ () => navigation.goBack(null) }

@@ -16,6 +16,7 @@ import { darkTheme } from './../styles/_global'
 const SIZE = 20;
 
 export default ({ 
+	bg,
 	title, 
 	navigation, 
 	notification,
@@ -27,7 +28,7 @@ export default ({
 	rightIconComponent,
 }) => (
 
-	<View style={head.container}>
+	<View style={[head.container, bg && bg]}>
 
 		<TouchableOpacity style={head.btn} onPress={ leftPress && leftPress }>
 			<Icon 
