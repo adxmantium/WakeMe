@@ -9,6 +9,7 @@ import {
   Text,
   Image,
   Platform,
+  TextInput,
   TouchableOpacity,
 } from 'react-native'
 
@@ -27,6 +28,9 @@ class Captured extends Component{
 
 		this.state = {
 			mute: false,
+			msgOpen: false,
+			msgVal: '',
+			msgSet: '',
 		};
 	}
 
@@ -54,15 +58,21 @@ class Captured extends Component{
 		this.setState({mute: typeof forceTo != 'undefined' ? forceTo : !this.state.mute});
 	}
 
+	_setMessage = () => {
+		this.setState({msgOpen: false, msgSet: this.state.msgVal});
+	}
+
 	render(){
 		const { navigation, _camera } = this.props;
-		const { mute } = this.state;
+		const { mute, msgOpen, msgVal, msgSet } = this.state;
 		const { capturedFile } = _camera;
 		const { uri, path } = capturedFile;
 		const isVideo = this._isVideo();
 
 		return (
 			<View style={capt.container}>	
+
+				<View style={capt.actions} />
 
 				{ isVideo ? 
 					<Video
@@ -80,11 +90,43 @@ class Captured extends Component{
 					<Image source={{uri: path || uri}} style={capt.file} /> 
 				}	
 
+				{ !!(msgVal && msgSet) && 
+					<View style={capt.msgSet}>
+						<Text style={capt.msgVal}>{ msgVal }</Text>
+					</View>
+				}
+
+				<View style={capt.actions}>
+					{ msgOpen && 
+						<View style={capt.msgInputContainer}>
+							<TextInput 
+								style={capt.msgInput}
+								autoCorrect={true}
+								autoFocus={true}
+								maxLength={100}
+								clearButtonMode="while-editing"
+								returnKeyType="done"
+								placeholder="Enter waker message here..."
+								placeholderTextColor="rgba(0,0,0,0.3)"
+								onChangeText={ val => this.setState({msgVal: val}) }
+								onSubmitEditing={ this._setMessage }
+								value={ msgVal } />
+						</View>
+					}
+				</View>
+
 				<View style={capt.actions}>
 					<View style={capt.action}>
 						<Text style={capt.label}>Discard</Text>
 						<TouchableOpacity onPress={ () => navigation.goBack(null) } style={[capt.btn]}>
 							<Icon name="times" size={30} color="#fff" />
+						</TouchableOpacity>
+					</View>
+
+					<View style={capt.action}>
+						<Text style={capt.label}>Message</Text>
+						<TouchableOpacity onPress={ () => this.setState({msgOpen: !msgOpen}) } style={[capt.btn, capt.msg]}>
+							<Icon name="commenting" size={30} color="#fff" />
 						</TouchableOpacity>
 					</View>
 

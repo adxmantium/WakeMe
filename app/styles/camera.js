@@ -55,6 +55,8 @@ export const cap = StyleSheet.create({
 export const capt = StyleSheet.create({
 	container: {
 		flex: 1,
+		justifyContent: 'space-between',
+		padding: 20,
 	},
 	file: {
 		flex: 1,
@@ -70,12 +72,7 @@ export const capt = StyleSheet.create({
 	actions: {
 		backgroundColor: 'transparent',
 		flexDirection: 'row',
-		justifyContent: 'space-between',
-		..._g._padding(0, 20, 0, 20),
-		position: 'absolute',
-		bottom: 20,
-		left: 0,
-		right: 0,
+		justifyContent: 'space-between',	
 	},
 	action: {
 		alignItems: 'center',
@@ -91,6 +88,9 @@ export const capt = StyleSheet.create({
 	send: {
 		backgroundColor: _g.darkTheme.shade2,
 	},
+	msg: {
+		backgroundColor: _g.darkTheme.shade1,
+	},
 	label: {
 		color: '#fff',
 		fontWeight: '600',
@@ -103,6 +103,29 @@ export const capt = StyleSheet.create({
 		backgroundColor: 'transparent',
 	},
 	muteIcon: {
+		backgroundColor: 'transparent',
+	},
+	msgInputContainer: {
+		flex: 1,
+	},
+	msgInput: {
+		backgroundColor: 'rgba(0,0,0,0.5)',
+		padding: 10,
+		borderRadius: 3,
+		color: _g.darkTheme.shade2,
+	},
+	msgSet: {
+		position: 'absolute',
+		top: '20%',
+		left: 0,
+		backgroundColor: 'rgba(0,0,0,0.4)',
+		borderTopRightRadius: 5,
+		borderBottomRightRadius: 5,
+		padding: 20,
+	},
+	msgVal: {
+		color: _g.darkTheme.shade2,
+		fontSize: 30,
 		backgroundColor: 'transparent',
 	}
 });
