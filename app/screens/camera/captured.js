@@ -11,10 +11,11 @@ import {
   Platform,
   TextInput,
   TouchableOpacity,
+  TouchableHighlight,
 } from 'react-native'
 
 // actions
-import { saveWakeupCall } from './../../actions/camera'
+import { captured } from './../../actions/camera'
 
 // styles
 import { capt } from './../../styles/camera'
@@ -35,8 +36,12 @@ class Captured extends Component{
 	}
 
 	_send = () => {
-		this._mute(true);
-		this.props.navigation.navigate('MyFriends', {title: 'Send to...'});
+		const { navigation, dispatch } = this.props;
+
+		this._mute(true); // mute vid just before sending
+
+		dispatch( captured({wakerMessage: this.state.msgVal}) );
+		navigation.navigate('MyFriends', {title: 'Send to...'});
 	}
 
 	_isVideo = () => {
@@ -91,9 +96,9 @@ class Captured extends Component{
 				}	
 
 				{ !!(msgVal && msgSet) && 
-					<View style={capt.msgSet}>
+					<TouchableHighlight style={capt.msgSet} onPress={() => this.setState({msgOpen: true, msgSet: false})}>
 						<Text style={capt.msgVal}>{ msgVal }</Text>
-					</View>
+					</TouchableHighlight>
 				}
 
 				<View style={capt.actions}>
@@ -125,7 +130,7 @@ class Captured extends Component{
 
 					<View style={capt.action}>
 						<Text style={capt.label}>Message</Text>
-						<TouchableOpacity onPress={ () => this.setState({msgOpen: !msgOpen}) } style={[capt.btn, capt.msg]}>
+						<TouchableOpacity onPress={ () => this.setState({msgOpen: !msgOpen, msgSet: msgOpen}) } style={[capt.btn, capt.msg]}>
 							<Icon name="commenting" size={30} color="#fff" />
 						</TouchableOpacity>
 					</View>
