@@ -109,25 +109,31 @@ export const capt = StyleSheet.create({
 		flex: 1,
 	},
 	msgInput: {
-		backgroundColor: 'rgba(0,0,0,0.5)',
 		padding: 10,
 		borderRadius: 3,
 		color: _g.darkTheme.shade2,
+		backgroundColor: 'rgba(0,0,0,0.5)',
 	},
 	msgSet: {
 		position: 'absolute',
-		top: '20%',
+		top: '10%',
 		left: 0,
 		backgroundColor: 'rgba(0,0,0,0.4)',
 		borderTopRightRadius: 5,
 		borderBottomRightRadius: 5,
 		padding: 20,
+		zIndex: 1,
 	},
 	msgVal: {
 		color: _g.darkTheme.shade2,
 		fontSize: 30,
 		backgroundColor: 'transparent',
-	}
+	},
+	fabBtn: {
+		fontSize: 20,
+		height: 22,
+		color: 'white',
+	},
 });
 
 

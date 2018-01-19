@@ -11,12 +11,12 @@ export const androidFontFamily = 'sans-serif-thin'
 export const header_height = Platform.OS === 'android' ? 50 : 60;
 
 export const darkTheme = {
-  shade1: '#29648A',
-  shade2: '#2E9CCA',
-  shade3: '#AAABB8',
-  shade4: '#464866',
-  shade5: '#25274D',
-  shade6: '#42468a',
+  shade1: '#29648A', // teal
+  shade2: '#2E9CCA', // bright blue
+  shade3: '#AAABB8', // light gray
+  shade4: '#464866', // dark blue/gray
+  shade5: '#25274D', // midnight
+  shade6: '#42468a', // 1 hr before midnight
 }
 
 export const lightTheme = {

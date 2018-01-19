@@ -3,6 +3,7 @@
 import { connect } from 'react-redux'
 import Video from 'react-native-video'
 import React, { Component } from 'react'
+import Fab from 'react-native-action-button'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   View,
@@ -10,6 +11,7 @@ import {
   Image,
   Platform,
   TextInput,
+  StyleSheet,
   TouchableOpacity,
   TouchableHighlight,
 } from 'react-native'
@@ -33,17 +35,9 @@ class Captured extends Component{
 			msgVal: '',
 			msgSet: '',
 		};
-	}
+	}	
 
-	_send = () => {
-		const { navigation, dispatch } = this.props;
-
-		this._mute(true); // mute vid just before sending
-
-		dispatch( captured({wakerMessage: this.state.msgVal}) );
-		navigation.navigate('MyFriends', {title: 'Send to...'});
-	}
-
+	// return true/false if capturedFile is vid or not
 	_isVideo = () => {
 		const { capturedFile } = this.props._camera;
 		let isVideo = false;
@@ -59,12 +53,29 @@ class Captured extends Component{
 		return isVideo;
 	}
 
-	_mute = forceTo => {
-		this.setState({mute: typeof forceTo != 'undefined' ? forceTo : !this.state.mute});
-	}
+	// toggles video volume
+	_mute = forceTo => this.setState({mute: typeof forceTo != 'undefined' ? forceTo : !this.state.mute});
 
-	_setMessage = () => {
-		this.setState({msgOpen: false, msgSet: this.state.msgVal});
+	// saves message locally and shows message preview
+	_setMessage = () => this.setState({msgOpen: false, msgSet: this.state.msgVal});
+
+	// navs back to prev screen
+	_onPressDiscard = () => this.props.navigation.goBack(null);
+
+	// toggle/clears message field
+	_onPressMessage = () => this.setState({msgOpen: !this.state.msgVal, msgSet: false, msgVal: ''});
+
+	// toggles volume
+	_onPressVolume = () => this._mute();
+
+	// saves message to store and navs to next screen
+	_onPressSend = () => {
+		const { navigation, dispatch } = this.props;
+
+		this._mute(true); // mute vid just before sending
+
+		dispatch( captured({wakerMessage: this.state.msgVal}) );
+		navigation.navigate('MyFriends', {title: 'Send to...'});
 	}
 
 	render(){
@@ -120,38 +131,31 @@ class Captured extends Component{
 					}
 				</View>
 
-				<View style={capt.actions}>
-					<View style={capt.action}>
-						<Text style={capt.label}>Discard</Text>
-						<TouchableOpacity onPress={ () => navigation.goBack(null) } style={[capt.btn]}>
-							<Icon name="times" size={30} color="#fff" />
-						</TouchableOpacity>
-					</View>
+				<View style={{flex:1}}>
+					<Fab 
+						offsetX={10}
+						offsetY={10}
+						spacing={15}
+						btnOutRange="rgba(46, 156, 202, 0.5)"
+						buttonColor="rgba(46, 156, 202,1)">
 
-					<View style={capt.action}>
-						<Text style={capt.label}>Message</Text>
-						<TouchableOpacity onPress={ () => this.setState({msgOpen: !msgOpen, msgSet: msgOpen}) } style={[capt.btn, capt.msg]}>
-							<Icon name="commenting" size={30} color="#fff" />
-						</TouchableOpacity>
-					</View>
+							<Fab.Item buttonColor='#AAABB8' title="Discard" onPress={ this._onPressDiscard }>
+								<Icon name="trash" style={capt.fabBtn} />
+							</Fab.Item>
 
-					{ isVideo && 
-						<View style={capt.action}>
-							<Text style={capt.label}>{mute ? 'Off' : 'On'}</Text>
-							<TouchableOpacity 
-								style={[capt.btn, capt.mute]}
-								onPress={ () => this._mute() }>
-									<Icon name={mute ? 'volume-off' : 'volume-up'} color="#fff" size={30} style={capt.muteIcon} />
-							</TouchableOpacity> 
-						</View>
-					}
+							<Fab.Item buttonColor={msgVal ? '#29648A' : '#AAABB8'} title={`${msgVal ? 'Remove' : 'Add'} Message`} onPress={ this._onPressMessage }>
+								<Icon name="commenting" style={capt.fabBtn} />
+							</Fab.Item>
 
-					<View style={capt.action}>
-						<Text style={capt.label}>Send</Text>
-						<TouchableOpacity onPress={ this._send } style={[capt.btn, capt.send]}>
-							<Icon name="check" size={30} color="#fff" />
-						</TouchableOpacity>
-					</View>
+							<Fab.Item buttonColor='#AAABB8' title={mute ? 'Off' : 'On'} onPress={ this._onPressVolume }>
+								<Icon name={mute ? 'volume-off' : 'volume-up'} style={capt.fabBtn} />
+							</Fab.Item>
+
+							<Fab.Item buttonColor='#AAABB8' title="Send" onPress={ this._onPressSend }>
+								<Icon name="paper-plane" style={capt.fabBtn} />
+							</Fab.Item>
+
+					</Fab>
 				</View>
 
 			</View>

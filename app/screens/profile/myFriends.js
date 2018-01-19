@@ -96,7 +96,7 @@ class MyFriends extends Component{
 	_send = () => {
 		const { sendTo_list } = this.state;
 		const { dispatch, _user, _friends, _camera } = this.props;
-		const { capturedFile } = _camera;	
+		const { capturedFile, wakerMessage } = _camera;	
 
 		// get only the friends that have been selected to sendTo
 		const friends = sendTo_list.filter(item => !!item.sendTo);
@@ -136,7 +136,7 @@ class MyFriends extends Component{
 					file_path = res.body.postResponse.location;
 
 					// get object that models the Waker table in db
-					wakerData = modelWakersTable({ _user, to_friend, file_name, file_path });
+					wakerData = modelWakersTable({ _user, to_friend, file_name, file_path, message: wakerMessage });
 
 					// pass a trigger prop to store indicating this friend is the last in arr
 					// will use to stop spinner when this friend's POST is done
