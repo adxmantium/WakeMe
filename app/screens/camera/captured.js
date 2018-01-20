@@ -136,6 +136,7 @@ class Captured extends Component{
 						offsetX={10}
 						offsetY={10}
 						spacing={15}
+						active={false}
 						btnOutRange="rgba(46, 156, 202, 0.5)"
 						buttonColor="rgba(46, 156, 202,1)">
 

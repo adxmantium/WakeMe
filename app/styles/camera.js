@@ -122,7 +122,6 @@ export const capt = StyleSheet.create({
 		borderTopRightRadius: 5,
 		borderBottomRightRadius: 5,
 		padding: 20,
-		zIndex: 1,
 	},
 	msgVal: {
 		color: _g.darkTheme.shade2,
