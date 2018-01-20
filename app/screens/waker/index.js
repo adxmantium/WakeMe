@@ -49,6 +49,7 @@ class Waker extends PureComponent{
 			isEnd: false,
 			isStart: true,
 			isEmpty: false,
+			hideMsg: false,
 			isLoading: false,
 			playableItem: null,
 		};
@@ -65,7 +66,7 @@ class Waker extends PureComponent{
 				wakers: deleteFromS3Model,
 				wakerObjects: deleteFromDBModel,
 			}) );
-		}	
+		}
 	}
 
 	_isVideo = () => {
@@ -83,7 +84,7 @@ class Waker extends PureComponent{
 	_onProgress = e => {
 		// console.log('onProgress: ', e);
 		if( this.state.isLoading ) this._onLoadEnd();
-		this.setState({progress: e.currentTime});
+		this.setState({progress: e.currentTime / e.playableDuration});
 	}
 
 	_onLoadStart = e => this.setState({isLoading: true});
@@ -131,6 +132,7 @@ class Waker extends PureComponent{
 
 		if( queue[nextIndex] ){
 			this.setState({
+				hideMsg: false,
 				isEmpty: false,
 				index: nextIndex,
 				playableItem: queue[nextIndex]
@@ -151,7 +153,7 @@ class Waker extends PureComponent{
 	render(){
 		const { queue } = this.props._waker;
 		const { hour, minute, ampm } = this.props._alarm;
-		const { index, playableItem, isStart, isEnd, isLoading, isEmpty, progress } = this.state;
+		const { index, playableItem, isStart, isEnd, isLoading, isEmpty, progress, hideMsg } = this.state;
 		const isVideo = playableItem && this._isVideo();
 
 		return (
@@ -159,19 +161,31 @@ class Waker extends PureComponent{
 
 				{ (playableItem && !isLoading) && 
 					<View style={wake.header}>
-						<View>
-							<Animatable.Text animation="fadeInLeft" delay={0} style={[wake.from, wake.txtShadow]}>
-								Wake up call from
+						<View style={wake.innerHeader}>
+							<Animatable.Text animation="fadeInLeft" delay={0} style={wake.fromWho}>
+								<Text style={[wake.from, wake.txtShadow]}>From: </Text>{ playableItem.from_name }
 							</Animatable.Text>
-							<Animatable.Text animation="fadeInLeft" delay={1000} style={wake.fromWho}>
-								{ playableItem.from_name }
+							<Animatable.Text animation="fadeInRight" delay={0} style={[wake.pagination]}>
+								{`${index + 1} / ${queue.length}`}
 							</Animatable.Text>
 						</View>
-						<Animatable.Text animation="fadeInRight" delay={0} style={[wake.pagination, wake.txtShadow]}>
-							{`${index + 1} / ${queue.length}`}
-						</Animatable.Text>
+
+						{ !!(playableItem && playableItem.message) && 
+							<TouchableOpacity onPress={() => this.setState({hideMsg: !hideMsg})}>
+								{ hideMsg ?
+									<View style={wake.showMsg}>
+										<Icon name="commenting" size={20} color="#AAABB8" />
+									</View>
+									:
+									<Animatable.View style={wake.msg} animation="fadeInLeft" delay={0}>
+										<Text style={[wake.from, wake.txtShadow]}>Message:</Text>
+										<Text style={[wake.fromWho, wake.msgTxt]}>{ playableItem.message }</Text>
+									</Animatable.View>
+								}
+							</TouchableOpacity>
+						}
 					</View> 
-				}
+				}	
 
 				{ (!playableItem && isStart) && 
 					<ThreeLineMessage 
@@ -230,7 +244,7 @@ class Waker extends PureComponent{
 				{ !!(!isStart && (playableItem || isEmpty) && !isLoading) && <NavButton title="Next" onPress={ this._nextItem } /> }
 				{ !!(!isStart && isEnd) && <NavButton title="Done" onPress={ this._finished } /> }
 
-				{ (!isStart && playableItem && isVideo) && 
+				{/* (!isStart && playableItem && isVideo) && 
 					<View style={wake.progessWrapper}>
 						<Progress.Bar 
 							progress={ progress }
@@ -239,7 +253,7 @@ class Waker extends PureComponent{
 							borderWidth={0}
 							borderRadius={0} />
 					</View>
-				}
+				*/}
 
 			</View>
 		);
@@ -261,7 +275,7 @@ const ThreeLineMessage = ({ row1, row2, row2component, row3 }) => (
 )
 
 const NavButton = ({ title, onPress }) => (
-	<Animatable.View animation="fadeInLeft" delay={5000} style={[wake.nav, wake.pos1]}>
+	<Animatable.View animation="fadeInLeft" delay={3000} style={[wake.nav, wake.pos1]}>
 		<TouchableOpacity style={wake.navBtn} onPress={ onPress }>
 			<Text style={wake.navTitle}>{ title || 'Next' }</Text>
 			<Icon name="chevron-right" size={16} style={wake.navIcon} />

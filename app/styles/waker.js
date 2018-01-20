@@ -8,23 +8,23 @@ import * as _g from './_global'
 const _wake = {
 	container: {
 		flex: 1,
-		// ..._g._border(1, 'red'),
 	},
 	header: {
+		position: 'absolute',
+		width: '100%',
+		zIndex: 2,
+	},
+	innerHeader: {
+		..._g._padding(40, 15, 10, 15),
 		flexDirection: 'row',
 		alignItems: 'flex-end',
 		justifyContent: 'space-between',
-		height: Platform.OS === 'android' ? _g.header_height + 20 : _g.header_height + 50,
-		position: 'absolute',
-		width: '100%',
-		..._g._padding(0, 15, 0, 15),
-		zIndex: 2,
-		backgroundColor: 'transparent',
-		// ..._g._border(1, 'red'),
+		backgroundColor: 'rgba(0,0,0,0.5)',
 	},
 	pagination: {
 		color: _g.white,
 		backgroundColor: 'transparent',
+		marginBottom: 5,
 	},
 	player: {
 		flex: 1,
@@ -61,12 +61,12 @@ const _wake = {
 		zIndex: 2,
 	},
 	navBtn: {
-		..._g._border(1, _g.darkTheme.shade2),
-		borderRadius: 3,
-		..._g._padding(5, 10, 7, 10),
+		borderRadius: 5,
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'center',
+		..._g._padding(5, 10, 7, 10),
+		..._g._border(3, _g.darkTheme.shade2),
 	},
 	pos1: {
 		position: 'absolute',
@@ -75,7 +75,7 @@ const _wake = {
 	},
 	navTitle: {
 		color: _g.darkTheme.shade2,
-		fontWeight: '100',
+		fontWeight: '400',
 		fontSize: 30,
 		marginRight: 10,
 	},
@@ -102,10 +102,20 @@ const _wake = {
 		color: _g.darkTheme.shade2,
 		fontSize: 28,
 	},
-	txtShadow: {
-		textShadowColor: 'rgba(0,0,0,1)',
-		textShadowOffset: {width: -1, height: -1},
-		textShadowRadius: 10,
+	msg: {
+		padding: 15,
+		backgroundColor: 'rgba(0,0,0,0.2)',
+	},
+	msgText: {
+		fontWeight: '100',
+	},
+	showMsg: {
+		width: 50,
+		height: 50,
+		alignItems: 'center',
+		justifyContent: 'center',
+		borderBottomRightRadius: 5,
+		backgroundColor: 'rgba(0,0,0,0.2)',
 	}
 };
 
