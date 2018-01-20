@@ -144,7 +144,7 @@ class Captured extends Component{
 								<Icon name="trash" style={capt.fabBtn} />
 							</Fab.Item>
 
-							<Fab.Item buttonColor={msgVal ? '#29648A' : '#AAABB8'} title={`${msgVal ? 'Remove' : 'Add'} Message`} onPress={ this._onPressMessage }>
+							<Fab.Item buttonColor={msgVal ? '#42468a' : '#AAABB8'} title={`${msgVal ? 'Remove' : 'Add'} Message`} onPress={ this._onPressMessage }>
 								<Icon name="commenting" style={capt.fabBtn} />
 							</Fab.Item>
 
