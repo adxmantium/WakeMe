@@ -8,6 +8,7 @@ import * as _g from './_global'
 const { width: dim_width, height: dim_height } = Dimensions.get('window');
 const EDIT_ALARM_CONTAINER_HEIGHT = 210;
 const editFieldPadding = 15;
+const isX = Platform.OS === 'ios' && dim_height === 812;
 
 const headStyles = {
 	container: {
@@ -31,7 +32,7 @@ const headStyles = {
 		color: _g.darkTheme.shade3,
 	},
 	btn: {
-		height: _g.header_height,
+		height: _g.header_height + (isX ? 20 : 0),
 		width: 50,
 		alignItems: 'center',
 		justifyContent: 'flex-end',
@@ -106,7 +107,7 @@ const _main = {
 		fontWeight: '700',
 		backgroundColor: 'transparent',
 		color: _g.darkTheme.shade3,
-		..._g._padding(10, 0, 10, 0),
+		..._g._padding((10 + (isX ? 20 : 0)), 0, (10 + (isX ? 20 : 0)), 0),
 		marginRight: 10,
 	},
 	editBtn: {

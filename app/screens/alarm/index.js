@@ -173,7 +173,7 @@ class Alarm extends PureComponent{
 					</View>
 				</View>
 
-				<Animatable.View animation="swing" iterationCount={7}>
+				<Animatable.View animation="swing" iterationCount={5}>
 					<TouchableOpacity 
 						style={[main.editBtn]}
 						onPress={ () => this.setState({slideUp: !slideUp}) }>
