@@ -20,6 +20,7 @@ const headStyles = {
 		position: 'absolute',
 		top: 0,
 		zIndex: 1,
+		paddingBottom: 5,
 	},
 	title: {
 		height: '100%',
