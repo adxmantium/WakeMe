@@ -25,16 +25,22 @@ export default ({
 	rightIcon, 
 	rightPress, 
 	middlePress,
+	leftIconComponent,
 	rightIconComponent,
 }) => (
 
 	<View style={[head.container, bg && bg]}>
 
 		<TouchableOpacity style={head.btn} onPress={ leftPress && leftPress }>
-			<Icon 
-				name={leftIcon ? leftIcon : "chevron-left"} 
-				color={leftIcon ? darkTheme.shade3 : "transparent"} 
-				size={SIZE} />
+			{
+				leftIconComponent ?
+					leftIconComponent
+					:
+					<Icon 
+						name={leftIcon ? leftIcon : "chevron-left"} 
+						color={leftIcon ? darkTheme.shade3 : "transparent"} 
+						size={SIZE} />
+			}
 		</TouchableOpacity>
 
 		<TouchableOpacity style={head.title} onPress={ middlePress && middlePress }>

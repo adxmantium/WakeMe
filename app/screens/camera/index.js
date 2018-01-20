@@ -196,6 +196,7 @@ class WakeUpCamera extends Component{
 							bg={{backgroundColor: 'rgba(0,0,0,0.4)'}}
 							leftIcon="chevron-left"
 							rightIconComponent={<Ionicon name="ios-reverse-camera-outline" size={35} color="#fff" style={cap.headIcon} />}
+							leftIconComponent={<Icon name="chevron-left" size={20} color="#fff" />}
 							leftPress={ () => navigation.goBack(null) }
 							rightPress={ this._toggleCamType } />
 

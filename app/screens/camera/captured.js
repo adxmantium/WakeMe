@@ -88,8 +88,6 @@ class Captured extends Component{
 		return (
 			<View style={capt.container}>	
 
-				<View style={capt.actions} />
-
 				{ isVideo ? 
 					<Video
 						ref={ p => { this._player = p; } }
