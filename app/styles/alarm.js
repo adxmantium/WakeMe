@@ -47,7 +47,7 @@ const headStyles = {
 		alignItems: 'center',
 		justifyContent: 'center',
 		position: 'absolute',
-		bottom: 10,
+		bottom: Platform.OS === 'ios' ? 10 : 20,
 		right: 0,
 		zIndex: 1,
 	},
