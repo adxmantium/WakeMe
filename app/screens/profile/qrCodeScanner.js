@@ -4,11 +4,13 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import Camera from 'react-native-camera'
+import Permissions from 'react-native-permissions'
 import * as Animatable from 'react-native-animatable'
 import {
 	View,
 	Text,
 	Image,
+	Platform,
 	FlatList,
 	TouchableOpacity,
 } from 'react-native'
@@ -41,7 +43,13 @@ class QRCodeScanner extends Component{
 			addPending: false,
 			addedFriend: false,
 			alreadyFriends: false,
+			havePermission: false,
 		}
+	}
+
+	componentDidMount(){
+		// react-native-camera not asking for permission on android for some reason
+		if( Platform.OS === 'android' ) this._checkPermissions();
 	}
 
 	componentWillReceiveProps(np, ns){
@@ -56,6 +64,19 @@ class QRCodeScanner extends Component{
 				alreadyFriends: false,
 			});
 		}
+	}
+
+	_checkPermissions = () => {
+		Permissions
+		.check('camera')
+		.then(response => {
+			if( response !== 'authorized' ){
+				Permissions
+				.request('camera')
+				.then(res => this.setState({havePermission: res === 'authorized'}));
+
+			}else this.setState({havePermission: response === 'authorized'});
+		});
 	}
 
 	_qrCaptured = ({ bounds, data, type }) => {
@@ -102,12 +123,13 @@ class QRCodeScanner extends Component{
 
 	render(){
 		const { navigation } = this.props;
-		const { captured, addedFriend, qrFriend, alreadyFriends, addPending } = this.state;
+		const { captured, addedFriend, qrFriend, alreadyFriends, addPending, havePermission } = this.state;
+		console.log('havePermission: ', havePermission);
 
 		return (
 			<View style={findf.qrContainer}>
 
-				{ captured ? 
+				{ !!captured &&
 					<View style={findf.qrFound}>
 						{ (!addedFriend && !alreadyFriends) &&
 							<Animatable.Text animation="fadeInRight" style={findf.qrAdding}>Adding 
@@ -132,7 +154,9 @@ class QRCodeScanner extends Component{
 							</TouchableOpacity>
 						}
 					</View>
-					:
+				}
+				
+				{ ((havePermission && Platform.OS === 'android') || (Platform.OS === 'ios')) &&
 					<Camera
 						ref={ cam => { this._camera = cam; } }
 						style={findf.qrScanner}
