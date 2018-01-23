@@ -63,7 +63,7 @@ class WakeUpCamera extends Component{
 	}
 
 	componentWillMount(){
-		this._checkPermissions();
+		// this._checkPermissions();
 	}
 
 	componentWillUnmount(){
