@@ -6,6 +6,7 @@
 
 // libs
 import { Provider } from 'react-redux'
+import { Platform } from 'react-native'
 import store from './app/reducers/store'
 import React, { Component } from 'react'
 import OneSignal from 'react-native-onesignal' // onesignal register events ONLY works at root file (aka this file)
