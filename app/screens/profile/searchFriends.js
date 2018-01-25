@@ -55,29 +55,31 @@ class SearchFriends extends Component{
 	render(){
 		const { navigation, _friends } = this.props;
 		const { searched, focused } = this.state;
-		const { searchResults } = _friends;
+		const { searchResults = [] } = _friends;
 
 		return (
 			<View style={findf.searchContainer}>
 
-				<View style={findf.searchWrapper}>
-					<TextInput
-						style={findf.searchInput}
-						value={ searched || '' }
-						placeholderTextColor="rgba(170, 171, 184, 0.2)"
-						placeholder="Search for a friends name..."
-						underlineColorAndroid="transparent"
-						returnKeyType="search"
-						clearButtonMode="always"
-						autoCapitalize="words"
-						keyboardAppearance="dark"
-						selectionColor={darkTheme.shade1}
-						onFocus={ () => this.setState({focused: true}) }
-						onBlur={ () => this.setState({focused: false}) }
-						onSubmitEditing={ this._search }
-						onChangeText={ text => this.setState({searched: text}) } />
+				<View style={[findf.searchWrapper, !searchResults.length && findf.searchWrapperEmpty]}>
+					<View style={findf.searchInnerWrapper}>
+						<TextInput
+							style={findf.searchInput}
+							value={ searched || '' }
+							placeholderTextColor="rgba(170, 171, 184, 0.2)"
+							placeholder="Search for a friends name..."
+							underlineColorAndroid="transparent"
+							returnKeyType="search"
+							clearButtonMode="always"
+							autoCapitalize="words"
+							keyboardAppearance="dark"
+							selectionColor={darkTheme.shade1}
+							onFocus={ () => this.setState({focused: true}) }
+							onBlur={ () => this.setState({focused: false}) }
+							onSubmitEditing={ this._search }
+							onChangeText={ text => this.setState({searched: text}) } />
 
-					{ focused && <Animatable.View animation="fadeInRight" style={findf.searchBorder} /> }
+						{ focused && <Animatable.View animation="fadeInRight" style={findf.searchBorder} /> }
+					</View>
 				</View>
 
 				{ (_friends.searching_friends || _friends.adding_friend) && 
@@ -87,7 +89,7 @@ class SearchFriends extends Component{
 			    }
 
 				<FlatList
-		            data={ searchResults || [] }
+		            data={ searchResults }
 		            style={findf.searchResults}
 		            initialNumToRender={ 10 }
 		            removeClippedSubviews={false}

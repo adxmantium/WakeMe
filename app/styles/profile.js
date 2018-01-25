@@ -112,13 +112,22 @@ export const findf = StyleSheet.create({
 		flex: 1,
 	},
 	searchWrapper: {
+		alignItems: 'center',
+		justifyContent: 'center',
 		..._g._padding(30, 50, 10, 50),
 	},
+	searchWrapperEmpty: {
+		flex: 1,
+	},
+	searchInnerWrapper: {
+		width: '100%',
+	},
 	searchInput: {
-		// ..._g._border(1, 'red'),
-		..._g._padding(5, 10, 0, 10),
-		color: _g.darkTheme.shade3,
+		padding: 10,
+		borderRadius: 3,
 		textAlign: 'center',
+		color: _g.darkTheme.shade3,
+		backgroundColor: '#292c56',
 	},
 	searchBorder: {
 		borderTopColor: _g.darkTheme.shade2,
