@@ -66,17 +66,18 @@ class QRCodeScanner extends Component{
 		}
 	}
 
-	_checkPermissions = () => {
-		Permissions
-		.check('camera')
-		.then(response => {
-			if( response !== 'authorized' ){
-				Permissions
-				.request('camera')
-				.then(res => this.setState({havePermission: res === 'authorized'}));
+	_checkPermissions = async () => {
+		const permissionNeeded = 'camera';
+		const statusNeeded = 'authorized';
 
-			}else this.setState({havePermission: response === 'authorized'});
-		});
+		// check camera permission
+		const permissionStatus = await Permissions.check(permissionNeeded);
+
+		// if not authorized, request it
+		if( permissionStatus !== statusNeeded ){
+			const requestResponse = await Permissions.request(permissionNeeded);
+			this.setState({havePermission: requestResponse === statusNeeded});
+		}
 	}
 
 	_qrCaptured = ({ bounds, data, type }) => {
