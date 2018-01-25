@@ -15,6 +15,7 @@ export default (state = init, action) => {
 
 	switch ( action.type ) {
 
+		case _actions.UPDATE_FRIENDS:
 		case _actions.ADDING_FRIEND_TYPE:
 		case _actions.FETCHING_FRIENDS_TYPE:
 		case _actions.SEARCHING_FRIENDS_TYPE:

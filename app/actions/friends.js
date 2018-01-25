@@ -7,6 +7,11 @@ import { sendNotification } from './user'
 import * as route from './../api/routes/user'
 import * as _actions from './../constants/user'
 
+export const updateFriends = payload => ({
+  type: _actions.UPDATE_FRIENDS,
+  payload
+})
+
 export const searchForFriends = ({ searched, userID }) => {
   const pendingName = _actions.SEARCHING_FRIENDS.toLowerCase();
   const done = _actions.SEARCHED_FRIENDS.toLowerCase();  

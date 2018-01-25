@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   View,
   Text,
+  Alert,
   StatusBar,
   AsyncStorage,
   TouchableOpacity,
@@ -21,8 +22,8 @@ import PushController from './../../components/pushController'
 import BackgroundImage from './../../components/backgroundImage'
 
 // actions
-import { acceptFriendship } from './../../actions/friends'
 import { saveAlarmData, updateAlarm } from './../../actions/alarm'
+import { updateFriends, acceptFriendship } from './../../actions/friends'
 
 // constants
 import { tomorrowsMoment } from './../../constants/alarm'
@@ -72,17 +73,23 @@ class Alarm extends PureComponent{
 	}
 
 	componentDidUpdate(pp, ps){
-		const { fetched_user_info: this_fetched } = this.props._user;
+		const { _user, _friends } = this.props;
+		const { fetched_user_info: this_fetched } = _user;
 		const { fetched_user_info: prev_fetched } = pp._user;
+		const { receivedFriendRequest: this_rfr } = _friends;
+		const { receivedFriendRequest: prev_rfr } = pp._friends;
 
 		// if notification was open while app was inactive, check store if on app open there is a notification trigger that we set in app.js
-		if( this_fetched !== prev_fetched && this_fetched ){
+		const fetchedUserInfoDiff = this_fetched !== prev_fetched && this_fetched;
+		const receivedFriendRequestDiff = this_rfr !== prev_rfr && this_rfr;
+
+		if( fetchedUserInfoDiff || receivedFriendRequestDiff ){
 			this._checkIfAlarmWentOffWhenAppWasClosed();
 		}
 	}
 
 	_checkIfAlarmWentOffWhenAppWasClosed = () => {
-		const { dispatch, navigation, _alarm } = this.props;
+		const { dispatch, navigation, _alarm, _friends } = this.props;
 		
 		// check if user has received alarm while app was closed
 		if( _alarm.receivedAlarm ){
@@ -92,11 +99,27 @@ class Alarm extends PureComponent{
 	        dispatch( updateAlarm({receivedAlarm: false}) ); // reset receivedAlarm
 	        dispatch( saveAlarmData({ alarmData }) ); // disable alarm
 
-		}else if( _alarm.receivedFriendRequest ){
-			// else if user received friend request while app was closed
-	        dispatch( updateAlarm({receivedFriendRequest: false}) ); // reset receivedFriendRequest
-	        //  !!!! if you want to do something when user receives new friend request on app cold open, do it here !!!!!
+		}else if( _friends.receivedFriendRequest ){
+			// else if user received friend request while app was closed, show request alert
+			this._showRequestAlert(_friends.receivedFriendRequestData);
+
+			 // reset receivedFriendRequest
+	        dispatch( updateFriends({
+	        	receivedFriendRequest: false,
+	        	receivedFriendRequestData: null,
+	        }) );
 		}
+	}
+
+	_showRequestAlert = ({ title, body, additionalData, ...rest }) => {
+		const { dispatch } = this.props;
+		const { notification_type, ...friend } = additionalData;
+		const buttons = [
+			{text: 'Accept', onPress: () => dispatch( acceptFriendship({...friend, friend_request_accepted: true}) )},
+			{text: 'Not Now'},
+		];
+
+		Alert.alert(title, body, buttons);
 	}
 
 	_dontShowMsgAgain = () => {
@@ -140,7 +163,7 @@ class Alarm extends PureComponent{
 
 				<BackgroundImage />
 
-				<PushController {...this.props} />
+				{/* <PushController {...this.props} /> */}
 
 				<NavHeader
 					title="WakeMe"

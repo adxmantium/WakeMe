@@ -17,6 +17,7 @@ import AppNavigation from './app/navigation'
 // actions
 import { updateUser } from './app/actions/user'
 import { updateAlarm } from './app/actions/alarm'
+import { updateFriends } from './app/actions/friends'
 
 export default class WakeMe extends Component<{}> {
     componentDidMount(){
@@ -48,21 +49,19 @@ export default class WakeMe extends Component<{}> {
       if( Platform.OS === 'android' ) OneSignal.clearOneSignalNotifications();
 
       // save a trigger if notification received to be handled when app starts and init data is fetched
-      if( notification_type === 'alarm' ){
-        store.dispatch( updateAlarm({receivedAlarm: true}) );
-      }else if( notification_type === 'friend_request_inquiry' ){
-        store.dispatch( updateAlarm({
-          receivedFriendRequest: true,
-          receivedFriendRequestData: notification.payload
-        }) );
-      }
+      if( notification_type === 'alarm' ) this._handleAlarm();
+      else if( notification_type === 'friend_request_inquiry' ) this._handleFriendRequest(notification.payload);
     } 
 
+    _handleAlarm = () => store.dispatch( updateAlarm({receivedAlarm: true}) )
+
+    _handleFriendRequest = data => store.dispatch( updateFriends({receivedFriendRequest: true, receivedFriendRequestData: data}) );
+
     _navStateChange = (prevState, currentState) => {
-      console.log('=======================');
-      console.log('prevState: ', prevState);
-      console.log('currentState: ', currentState);
-      console.log('=======================');
+      // console.log('=======================');
+      // console.log('prevState: ', prevState);
+      // console.log('currentState: ', currentState);
+      // console.log('=======================');
     }
 
     render() {
