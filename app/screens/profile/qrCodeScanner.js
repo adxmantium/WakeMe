@@ -77,7 +77,8 @@ class QRCodeScanner extends Component{
 		if( permissionStatus !== statusNeeded ){
 			const requestResponse = await Permissions.request(permissionNeeded);
 			this.setState({havePermission: requestResponse === statusNeeded});
-		}
+
+		}else this.setState({havePermission: true});
 	}
 
 	_qrCaptured = ({ bounds, data, type }) => {
@@ -125,7 +126,6 @@ class QRCodeScanner extends Component{
 	render(){
 		const { navigation } = this.props;
 		const { captured, addedFriend, qrFriend, alreadyFriends, addPending, havePermission } = this.state;
-		console.log('havePermission: ', havePermission);
 
 		return (
 			<View style={findf.qrContainer}>
