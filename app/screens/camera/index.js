@@ -12,6 +12,7 @@ import Ionicon from 'react-native-vector-icons/Ionicons'
 import {
   View,
   Text,
+  Platform,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native'
@@ -58,30 +59,36 @@ class WakeUpCamera extends Component{
 			capture: 'camera',
 			isRecording: false,
 			activeIcon: 'camera',
+			havePermission: false,
 			inactiveIcon: 'video-camera',
 		};
 	}
 
 	componentWillMount(){
-		// this._checkPermissions();
+		if( Platform.OS === 'android' ) this._checkPermissions();
 	}
 
 	componentWillUnmount(){
 		this._stopTimer();
 	}
 
-	_checkPermissions = () => {
-		Permissions.check('microphone')
-				   .then(perm => {
-				   		// if microphone is not authorized, then request it
-				   		// console.log('perm: ', perm);
-					   	if( perm !== 'authorized' ){
-					   		Permissions.request('microphone')
-									   .then(res => {
-									   		// console.log('res: ', res)
-									   });
-					   	}
-				   });
+	_checkPermissions = async () => {
+		const permissionNeeded = 'camera';
+		const statusNeeded = 'authorized';
+
+		// check camera permission
+		const permissionStatus = await Permissions.check(permissionNeeded);
+
+		// if not authorized, request it
+		if( permissionStatus !== statusNeeded ){
+			const { navigation } = this.props;
+			const requestResponse = await Permissions.request(permissionNeeded);
+
+			// if request response is 'authorized', show camera component, else nav back
+			if( requestResponse === statusNeeded ) this.setState({havePermission: true});
+			else navigation.goBack(null);
+
+		}else this.setState({havePermission: true});
 	}
 
 	_capture = () => {
@@ -170,76 +177,63 @@ class WakeUpCamera extends Component{
 
 	render(){
 		const { navigation } = this.props;
-		const { capture, type, mode, activeIcon, inactiveIcon, isRecording, progress } = this.state;
+		const { capture, type, mode, activeIcon, inactiveIcon, isRecording, progress, havePermission } = this.state;
 		const captureBtnIcon = capture === 'camera' ? capture : (isRecording ? 'stop' : 'play');
+		const androidPermission = Platform.OS === 'android' && havePermission;
 
 		return (
 			<View style={cap.container}>
 
-				<Camera
-					ref={ cam => { this._camera = cam; } }
-					aspect={ _cam.ASPECT }
-					style={ cap.preview }
-					type={ type }
-					audio={true}
-					keepAwake={true}
-					flashMode={Camera.constants.FlashMode.off}
-					onFocusChanged={() => {}}
-					onZoomChanged={() => {}}
-					defaultTouchToFocus
-					mirrorImage={false}
-					captureMode={ capture === 'video' ? Camera.constants.CaptureMode.video : Camera.constants.CaptureMode.still }
-					captureTarget={ _cam.CAPTURE_TARGET }
-					captureQuality={ _cam.CAPTURE_QUALITY }>
+				{ (Platform.OS === 'ios' || androidPermission) &&
+					<Camera
+						ref={ cam => { this._camera = cam; } }
+						aspect={ _cam.ASPECT }
+						style={ cap.preview }
+						type={ type }
+						audio={true}
+						keepAwake={true}
+						flashMode={Camera.constants.FlashMode.off}
+						onFocusChanged={() => {}}
+						onZoomChanged={() => {}}
+						defaultTouchToFocus
+						mirrorImage={false}
+						captureMode={ capture === 'video' ? Camera.constants.CaptureMode.video : Camera.constants.CaptureMode.still }
+						captureTarget={ _cam.CAPTURE_TARGET }
+						captureQuality={ _cam.CAPTURE_QUALITY }>
 
-						<NavHeader
-							bg={{backgroundColor: 'rgba(0,0,0,0.4)'}}
-							leftIcon="chevron-left"
-							rightIconComponent={<Ionicon name="ios-reverse-camera-outline" size={35} color="#fff" style={cap.headIcon} />}
-							leftIconComponent={<Icon name="chevron-left" size={20} color="#fff" />}
-							leftPress={ () => navigation.goBack(null) }
-							rightPress={ this._toggleCamType } />
+							<NavHeader
+								bg={{backgroundColor: 'rgba(0,0,0,0.4)'}}
+								leftIcon="chevron-left"
+								rightIconComponent={<Ionicon name="ios-reverse-camera-outline" size={35} color="#fff" style={cap.headIcon} />}
+								leftIconComponent={<Icon name="chevron-left" size={20} color="#fff" />}
+								leftPress={ () => navigation.goBack(null) }
+								rightPress={ this._toggleCamType } />
 
-						<TouchableOpacity
-							style={cap.upload}
-							onPress={() => ImagePicker.launchImageLibrary(PICKER_OPTIONS, this._imageCaptured)}>
-							<Icon name="upload" size={25} color="#fff" style={cap.uploadIcon} />
-						</TouchableOpacity>
+							<TouchableOpacity
+								style={cap.upload}
+								onPress={() => ImagePicker.launchImageLibrary(PICKER_OPTIONS, this._imageCaptured)}>
+								<Icon name="upload" size={25} color="#fff" style={cap.uploadIcon} />
+							</TouchableOpacity>
 
-						<TouchableOpacity 
-							onPress={ this._capture }
-							style={cap.captureBtn}>
-								<Icon name={captureBtnIcon} size={30} color="#000" />	
-						</TouchableOpacity>
+							<TouchableOpacity 
+								onPress={ this._capture }
+								style={cap.captureBtn}>
+									<Icon name={captureBtnIcon} size={30} color="#000" />	
+							</TouchableOpacity>
 
-						{/* will come back and fix in v2 */}
-						{/*<Fab 
-							buttonColor="#fff"
-							position="right"
-							offsetX={20}
-							offsetY={20}
-							icon={ <Icon name={activeIcon} size={SIZE} color={COLOR} /> }>
+							{ capture === 'video' && 
+								<View style={wake.progessWrapper}>
+									<Progress.Bar 
+										progress={ progress }
+										width={null}
+										color={ darkTheme.shade1 }
+										borderWidth={0}
+										borderRadius={0} />
+								</View>
+							}
 
-								<Fab.Item 
-									buttonColor={BG_COLOR}
-									onPress={ this._toggleCapture }>
-										<Icon name={inactiveIcon} size={SIZE} color={COLOR} />
-								</Fab.Item>
-
-						</Fab>*/}
-
-						{ capture === 'video' && 
-							<View style={wake.progessWrapper}>
-								<Progress.Bar 
-									progress={ progress }
-									width={null}
-									color={ darkTheme.shade1 }
-									borderWidth={0}
-									borderRadius={0} />
-							</View>
-						}
-
-				</Camera>
+					</Camera>
+				}
 
 			</View>
 		);
