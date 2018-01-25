@@ -82,7 +82,9 @@ class QRCodeScanner extends Component{
 	}
 
 	_qrCaptured = ({ bounds, data, type }) => {
-		if( type === 'org.iso.QRCode' ){
+		const qrType = Platform.OS === 'ios' ? 'org.iso.QRCode' : 'QR_CODE';
+
+		if( type === qrType ){
 			const qrFriend = JSON.parse(data);
 
 			this.setState({ captured: true, qrFriend });
@@ -141,7 +143,7 @@ class QRCodeScanner extends Component{
 
 						{ ((!addedFriend && alreadyFriends) || (addedFriend && !alreadyFriends)) && 
 							<Animatable.View animation="fadeInRight">
-								<Text style={findf.qrAddSuccess}>{ alreadyFriends ? 'Hey, Silly!' : 'Success!' }</Text>
+								<Text style={findf.qrAddSuccess}>{ alreadyFriends ? 'Woops!' : 'Success!' }</Text>
 								<Text style={[findf.qrAdding, findf.qrMarg]}>{ alreadyFriends ? 'You are already friends with' : 'You are now friends with' }</Text>
 								<Text style={findf.qrAddingName}>{qrFriend.name}</Text>
 							</Animatable.View>
@@ -157,7 +159,7 @@ class QRCodeScanner extends Component{
 					</View>
 				}
 				
-				{ ((havePermission && Platform.OS === 'android') || (Platform.OS === 'ios')) &&
+				{ (((havePermission && Platform.OS === 'android') || (Platform.OS === 'ios')) && !captured) &&
 					<Camera
 						ref={ cam => { this._camera = cam; } }
 						style={findf.qrScanner}

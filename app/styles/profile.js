@@ -164,7 +164,7 @@ export const findf = StyleSheet.create({
 	qrAddingName: {
 		color: _g.darkTheme.shade3,
 		fontSize: 24,
-		fontWeight: '600',
+		fontWeight: Platform.OS === 'ios' ? '600' : '200',
 		textAlign: 'center',
 	},
 	qrAddSuccess: {
