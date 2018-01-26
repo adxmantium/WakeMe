@@ -177,7 +177,7 @@ class QRCodeScanner extends Component{
 						captureTarget={ _cam.CAPTURE_TARGET }
 						captureQuality={ _cam.CAPTURE_QUALITY }>
 
-							<Text style={findf.qrFiller} />
+							<View style={findf.qrCrosshair} />
 
 							<View style={findf.qrMsg}>
 								<Text style={findf.qrMsgText}>Scanning for QR Code...</Text>

@@ -1,9 +1,11 @@
 // /styles/entry.js
 
-import { StyleSheet, Platform } from 'react-native'
+import { StyleSheet, Platform, Dimensions } from 'react-native'
 
 // import global styles
 import * as _g from './_global'
+
+const { width: w_width } = Dimensions.get('window');
 
 export const pro = StyleSheet.create({
 	container: {
@@ -99,11 +101,12 @@ export const findf = StyleSheet.create({
 	},
 	qrScanner: {
 		flex: 1,
-		justifyContent: 'space-around',
+		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	qrMsg: {
 		backgroundColor: 'transparent',
+		marginTop: 20,
 	},
 	qrMsgText: {
 		color: _g.white,
@@ -191,6 +194,12 @@ export const findf = StyleSheet.create({
 	resetText: {
 		color: _g.darkTheme.shade2,
 		fontSize: 16,
+	},
+	qrCrosshair: {
+		..._g._border(2, _g.darkTheme.shade2),
+		borderRadius: 10,
+		width: (w_width / 2) + 20,
+		height: (w_width / 2) + 20,
 	}
 });
 
