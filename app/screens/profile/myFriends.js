@@ -27,7 +27,11 @@ import { myf } from './../../styles/profile'
 import { darkTheme } from './../../styles/_global'
 
 // constants
-import { resetStackAndNavTo } from './../../constants/user'
+import { 
+	modelMyself, 
+	resetStackAndNavTo,
+} from './../../constants/user'
+
 import { 
 	MIMETYPES,
 	S3_OPTIONS, 
@@ -45,6 +49,7 @@ class MyFriends extends Component{
 			sendTo_list: [...props._friends.accepted_list],
 			sendTo_list_count: 0,
 			saving_waker: false,
+			myself: modelMyself({_user: props._user, friend: props._user}),
 		}
 	}
 
@@ -80,6 +85,14 @@ class MyFriends extends Component{
 		this.props.dispatch( updateWaker({last_waker_to_save: false}) );
 	}
 
+	_addMeToSendList = me => {
+		const { myself: m, sendTo_list_count: count } = this.state;
+		const myself = {...m, sendTo: !m.sendTo}; // toggle sendTo myself
+		const sendTo_list_count = this._getListCount({ myself }); // update count
+
+		this.setState({ myself, sendTo_list_count });
+	}
+
 	_addToSendList = friend => {
 		const { sendTo_list: oldList } = this.state;
 
@@ -88,26 +101,39 @@ class MyFriends extends Component{
 			item.friend_fb_user_id == friend.friend_fb_user_id ? {...item, sendTo: !item.sendTo} : item);
 
 		// get count of !!sendTo friends in list
-		const sendTo_list_count = sendTo_list.filter(item => item.sendTo).length;
+		const sendTo_list_count = this._getListCount({ sendTo_list });
 
 		this.setState({ sendTo_list, sendTo_list_count });
 	}
 
+	_getListCount = ({ myself, sendTo_list }) => {
+		const { myself: me, sendTo_list: list } = this.state;
+
+		let _me = myself;
+		let _list = sendTo_list;
+
+		// if param is empty, store state equivalent instead
+		if( !_me ) _me = me;
+		else if( !_list ) _list = list;
+
+		const meCount = _me.sendTo ? 1 : 0;
+		const listCount = _list.reduce((total, item) => item.sendTo ? total + 1 : total, 0); // only add to total if item is checked
+
+		return meCount + listCount;
+	}
+
 	_send = () => {
-		const { sendTo_list } = this.state;
+		const { sendTo_list, myself } = this.state;
 		const { dispatch, _user, _friends, _camera } = this.props;
 		const { capturedFile, wakerMessage } = _camera;	
 
 		// get only the friends that have been selected to sendTo
-		const friends = sendTo_list.filter(item => !!item.sendTo);
-		let wakerData = null;	
+		let friends = sendTo_list.filter(item => !!item.sendTo);
+
+		// if send to myself, add to list
+		if( myself.sendTo ) friends = [...friends, myself];
 
 		// required props for s3 file
-		let file = null;
-		let file_name = '';
-		let file_path = '';
-		let last_waker_to_save = false;
-		let friends_id = '';
 		const pathname = capturedFile.path || capturedFile.uri;
 		const ext = pathname.split('.')[1].toLowerCase(); // get file extension
 		const mime = MIMETYPES[ext]; // get mime type
@@ -117,41 +143,48 @@ class MyFriends extends Component{
 			uri: capturedFile.uri || capturedFile.path,
 		};
 
-		// send waker to each friend
-		friends.forEach((to_friend, i) => {	
+		this.setState({saving_waker: true});
+
+		// send waker to each friend - using let to create separate block scope on each iteration
+		for(let i = 0; i < friends.length; i++){	
+
+			// create to_friend instance for each scope created
+			const to_friend = friends[i];
+
 			// if item is a friend request initiated by me, then use friend_name, else it was initiated by friend, so use name
-			friends_id = _user.id === to_friend.fb_user_id ? 'friend_fb_user_id' : 'fb_user_id';
+			const friends_id = _user.id === to_friend.fb_user_id ? 'friend_fb_user_id' : 'fb_user_id';
 
 			// build file name - will be used as the waker id
-			file_name = buildFileName({ _user, to_friend, friends_id });
+			const file_name = buildFileName({ _user, to_friend, friends_id });
 
 			// build s3 file obj to be saved to s3 bucket
-			file = {...s3File, name: `${file_name}.${ext}`};
+			const file = {...s3File, name: `${file_name}.${ext}`};
 
-			this.setState({saving_waker: true});
+			// use RNS3 lib to save file to S3 bucket
+			RNS3
+			.put(file, S3_OPTIONS)
+			.then(res => {
+				let last_waker_to_save = false;
+				const file_path = res.body.postResponse.location;
 
-			RNS3.put(file, S3_OPTIONS)
-				// .progress(e => console.log(e.loaded / e.total))
-				.then(res => {
-					file_path = res.body.postResponse.location;
+				// get object that models the Waker table in db
+				const wakerData = modelWakersTable({ _user, to_friend, file_name, file_path, message: wakerMessage });
 
-					// get object that models the Waker table in db
-					wakerData = modelWakersTable({ _user, to_friend, file_name, file_path, message: wakerMessage });
+				// pass a trigger prop to store indicating this friend is the last in arr
+				// will use to stop spinner when this friend's POST is done
+				if( (i+1) === friends.length ) last_waker_to_save = true;
 
-					// pass a trigger prop to store indicating this friend is the last in arr
-					// will use to stop spinner when this friend's POST is done
-					if( (i+1) === friends.length ) last_waker_to_save = true;
-
-					dispatch( sendWaker({ wakerData, last_waker_to_save }) );
-				})
-				.catch(err => {console.log('s3 err: ', err);});
-		})	
+				// save waker data to db
+				dispatch( sendWaker({ wakerData, last_waker_to_save }) );
+			})
+			.catch(err => {console.log('s3 err: ', err);});
+		}
 	}
 
 	render(){
 		const { navigation, _user, _waker } = this.props;
 		const title = navigation.state.params.title || 'My Friends';
-		const { sendTo_list, sendTo_list_count, saving_waker } = this.state;
+		const { sendTo_list, sendTo_list_count, saving_waker, myself } = this.state;
 
 		return (
 			<View style={myf.container}>
@@ -171,6 +204,17 @@ class MyFriends extends Component{
 					}
 					rightPress={ this._send }
 					leftPress={ () => navigation.goBack(null) } />
+
+				<View style={myf.divider}>
+					<Text style={myf.dividerTxt}>Me</Text>
+				</View>
+
+				<FriendItem {...myself} onPress={ this._addMeToSendList } />
+
+				<View style={myf.divider}>
+					<Text style={myf.dividerTxt}>Friends</Text>
+					<View style={myf.line} />
+				</View>
 
 				<FlatList
 		            data={ sendTo_list || [] }

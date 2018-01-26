@@ -17,6 +17,7 @@ export const darkTheme = {
   shade4: '#464866', // dark blue/gray
   shade5: '#25274D', // midnight
   shade6: '#42468a', // 1 hr before midnight
+  shade7: '#292c56', // 1 shade lighter than shade5
 }
 
 export const lightTheme = {

@@ -95,6 +95,21 @@ export const modelFriendsTable = ({ _user, friend }) => {
   }
 }
 
+// For sending wakers to myself
+export const modelMyself = ({ _user }) => {
+  return {
+    id: `${_user.id}_${_user.id}`,
+    fb_user_id: _user.id,
+    name: _user.name,
+    device_token: _user.onesignal_device_token,
+    friend_fb_user_id: _user.id,
+    friend_name: _user.name,
+    friend_device_token: _user.onesignal_device_token,
+    friend_request_accepted: false,
+    notification_type: 'friend_request_inquiry',
+  }
+}
+
 export const friendRequestModel = notification => ({
   app_id: ENV.ONESIGNAL_APP_ID,
   contents: {en: `${notification.name} wants to be your friend :)`}, // main message

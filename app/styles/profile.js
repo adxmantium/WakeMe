@@ -130,7 +130,7 @@ export const findf = StyleSheet.create({
 		borderRadius: 3,
 		textAlign: 'center',
 		color: _g.darkTheme.shade3,
-		backgroundColor: '#292c56',
+		backgroundColor: _g.darkTheme.shade7,
 	},
 	searchBorder: {
 		borderTopColor: _g.darkTheme.shade2,
@@ -223,7 +223,16 @@ export const myf = StyleSheet.create({
 	},
 	spinner: {
 		height: 20,
-	}
+	},
+	divider: {
+		..._g._margin(20, 0, 20, 0),
+		..._g._padding(5, 20, 5, 20),
+		backgroundColor: _g.darkTheme.shade7,
+	},
+	dividerTxt: {
+		color: _g.darkTheme.shade3,
+		fontSize: 12,
+	},
 });
 
 export const allf = StyleSheet.create({
