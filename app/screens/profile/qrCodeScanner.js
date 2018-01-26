@@ -83,8 +83,9 @@ class QRCodeScanner extends Component{
 
 	_qrCaptured = ({ bounds, data, type }) => {
 		const qrType = Platform.OS === 'ios' ? 'org.iso.QRCode' : 'QR_CODE';
+		const dataMustContain = ['name', 'fb_user_id', 'device_token'];
 
-		if( type === qrType ){
+		if( type === qrType && data.includes(...dataMustContain) ){
 			const qrFriend = JSON.parse(data);
 
 			this.setState({ captured: true, qrFriend });
